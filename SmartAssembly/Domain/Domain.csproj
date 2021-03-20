@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DCF18471-4350-470E-A475-073B5A646C0A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Domain</RootNamespace>
+    <AssemblyName>Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Clients\Client.cs" />
+    <Compile Include="Compatibilities\Implementations\CompatibleAccesory.cs" />
+    <Compile Include="Compatibilities\Implementations\CompatibleCpu.cs" />
+    <Compile Include="Components\Types\TypeFormat.cs" />
+    <Compile Include="Components\Types\TypeMemory.cs" />
+    <Compile Include="Components\Types\TypePart.cs" />
+    <Compile Include="Employees\Employee.cs" />
+    <Compile Include="Enoughs\Enums\Enough.cs" />
+    <Compile Include="Enoughs\Implementations\EnoughCapacity.cs" />
+    <Compile Include="Enoughs\Implementations\EnoughChannels.cs" />
+    <Compile Include="Enoughs\Implementations\EnoughFan.cs" />
+    <Compile Include="Enoughs\Implementations\EnoughGpu.cs" />
+    <Compile Include="Enoughs\Implementations\EnoughLevel.cs" />
+    <Compile Include="Enoughs\Implementations\EnoughOneRam.cs" />
+    <Compile Include="Enoughs\Implementations\EnoughStock.cs" />
+    <Compile Include="Enoughs\Interfaces\IEnough.cs" />
+    <Compile Include="Orders\Order.cs" />
+    <Compile Include="Compatibilities\Implementations\CompatibleFan.cs" />
+    <Compile Include="Compatibilities\Enums\Compatibility.cs" />
+    <Compile Include="Compatibilities\Interfaces\ICompatible.cs" />
+    <Compile Include="Compatibilities\Implementations\CompatibleMother.cs" />
+    <Compile Include="Compatibilities\Implementations\CompatibleRam.cs" />
+    <Compile Include="Compatibilities\Implementations\CompatibleTowerFan.cs" />
+    <Compile Include="Compatibilities\Implementations\CompatibleTowerMother.cs" />
+    <Compile Include="Compatibilities\Implementations\CompatibleType.cs" />
+    <Compile Include="Compatibilities\Implementations\CompatibleVideoCpu.cs" />
+    <Compile Include="Components\Component.cs" />
+    <Compile Include="Computers\Computer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
