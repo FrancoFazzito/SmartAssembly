@@ -8,7 +8,7 @@ namespace Domain.Computers
     public class Computer
     {
         private const int MULTIPLIER_PRICE = 10000;
-        private readonly List<Component> components = new List<Component>();
+        private List<Component> components = new List<Component>();
 
         public void Add(Component element, int quantity = 1)
         {
@@ -31,7 +31,9 @@ namespace Domain.Computers
 
         public int Id { get; set; }
         public string TypeUse { get; set; }
-        public IEnumerable<Component> Components => components;
+
+        public IEnumerable<Component> Components { get => components; set => components = value.ToList(); }
+
         public decimal Price => components.Sum(c => c.Price);
         public int TotalConsumption => components.Sum(c => c.Watts);
         public decimal Perfomance => components.Sum(c => c.PerfomanceLevel);

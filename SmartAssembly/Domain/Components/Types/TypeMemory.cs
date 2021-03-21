@@ -2,7 +2,7 @@
 {
     public enum TypeMemory
     {
-        ___,
+        _,
         DDR3,
         DDR4,
         DDR5,

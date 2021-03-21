@@ -8,7 +8,7 @@ namespace Application.Commands.Build.Orders
     {
         void Add(Computer computerDto, int quantity);
         void Remove(Computer computerDto);
-        void Submit(string email,string commentary);
+        void Submit(string email, string commentary);
 
         IOrderWriteOnlyRepository OrderRepository { get; }
         IEmployeeReadOnlyRepository EmployeeRepository { get; }

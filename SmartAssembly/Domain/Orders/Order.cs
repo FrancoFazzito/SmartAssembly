@@ -25,6 +25,7 @@ namespace Domain.Orders
             Computers.Remove(computer);
         }
 
+        public int Id { get; set; }
         public decimal Price => Computers.Sum(c => c.Price) + (Computers.Count * BUILD_COST);
 
         public DateTime OrderDate { get; set; }
@@ -33,7 +34,7 @@ namespace Domain.Orders
 
         public Employee Employee { get; set; }
 
-        public List<Computer> Computers { get; } = new List<Computer>();
+        public ICollection<Computer> Computers { get; set; } = new List<Computer>();
 
         public Client Client { get; set; }
 

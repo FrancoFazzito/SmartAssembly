@@ -24,16 +24,18 @@ namespace Application.Commands.RegisterComputerError.Errors
             this.enoughs = enoughs;
         }
 
-        public IErrorResult Register(Component component)
+        public IErrorResult Register(Component component, string commentary)
         {
-            var replaceComponent = new ComponentReplacer(computer, component, componenRepository, compatibilities, enoughs).Replace();
+            var componentReplacer = new ComponentReplacer(computer, component, componenRepository, compatibilities, enoughs);
+            var replaceComponent = componentReplacer.Replace();
+            //register in BD -> update commentary de la orden y add al error
             if (replaceComponent == null)
             {
-                return new ErrorWithoutReplaceResult(component, new Computer());
+                return new ErrorWithoutReplaceResult(component, computer.Id, commentary);
             }
+
             computer.Replace(component, replaceComponent);
-            //register in BD
-            return new ErrorResult(component, replaceComponent, new Computer());
+            return new ErrorResult(component, replaceComponent, computer.Id, commentary);
         }
     }
 }

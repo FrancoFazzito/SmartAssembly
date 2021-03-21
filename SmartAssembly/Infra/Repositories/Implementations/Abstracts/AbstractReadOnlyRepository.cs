@@ -26,6 +26,17 @@ namespace Infra.Repositories.Implementations.Abstracts
 
         protected abstract string ParamName { get; }
 
+        protected IEnumerable<T> GetRecords(string query, Dictionary<string, object> parameters)
+        {
+            using (var reader = connection.GetDataReader(query, parameters))
+            {
+                while (reader.Read())
+                {
+                    yield return NewRecord(reader);
+                }
+            }
+        }
+
         protected IEnumerable<T> GetRecords(string query)
         {
             using (var reader = connection.GetDataReader(query))

@@ -2,9 +2,9 @@
 {
     public enum TypeFormat
     {
-        ___ = 1,
-        ITX = 2,
-        MATX = 3,
-        ATX = 4,
+        _,
+        ITX = 1,
+        MATX = 2,
+        ATX = 3,
     }
 }

@@ -4,6 +4,7 @@ using Domain.Components.Types;
 using Infra.Interfaces.Connections;
 using Infra.Repositories.Convert;
 using Infra.Repositories.Implementations.Abstracts;
+using System.Collections.Generic;
 using System.Data;
 
 namespace Infra.Repositories.Implementations.Components
@@ -20,6 +21,11 @@ namespace Infra.Repositories.Implementations.Components
         protected override string ParamName => "Name";
 
         protected override string QuerySelectByName => $"SELECT * FROM component WHERE name = @{ParamName}";
+
+        public IEnumerable<Component> GetByComputerId(int id)
+        {
+            return GetRecords("SELECT cmp.[ID],[Name],[Price],[Perfomance],[TypePart],[TypeFormat],[TypeMemory],[Socket],[HasIntegratedVideo],[Channels],[VideoLevel],[FanLevel],[NeedHighFrecuency],[Capacity],[FanSize],[MaxFrecuency],[Stock],[Watts] from Component cmp inner join Component_Computer c on ID = c.ID_Component  inner join Computer on Computer.ID = c.ID_Computer where c.ID_Computer = @id", new Dictionary<string, object>() { { "id", id } });
+        }
 
         protected override Component NewRecord(IDataReader reader)
         {

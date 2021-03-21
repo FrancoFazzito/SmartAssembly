@@ -30,22 +30,6 @@ namespace Infra.SqlServer.Connections
             connection.Close();
         }
 
-        //public void Execute(string command, Dictionary<string, object> parameters)
-        //{
-        //    try
-        //    {
-        //        using (var sqlCommand = new SqlCommand(command, Open()))
-        //        {
-        //            foreach (var param in parameters)
-        //            {
-        //                sqlCommand.Parameters.AddWithValue(param.Key, param.Value);
-        //            }
-        //            sqlCommand.ExecuteNonQuery();
-        //        }
-        //    }
-        //    finally { Close(); }
-        //}
-
         public void Execute(IEnumerable<SqlCommand> commands)
         {
             connection.Open();
@@ -64,7 +48,7 @@ namespace Infra.SqlServer.Connections
                     }
                     transaction.Commit();
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     transaction.Rollback();
                     throw new Exception(ex.Message);

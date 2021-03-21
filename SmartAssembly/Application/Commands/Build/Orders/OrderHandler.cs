@@ -26,7 +26,7 @@ namespace Application.Commands.Build.Orders
             Order.Remove(computer);
         }
 
-        public void Submit(string clientEmail,string commentary)
+        public void Submit(string clientEmail, string commentary)
         {
             Order.OrderDate = System.DateTime.Now;
             Order.Client = ClientRepository.GetByName(clientEmail);

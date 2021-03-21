@@ -9,6 +9,7 @@ namespace Application.Commands.RegisterComputerError.Errors.Results
         string NameNewComponent { get; }
         decimal PriceDiference { get; }
         DateTime DateError { get; }
-        Computer Computer { get; }
+        int IdComputer { get; }
+        int IdComputer { get; }
     }
 }
