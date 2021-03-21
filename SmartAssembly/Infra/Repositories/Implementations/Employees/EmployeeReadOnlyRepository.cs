@@ -22,9 +22,15 @@ namespace Infra.Repositories.Implementations.Employees
 
         protected override string ParamName => "Email";
 
-        public Employee MostInactiveEmployee => GetRecord(QUERY_MOST_INACTIVE);
+        public Employee GetMostInactiveEmployee()
+        {
+            return GetRecord(QUERY_MOST_INACTIVE);
+        }
 
-        public Employee EmployeeWithoutOrder => GetRecord(QUERY_INACTIVE);
+        public Employee GetEmployeeWithoutOrder()
+        {
+            return GetRecord(QUERY_INACTIVE);
+        }
 
         protected override Employee NewRecord(IDataReader reader)
         {

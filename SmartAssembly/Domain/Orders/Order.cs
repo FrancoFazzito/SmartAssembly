@@ -13,7 +13,7 @@ namespace Domain.Orders
 
         public void Add(Computer computer, int quantity)
         {
-            for (int i = 0; i < quantity; i++)
+            for (var i = 0; i < quantity; i++)
             {
                 Computers.Add(computer);
             }
@@ -36,5 +36,7 @@ namespace Domain.Orders
         public List<Computer> Computers { get; } = new List<Computer>();
 
         public Client Client { get; set; }
+
+        public string Commentary { get; set; }
     }
 }

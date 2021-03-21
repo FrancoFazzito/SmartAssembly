@@ -9,8 +9,8 @@ namespace Domain.Compatibilities.Implementations
 
         public bool IsCompatibleWith(Component component, Component componentToCompare)
         {
-            bool compatible = component.TypeMemory == componentToCompare.TypeMemory && component.MaxFrecuency <= componentToCompare.MaxFrecuency;
-            bool highFrecuency = componentToCompare.MaxFrecuency >= HIGH_FRECUENCY;
+            var compatible = component.TypeMemory == componentToCompare.TypeMemory && component.MaxFrecuency <= componentToCompare.MaxFrecuency;
+            var highFrecuency = componentToCompare.MaxFrecuency >= HIGH_FRECUENCY;
             return componentToCompare.NeedHighFrecuency ? highFrecuency && compatible : compatible;
         }
     }

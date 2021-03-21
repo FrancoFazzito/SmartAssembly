@@ -56,6 +56,7 @@
     <Compile Include="Commands\Build\Builders\BuilderComputer.cs" />
     <Compile Include="Factories\Compatibilities\FactoryCompatibility.cs" />
     <Compile Include="Factories\Enoughs\FactoryEnough.cs" />
+    <Compile Include="Repositories\Interfaces\Clients\IClientReadOnlyRepository.cs" />
     <Compile Include="Strategies\StrategyOrderBy.cs" />
     <Compile Include="Strategies\IStrategyOrderBy.cs" />
     <Compile Include="Factories\Compatibilities\IFactoryCompatibility.cs" />

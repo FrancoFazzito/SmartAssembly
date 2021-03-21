@@ -1,4 +1,5 @@
 ﻿using Infra.Interfaces.Connections;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -47,11 +48,12 @@ namespace Infra.SqlServer.Connections
 
         public void Execute(IEnumerable<SqlCommand> commands)
         {
+            connection.Open();
             using (var transaction = connection.BeginTransaction())
             {
                 foreach (var command in commands)
                 {
-                    command.Connection = Open();
+                    command.Connection = connection;
                     command.Transaction = transaction;
                 }
                 try
@@ -62,9 +64,10 @@ namespace Infra.SqlServer.Connections
                     }
                     transaction.Commit();
                 }
-                catch
+                catch(Exception ex)
                 {
                     transaction.Rollback();
+                    throw new Exception(ex.Message);
                 }
                 finally { Close(); }
             }

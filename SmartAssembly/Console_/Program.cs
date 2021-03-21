@@ -9,21 +9,23 @@ using Application.Factories.Compatibilities;
 using Application.Factories.Enoughs;
 using Application.Repositories.Components.Interfaces;
 using Application.Repositories.Employees.Interfaces;
+using Application.Repositories.Interfaces.Clients;
 using Application.Repositories.Orders.Interfaces;
 using Application.Repositories.TypeUses.Interfaces;
 using Application.Strategies.OrderBy;
-using Domain.Clients;
+using Console_.Container;
 using Domain.Computers;
 using Infra.Interfaces.Connections;
+using Infra.Repositories.Implementations.Clients;
 using Infra.Repositories.Implementations.Components;
 using Infra.Repositories.Implementations.Employees;
 using Infra.Repositories.Implementations.Orders;
 using Infra.Repositories.Implementations.TypeUses;
 using Infra.SqlServer.Connections;
-using System.Collections.Generic;
-using System.Linq;
 using System;
-using Console_.Container;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
 namespace Console_
 {
@@ -37,10 +39,14 @@ namespace Console_
 
         private static void Main()
         {
+            Stopwatch clock = new Stopwatch();
+            clock.Start();
             TestRegisterDependencies();
             var computer = TestBuildComputer().ElementAt(0);
             TestSubmitOrder(computer);
             RegisterError(computer);
+            clock.Stop();
+            Console.WriteLine(clock.ElapsedMilliseconds);
             Console.Read();
         }
 
@@ -62,6 +68,7 @@ namespace Console_
             container.Register<ITypeUseReadOnlyRepository>(() => new TypeUseReadOnlyRepository(container.Resolve<IConnection>()));
             container.Register<IEmployeeReadOnlyRepository>(() => new EmployeeReadOnlyRepository(container.Resolve<IConnection>()));
             container.Register<IOrderWriteOnlyRepository>(() => new OrderWriteOnlyRepository(container.Resolve<IConnection>()));
+            container.Register<IClientReadOnlyRepository>(() => new ClientReadOnlyRepository(container.Resolve<IConnection>()));
             container.Register<IFactoryCompatibility>(() => new FactoryCompatibility());
             container.Register<IFactoryEnough>(() => new FactoryEnough());
             container.Register<IStrategyOrderBy>(() => new StrategyOrderBy());
@@ -94,9 +101,10 @@ namespace Console_
         {
             var repoOrder = container.Resolve<IOrderWriteOnlyRepository>();
             var repoEmployee = container.Resolve<IEmployeeReadOnlyRepository>();
-            var order = new OrderHandler(repoOrder, repoEmployee);
+            var repoClient = container.Resolve<IClientReadOnlyRepository>();
+            var order = new OrderHandler(repoOrder, repoEmployee, repoClient);
             order.Add(computer, 1);
-            order.Submit(new Client("juan", "123123123", "juan@gmail", "berutti 2062")); //repo cliente
+            order.Submit("juan@gmail","maincra");
         }
     }
 }

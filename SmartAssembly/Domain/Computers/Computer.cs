@@ -12,7 +12,7 @@ namespace Domain.Computers
 
         public void Add(Component element, int quantity = 1)
         {
-            for (int i = 0; i < quantity; i++)
+            for (var i = 0; i < quantity; i++)
             {
                 components.Add(element);
             }

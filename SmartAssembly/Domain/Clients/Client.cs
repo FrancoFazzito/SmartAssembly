@@ -2,17 +2,14 @@
 {
     public class Client
     {
-        public Client(string name, string number, string email, string adress)
+        public Client()
         {
-            Name = name;
-            Number = number;
-            Email = email;
-            Adress = adress;
+
         }
 
-        public string Name { get; }
-        public string Number { get; }
-        public string Email { get; }
-        public string Adress { get; }
+        public string Name { get; set; }
+        public string Number { get; set; }
+        public string Email { get; set; }
+        public string Adress { get; set; }
     }
 }

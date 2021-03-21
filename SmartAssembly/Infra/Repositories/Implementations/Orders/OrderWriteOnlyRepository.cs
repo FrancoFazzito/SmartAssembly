@@ -17,6 +17,7 @@ namespace Infra.Repositories.Implementations.Orders
         private const string PARAMETER_ID_EMPLOYEE = "Id_employee";
         private const string PARAMETER_TYPE_USE = "typeUse";
         private const string PARAMETER_EMAIL_CLIENT = "Email_client";
+        private const string PARAMETER_COMMENTARY = "Commentary";
         private readonly IConnection connection;
 
         public OrderWriteOnlyRepository(IConnection connection)
@@ -26,7 +27,7 @@ namespace Infra.Repositories.Implementations.Orders
 
         public void Insert(Order order)
         {
-            List<SqlCommand> commands = new List<SqlCommand>
+            var commands = new List<SqlCommand>
             {
                 CommandOrder(order)
             };
@@ -71,13 +72,14 @@ namespace Infra.Repositories.Implementations.Orders
 
         private SqlCommand CommandOrder(Order order)
         {
-            using (var commandOrder = new SqlCommand($"INSERT INTO [Order] VALUES (@{PARAMETER_PRICE},@{PARAMETER_ORDER_DATE},@{PARAMATER_ORDER_DELIVERY},@{PARAMETER_ID_EMPLOYEE},@{PARAMETER_EMAIL_CLIENT})"))
+            using (var commandOrder = new SqlCommand($"INSERT INTO [Order] VALUES (@{PARAMETER_PRICE},@{PARAMETER_ORDER_DATE},@{PARAMATER_ORDER_DELIVERY},@{PARAMETER_ID_EMPLOYEE},@{PARAMETER_EMAIL_CLIENT},@{PARAMETER_COMMENTARY})"))
             {
                 commandOrder.Parameters.AddWithValue(PARAMETER_PRICE, order.Price);
                 commandOrder.Parameters.AddWithValue(PARAMETER_ORDER_DATE, order.OrderDate);
                 commandOrder.Parameters.AddWithValue(PARAMATER_ORDER_DELIVERY, order.OrderDelivery);
                 commandOrder.Parameters.AddWithValue(PARAMETER_ID_EMPLOYEE, order.Employee.Email);
                 commandOrder.Parameters.AddWithValue(PARAMETER_EMAIL_CLIENT, order.Client.Email);
+                commandOrder.Parameters.AddWithValue(PARAMETER_COMMENTARY, order.Commentary);
                 return commandOrder;
             }
         }
