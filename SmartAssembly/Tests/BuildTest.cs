@@ -13,7 +13,6 @@ using Application.Repositories.Orders.Interfaces;
 using Application.Repositories.TypeUses.Interfaces;
 using Application.Strategies.OrderBy;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Linq;
 
 namespace Tests
@@ -47,7 +46,7 @@ namespace Tests
             var repoEmployee = container.Resolve<IEmployeeReadOnlyRepository>();
             var repoClient = container.Resolve<IClientReadOnlyRepository>();
             var order = new OrderHandler(repoOrder, repoEmployee, repoClient);
-            int Quantity = 2;
+            var Quantity = 2;
             order.Add(computer, Quantity);
             order.Submit("juan@gmail", "maincra");
             var newCount = container.Resolve<IOrderReadOnlyRepository>().All.Count(); //ver si poner un mediator en el medio para la application

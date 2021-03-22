@@ -23,7 +23,7 @@ namespace Application.Commands.RegisterComputerError.Replacers
             Computer = computer;
             Component = component;
             Components = componentRepository.All.Where(c => c.TypePart == component.TypePart)
-                                                .Where(c => c.IsEnough(enoughs[Enough.Level], c.PerfomanceLevel))
+                                                .Where(c => c.IsEnough(enoughs[Enough.Level], GetLevelToReplace(component)))
                                                 .Where(c => c.Id != component.Id)
                                                 .OrderBy(c => c.Price).ToList();
 
@@ -40,6 +40,11 @@ namespace Application.Commands.RegisterComputerError.Replacers
                 { TypePart.psu, ReplaceCapacity },
                 { TypePart.accesory, ReplaceAccesory }
             };
+        }
+
+        private int GetLevelToReplace(Component component)
+        {
+            return (int)(0.70 * component.PerfomanceLevel);
         }
 
         public Component Replace()

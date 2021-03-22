@@ -1,12 +1,11 @@
 ﻿using Domain.Components;
-using Domain.Computers;
 using System;
 
 namespace Application.Commands.RegisterComputerError.Errors.Results
 {
     public class ErrorWithoutReplaceResult : IErrorResult
     {
-        public ErrorWithoutReplaceResult(Component oldComponent,int idComputer, string commentary)
+        public ErrorWithoutReplaceResult(Component oldComponent, int idComputer, string commentary)
         {
             NameOldComponent = oldComponent.Name;
             PriceDiference = 0 - oldComponent.Price;

@@ -1,5 +1,4 @@
-﻿using Domain.Computers;
-using System;
+﻿using System;
 
 namespace Application.Commands.RegisterComputerError.Errors.Results
 {
@@ -9,7 +8,6 @@ namespace Application.Commands.RegisterComputerError.Errors.Results
         string NameNewComponent { get; }
         decimal PriceDiference { get; }
         DateTime DateError { get; }
-        int IdComputer { get; }
         int IdComputer { get; }
     }
 }

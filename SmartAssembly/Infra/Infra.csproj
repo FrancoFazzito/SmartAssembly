@@ -46,6 +46,7 @@
     <Compile Include="Repositories\Implementations\Clients\ClientReadOnlyRepository.cs" />
     <Compile Include="Repositories\Implementations\Computers\ComputerReadOnlyRepository.cs" />
     <Compile Include="Repositories\Implementations\Employees\EmployeeReadOnlyRepository.cs" />
+    <Compile Include="Repositories\Implementations\Errors\ErrorWriteOnlyRepository.cs" />
     <Compile Include="Repositories\Implementations\Orders\OrderReadOnlyRepository.cs" />
     <Compile Include="Repositories\Implementations\Orders\OrderWriteOnlyRepository.cs" />
     <Compile Include="Repositories\Implementations\TypeUse\TypeUseReadOnlyRepository.cs" />

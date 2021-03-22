@@ -3,6 +3,7 @@ using Application.Commands.RegisterComputerError.Replacers;
 using Application.Factories.Compatibilities;
 using Application.Factories.Enoughs;
 using Application.Repositories.Components.Interfaces;
+using Application.Repositories.Interfaces.Error;
 using Domain.Components;
 using Domain.Computers;
 
@@ -14,28 +15,31 @@ namespace Application.Commands.RegisterComputerError.Errors
         private readonly IComponentReadOnlyRepository componenRepository;
         private readonly IFactoryCompatibility compatibilities;
         private readonly IFactoryEnough enoughs;
+        private readonly IErrorWriteOnlyRepository errorRepository;
+
         //IwriteError
 
-        public RegisterError(Computer computer, IComponentReadOnlyRepository componenRepository, IFactoryCompatibility compatibilities, IFactoryEnough enoughs)
+        public RegisterError(Computer computer, IComponentReadOnlyRepository componenRepository, IFactoryCompatibility compatibilities, IFactoryEnough enoughs, IErrorWriteOnlyRepository errorRepository)
         {
             this.computer = computer;
             this.componenRepository = componenRepository;
             this.compatibilities = compatibilities;
             this.enoughs = enoughs;
+            this.errorRepository = errorRepository;
         }
 
-        public IErrorResult Register(Component component, string commentary)
+        public IErrorResult Register(Component componentWithError, string commentary)
         {
-            var componentReplacer = new ComponentReplacer(computer, component, componenRepository, compatibilities, enoughs);
+            commentary = $" {commentary}";
+            var componentReplacer = new ComponentReplacer(computer, componentWithError, componenRepository, compatibilities, enoughs);
             var replaceComponent = componentReplacer.Replace();
-            //register in BD -> update commentary de la orden y add al error
+            errorRepository.Insert(componentWithError, replaceComponent, computer.Id, commentary);
             if (replaceComponent == null)
             {
-                return new ErrorWithoutReplaceResult(component, computer.Id, commentary);
+                return new ErrorWithoutReplaceResult(componentWithError, computer.Id, commentary);
             }
-
-            computer.Replace(component, replaceComponent);
-            return new ErrorResult(component, replaceComponent, computer.Id, commentary);
+            computer.Replace(componentWithError, replaceComponent);
+            return new ErrorResult(componentWithError, replaceComponent, computer.Id, commentary);
         }
     }
 }

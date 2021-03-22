@@ -1,5 +1,4 @@
 ﻿using Domain.Components;
-using Domain.Computers;
 using System;
 
 namespace Application.Commands.RegisterComputerError.Errors.Results

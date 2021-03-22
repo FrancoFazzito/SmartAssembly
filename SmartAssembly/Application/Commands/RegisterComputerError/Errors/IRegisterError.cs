@@ -5,6 +5,6 @@ namespace Application.Commands.RegisterComputerError.Errors
 {
     public interface IRegisterError
     {
-        IErrorResult Register(Component componentWithError);
+        IErrorResult Register(Component componentWithError, string commentary);
     }
 }
