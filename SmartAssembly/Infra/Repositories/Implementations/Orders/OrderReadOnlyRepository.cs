@@ -29,6 +29,11 @@ namespace Infra.Repositories.Implementations.Orders
 
         protected override string QuerySelectAll => "SELECT o.ID, o.OrderDate, o.Email_Employee, o.Email_client, o.Commentary , o.OrderState, c.ID as ID_computer FROM [Order] o inner join Computer c on c.ID_Order = o.ID";
 
+        public override Order GetById(int id)
+        {
+            return All.FirstOrDefault(c => c.Id == id);
+        }
+
         protected override Order NewRecord(IDataReader reader)
         {
             return new Order

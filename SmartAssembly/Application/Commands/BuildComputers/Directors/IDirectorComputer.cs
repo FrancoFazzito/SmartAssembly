@@ -1,6 +1,6 @@
-﻿using Application.Commands.Build.Builders;
+﻿using Application.Commands.BuildComputers.Builders;
 
-namespace Application.Commands.Build.Directors
+namespace Application.Commands.BuildComputers.Directors
 {
     public interface IDirectorComputer
     {

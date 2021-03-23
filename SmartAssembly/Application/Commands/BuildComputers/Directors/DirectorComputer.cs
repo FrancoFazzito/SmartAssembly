@@ -1,4 +1,4 @@
-﻿using Application.Commands.Build.Builders;
+﻿using Application.Commands.BuildComputers.Builders;
 using Application.Exceptions.Add;
 using Domain.Components;
 using Domain.Components.Types;
@@ -6,7 +6,7 @@ using Domain.Computers;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Application.Commands.Build.Directors
+namespace Application.Commands.BuildComputers.Directors
 {
     public class DirectorComputer : IDirectorComputer
     {

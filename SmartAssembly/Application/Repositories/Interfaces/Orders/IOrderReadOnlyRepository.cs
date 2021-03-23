@@ -6,6 +6,7 @@ namespace Application.Repositories.Orders.Interfaces
     public interface IOrderReadOnlyRepository
     {
         IEnumerable<Order> All { get; }
+        Order GetById(int id);
     }
 }
 

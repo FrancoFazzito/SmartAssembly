@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 
 namespace Infra.Repositories.Implementations.Orders
 {
-    public class OrderWriteOnlyRepository : IOrderWriteOnlyRepository
+    public class SubmitOrderRepository : ISubmitOrderRepository
     {
         private const string PARAMETER_PRICE = "price";
         private const string PARAMETER_ORDER_DATE = "orderDate";
@@ -21,7 +21,7 @@ namespace Infra.Repositories.Implementations.Orders
         private const string PARAMETER_STATE = "State";
         private readonly IConnection connection;
 
-        public OrderWriteOnlyRepository(IConnection connection)
+        public SubmitOrderRepository(IConnection connection)
         {
             this.connection = connection;
         }

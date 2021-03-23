@@ -2,7 +2,7 @@
 
 namespace Application.Repositories.Orders.Interfaces
 {
-    public interface IOrderWriteOnlyRepository
+    public interface ISubmitOrderRepository
     {
         void Insert(Order order);
     }

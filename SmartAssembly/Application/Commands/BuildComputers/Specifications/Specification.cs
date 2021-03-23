@@ -1,4 +1,4 @@
-﻿namespace Application.Commands.Build.Specifications
+﻿namespace Application.Commands.BuildComputers.Specifications
 {
     public class Specification : ISpecification //pasar a domain y poner un manager
     {

@@ -5,6 +5,6 @@ namespace Application.Strategies.OrderBy
 {
     public interface IStrategyOrderBy
     {
-        IEnumerable<Component> GetOrderedComponents(IEnumerable<Component> components, Commands.Build.Importances.Importance order);
+        IEnumerable<Component> GetOrderedComponents(IEnumerable<Component> components, Commands.BuildComputers.Importances.Importance order);
     }
 }

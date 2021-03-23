@@ -17,10 +17,10 @@ namespace Infra.Repositories.Implementations.Abstracts
         {
             this.connection = connection;
         }
+
         protected abstract T NewRecord(IDataReader reader);
 
         protected abstract string QuerySelectAll { get; }
-
         private string QuerySelectById => $"{QuerySelectAll} {WHERE_ID}";
 
         protected IEnumerable<T> GetRecords(string query, Dictionary<string, object> parameters)
@@ -69,7 +69,7 @@ namespace Infra.Repositories.Implementations.Abstracts
             return null;
         }
 
-        public T GetById(int id)
+        public virtual T GetById(int id)
         {
             return GetRecord(QuerySelectById, new Dictionary<string, object>
             {

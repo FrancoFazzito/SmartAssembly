@@ -33,8 +33,14 @@ namespace Infra.Repositories.Implementations.Errors
             if (ExistsComponent(componentToReplace))
             {
                 commands.Add(CommandUpdateComputer(componentToReplace, idComputer));
+                commands.Add(CommandUpdateComponentStock(componentToReplace));
             }
             connection.Execute(commands);
+        }
+
+        private SqlCommand CommandUpdateComponentStock(Component componentToReplace)
+        {
+            throw new NotImplementedException();
         }
 
         private SqlCommand CommandUpdateComputer(Component componentToReplace, int idComputer)

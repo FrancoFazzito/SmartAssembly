@@ -1,10 +1,12 @@
-﻿using Application.Factories.Compatibilities;
+﻿using Application.Commands.BuildOrders;
+using Application.Factories.Compatibilities;
 using Application.Factories.Enoughs;
 using Application.Repositories.Components.Interfaces;
 using Application.Repositories.Employees.Interfaces;
 using Application.Repositories.Interfaces.Clients;
 using Application.Repositories.Interfaces.Computers;
 using Application.Repositories.Interfaces.Error;
+using Application.Repositories.Interfaces.Orders;
 using Application.Repositories.Orders.Interfaces;
 using Application.Repositories.TypeUses.Interfaces;
 using Application.Strategies.OrderBy;
@@ -24,33 +26,35 @@ namespace Tests
 {
     public class DependencyContainerMock
     {
+        private readonly IContainer container;
+
         public DependencyContainerMock()
         {
-            Container = new DependencyContainer();
-            Container.Register<IConnection>(() => new Connection());
-            Container.Register<IComponentReadOnlyRepository>(() => new ComponentReadOnlyRepository(Container.Resolve<IConnection>()));
-            Container.Register<ITypeUseReadOnlyRepository>(() => new TypeUseReadOnlyRepository(Container.Resolve<IConnection>()));
-            Container.Register<IEmployeeReadOnlyRepository>(() => new EmployeeReadOnlyRepository(Container.Resolve<IConnection>()));
-            Container.Register<IOrderWriteOnlyRepository>(() => new OrderWriteOnlyRepository(Container.Resolve<IConnection>()));
-            Container.Register<IClientReadOnlyRepository>(() => new ClientReadOnlyRepository(Container.Resolve<IConnection>()));
-            Container.Register<IErrorWriteOnlyRepository>(() => new ErrorWriteOnlyRepository(Container.Resolve<IConnection>()));
-            Container.Register<IComputerReadOnlyRepository>(() => new ComputerReadOnlyRepository(Container.Resolve<IConnection>(), Container.Resolve<IComponentReadOnlyRepository>()));
-            Container.Register<IOrderReadOnlyRepository>(() => new OrderReadOnlyRepository(Container.Resolve<IConnection>(), Container.Resolve<IComputerReadOnlyRepository>(), Container.Resolve<IEmployeeReadOnlyRepository>(), Container.Resolve<IClientReadOnlyRepository>()));
-            Container.Register<IFactoryCompatibility>(() => new FactoryCompatibility());
-            Container.Register<IFactoryEnough>(() => new FactoryEnough());
-            Container.Register<IStrategyOrderBy>(() => new StrategyOrderBy());
+            container = new DependencyContainer();
+            container.Register<IConnection>(() => new Connection());
+            container.Register<IComponentReadOnlyRepository>(() => new ComponentReadOnlyRepository(container.Resolve<IConnection>()));
+            container.Register<ITypeUseReadOnlyRepository>(() => new TypeUseReadOnlyRepository(container.Resolve<IConnection>()));
+            container.Register<IEmployeeReadOnlyRepository>(() => new EmployeeReadOnlyRepository(container.Resolve<IConnection>()));
+            container.Register<ISubmitOrderRepository>(() => new SubmitOrderRepository(container.Resolve<IConnection>()));
+            container.Register<IClientReadOnlyRepository>(() => new ClientReadOnlyRepository(container.Resolve<IConnection>()));
+            container.Register<IErrorWriteOnlyRepository>(() => new ErrorWriteOnlyRepository(container.Resolve<IConnection>()));
+            container.Register<IComputerReadOnlyRepository>(() => new ComputerReadOnlyRepository(container.Resolve<IConnection>(), container.Resolve<IComponentReadOnlyRepository>()));
+            container.Register<IOrderReadOnlyRepository>(() => new OrderReadOnlyRepository(container.Resolve<IConnection>(), container.Resolve<IComputerReadOnlyRepository>(), container.Resolve<IEmployeeReadOnlyRepository>(), container.Resolve<IClientReadOnlyRepository>()));
+            container.Register<IBuildOrderRepository>(() => new BuildOrderRepository(container.Resolve<IConnection>()));
+            container.Register<IBuilderOrder>(() => new BuildOrder(container.Resolve<IBuildOrderRepository>(), container.Resolve<IOrderReadOnlyRepository>()));
+            container.Register<IFactoryCompatibility>(() => new FactoryCompatibility());
+            container.Register<IFactoryEnough>(() => new FactoryEnough());
+            container.Register<IStrategyOrderBy>(() => new StrategyOrderBy());
         }
 
         public void Register<T>(Func<T> createInstance, string instanceName = null)
         {
-            Container.Register(createInstance, instanceName);
+            container.Register(createInstance, instanceName);
         }
 
         public T Resolve<T>(string instanceName = null)
         {
-            return Container.Resolve<T>(instanceName);
+            return container.Resolve<T>(instanceName);
         }
-
-        public IContainer Container { get; }
     }
 }

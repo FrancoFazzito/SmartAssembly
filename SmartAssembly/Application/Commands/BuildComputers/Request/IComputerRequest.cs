@@ -1,6 +1,6 @@
-﻿using Application.Commands.Build.Specifications;
+﻿using Application.Commands.BuildComputers.Specifications;
 
-namespace Application.Commands.Build.Request
+namespace Application.Commands.BuildComputers.Request
 {
     public interface IComputerRequest
     {

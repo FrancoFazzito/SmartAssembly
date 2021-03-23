@@ -1,5 +1,5 @@
-﻿using Application.Commands.Build.Importances;
-using Application.Commands.Build.Request;
+﻿using Application.Commands.BuildComputers.Importances;
+using Application.Commands.BuildComputers.Request;
 using Application.Exceptions.Add;
 using Application.Factories.Compatibilities;
 using Application.Factories.Enoughs;
@@ -13,7 +13,7 @@ using Domain.Enoughs.Enums;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Application.Commands.Build.Builders
+namespace Application.Commands.BuildComputers.Builders
 {
     public class BuilderComputer : IBuilder
     {

@@ -1,4 +1,4 @@
-﻿using Application.Commands.Build.Importances;
+﻿using Application.Commands.BuildComputers.Importances;
 using Domain.Components;
 using System.Collections.Generic;
 using System.Linq;

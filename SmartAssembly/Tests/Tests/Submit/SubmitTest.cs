@@ -1,9 +1,9 @@
-﻿using Application.Commands.Build.Builders;
-using Application.Commands.Build.Directors;
-using Application.Commands.Build.Importances;
-using Application.Commands.Build.Orders;
-using Application.Commands.Build.Request;
-using Application.Commands.Build.Specifications;
+﻿using Application.Commands.BuildComputers.Builders;
+using Application.Commands.BuildComputers.Directors;
+using Application.Commands.BuildComputers.Importances;
+using Application.Commands.BuildComputers.Orders;
+using Application.Commands.BuildComputers.Request;
+using Application.Commands.BuildComputers.Specifications;
 using Application.Factories.Compatibilities;
 using Application.Factories.Enoughs;
 using Application.Repositories.Components.Interfaces;
@@ -28,10 +28,10 @@ namespace Tests
             var container = new DependencyContainerMock();
             var oldCount = container.Resolve<IOrderReadOnlyRepository>().All.Count();
             var computer = new DirectorComputer(new BuilderComputer(new ComputerRequest(TypeUse.gaming, 1200000, container.Resolve<ITypeUseReadOnlyRepository>()), Importance.Price, container.Resolve<IStrategyOrderBy>(), container.Resolve<IFactoryCompatibility>(), container.Resolve<IFactoryEnough>(), container.Resolve<IComponentReadOnlyRepository>())).Build().Computers.ElementAt(0);
-            var repoOrder = container.Resolve<IOrderWriteOnlyRepository>();
+            var repoOrder = container.Resolve<ISubmitOrderRepository>();
             var repoEmployee = container.Resolve<IEmployeeReadOnlyRepository>();
             var repoClient = container.Resolve<IClientReadOnlyRepository>();
-            var order = new OrderHandler(repoOrder, repoEmployee, repoClient); //ver si poner un mediator en el medio para la application
+            var order = new SubmitOrder(repoOrder, repoEmployee, repoClient); //ver si poner un mediator en el medio para la application
             var Quantity = 2;
             order.Add(computer, Quantity);
             order.Submit("juan@gmail", "maincra");

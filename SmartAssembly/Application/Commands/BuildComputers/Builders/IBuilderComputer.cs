@@ -1,11 +1,11 @@
-﻿using Application.Commands.Build.Request;
+﻿using Application.Commands.BuildComputers.Request;
 using Application.Factories.Compatibilities;
 using Application.Factories.Enoughs;
 using Domain.Components;
 using Domain.Computers;
 using System.Collections.Generic;
 
-namespace Application.Commands.Build.Builders
+namespace Application.Commands.BuildComputers.Builders
 {
     public interface IBuilder
     {

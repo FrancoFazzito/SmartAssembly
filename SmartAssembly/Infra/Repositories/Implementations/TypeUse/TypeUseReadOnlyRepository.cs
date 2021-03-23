@@ -1,4 +1,4 @@
-﻿using Application.Commands.Build.Specifications;
+﻿using Application.Commands.BuildComputers.Specifications;
 using Application.Repositories.TypeUses.Interfaces;
 using Infra.Interfaces.Connections;
 using Infra.Repositories.Convert;

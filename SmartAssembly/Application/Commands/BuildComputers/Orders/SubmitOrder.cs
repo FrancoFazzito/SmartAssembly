@@ -5,11 +5,11 @@ using Domain.Computers;
 using Domain.Orders;
 using Domain.Orders.States;
 
-namespace Application.Commands.Build.Orders
+namespace Application.Commands.BuildComputers.Orders
 {
-    public class OrderHandler : IOrderHandler
+    public class SubmitOrder : ISubmirOrder
     {
-        public OrderHandler(IOrderWriteOnlyRepository repository, IEmployeeReadOnlyRepository employeeRepository, IClientReadOnlyRepository clientRepository)
+        public SubmitOrder(ISubmitOrderRepository repository, IEmployeeReadOnlyRepository employeeRepository, IClientReadOnlyRepository clientRepository)
         {
             Order = new Order();
             OrderRepository = repository;
@@ -27,7 +27,7 @@ namespace Application.Commands.Build.Orders
             Order.Remove(computer);
         }
 
-        public void Submit(string clientEmail, string commentary)
+        public Order Submit(string clientEmail, string commentary)
         {
             Order.OrderDate = System.DateTime.Now;
             Order.Client = ClientRepository.GetByName(clientEmail);
@@ -36,9 +36,10 @@ namespace Application.Commands.Build.Orders
             Order.Employee = employee ?? EmployeeRepository.GetMostInactiveEmployee();
             Order.State = OrderState.Uncompleted;
             OrderRepository.Insert(Order);
+            return Order;
         }
 
-        public IOrderWriteOnlyRepository OrderRepository { get; }
+        public ISubmitOrderRepository OrderRepository { get; }
         public IEmployeeReadOnlyRepository EmployeeRepository { get; }
         public IClientReadOnlyRepository ClientRepository { get; }
         public Order Order { get; }

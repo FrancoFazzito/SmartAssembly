@@ -1,8 +1,8 @@
-﻿using Application.Commands.Build.Builders;
-using Application.Commands.Build.Directors;
-using Application.Commands.Build.Importances;
-using Application.Commands.Build.Request;
-using Application.Commands.Build.Specifications;
+﻿using Application.Commands.BuildComputers.Builders;
+using Application.Commands.BuildComputers.Directors;
+using Application.Commands.BuildComputers.Importances;
+using Application.Commands.BuildComputers.Request;
+using Application.Commands.BuildComputers.Specifications;
 using Application.Factories.Compatibilities;
 using Application.Factories.Enoughs;
 using Application.Repositories.Components.Interfaces;
@@ -14,7 +14,7 @@ using System.Linq;
 namespace Tests
 {
     [TestClass]
-    public class BuildTest
+    public class BuildComputerTest
     {
         [TestMethod]
         public void TestBuildComputer()
