@@ -6,6 +6,7 @@ using Application.Repositories.Components.Interfaces;
 using Application.Repositories.Interfaces.Error;
 using Domain.Components;
 using Domain.Computers;
+using Domain.Orders.States;
 
 namespace Application.Commands.RegisterComputerError.Errors
 {
@@ -33,7 +34,7 @@ namespace Application.Commands.RegisterComputerError.Errors
             commentary = $" {commentary}";
             var componentReplacer = new ComponentReplacer(computer, componentWithError, componenRepository, compatibilities, enoughs);
             var replaceComponent = componentReplacer.Replace();
-            errorRepository.Insert(componentWithError, replaceComponent, computer.Id, commentary);
+            errorRepository.Insert(componentWithError, replaceComponent, computer.Id, commentary, OrderState.Mistake);
             if (replaceComponent == null)
             {
                 return new ErrorWithoutReplaceResult(componentWithError, computer.Id, commentary);

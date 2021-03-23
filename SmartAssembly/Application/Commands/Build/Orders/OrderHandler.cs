@@ -3,6 +3,7 @@ using Application.Repositories.Interfaces.Clients;
 using Application.Repositories.Orders.Interfaces;
 using Domain.Computers;
 using Domain.Orders;
+using Domain.Orders.States;
 
 namespace Application.Commands.Build.Orders
 {
@@ -33,6 +34,7 @@ namespace Application.Commands.Build.Orders
             Order.Commentary = commentary;
             var employee = EmployeeRepository.GetEmployeeWithoutOrder();
             Order.Employee = employee ?? EmployeeRepository.GetMostInactiveEmployee();
+            Order.State = OrderState.Uncompleted;
             OrderRepository.Insert(Order);
         }
 

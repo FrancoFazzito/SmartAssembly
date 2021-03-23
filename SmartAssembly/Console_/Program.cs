@@ -26,18 +26,13 @@ namespace Console_
 {
     public class Program
     {
-        //register in BD error
-        //add state order
         private static IContainer container;
 
         private static void Main()
         {
+            //armar handler segun orders -> empleado y cliente
             RegisterDependencies();
-            var orders = container.Resolve<IOrderReadOnlyRepository>().All;
-            var computer = orders.ElementAt(0).Computers.ElementAt(0);
-            var error = new RegisterError(computer, container.Resolve<IComponentReadOnlyRepository>(), container.Resolve<IFactoryCompatibility>(), container.Resolve<IFactoryEnough>(), container.Resolve<IErrorWriteOnlyRepository>());
-            var errorResult = error.Register(computer.Components.ElementAt(0), "error de inicio");
-            Console.WriteLine(errorResult.DateError);
+            //realizar pedido CU
             Console.Read();
         }
 
@@ -56,7 +51,6 @@ namespace Console_
             container.Register<IFactoryCompatibility>(() => new FactoryCompatibility());
             container.Register<IFactoryEnough>(() => new FactoryEnough());
             container.Register<IStrategyOrderBy>(() => new StrategyOrderBy());
-
         }
     }
 }

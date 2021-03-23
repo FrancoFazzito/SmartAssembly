@@ -69,6 +69,7 @@
     <Compile Include="Compatibilities\Implementations\CompatibleVideoCpu.cs" />
     <Compile Include="Components\Component.cs" />
     <Compile Include="Computers\Computer.cs" />
+    <Compile Include="Orders\States\OrderState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

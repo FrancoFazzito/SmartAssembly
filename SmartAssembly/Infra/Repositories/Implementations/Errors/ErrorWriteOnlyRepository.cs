@@ -1,5 +1,6 @@
 ﻿using Application.Repositories.Interfaces.Error;
 using Domain.Components;
+using Domain.Orders.States;
 using Infra.Interfaces.Connections;
 using System;
 using System.Collections.Generic;
@@ -13,13 +14,14 @@ namespace Infra.Repositories.Implementations.Errors
         private const string PARAM_COMPONENT_REPLACE = "ID_Component_Replace";
         private const string PARAM_COMMENTARY = "Commentary";
         private const string PARAM_COMPONENT_ERROR = "ID_Component_Error";
+        private const string PARAM_STATE_ORDER = "State";
         private readonly IConnection connection;
 
         public ErrorWriteOnlyRepository(IConnection connection)
         {
             this.connection = connection;
         }
-        public void Insert(Component componentWithError, Component componentToReplace, int idComputer, string commentary)
+        public void Insert(Component componentWithError, Component componentToReplace, int idComputer, string commentary, OrderState newStateOrder)
         {
             var commands = new List<SqlCommand>();
             var commandError = new SqlCommand($"INSERT INTO Computer_Error VALUES (@{PARAM_COMPUTER},@{PARAM_COMPONENT_ERROR},@{PARAM_COMPONENT_REPLACE},@{PARAM_COMMENTARY})");
@@ -29,9 +31,10 @@ namespace Infra.Repositories.Implementations.Errors
             commandError.Parameters.AddWithValue(PARAM_COMMENTARY, commentary);
             commands.Add(commandError);
 
-            var commandUpdateError = new SqlCommand($"update [Order] set Commentary =+ @{PARAM_COMMENTARY} where ID = (select o.ID from [Order] o inner join Computer c on c.ID_Order = o.ID where c.ID = @{PARAM_COMPUTER})");
+            var commandUpdateError = new SqlCommand($"update [Order] set Commentary =+ @{PARAM_COMMENTARY}, OrderState = @{PARAM_STATE_ORDER} where ID = (select o.ID from [Order] o inner join Computer c on c.ID_Order = o.ID where c.ID = @{PARAM_COMPUTER})");
             commandUpdateError.Parameters.AddWithValue(PARAM_COMMENTARY, commentary);
             commandUpdateError.Parameters.AddWithValue(PARAM_COMPUTER, idComputer);
+            commandUpdateError.Parameters.AddWithValue(PARAM_STATE_ORDER, newStateOrder);
             commands.Add(commandUpdateError);
 
             if (ExistsComponent(componentToReplace))
