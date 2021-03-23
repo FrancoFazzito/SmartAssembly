@@ -22,6 +22,7 @@ namespace Infra.Repositories.Implementations.Errors
             this.connection = connection;
         }
 
+        //change to computer object y obtener cantidad del component
         public void Insert(Component componentWithError, Component componentToReplace, int idComputer, string commentary, OrderState newStateOrder)
         {
             var commands = new List<SqlCommand>
@@ -33,12 +34,12 @@ namespace Infra.Repositories.Implementations.Errors
             if (ExistsComponent(componentToReplace))
             {
                 commands.Add(CommandUpdateComputer(componentToReplace, idComputer));
-                commands.Add(CommandUpdateComponentStock(componentToReplace));
+                //commands.Add(CommandUpdateComponentStock(componentToReplace));
             }
             connection.Execute(commands);
         }
 
-        private SqlCommand CommandUpdateComponentStock(Component componentToReplace)
+        private SqlCommand CommandUpdateComponentStock(Component componentToReplace, int quantity)
         {
             throw new NotImplementedException();
         }
