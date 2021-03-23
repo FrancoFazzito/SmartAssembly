@@ -4,6 +4,7 @@ using Infra.Interfaces.Connections;
 using Infra.Repositories.Convert;
 using Infra.Repositories.Implementations.Abstracts;
 using System.Data;
+using System.Linq;
 
 namespace Infra.Repositories.Implementations.Clients
 {
@@ -15,9 +16,10 @@ namespace Infra.Repositories.Implementations.Clients
 
         protected override string QuerySelectAll => "SELECT * FROM Client";
 
-        protected override string QuerySelectByName => $"SELECT * FROM Client WHERE Email = @{ParamName}";
-
-        protected override string ParamName => "Email";
+        public Client GetByName(string email)
+        {
+            return All.FirstOrDefault(c => c.Email == email);
+        }
 
         protected override Client NewRecord(IDataReader reader)
         {
@@ -25,7 +27,7 @@ namespace Infra.Repositories.Implementations.Clients
             {
                 Name = ConvertReader<string>.WithName(reader, "Name"),
                 Number = ConvertReader<string>.WithName(reader, "Number"),
-                Email = ConvertReader<string>.WithName(reader, ParamName),
+                Email = ConvertReader<string>.WithName(reader, "Email"),
                 Adress = ConvertReader<string>.WithName(reader, "Adress")
             };
         }

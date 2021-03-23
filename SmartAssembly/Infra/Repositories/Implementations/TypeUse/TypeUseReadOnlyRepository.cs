@@ -4,6 +4,7 @@ using Infra.Interfaces.Connections;
 using Infra.Repositories.Convert;
 using Infra.Repositories.Implementations.Abstracts;
 using System.Data;
+using System.Linq;
 
 namespace Infra.Repositories.Implementations.TypeUses
 {
@@ -15,11 +16,12 @@ namespace Infra.Repositories.Implementations.TypeUses
 
         protected override string QuerySelectAll => "SELECT * FROM TypeUse";
 
-        protected override string QuerySelectByName => $"SELECT * FROM TypeUse where Name = @{ParamName}";
+        public ISpecification GetByName(string use)
+        {
+            return All.FirstOrDefault(c => c.Use.ToString() == use);
+        }
 
-        protected override string ParamName => "Name";
-
-        protected override ISpecification NewRecord(IDataReader reader) //corregir namespaces
+        protected override ISpecification NewRecord(IDataReader reader)
         {
             return new Specification(ConvertReader<int>.WithName(reader, "Cpu"),
                                      ConvertReader<int>.WithName(reader, "Fan"),
@@ -27,7 +29,7 @@ namespace Infra.Repositories.Implementations.TypeUses
                                      ConvertReader<int>.WithName(reader, "Gpu"),
                                      ConvertReader<int>.WithName(reader, "HDD"),
                                      ConvertReader<int>.WithName(reader, "SSD"),
-                                     ConvertReader<TypeUse>.EnumWithName(reader, ParamName));
+                                     ConvertReader<TypeUse>.EnumWithName(reader, "Name"));
         }
     }
 }

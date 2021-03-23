@@ -8,6 +8,7 @@ namespace Infra.Repositories.Implementations.Abstracts
     {
         private const string PARAM_ID = "id";
         private const string WHERE_ID = "WHERE id = @id";
+
         protected readonly IConnection connection;
 
         public IEnumerable<T> All => GetRecords(QuerySelectAll);
@@ -20,11 +21,7 @@ namespace Infra.Repositories.Implementations.Abstracts
 
         protected abstract string QuerySelectAll { get; }
 
-        protected virtual string QuerySelectById => $"{QuerySelectAll} {WHERE_ID}";
-
-        protected abstract string QuerySelectByName { get; }
-
-        protected abstract string ParamName { get; }
+        private string QuerySelectById => $"{QuerySelectAll} {WHERE_ID}";
 
         protected IEnumerable<T> GetRecords(string query, Dictionary<string, object> parameters)
         {
@@ -77,14 +74,6 @@ namespace Infra.Repositories.Implementations.Abstracts
             return GetRecord(QuerySelectById, new Dictionary<string, object>
             {
                 { PARAM_ID, id }
-            });
-        }
-
-        public T GetByName(string name)
-        {
-            return GetRecord(QuerySelectByName, new Dictionary<string, object>
-            {
-                { ParamName, name }
             });
         }
     }

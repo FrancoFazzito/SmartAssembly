@@ -4,6 +4,7 @@ using Infra.Interfaces.Connections;
 using Infra.Repositories.Convert;
 using Infra.Repositories.Implementations.Abstracts;
 using System.Data;
+using System.Linq;
 
 namespace Infra.Repositories.Implementations.Employees
 {
@@ -18,10 +19,6 @@ namespace Infra.Repositories.Implementations.Employees
 
         protected override string QuerySelectAll => "SELECT * FROM Employee";
 
-        protected override string QuerySelectByName => $"SELECT * FROM Employee WHERE Email = @{ParamName}";
-
-        protected override string ParamName => "Email";
-
         public Employee GetMostInactiveEmployee()
         {
             return GetRecord(QUERY_MOST_INACTIVE);
@@ -34,7 +31,12 @@ namespace Infra.Repositories.Implementations.Employees
 
         protected override Employee NewRecord(IDataReader reader)
         {
-            return new Employee(ConvertReader<string>.WithName(reader, ParamName));
+            return new Employee(ConvertReader<string>.WithName(reader, "Email"));
+        }
+
+        public Employee GetByName(string email)
+        {
+            return All.FirstOrDefault(c => c.Email == email);
         }
     }
 }

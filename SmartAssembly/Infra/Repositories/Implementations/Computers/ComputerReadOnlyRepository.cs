@@ -20,10 +20,6 @@ namespace Infra.Repositories.Implementations.Computers
 
         protected override string QuerySelectAll => "SELECT * FROM Computer";
 
-        protected override string QuerySelectByName => "SELECT * FROM Computer WHERE TypeUse = @name";
-
-        protected override string ParamName => "name";
-
         public IEnumerable<Computer> GetByOrderId(int id)
         {
             return GetRecords("SELECT * FROM Computer c inner join [Order] o on c.ID_Order = o.ID where o.ID = @id", new Dictionary<string, object>() { { "@id", id } });

@@ -49,11 +49,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BuildTest.cs" />
-    <Compile Include="DependencyContainerMock.cs" />
+    <Compile Include="Tests\Build\BuildTest.cs" />
+    <Compile Include="Mocks\DependencyContainerMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SubmitErrorTest.cs" />
-    <Compile Include="SubmitTest.cs" />
+    <Compile Include="Tests\SubmitError\SubmitErrorTest.cs" />
+    <Compile Include="Tests\Submit\SubmitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

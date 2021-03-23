@@ -18,10 +18,6 @@ namespace Infra.Repositories.Implementations.Components
 
         protected override string QuerySelectAll => "SELECT * FROM component";
 
-        protected override string ParamName => "Name";
-
-        protected override string QuerySelectByName => $"SELECT * FROM component WHERE name = @{ParamName}";
-
         public IEnumerable<Component> GetByComputerId(int id)
         {
             return GetRecords("SELECT cmp.[ID],[Name],[Price],[Perfomance],[TypePart],[TypeFormat],[TypeMemory],[Socket],[HasIntegratedVideo],[Channels],[VideoLevel],[FanLevel],[NeedHighFrecuency],[Capacity],[FanSize],[MaxFrecuency],[Stock],[Watts] from Component cmp inner join Component_Computer c on ID = c.ID_Component  inner join Computer on Computer.ID = c.ID_Computer where c.ID_Computer = @id", new Dictionary<string, object>() { { "id", id } });
@@ -32,7 +28,7 @@ namespace Infra.Repositories.Implementations.Components
             return new Component
             {
                 Id = ConvertReader<int>.WithName(reader, "ID"),
-                Name = ConvertReader<string>.WithName(reader, ParamName),
+                Name = ConvertReader<string>.WithName(reader, "Name"),
                 Price = ConvertReader<decimal>.WithName(reader, "Price"),
                 PerfomanceLevel = ConvertReader<int>.WithName(reader, "Perfomance"),
                 TypePart = ConvertReader<TypePart>.EnumWithName(reader, "TypePart"),
