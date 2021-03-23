@@ -1,20 +1,13 @@
 ﻿using Application.Commands.Build.Builders;
 using Application.Commands.Build.Directors;
 using Application.Commands.Build.Importances;
-using Application.Commands.Build.Orders;
 using Application.Commands.Build.Request;
 using Application.Commands.Build.Specifications;
-using Application.Commands.RegisterComputerError.Errors;
 using Application.Factories.Compatibilities;
 using Application.Factories.Enoughs;
 using Application.Repositories.Components.Interfaces;
-using Application.Repositories.Employees.Interfaces;
-using Application.Repositories.Interfaces.Clients;
-using Application.Repositories.Interfaces.Error;
-using Application.Repositories.Orders.Interfaces;
 using Application.Repositories.TypeUses.Interfaces;
 using Application.Strategies.OrderBy;
-using Domain.Orders.States;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 

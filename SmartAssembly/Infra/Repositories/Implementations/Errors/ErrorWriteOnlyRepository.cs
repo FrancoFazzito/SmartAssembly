@@ -21,42 +21,59 @@ namespace Infra.Repositories.Implementations.Errors
         {
             this.connection = connection;
         }
+
         public void Insert(Component componentWithError, Component componentToReplace, int idComputer, string commentary, OrderState newStateOrder)
         {
-            var commands = new List<SqlCommand>();
+            var commands = new List<SqlCommand>
+            {
+                CommandError(componentWithError, componentToReplace, idComputer, commentary),
+                CommandUpdateOrder(idComputer, commentary, newStateOrder)
+            };
+
+            if (ExistsComponent(componentToReplace))
+            {
+                commands.Add(CommandUpdateComputer(componentToReplace, idComputer));
+            }
+            connection.Execute(commands);
+        }
+
+        private SqlCommand CommandUpdateComputer(Component componentToReplace, int idComputer)
+        {
+            var commandUpdateComputer = new SqlCommand($"update Component_Computer set ID_Component = @{PARAM_COMPONENT_REPLACE} where ID_Computer = @{PARAM_COMPUTER}");
+            commandUpdateComputer.Parameters.AddWithValue(PARAM_COMPONENT_REPLACE, componentToReplace.Id);
+            commandUpdateComputer.Parameters.AddWithValue(PARAM_COMPUTER, idComputer);
+            return commandUpdateComputer;
+        }
+
+        private SqlCommand CommandUpdateOrder(int idComputer, string commentary, OrderState newStateOrder)
+        {
+            var commandUpdateError = new SqlCommand($"update [Order] set Commentary =+ @{PARAM_COMMENTARY}, OrderState = @{PARAM_STATE_ORDER} where ID = (select o.ID from [Order] o inner join Computer c on c.ID_Order = o.ID where c.ID = @{PARAM_COMPUTER})");
+            commandUpdateError.Parameters.AddWithValue(PARAM_COMMENTARY, commentary);
+            commandUpdateError.Parameters.AddWithValue(PARAM_COMPUTER, idComputer);
+            commandUpdateError.Parameters.AddWithValue(PARAM_STATE_ORDER, newStateOrder);
+            return commandUpdateError;
+        }
+
+        private SqlCommand CommandError(Component componentWithError, Component componentToReplace, int idComputer, string commentary)
+        {
             var commandError = new SqlCommand($"INSERT INTO Computer_Error VALUES (@{PARAM_COMPUTER},@{PARAM_COMPONENT_ERROR},@{PARAM_COMPONENT_REPLACE},@{PARAM_COMMENTARY})");
             commandError.Parameters.AddWithValue(PARAM_COMPUTER, idComputer);
             commandError.Parameters.AddWithValue(PARAM_COMPONENT_ERROR, componentWithError.Id);
             AddReplaceToCommand(componentToReplace, commandError);
             commandError.Parameters.AddWithValue(PARAM_COMMENTARY, commentary);
-            commands.Add(commandError);
-
-            var commandUpdateError = new SqlCommand($"update [Order] set Commentary =+ @{PARAM_COMMENTARY}, OrderState = @{PARAM_STATE_ORDER} where ID = (select o.ID from [Order] o inner join Computer c on c.ID_Order = o.ID where c.ID = @{PARAM_COMPUTER})");
-            commandUpdateError.Parameters.AddWithValue(PARAM_COMMENTARY, commentary);
-            commandUpdateError.Parameters.AddWithValue(PARAM_COMPUTER, idComputer);
-            commandUpdateError.Parameters.AddWithValue(PARAM_STATE_ORDER, newStateOrder);
-            commands.Add(commandUpdateError);
-
-            if (ExistsComponent(componentToReplace))
-            {
-                var commandUpdateComputer = new SqlCommand($"update Component_Computer set ID_Component = @{PARAM_COMPONENT_REPLACE} where ID_Computer = @{PARAM_COMPUTER}");
-                commandUpdateComputer.Parameters.AddWithValue(PARAM_COMPONENT_REPLACE, componentToReplace.Id);
-                commandUpdateComputer.Parameters.AddWithValue(PARAM_COMPUTER, idComputer);
-                commands.Add(commandUpdateComputer);
-            }
-            connection.Execute(commands);
+            return commandError;
         }
 
         private void AddReplaceToCommand(Component componentToReplace, SqlCommand commandError)
         {
-            if (!ExistsComponent(componentToReplace))
+            if (ExistsComponent(componentToReplace))
             {
-                //log
-                commandError.Parameters.AddWithValue(PARAM_COMPONENT_REPLACE, DBNull.Value);
+                commandError.Parameters.AddWithValue(PARAM_COMPONENT_REPLACE, componentToReplace.Id);
             }
             else
             {
-                commandError.Parameters.AddWithValue(PARAM_COMPONENT_REPLACE, componentToReplace.Id);
+                //log
+                commandError.Parameters.AddWithValue(PARAM_COMPONENT_REPLACE, DBNull.Value);
             }
         }
 
