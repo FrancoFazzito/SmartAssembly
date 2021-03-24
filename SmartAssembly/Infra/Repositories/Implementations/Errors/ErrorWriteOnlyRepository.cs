@@ -1,5 +1,6 @@
 ﻿using Application.Repositories.Interfaces.Error;
 using Domain.Components;
+using Domain.Computers;
 using Domain.Orders.States;
 using Infra.Interfaces.Connections;
 using System;
@@ -23,25 +24,58 @@ namespace Infra.Repositories.Implementations.Errors
         }
 
         //change to computer object y obtener cantidad del component
-        public void Insert(Component componentWithError, Component componentToReplace, int idComputer, string commentary, OrderState newStateOrder)
+        public void InsertWithReplace(Component componentWithError, Component componentToReplace, Computer computer, string commentary, OrderState newStateOrder, bool deleteComponentError)
         {
             var commands = new List<SqlCommand>
             {
-                CommandError(componentWithError, componentToReplace, idComputer, commentary),
-                CommandUpdateOrder(idComputer, commentary, newStateOrder)
+                CommandError(componentWithError, computer.Id, commentary, componentToReplace),
+                CommandUpdateOrder(computer.Id, commentary, newStateOrder)
             };
 
-            if (ExistsComponent(componentToReplace))
+            int quantity = computer.QuantityComponent(componentWithError);
+            if (ExistsComponent(componentToReplace) && componentToReplace.Stock >= quantity)
             {
-                commands.Add(CommandUpdateComputer(componentToReplace, idComputer));
-                //commands.Add(CommandUpdateComponentStock(componentToReplace));
+                commands.Add(CommandUpdateComputer(componentToReplace, computer.Id));
+                commands.Add(CommandUpdateComponentReplaceStock(componentToReplace, quantity));
+            }
+
+            if (!deleteComponentError)
+            {
+                commands.Add(CommandUpdateComponentWithErrorStock(componentWithError, quantity));
+            }
+
+            connection.Execute(commands);
+        }
+
+        public void InsertWithouthReplace(Component componentWithError, Computer computer, string commentary, OrderState newStateOrder, bool deleteComponentError)
+        {
+            var commands = new List<SqlCommand>
+            {
+                CommandError(componentWithError, computer.Id, commentary),
+                CommandUpdateOrder(computer.Id, commentary, newStateOrder)
+            };
+
+            if (!deleteComponentError)
+            {
+                commands.Add(CommandUpdateComponentWithErrorStock(componentWithError, computer.QuantityComponent(componentWithError)));
             }
             connection.Execute(commands);
         }
 
-        private SqlCommand CommandUpdateComponentStock(Component componentToReplace, int quantity)
+        private SqlCommand CommandUpdateComponentReplaceStock(Component componentToReplace, int quantity)
         {
-            throw new NotImplementedException();
+            var command = new SqlCommand("UPDATE Component SET Stock -= @Quantity WHERE Component.ID = @id");
+            command.Parameters.AddWithValue("id", componentToReplace.Id);
+            command.Parameters.AddWithValue("Quantity", quantity);
+            return command;
+        }
+
+        private SqlCommand CommandUpdateComponentWithErrorStock(Component componentToReplace, int quantity)
+        {
+            var command = new SqlCommand("UPDATE Component SET Stock += @Quantity WHERE Component.ID = @id");
+            command.Parameters.AddWithValue("id", componentToReplace.Id);
+            command.Parameters.AddWithValue("Quantity", quantity);
+            return command;
         }
 
         private SqlCommand CommandUpdateComputer(Component componentToReplace, int idComputer)
@@ -61,7 +95,7 @@ namespace Infra.Repositories.Implementations.Errors
             return commandUpdateError;
         }
 
-        private SqlCommand CommandError(Component componentWithError, Component componentToReplace, int idComputer, string commentary)
+        private SqlCommand CommandError(Component componentWithError, int idComputer, string commentary, Component componentToReplace = null)
         {
             var commandError = new SqlCommand($"INSERT INTO Computer_Error VALUES (@{PARAM_COMPUTER},@{PARAM_COMPONENT_ERROR},@{PARAM_COMPONENT_REPLACE},@{PARAM_COMMENTARY})");
             commandError.Parameters.AddWithValue(PARAM_COMPUTER, idComputer);

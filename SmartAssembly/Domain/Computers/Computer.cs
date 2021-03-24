@@ -18,22 +18,14 @@ namespace Domain.Computers
             }
         }
 
-        public void Replace(Component oldComponent, Component newComponent)
+        public int QuantityComponent(Component oldComponent)
         {
-            Remove(oldComponent);
-            Add(newComponent, components.Count(c => c.Id == oldComponent.Id));
-        }
-
-        public void Remove(Component element)
-        {
-            components.RemoveAll(c => c == element);
+            return components.Count(c => c.Id == oldComponent.Id);
         }
 
         public int Id { get; set; }
         public string TypeUse { get; set; }
-
         public IEnumerable<Component> Components { get => components; set => components = value.ToList(); }
-
         public decimal Price => components.Sum(c => c.Price);
         public int TotalConsumption => components.Sum(c => c.Watts);
         public decimal Perfomance => components.Sum(c => c.PerfomanceLevel);

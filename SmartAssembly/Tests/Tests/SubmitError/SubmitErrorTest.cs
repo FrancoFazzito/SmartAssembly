@@ -10,6 +10,7 @@ using Application.Factories.Enoughs;
 using Application.Repositories.Components.Interfaces;
 using Application.Repositories.Employees.Interfaces;
 using Application.Repositories.Interfaces.Clients;
+using Application.Repositories.Interfaces.Computers;
 using Application.Repositories.Interfaces.Error;
 using Application.Repositories.Orders.Interfaces;
 using Application.Repositories.TypeUses.Interfaces;
@@ -24,20 +25,21 @@ namespace Tests
     public class SubmitErrorTest
     {
         [TestMethod]
-        public void TestSubmitError()
+        public void SubmitError()
         {
             var container = new DependencyContainerMock();
             var computer = new DirectorComputer(new BuilderComputer(new ComputerRequest(TypeUse.gaming, 1200000, container.Resolve<ITypeUseReadOnlyRepository>()), Importance.Price, container.Resolve<IStrategyOrderBy>(), container.Resolve<IFactoryCompatibility>(), container.Resolve<IFactoryEnough>(), container.Resolve<IComponentReadOnlyRepository>())).Build().Computers.ElementAt(0);
             var repoOrder = container.Resolve<ISubmitOrderRepository>();
             var repoEmployee = container.Resolve<IEmployeeReadOnlyRepository>();
             var repoClient = container.Resolve<IClientReadOnlyRepository>();
-            var order = new SubmitOrder(repoOrder, repoEmployee, repoClient); //ver si poner un mediator en el medio para la application
-            var Quantity = 2;
-            order.Add(computer, Quantity);
-            order.Submit("juan@gmail", "maincra");
+            var repoComputerStock = container.Resolve<IComputerStockRepository>();
+            var submitOrder = new SubmitOrder(repoOrder, repoEmployee, repoClient, repoComputerStock); //ver si poner un mediator en el medio para la application
+            var Quantity = 1;
+            submitOrder.Add(computer, Quantity);
+            submitOrder.Submit("juan@gmail", "maincra");
             var lastOrder = container.Resolve<IOrderReadOnlyRepository>().All.Last();
             var error = new RegisterError(lastOrder.Computers.ElementAt(0), container.Resolve<IComponentReadOnlyRepository>(), container.Resolve<IFactoryCompatibility>(), container.Resolve<IFactoryEnough>(), container.Resolve<IErrorWriteOnlyRepository>());
-            var errorResult = error.Register(computer.Components.ElementAt(0), "error de inicio");
+            var errorResult = error.Register(computer.Components.ElementAt(0), "error de inicio", false);
             lastOrder = container.Resolve<IOrderReadOnlyRepository>().All.Last();
             Assert.IsTrue(lastOrder != null && lastOrder.State == OrderState.Mistake && errorResult != null);
         }

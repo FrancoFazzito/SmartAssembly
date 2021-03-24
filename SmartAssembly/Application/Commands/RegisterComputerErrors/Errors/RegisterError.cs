@@ -29,18 +29,17 @@ namespace Application.Commands.RegisterComputerError.Errors
             this.errorRepository = errorRepository;
         }
 
-        public IErrorResult Register(Component componentWithError, string commentary)
+        public IErrorResult Register(Component componentWithError, string commentary, bool deleteComponentWithError)
         {
             commentary = $" {commentary}";
-            var componentReplacer = new ComponentReplacer(computer, componentWithError, componenRepository, compatibilities, enoughs);
-            var replaceComponent = componentReplacer.Replace();
-            errorRepository.Insert(componentWithError, replaceComponent, computer.Id, commentary, OrderState.Mistake);
-            if (replaceComponent == null)
+            var replace = new ComponentReplacer(computer, componentWithError, componenRepository, compatibilities, enoughs).Replace();
+            if (replace == null)
             {
-                return new ErrorWithoutReplaceResult(componentWithError, computer.Id, commentary);
+                errorRepository.InsertWithouthReplace(componentWithError, computer, commentary, OrderState.Mistake, deleteComponentWithError);
+                return new ErrorWithoutReplaceResult(componentWithError, commentary);
             }
-            computer.Replace(componentWithError, replaceComponent);
-            return new ErrorResult(componentWithError, replaceComponent, computer.Id, commentary);
+            errorRepository.InsertWithReplace(componentWithError, replace, computer, commentary, OrderState.Mistake, deleteComponentWithError);
+            return new ErrorResult(componentWithError, replace, commentary);
         }
     }
 }

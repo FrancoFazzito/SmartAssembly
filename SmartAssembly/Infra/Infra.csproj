@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Implementations\Clients\ClientReadOnlyRepository.cs" />
+    <Compile Include="Repositories\Implementations\Computers\ComputerStockRepository.cs" />
     <Compile Include="Repositories\Implementations\Computers\ComputerReadOnlyRepository.cs" />
     <Compile Include="Repositories\Implementations\Employees\EmployeeReadOnlyRepository.cs" />
     <Compile Include="Repositories\Implementations\Errors\ErrorWriteOnlyRepository.cs" />

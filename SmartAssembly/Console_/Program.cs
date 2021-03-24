@@ -33,10 +33,6 @@ namespace Console_
         {
             //armar handler segun orders -> cliente
             RegisterDependencies();
-            var builder = container.Resolve<IBuilderOrder>();
-            var order = builder.GetOrdersByEmployee("franco@gmail.com").ElementAt(0);
-            var result = builder.Build(order);
-            order = container.Resolve<IOrderReadOnlyRepository>().GetById(result.OrderBuilded.Id);
             Console.Read();
         }
 

@@ -5,20 +5,17 @@ namespace Application.Commands.RegisterComputerError.Errors.Results
 {
     public class ErrorWithoutReplaceResult : IErrorResult
     {
-        public ErrorWithoutReplaceResult(Component oldComponent, int idComputer, string commentary)
+        public ErrorWithoutReplaceResult(Component oldComponent, string commentary)
         {
-            NameOldComponent = oldComponent.Name;
-            PriceDiference = 0 - oldComponent.Price;
             DateError = DateTime.Now;
-            IdComputer = idComputer;
+            OldComponent = oldComponent;
             Commentary = commentary;
         }
 
-        public int IdComputer { get; }
-        public string Commentary { get; }
-        public string NameOldComponent { get; }
-        public string NameNewComponent => "";
-        public decimal PriceDiference { get; }
+        public decimal DifferencePrice => 0 - OldComponent.Price;
         public DateTime DateError { get; }
+        public Component OldComponent { get; }
+        public Component NewComponent => null;
+        public string Commentary { get; }
     }
 }

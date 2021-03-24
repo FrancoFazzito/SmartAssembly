@@ -1,13 +1,14 @@
-﻿using System;
+﻿using Domain.Components;
+using System;
 
 namespace Application.Commands.RegisterComputerError.Errors.Results
 {
     public interface IErrorResult
     {
-        string NameOldComponent { get; }
-        string NameNewComponent { get; }
-        decimal PriceDiference { get; }
+        decimal DifferencePrice { get; }
         DateTime DateError { get; }
-        int IdComputer { get; }
+        Component OldComponent { get; }
+        Component NewComponent { get; }
+        string Commentary { get; }
     }
 }

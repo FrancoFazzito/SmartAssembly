@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\BuildComputers\Orders\ErrorComputerStockException.cs" />
     <Compile Include="Commands\BuildOrders\BuilderOrderResult.cs" />
     <Compile Include="Commands\BuildOrders\BuildOrder.cs" />
     <Compile Include="Commands\BuildComputers\Importances\Importance.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Factories\Enoughs\FactoryEnough.cs" />
     <Compile Include="Repositories\Interfaces\Clients\IClientReadOnlyRepository.cs" />
     <Compile Include="Repositories\Interfaces\Computers\IComputerReadOnlyRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Computers\ICompouterStockRepository.cs" />
     <Compile Include="Repositories\Interfaces\Error\IErrorWriteOnlyRepository.cs" />
     <Compile Include="Repositories\Interfaces\Orders\IBuildOrderRepository.cs" />
     <Compile Include="Repositories\Interfaces\Orders\IOrderReadOnlyRepository.cs" />

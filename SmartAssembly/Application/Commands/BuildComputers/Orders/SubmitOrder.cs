@@ -1,5 +1,6 @@
 ﻿using Application.Repositories.Employees.Interfaces;
 using Application.Repositories.Interfaces.Clients;
+using Application.Repositories.Interfaces.Computers;
 using Application.Repositories.Orders.Interfaces;
 using Domain.Computers;
 using Domain.Orders;
@@ -9,17 +10,25 @@ namespace Application.Commands.BuildComputers.Orders
 {
     public class SubmitOrder : ISubmirOrder
     {
-        public SubmitOrder(ISubmitOrderRepository repository, IEmployeeReadOnlyRepository employeeRepository, IClientReadOnlyRepository clientRepository)
+        public SubmitOrder(ISubmitOrderRepository repository, IEmployeeReadOnlyRepository employeeRepository, IClientReadOnlyRepository clientRepository, IComputerStockRepository computerStock)
         {
             Order = new Order();
             OrderRepository = repository;
             EmployeeRepository = employeeRepository;
             ClientRepository = clientRepository;
+            ComputerStock = computerStock;
         }
 
         public void Add(Computer computer, int quantity)
         {
-            Order.Add(computer, quantity);
+            if (ComputerStock.isValidStock(computer, quantity))
+            {
+                Order.Add(computer, quantity);
+            }
+            else
+            {
+                throw new ErrorComputerStockException(quantity);
+            }
         }
 
         public void Remove(Computer computer)
@@ -42,6 +51,7 @@ namespace Application.Commands.BuildComputers.Orders
         public ISubmitOrderRepository OrderRepository { get; }
         public IEmployeeReadOnlyRepository EmployeeRepository { get; }
         public IClientReadOnlyRepository ClientRepository { get; }
+        public IComputerStockRepository ComputerStock { get; }
         public Order Order { get; }
     }
 }
