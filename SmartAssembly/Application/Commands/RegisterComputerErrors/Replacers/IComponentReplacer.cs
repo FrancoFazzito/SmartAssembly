@@ -8,7 +8,6 @@ namespace Application.Commands.RegisterComputerError.Replacers
     {
         IFactoryCompatibility Compatibilities { get; }
         IFactoryEnough Enoughs { get; }
-
         Component Replace();
         Component ReplaceAccesory();
         Component ReplaceCapacity();

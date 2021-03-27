@@ -3,7 +3,7 @@ using Domain.Components;
 
 namespace Domain.Compatibilities.Implementations
 {
-    public class CompatibleVideoCpu : ICompatible
+    public class CompatibleIntegratedVideo : ICompatible
     {
         public bool IsCompatibleWith(Component component, Component componentToCompare)
         {

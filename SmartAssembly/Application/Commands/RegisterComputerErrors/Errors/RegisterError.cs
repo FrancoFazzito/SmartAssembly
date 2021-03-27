@@ -30,11 +30,8 @@ namespace Application.Commands.RegisterComputerError.Errors
         public IErrorResult Register(Component componentWithError, string commentary, bool deleteComponentWithError)
         {
             var replace = new ComponentReplacer(computer, componentWithError, componenRepository, compatibilities, enoughs).Replace();
-            if (replace == null)
-            {
-                return InsertErrorWithoutReplace(componentWithError, $" {commentary}", deleteComponentWithError);
-            }
-            return InsertErrorWithReplace(componentWithError, $" {commentary}", deleteComponentWithError, replace);
+            return replace == null ? InsertErrorWithoutReplace(componentWithError, $" {commentary}", deleteComponentWithError)
+                                   : InsertErrorWithReplace(componentWithError, $" {commentary}", deleteComponentWithError, replace);
         }
 
         private IErrorResult InsertErrorWithReplace(Component componentWithError, string commentary, bool deleteComponentWithError, Component replace)

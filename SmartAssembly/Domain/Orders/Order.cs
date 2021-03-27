@@ -18,7 +18,6 @@ namespace Domain.Orders
             {
                 Computers.Add(computer);
             }
-
         }
 
         public void Remove(Computer computer)

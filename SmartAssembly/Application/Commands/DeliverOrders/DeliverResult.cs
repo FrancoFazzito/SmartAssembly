@@ -6,7 +6,7 @@ namespace Application.Commands.DeliverOrders
     {
         public DeliverResult(Order order)
         {
-            this.Order = order;
+            Order = order;
         }
 
         public Order Order { get; }

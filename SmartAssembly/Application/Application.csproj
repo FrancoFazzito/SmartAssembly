@@ -81,7 +81,7 @@
     <Compile Include="Commands\BuildComputers\Directors\IDirectorComputer.cs" />
     <Compile Include="Commands\BuildComputers\Specifications\ISpecification.cs" />
     <Compile Include="Commands\BuildComputers\Specifications\Specification.cs" />
-    <Compile Include="Exceptions\Add\InvalidAddException.cs" />
+    <Compile Include="Commands\BuildComputers\Builders\InvalidAddException.cs" />
     <Compile Include="Commands\BuildComputers\Orders\SubmitOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Interfaces\Components\IComponentReadOnlyRepository.cs" />

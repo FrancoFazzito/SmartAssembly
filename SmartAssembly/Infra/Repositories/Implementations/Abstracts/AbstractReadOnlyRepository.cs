@@ -25,13 +25,15 @@ namespace Infra.Repositories.Implementations.Abstracts
 
         protected IEnumerable<T> GetRecords(string query, Dictionary<string, object> parameters)
         {
+            var records = new List<T>();
             using (var reader = connection.GetDataReader(query, parameters))
             {
                 while (reader.Read())
                 {
-                    yield return NewRecord(reader);
+                    records.Add(NewRecord(reader));
                 }
             }
+            return records;
         }
 
         protected IEnumerable<T> GetRecords(string query)

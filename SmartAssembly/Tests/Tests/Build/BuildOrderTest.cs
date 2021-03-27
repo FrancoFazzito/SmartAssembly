@@ -32,10 +32,9 @@ namespace Tests
             var repoEmployee = container.Resolve<IEmployeeReadOnlyRepository>();
             var repoClient = container.Resolve<IClientReadOnlyRepository>();
             var repoComputerStock = container.Resolve<IComputerStockRepository>();
-            var submitOrder = new SubmitOrder(repoOrder, repoEmployee, repoClient, repoComputerStock); //ver si poner un mediator en el medio para la application
-            var Quantity = 3;
-            submitOrder.Add(computer, Quantity);
-            var order = submitOrder.Submit("juan@gmail", "maincra 0");
+            var submitOrder = new SubmitOrder(repoOrder, repoEmployee, repoClient, repoComputerStock);
+            submitOrder.Add(computer, 3);
+            var order = submitOrder.Submit("juan@gmail", "comentario de prueba");
             var builder = container.Resolve<IBuilderOrder>();
             order = builder.GetOrdersByEmployee(order.Employee.Email).Last();
             var result = builder.Build(order);

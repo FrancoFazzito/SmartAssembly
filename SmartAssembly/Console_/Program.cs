@@ -1,5 +1,4 @@
 ﻿using Application.Commands.BuildOrders;
-using Application.Commands.DeliverOrders;
 using Application.Factories.Compatibilities;
 using Application.Factories.Enoughs;
 using Application.Repositories.Components.Interfaces;
@@ -22,7 +21,6 @@ using Infra.Repositories.Implementations.Orders;
 using Infra.Repositories.Implementations.TypeUses;
 using Infra.SqlServer.Connections;
 using System;
-using System.Linq;
 
 namespace Console_
 {

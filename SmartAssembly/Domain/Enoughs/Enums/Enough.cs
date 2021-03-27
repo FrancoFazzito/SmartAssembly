@@ -7,7 +7,7 @@
         Fan,
         VideoLevel,
         Level,
-        OneRam,
+        MultipleRam,
         Stock
     }
 }

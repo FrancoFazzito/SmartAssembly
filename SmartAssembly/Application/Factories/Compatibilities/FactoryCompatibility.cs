@@ -20,8 +20,7 @@ namespace Application.Factories.Compatibilities
                 { Compatibility.Mother, new CompatibleMother() },
                 { Compatibility.Ram, new CompatibleRam() },
                 { Compatibility.Type, new CompatibleType() },
-                { Compatibility.IntegratedVideo, new CompatibleVideoCpu() },
-                { Compatibility.Accesory, new CompatibleVideoCpu() }
+                { Compatibility.IntegratedVideo, new CompatibleIntegratedVideo() }
             };
         }
 

@@ -35,8 +35,8 @@ namespace Infra.Repositories.Implementations.Orders
             {
                 Id = ConvertReader<int>.WithName(reader, "id"),
                 DateRequested = ConvertReader<DateTime>.WithName(reader, "DateRequested"),
-                Computers = ComputerRepository.GetByOrderId(ConvertReader<int>.WithName(reader, "id")).ToList(),
-                DateDelivered = ConvertReader<DateTime>.WithName(reader,"DateDelivered"),
+                Computers = ComputerRepository.GetByOrder(ConvertReader<int>.WithName(reader, "id")).ToList(),
+                DateDelivered = ConvertReader<DateTime>.WithName(reader, "DateDelivered"),
                 Employee = EmployeeRepository.GetByName(ConvertReader<string>.WithName(reader, "Email_Employee")),
                 Client = ClientRepository.GetByEmail(ConvertReader<string>.WithName(reader, "Email_client")),
                 Commentary = ConvertReader<string>.WithName(reader, "Commentary"),

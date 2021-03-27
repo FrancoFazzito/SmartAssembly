@@ -3,7 +3,7 @@ using Domain.Enoughs.Interfaces;
 
 namespace Domain.Enoughs.Implementations
 {
-    public class EnoughGpu : IEnough
+    public class EnoughVideoLevel : IEnough
     {
         public bool IsEnough(Component component, int quantity)
         {

@@ -19,6 +19,7 @@ namespace Infra.Repositories.Implementations.Orders
         private const string PARAMETER_EMAIL_CLIENT = "Email_client";
         private const string PARAMETER_COMMENTARY = "Commentary";
         private const string PARAMETER_STATE = "State";
+        private const string PARAMETER_DELIVERED = "DateDelivered";
         private readonly IConnection connection;
 
         public SubmitOrderRepository(IConnection connection)
@@ -82,7 +83,7 @@ namespace Infra.Repositories.Implementations.Orders
                 commandOrder.Parameters.AddWithValue(PARAMETER_EMAIL_CLIENT, order.Client.Email);
                 commandOrder.Parameters.AddWithValue(PARAMETER_COMMENTARY, order.Commentary);
                 commandOrder.Parameters.AddWithValue(PARAMETER_STATE, (int)order.State);
-                commandOrder.Parameters.AddWithValue("DateDelivered", System.DBNull.Value);
+                commandOrder.Parameters.AddWithValue(PARAMETER_DELIVERED, System.DBNull.Value);
                 return commandOrder;
             }
         }

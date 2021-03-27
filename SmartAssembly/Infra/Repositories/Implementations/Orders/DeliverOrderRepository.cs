@@ -7,6 +7,9 @@ namespace Infra.Repositories.Implementations.Orders
 {
     public class DeliverOrderRepository : IDeliverOrderRepository
     {
+        private const string PARAMETER_STATE = "State";
+        private const string PARAMETER_ID = "Id";
+        private const string PARAMETER_DATE_DELIVERED = "date";
         private readonly IConnection connection;
 
         public DeliverOrderRepository(IConnection connection)
@@ -21,10 +24,10 @@ namespace Infra.Repositories.Implementations.Orders
 
         private SqlCommand CommandBuild(Order orderToDeliver)
         {
-            var commandBuild = new SqlCommand("UPDATE [Order] SET OrderState = @State, DateDelivered = @date WHERE ID = @Id");
-            commandBuild.Parameters.AddWithValue("State", (int)orderToDeliver.State);
-            commandBuild.Parameters.AddWithValue("Id", orderToDeliver.Id);
-            commandBuild.Parameters.AddWithValue("date",orderToDeliver.DateDelivered);
+            var commandBuild = new SqlCommand($"UPDATE [Order] SET OrderState = @{PARAMETER_STATE}, DateDelivered = @{PARAMETER_DATE_DELIVERED} WHERE ID = @{PARAMETER_ID}");
+            commandBuild.Parameters.AddWithValue(PARAMETER_STATE, (int)orderToDeliver.State);
+            commandBuild.Parameters.AddWithValue(PARAMETER_ID, orderToDeliver.Id);
+            commandBuild.Parameters.AddWithValue(PARAMETER_DATE_DELIVERED, orderToDeliver.DateDelivered);
             return commandBuild;
         }
     }

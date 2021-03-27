@@ -1,20 +1,16 @@
-﻿using Application.Repositories.Interfaces.Clients;
-using Application.Repositories.Interfaces.Orders;
+﻿using Application.Repositories.Interfaces.Orders;
 using Application.Repositories.Orders.Interfaces;
-using Domain.Clients;
 using Domain.Orders;
 using Domain.Orders.States;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Commands.DeliverOrders
 {
     public class DeliverOrder : IDeliverOrder
     {
-        public DeliverOrder(IOrderReadOnlyRepository orderRepository,IDeliverOrderRepository deliverRepository)
+        public DeliverOrder(IOrderReadOnlyRepository orderRepository, IDeliverOrderRepository deliverRepository)
         {
             OrderRepository = orderRepository;
             DeliverRepository = deliverRepository;

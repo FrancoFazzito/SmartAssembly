@@ -25,7 +25,7 @@ namespace Application.Commands.RegisterComputerError.Replacers
             Components = componentRepository.All.Where(c => c.TypePart == component.TypePart)
                                                 .Where(c => c.IsEnough(enoughs[Enough.Level], GetLevelToReplace(component)))
                                                 .Where(c => c.Id != component.Id)
-                                                .OrderBy(c => c.Price).ToList();
+                                                .OrderBy(c => c.Price);
 
             replaces = new Dictionary<TypePart, Func<Component>>
             {
@@ -60,8 +60,8 @@ namespace Application.Commands.RegisterComputerError.Replacers
         public Component ReplaceMother()
         {
             return Components.Where(c => c.IsCompatibleWith(Compatibilities[Compatibility.CaseMother], Computer[TypePart.tower]))
-                      .Where(c => Computer[TypePart.ram].IsCompatibleWith(Compatibilities[Compatibility.Ram], c))
-                      .FirstOrDefault(c => c.IsCompatibleWith(Compatibilities[Compatibility.Mother], Component));
+                             .Where(c => Computer[TypePart.ram].IsCompatibleWith(Compatibilities[Compatibility.Ram], c))
+                             .FirstOrDefault(c => c.IsCompatibleWith(Compatibilities[Compatibility.Mother], Component));
         }
 
         public Component ReplaceFan()

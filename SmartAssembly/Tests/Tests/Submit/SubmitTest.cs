@@ -36,7 +36,7 @@ namespace Tests
             var submitOrder = new SubmitOrder(repoOrder, repoEmployee, repoClient, repoComputerStock); //ver si poner un mediator en el medio para la application
             var Quantity = 3;
             submitOrder.Add(computer, Quantity);
-            submitOrder.Submit("juan@gmail", "maincra");
+            submitOrder.Submit("juan@gmail", "comentario de prueba");
             var newCount = container.Resolve<IOrderReadOnlyRepository>().All.Count();
             var lastOrder = container.Resolve<IOrderReadOnlyRepository>().All.Last();
             Assert.IsTrue((newCount - oldCount) == 1 && lastOrder != null && lastOrder.State == OrderState.Uncompleted);

@@ -10,7 +10,6 @@ namespace Application.Commands.BuildComputers.Orders
         void Add(Computer computerDto, int quantity);
         void Remove(Computer computerDto);
         Order Submit(string email, string commentary);
-
         ISubmitOrderRepository OrderRepository { get; }
         IEmployeeReadOnlyRepository EmployeeRepository { get; }
     }

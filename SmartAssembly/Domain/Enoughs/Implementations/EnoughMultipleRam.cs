@@ -3,7 +3,7 @@ using Domain.Enoughs.Interfaces;
 
 namespace Domain.Enoughs.Implementations
 {
-    public class EnoughOneRam : IEnough
+    public class EnoughMultipleRam : IEnough
     {
         public bool IsEnough(Component component, int capacity)
         {

@@ -7,6 +7,8 @@ namespace Infra.Repositories.Implementations.Orders
 {
     public class BuildOrderRepository : IBuildOrderRepository
     {
+        private const string PARAMETER_STATE = "State";
+        private const string PARAMETER_ID = "Id";
         private readonly IConnection connection;
 
         public BuildOrderRepository(IConnection connection)
@@ -21,9 +23,9 @@ namespace Infra.Repositories.Implementations.Orders
 
         private SqlCommand CommandBuild(Order orderToBuild)
         {
-            var commandBuild = new SqlCommand("UPDATE [Order] SET  OrderState = @State WHERE ID = @Id");
-            commandBuild.Parameters.AddWithValue("State", (int)orderToBuild.State);
-            commandBuild.Parameters.AddWithValue("Id", orderToBuild.Id);
+            var commandBuild = new SqlCommand($"UPDATE [Order] SET  OrderState = @{PARAMETER_STATE} WHERE ID = @{PARAMETER_ID}");
+            commandBuild.Parameters.AddWithValue(PARAMETER_STATE, (int)orderToBuild.State);
+            commandBuild.Parameters.AddWithValue(PARAMETER_ID, orderToBuild.Id);
             return commandBuild;
         }
     }

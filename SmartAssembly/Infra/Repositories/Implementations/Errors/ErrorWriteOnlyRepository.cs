@@ -91,14 +91,14 @@ namespace Infra.Repositories.Implementations.Errors
 
         private SqlCommand CommandUpdateOrder(int idComputer, string commentary, OrderState newStateOrder)
         {
-            var commandUpdateError = new SqlCommand($"update [Order] set Commentary =+ @{PARAM_COMMENTARY}, OrderState = @{PARAM_STATE_ORDER} where ID = (select o.ID from [Order] o inner join Computer c on c.ID_Order = o.ID where c.ID = @{PARAM_COMPUTER})");
+            var commandUpdateError = new SqlCommand($"update [Order] set Commentary += @{PARAM_COMMENTARY}, OrderState = @{PARAM_STATE_ORDER} where ID = (select o.ID from [Order] o inner join Computer c on c.ID_Order = o.ID where c.ID = @{PARAM_COMPUTER})");
             commandUpdateError.Parameters.AddWithValue(PARAM_COMMENTARY, commentary);
             commandUpdateError.Parameters.AddWithValue(PARAM_COMPUTER, idComputer);
             commandUpdateError.Parameters.AddWithValue(PARAM_STATE_ORDER, newStateOrder);
             return commandUpdateError;
         }
 
-        private SqlCommand CommandError(Component componentWithError, int idComputer, string commentary, Component componentToReplace = null)
+        private SqlCommand CommandError(Component componentWithError, int idComputer, string commentary, Component componentToReplace)
         {
             var commandError = new SqlCommand($"INSERT INTO Computer_Error VALUES (@{PARAM_COMPUTER},@{PARAM_COMPONENT_ERROR},@{PARAM_COMPONENT_REPLACE},@{PARAM_COMMENTARY})");
             commandError.Parameters.AddWithValue(PARAM_COMPUTER, idComputer);
@@ -108,7 +108,7 @@ namespace Infra.Repositories.Implementations.Errors
             return commandError;
         }
 
-        private SqlCommand CommandErrorWithouthReplace(Component componentWithError, int idComputer, string commentary, Component componentToReplace = null)
+        private SqlCommand CommandErrorWithouthReplace(Component componentWithError, int idComputer, string commentary)
         {
             var commandError = new SqlCommand($"INSERT INTO Computer_Error VALUES (@{PARAM_COMPUTER},@{PARAM_COMPONENT_ERROR},@{PARAM_COMPONENT_REPLACE},@{PARAM_COMMENTARY})");
             commandError.Parameters.AddWithValue(PARAM_COMPUTER, idComputer);

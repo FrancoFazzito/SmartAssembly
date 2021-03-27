@@ -35,12 +35,12 @@ namespace Tests
             var repoComputerStock = container.Resolve<IComputerStockRepository>();
             var submitOrder = new SubmitOrder(container.Resolve<ISubmitOrderRepository>(), container.Resolve<IEmployeeReadOnlyRepository>(), container.Resolve<IClientReadOnlyRepository>(), repoComputerStock); //ver si poner un mediator en el medio para la application
             submitOrder.Add(computer, 3);
-            var order = submitOrder.Submit(ClientEmail, "maincra 0");
+            var order = submitOrder.Submit(ClientEmail, "comentario de prueba");
             var builder = container.Resolve<IBuilderOrder>();
             order = builder.GetOrdersByEmployee(order.Employee.Email).Last();
             builder.Build(order);
 
-            DeliverOrder deliverOrder = new DeliverOrder(container.Resolve<IOrderReadOnlyRepository>(),container.Resolve<IDeliverOrderRepository>());
+            DeliverOrder deliverOrder = new DeliverOrder(container.Resolve<IOrderReadOnlyRepository>(), container.Resolve<IDeliverOrderRepository>());
             var ordersClient = deliverOrder.GetOrdersByClient(ClientEmail);
             var resultDelivery = deliverOrder.Deliver(ordersClient.Last());
             var orderDelivered = container.Resolve<IOrderReadOnlyRepository>().All.FirstOrDefault(c => c.Id == resultDelivery.Order.Id);
@@ -52,8 +52,8 @@ namespace Tests
         public void DeliverOrderNotComplete()
         {
             var container = new DependencyContainerMock();
-            DeliverOrder deliverOrder = new DeliverOrder(container.Resolve<IOrderReadOnlyRepository>(),container.Resolve<IDeliverOrderRepository>());
-            deliverOrder.Deliver(new Domain.Orders.Order(){ State = OrderState.Mistake });
+            DeliverOrder deliverOrder = new DeliverOrder(container.Resolve<IOrderReadOnlyRepository>(), container.Resolve<IDeliverOrderRepository>());
+            deliverOrder.Deliver(new Domain.Orders.Order() { State = OrderState.Mistake });
         }
     }
 }

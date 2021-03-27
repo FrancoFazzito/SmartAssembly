@@ -1,6 +1,6 @@
 ﻿using Application.Commands.BuildComputers.Importances;
 using Application.Commands.BuildComputers.Request;
-using Application.Exceptions.Add;
+
 using Application.Factories.Compatibilities;
 using Application.Factories.Enoughs;
 using Application.Repositories.Components.Interfaces;
@@ -36,7 +36,7 @@ namespace Application.Commands.BuildComputers.Builders
             }
             else
             {
-                ThrowInvalidAdd();
+                ThrowInvalidAdd(root.Name);
             }
         }
 
@@ -59,10 +59,9 @@ namespace Application.Commands.BuildComputers.Builders
                 return;
             }
 
-            if(!computer[TypePart.cpu].IsCompatibleWith(FactoryCompatibilty[Compatibility.IntegratedVideo], computer[TypePart.mother]))
+            if (!computer[TypePart.cpu].IsCompatibleWith(FactoryCompatibilty[Compatibility.IntegratedVideo], computer[TypePart.mother]))
             {
-                ThrowInvalidAdd();
-                return;
+                ThrowInvalidAdd("integrated video");
             }
         }
 
@@ -89,7 +88,7 @@ namespace Application.Commands.BuildComputers.Builders
         public void AddRam()
         {
 
-            if (computer[TypePart.cpu].IsEnough(FactoryEnough[Enough.OneRam], Request.Specification.Ram))
+            if (computer[TypePart.cpu].IsEnough(FactoryEnough[Enough.MultipleRam], Request.Specification.Ram))
             {
                 Add(Components.Where(c => c.IsType(TypePart.ram))
                                            .Where(c => c.IsCompatibleWith(FactoryCompatibilty[Compatibility.Ram], computer[TypePart.cpu]))
@@ -125,7 +124,7 @@ namespace Application.Commands.BuildComputers.Builders
             }
             else
             {
-                ThrowInvalidAdd();
+                ThrowInvalidAdd(component.Name);
             }
         }
 
@@ -139,10 +138,10 @@ namespace Application.Commands.BuildComputers.Builders
             return component != null && component.IsEnough(FactoryEnough[Enough.Stock], quantity);
         }
 
-        private void ThrowInvalidAdd()
+        private void ThrowInvalidAdd(string nameComponent)
         {
             SetComputer();
-            InvalidAddException.Throw();
+            throw new InvalidAddException(nameComponent);
         }
 
         private void SetComputer()

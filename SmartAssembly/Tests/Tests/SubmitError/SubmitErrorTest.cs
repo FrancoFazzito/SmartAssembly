@@ -36,10 +36,10 @@ namespace Tests
             var submitOrder = new SubmitOrder(repoOrder, repoEmployee, repoClient, repoComputerStock); //ver si poner un mediator en el medio para la application
             var Quantity = 1;
             submitOrder.Add(computer, Quantity);
-            submitOrder.Submit("juan@gmail", "maincra");
+            submitOrder.Submit("juan@gmail", "comentario de prueba");
             var lastOrder = container.Resolve<IOrderReadOnlyRepository>().All.Last();
             var registerError = new RegisterError(lastOrder.Computers.ElementAt(0), container.Resolve<IComponentReadOnlyRepository>(), container.Resolve<IFactoryCompatibility>(), container.Resolve<IFactoryEnough>(), container.Resolve<IErrorWriteOnlyRepository>());
-            var errorResult = registerError.Register(computer.Components.ElementAt(0), "error de inicio", false);
+            var errorResult = registerError.Register(computer.Components.ElementAt(0), "error de prueba", false);
             lastOrder = container.Resolve<IOrderReadOnlyRepository>().All.Last();
             Assert.IsTrue(lastOrder != null && lastOrder.State == OrderState.Mistake && errorResult != null);
         }

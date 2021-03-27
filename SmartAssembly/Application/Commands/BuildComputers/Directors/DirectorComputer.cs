@@ -1,5 +1,4 @@
 ﻿using Application.Commands.BuildComputers.Builders;
-using Application.Exceptions.Add;
 using Domain.Components;
 using Domain.Components.Types;
 using Domain.Computers;
