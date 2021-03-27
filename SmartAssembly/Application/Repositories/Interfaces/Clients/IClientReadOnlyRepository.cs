@@ -6,6 +6,6 @@ namespace Application.Repositories.Interfaces.Clients
     public interface IClientReadOnlyRepository
     {
         IEnumerable<Client> All { get; }
-        Client GetByName(string email);
+        Client GetByEmail(string email);
     }
 }

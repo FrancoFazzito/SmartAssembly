@@ -28,8 +28,9 @@ namespace Domain.Orders
 
         public int Id { get; set; }
         public decimal Price => Computers.Sum(c => c.Price) + (Computers.Count * BUILD_COST);
-        public DateTime OrderDate { get; set; }
-        public DateTime OrderDelivery => OrderDate.AddDays(Computers.Count);
+        public DateTime DateRequested { get; set; }
+        public DateTime DateToDelivery => DateRequested.AddDays(Computers.Count);
+        public DateTime DateDelivered { get; set; }
         public Employee Employee { get; set; }
         public ICollection<Computer> Computers { get; set; } = new List<Computer>();
         public Client Client { get; set; }

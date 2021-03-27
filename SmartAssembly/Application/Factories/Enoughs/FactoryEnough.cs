@@ -17,7 +17,7 @@ namespace Application.Factories.Enoughs
                 { Enough.Capacity, new EnoughCapacity() },
                 { Enough.Channels, new EnoughChannels() },
                 { Enough.Fan, new EnoughFan() },
-                { Enough.Gpu, new EnoughGpu() },
+                { Enough.VideoLevel, new EnoughGpu() },
                 { Enough.Level, new EnoughLevel() },
                 { Enough.OneRam, new EnoughOneRam() },
                 { Enough.Stock, new EnoughStock() }

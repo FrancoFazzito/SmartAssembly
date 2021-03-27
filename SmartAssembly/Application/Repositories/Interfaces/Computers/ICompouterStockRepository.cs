@@ -4,6 +4,6 @@ namespace Application.Repositories.Interfaces.Computers
 {
     public interface IComputerStockRepository
     {
-        bool isValidStock(Computer computer, int quantity);
+        bool IsValid(Computer computer, int quantity);
     }
 }

@@ -16,7 +16,7 @@ namespace Infra.Repositories.Implementations.Clients
 
         protected override string QuerySelectAll => "SELECT * FROM Client";
 
-        public Client GetByName(string email)
+        public Client GetByEmail(string email)
         {
             return All.FirstOrDefault(c => c.Email == email);
         }

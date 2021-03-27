@@ -5,7 +5,7 @@
         Capacity,
         Channels,
         Fan,
-        Gpu,
+        VideoLevel,
         Level,
         OneRam,
         Stock

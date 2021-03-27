@@ -14,7 +14,7 @@ namespace Infra.Repositories.Implementations.Computers
 
         public IComponentReadOnlyRepository ComponentRepository { get; }
 
-        public bool isValidStock(Computer computer, int quantity)
+        public bool IsValid(Computer computer, int quantity)
         {
             foreach (var componentQuantity in computer.Components.GroupBy(x => x).ToDictionary(x => x.Key.Id, y => y.Count() * quantity))
             {

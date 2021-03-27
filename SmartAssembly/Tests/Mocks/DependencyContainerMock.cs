@@ -46,6 +46,7 @@ namespace Tests
             container.Register<IFactoryCompatibility>(() => new FactoryCompatibility());
             container.Register<IFactoryEnough>(() => new FactoryEnough());
             container.Register<IStrategyOrderBy>(() => new StrategyOrderBy());
+            container.Register<IDeliverOrderRepository>(() => new DeliverOrderRepository(container.Resolve<IConnection>()));
         }
 
         public void Register<T>(Func<T> createInstance, string instanceName = null)

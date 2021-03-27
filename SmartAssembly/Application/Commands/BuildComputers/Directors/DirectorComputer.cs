@@ -17,7 +17,8 @@ namespace Application.Commands.BuildComputers.Directors
 
         public BuilderComputerResult Build()
         {
-            return new BuilderComputerResult(ComputersBuilded);
+            var computersBuilded = ComputersBuilded;
+            return computersBuilded.Count() == 0 ? throw new NotAvailableComputersException() : new BuilderComputerResult(computersBuilded);
         }
 
         private IEnumerable<Computer> ComputersBuilded => from item in Builder.Components.Where(c => c.IsType(TypePart.cpu))

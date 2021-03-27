@@ -39,11 +39,11 @@ namespace Tests
             submitOrder.Submit("juan@gmail", "maincra");
             var newCount = container.Resolve<IOrderReadOnlyRepository>().All.Count();
             var lastOrder = container.Resolve<IOrderReadOnlyRepository>().All.Last();
-            Assert.IsTrue((newCount - oldCount) == Quantity && lastOrder != null && lastOrder.State == OrderState.Uncompleted);
+            Assert.IsTrue((newCount - oldCount) == 1 && lastOrder != null && lastOrder.State == OrderState.Uncompleted);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ErrorComputerStockException))]
+        [ExpectedException(typeof(ErrorStockException))]
         public void SubmitOrderWithoutStock()
         {
             var container = new DependencyContainerMock();
@@ -53,7 +53,7 @@ namespace Tests
             var repoClient = container.Resolve<IClientReadOnlyRepository>();
             var repoComputerStock = container.Resolve<IComputerStockRepository>();
             var submitOrder = new SubmitOrder(repoOrder, repoEmployee, repoClient, repoComputerStock); //ver si poner un mediator en el medio para la application
-            submitOrder.Add(computer, int.MaxValue);
+            submitOrder.Add(computer, 1000);
         }
     }
 }

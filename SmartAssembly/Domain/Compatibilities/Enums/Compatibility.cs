@@ -9,7 +9,7 @@
         CaseFan,
         CaseMother,
         Type,
-        VideoCpu,
+        IntegratedVideo,
         Accesory
     }
 }

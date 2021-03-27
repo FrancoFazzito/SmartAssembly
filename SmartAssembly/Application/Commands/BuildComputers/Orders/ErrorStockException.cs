@@ -2,11 +2,11 @@
 
 namespace Application.Commands.BuildComputers.Orders
 {
-    public class ErrorComputerStockException : Exception
+    public class ErrorStockException : Exception
     {
         private readonly int quantity;
 
-        public ErrorComputerStockException(int quantity)
+        public ErrorStockException(int quantity)
         {
             this.quantity = quantity;
         }

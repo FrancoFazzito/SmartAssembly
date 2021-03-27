@@ -18,7 +18,7 @@ namespace Domain.Computers
             }
         }
 
-        public int QuantityComponent(Component oldComponent)
+        public int QuantityOf(Component oldComponent)
         {
             return components.Count(c => c.Id == oldComponent.Id);
         }

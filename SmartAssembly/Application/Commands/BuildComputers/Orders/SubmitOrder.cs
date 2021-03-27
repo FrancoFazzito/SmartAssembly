@@ -21,14 +21,11 @@ namespace Application.Commands.BuildComputers.Orders
 
         public void Add(Computer computer, int quantity)
         {
-            if (ComputerStock.isValidStock(computer, quantity))
+            if (!ComputerStock.IsValid(computer, quantity))
             {
-                Order.Add(computer, quantity);
+                throw new ErrorStockException(quantity);
             }
-            else
-            {
-                throw new ErrorComputerStockException(quantity);
-            }
+            Order.Add(computer, quantity);
         }
 
         public void Remove(Computer computer)
@@ -38,8 +35,8 @@ namespace Application.Commands.BuildComputers.Orders
 
         public Order Submit(string clientEmail, string commentary)
         {
-            Order.OrderDate = System.DateTime.Now;
-            Order.Client = ClientRepository.GetByName(clientEmail);
+            Order.DateRequested = System.DateTime.Now;
+            Order.Client = ClientRepository.GetByEmail(clientEmail);
             Order.Commentary = commentary;
             var employee = EmployeeRepository.GetEmployeeWithoutOrder();
             Order.Employee = employee ?? EmployeeRepository.GetMostInactiveEmployee();

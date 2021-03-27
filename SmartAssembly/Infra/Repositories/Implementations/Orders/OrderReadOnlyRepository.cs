@@ -27,22 +27,18 @@ namespace Infra.Repositories.Implementations.Orders
         public IEmployeeReadOnlyRepository EmployeeRepository { get; }
         public IClientReadOnlyRepository ClientRepository { get; }
 
-        protected override string QuerySelectAll => "SELECT o.ID, o.OrderDate, o.Email_Employee, o.Email_client, o.Commentary , o.OrderState, c.ID as ID_computer FROM [Order] o inner join Computer c on c.ID_Order = o.ID";
-
-        public override Order GetById(int id)
-        {
-            return All.FirstOrDefault(c => c.Id == id);
-        }
+        protected override string QuerySelectAll => "SELECT * FROM [Order]";
 
         protected override Order NewRecord(IDataReader reader)
         {
             return new Order
             {
                 Id = ConvertReader<int>.WithName(reader, "id"),
-                OrderDate = ConvertReader<DateTime>.WithName(reader, "OrderDate"),
+                DateRequested = ConvertReader<DateTime>.WithName(reader, "DateRequested"),
                 Computers = ComputerRepository.GetByOrderId(ConvertReader<int>.WithName(reader, "id")).ToList(),
+                DateDelivered = ConvertReader<DateTime>.WithName(reader,"DateDelivered"),
                 Employee = EmployeeRepository.GetByName(ConvertReader<string>.WithName(reader, "Email_Employee")),
-                Client = ClientRepository.GetByName(ConvertReader<string>.WithName(reader, "Email_client")),
+                Client = ClientRepository.GetByEmail(ConvertReader<string>.WithName(reader, "Email_client")),
                 Commentary = ConvertReader<string>.WithName(reader, "Commentary"),
                 State = ConvertReader<OrderState>.WithName(reader, "OrderState")
             };

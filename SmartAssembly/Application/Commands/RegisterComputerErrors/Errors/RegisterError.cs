@@ -18,8 +18,6 @@ namespace Application.Commands.RegisterComputerError.Errors
         private readonly IFactoryEnough enoughs;
         private readonly IErrorWriteOnlyRepository errorRepository;
 
-        //IwriteError
-
         public RegisterError(Computer computer, IComponentReadOnlyRepository componenRepository, IFactoryCompatibility compatibilities, IFactoryEnough enoughs, IErrorWriteOnlyRepository errorRepository)
         {
             this.computer = computer;
@@ -31,15 +29,24 @@ namespace Application.Commands.RegisterComputerError.Errors
 
         public IErrorResult Register(Component componentWithError, string commentary, bool deleteComponentWithError)
         {
-            commentary = $" {commentary}";
             var replace = new ComponentReplacer(computer, componentWithError, componenRepository, compatibilities, enoughs).Replace();
             if (replace == null)
             {
-                errorRepository.InsertWithouthReplace(componentWithError, computer, commentary, OrderState.Mistake, deleteComponentWithError);
-                return new ErrorWithoutReplaceResult(componentWithError, commentary);
+                return InsertErrorWithoutReplace(componentWithError, $" {commentary}", deleteComponentWithError);
             }
+            return InsertErrorWithReplace(componentWithError, $" {commentary}", deleteComponentWithError, replace);
+        }
+
+        private IErrorResult InsertErrorWithReplace(Component componentWithError, string commentary, bool deleteComponentWithError, Component replace)
+        {
             errorRepository.InsertWithReplace(componentWithError, replace, computer, commentary, OrderState.Mistake, deleteComponentWithError);
             return new ErrorResult(componentWithError, replace, commentary);
+        }
+
+        private IErrorResult InsertErrorWithoutReplace(Component componentWithError, string commentary, bool deleteComponentWithError)
+        {
+            errorRepository.InsertWithouthReplace(componentWithError, computer, commentary, OrderState.Mistake, deleteComponentWithError);
+            return new ErrorWithoutReplaceResult(componentWithError, commentary);
         }
     }
 }

@@ -31,6 +31,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(NotAvailableComputersException))]
         public void BuildComputerWithouthCorrectPrice()
         {
             var container = new DependencyContainerMock();
@@ -41,7 +42,6 @@ namespace Tests
             var componentRepository = container.Resolve<IComponentReadOnlyRepository>();
             var builder = new BuilderComputer(request, Importance.Price, orderBy, factoryCompatibility, factoryEnough, componentRepository);
             var computers = new DirectorComputer(builder).Build().Computers;
-            Assert.IsTrue(computers.Count() == 0);
         }
     }
 }

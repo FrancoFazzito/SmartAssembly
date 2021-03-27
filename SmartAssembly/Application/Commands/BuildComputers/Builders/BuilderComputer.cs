@@ -52,14 +52,17 @@ namespace Application.Commands.BuildComputers.Builders
 
         public void AddGpu()
         {
-            if (computer[TypePart.cpu].IsEnough(FactoryEnough[Enough.Gpu], Request.Specification.Gpu))
+            if (computer[TypePart.cpu].IsEnough(FactoryEnough[Enough.VideoLevel], Request.Specification.Gpu))
             {
                 Add(Components.Where(c => c.IsType(TypePart.gpu))
                                            .FirstOrDefault(c => c.IsEnough(FactoryEnough[Enough.Level], Request.Specification.Gpu)));
+                return;
             }
-            else if (!computer[TypePart.cpu].IsCompatibleWith(FactoryCompatibilty[Compatibility.VideoCpu], computer[TypePart.mother]))
+
+            if(!computer[TypePart.cpu].IsCompatibleWith(FactoryCompatibilty[Compatibility.IntegratedVideo], computer[TypePart.mother]))
             {
                 ThrowInvalidAdd();
+                return;
             }
         }
 

@@ -16,14 +16,16 @@ namespace Infra.Repositories.Implementations.Errors
         private const string PARAM_COMMENTARY = "Commentary";
         private const string PARAM_COMPONENT_ERROR = "ID_Component_Error";
         private const string PARAM_STATE_ORDER = "State";
+        private const string PARAM_ID = "id";
+        private const string PARAM_QUANTITY = "Quantity";
         private readonly IConnection connection;
+        //list<Commands>
 
         public ErrorWriteOnlyRepository(IConnection connection)
         {
             this.connection = connection;
         }
 
-        //change to computer object y obtener cantidad del component
         public void InsertWithReplace(Component componentWithError, Component componentToReplace, Computer computer, string commentary, OrderState newStateOrder, bool deleteComponentError)
         {
             var commands = new List<SqlCommand>
@@ -32,8 +34,8 @@ namespace Infra.Repositories.Implementations.Errors
                 CommandUpdateOrder(computer.Id, commentary, newStateOrder)
             };
 
-            int quantity = computer.QuantityComponent(componentWithError);
-            if (ExistsComponent(componentToReplace) && componentToReplace.Stock >= quantity)
+            var quantity = computer.QuantityOf(componentWithError);
+            if (componentToReplace.Stock >= quantity)
             {
                 commands.Add(CommandUpdateComputer(componentToReplace, computer.Id));
                 commands.Add(CommandUpdateComponentReplaceStock(componentToReplace, quantity));
@@ -51,30 +53,31 @@ namespace Infra.Repositories.Implementations.Errors
         {
             var commands = new List<SqlCommand>
             {
-                CommandError(componentWithError, computer.Id, commentary),
+                CommandErrorWithouthReplace(componentWithError, computer.Id, commentary),
                 CommandUpdateOrder(computer.Id, commentary, newStateOrder)
             };
 
             if (!deleteComponentError)
             {
-                commands.Add(CommandUpdateComponentWithErrorStock(componentWithError, computer.QuantityComponent(componentWithError)));
+                commands.Add(CommandUpdateComponentWithErrorStock(componentWithError, computer.QuantityOf(componentWithError)));
             }
+
             connection.Execute(commands);
         }
 
         private SqlCommand CommandUpdateComponentReplaceStock(Component componentToReplace, int quantity)
         {
-            var command = new SqlCommand("UPDATE Component SET Stock -= @Quantity WHERE Component.ID = @id");
-            command.Parameters.AddWithValue("id", componentToReplace.Id);
-            command.Parameters.AddWithValue("Quantity", quantity);
+            var command = new SqlCommand($"UPDATE Component SET Stock -= @{PARAM_QUANTITY} WHERE Component.ID = @{PARAM_ID}");
+            command.Parameters.AddWithValue(PARAM_ID, componentToReplace.Id);
+            command.Parameters.AddWithValue(PARAM_QUANTITY, quantity);
             return command;
         }
 
         private SqlCommand CommandUpdateComponentWithErrorStock(Component componentToReplace, int quantity)
         {
-            var command = new SqlCommand("UPDATE Component SET Stock += @Quantity WHERE Component.ID = @id");
-            command.Parameters.AddWithValue("id", componentToReplace.Id);
-            command.Parameters.AddWithValue("Quantity", quantity);
+            var command = new SqlCommand($"UPDATE Component SET Stock += @{PARAM_QUANTITY} WHERE Component.ID = @{PARAM_ID}");
+            command.Parameters.AddWithValue(PARAM_ID, componentToReplace.Id);
+            command.Parameters.AddWithValue(PARAM_QUANTITY, quantity);
             return command;
         }
 
@@ -100,27 +103,19 @@ namespace Infra.Repositories.Implementations.Errors
             var commandError = new SqlCommand($"INSERT INTO Computer_Error VALUES (@{PARAM_COMPUTER},@{PARAM_COMPONENT_ERROR},@{PARAM_COMPONENT_REPLACE},@{PARAM_COMMENTARY})");
             commandError.Parameters.AddWithValue(PARAM_COMPUTER, idComputer);
             commandError.Parameters.AddWithValue(PARAM_COMPONENT_ERROR, componentWithError.Id);
-            AddReplaceToCommand(componentToReplace, commandError);
+            commandError.Parameters.AddWithValue(PARAM_COMPONENT_REPLACE, componentToReplace.Id);
             commandError.Parameters.AddWithValue(PARAM_COMMENTARY, commentary);
             return commandError;
         }
 
-        private void AddReplaceToCommand(Component componentToReplace, SqlCommand commandError)
+        private SqlCommand CommandErrorWithouthReplace(Component componentWithError, int idComputer, string commentary, Component componentToReplace = null)
         {
-            if (ExistsComponent(componentToReplace))
-            {
-                commandError.Parameters.AddWithValue(PARAM_COMPONENT_REPLACE, componentToReplace.Id);
-            }
-            else
-            {
-                //log
-                commandError.Parameters.AddWithValue(PARAM_COMPONENT_REPLACE, DBNull.Value);
-            }
-        }
-
-        private bool ExistsComponent(Component componentToReplace)
-        {
-            return componentToReplace != null;
+            var commandError = new SqlCommand($"INSERT INTO Computer_Error VALUES (@{PARAM_COMPUTER},@{PARAM_COMPONENT_ERROR},@{PARAM_COMPONENT_REPLACE},@{PARAM_COMMENTARY})");
+            commandError.Parameters.AddWithValue(PARAM_COMPUTER, idComputer);
+            commandError.Parameters.AddWithValue(PARAM_COMPONENT_ERROR, componentWithError.Id);
+            commandError.Parameters.AddWithValue(PARAM_COMPONENT_REPLACE, DBNull.Value);
+            commandError.Parameters.AddWithValue(PARAM_COMMENTARY, commentary);
+            return commandError;
         }
     }
 }

@@ -73,15 +73,16 @@ namespace Infra.Repositories.Implementations.Orders
 
         private SqlCommand CommandOrder(Order order)
         {
-            using (var commandOrder = new SqlCommand($"INSERT INTO [Order] VALUES (@{PARAMETER_PRICE},@{PARAMETER_ORDER_DATE},@{PARAMATER_ORDER_DELIVERY},@{PARAMETER_ID_EMPLOYEE},@{PARAMETER_EMAIL_CLIENT},@{PARAMETER_COMMENTARY},@{PARAMETER_STATE})"))
+            using (var commandOrder = new SqlCommand($"INSERT INTO [Order] VALUES (@{PARAMETER_PRICE},@{PARAMETER_ORDER_DATE},@{PARAMATER_ORDER_DELIVERY},@{PARAMETER_ID_EMPLOYEE},@{PARAMETER_EMAIL_CLIENT},@{PARAMETER_COMMENTARY},@{PARAMETER_STATE},@DateDelivered)"))
             {
                 commandOrder.Parameters.AddWithValue(PARAMETER_PRICE, order.Price);
-                commandOrder.Parameters.AddWithValue(PARAMETER_ORDER_DATE, order.OrderDate);
-                commandOrder.Parameters.AddWithValue(PARAMATER_ORDER_DELIVERY, order.OrderDelivery);
+                commandOrder.Parameters.AddWithValue(PARAMETER_ORDER_DATE, order.DateRequested);
+                commandOrder.Parameters.AddWithValue(PARAMATER_ORDER_DELIVERY, order.DateToDelivery);
                 commandOrder.Parameters.AddWithValue(PARAMETER_ID_EMPLOYEE, order.Employee.Email);
                 commandOrder.Parameters.AddWithValue(PARAMETER_EMAIL_CLIENT, order.Client.Email);
                 commandOrder.Parameters.AddWithValue(PARAMETER_COMMENTARY, order.Commentary);
                 commandOrder.Parameters.AddWithValue(PARAMETER_STATE, (int)order.State);
+                commandOrder.Parameters.AddWithValue("DateDelivered", System.DBNull.Value);
                 return commandOrder;
             }
         }

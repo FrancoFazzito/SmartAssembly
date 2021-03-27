@@ -49,9 +49,10 @@
     <Compile Include="Repositories\Implementations\Employees\EmployeeReadOnlyRepository.cs" />
     <Compile Include="Repositories\Implementations\Errors\ErrorWriteOnlyRepository.cs" />
     <Compile Include="Repositories\Implementations\Orders\BuildOrderRepository.cs" />
+    <Compile Include="Repositories\Implementations\Orders\DeliverOrderRepository.cs" />
     <Compile Include="Repositories\Implementations\Orders\OrderReadOnlyRepository.cs" />
     <Compile Include="Repositories\Implementations\Orders\SubmitOrderRepository.cs" />
-    <Compile Include="Repositories\Implementations\TypeUse\TypeUseReadOnlyRepository.cs" />
+    <Compile Include="Repositories\Implementations\TypeUses\TypeUseReadOnlyRepository.cs" />
     <Compile Include="Repositories\ConvertHelper\ConvertReader.cs" />
     <Compile Include="Repositories\Implementations\Abstracts\AbstractReadOnlyRepository.cs" />
     <Compile Include="Connections\SqlServer\Connection.cs" />

@@ -41,7 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\BuildComputers\Orders\ErrorComputerStockException.cs" />
+    <Compile Include="Commands\BuildComputers\Directors\NotAvailableComputersException.cs" />
+    <Compile Include="Commands\BuildComputers\Orders\ErrorStockException.cs" />
     <Compile Include="Commands\BuildOrders\BuilderOrderResult.cs" />
     <Compile Include="Commands\BuildOrders\BuildOrder.cs" />
     <Compile Include="Commands\BuildComputers\Importances\Importance.cs" />
@@ -49,6 +50,10 @@
     <Compile Include="Commands\BuildComputers\Request\ComputerRequest.cs" />
     <Compile Include="Commands\BuildComputers\Request\IComputerRequest.cs" />
     <Compile Include="Commands\BuildOrders\IBuilderOrder.cs" />
+    <Compile Include="Commands\DeliverOrders\DeliverOrder.cs" />
+    <Compile Include="Commands\DeliverOrders\DeliverResult.cs" />
+    <Compile Include="Commands\DeliverOrders\IDeliverOrder.cs" />
+    <Compile Include="Commands\DeliverOrders\NotCompletedOrderException.cs" />
     <Compile Include="Commands\RegisterComputerErrors\Errors\IRegisterError.cs" />
     <Compile Include="Commands\RegisterComputerErrors\Errors\Results\IErrorResult.cs" />
     <Compile Include="Commands\RegisterComputerErrors\Errors\Results\ErrorResult.cs" />
@@ -65,6 +70,7 @@
     <Compile Include="Repositories\Interfaces\Computers\ICompouterStockRepository.cs" />
     <Compile Include="Repositories\Interfaces\Error\IErrorWriteOnlyRepository.cs" />
     <Compile Include="Repositories\Interfaces\Orders\IBuildOrderRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Orders\IDeliverOrderRepository.cs" />
     <Compile Include="Repositories\Interfaces\Orders\IOrderReadOnlyRepository.cs" />
     <Compile Include="Strategies\StrategyOrderBy.cs" />
     <Compile Include="Strategies\IStrategyOrderBy.cs" />

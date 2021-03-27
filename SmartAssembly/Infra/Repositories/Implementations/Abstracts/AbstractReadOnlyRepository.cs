@@ -36,13 +36,15 @@ namespace Infra.Repositories.Implementations.Abstracts
 
         protected IEnumerable<T> GetRecords(string query)
         {
+            var records = new List<T>();
             using (var reader = connection.GetDataReader(query))
             {
                 while (reader.Read())
                 {
-                    yield return NewRecord(reader);
+                    records.Add(NewRecord(reader));
                 }
             }
+            return records;
         }
 
         protected T GetRecord(string query, Dictionary<string, object> parameters)
@@ -69,7 +71,7 @@ namespace Infra.Repositories.Implementations.Abstracts
             return null;
         }
 
-        public virtual T GetById(int id)
+        public T GetById(int id)
         {
             return GetRecord(QuerySelectById, new Dictionary<string, object>
             {
