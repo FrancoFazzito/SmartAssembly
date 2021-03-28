@@ -1,9 +1,10 @@
 ﻿using Application.Commands.BuildComputers.Specifications;
+using Domain.Computers;
 
 namespace Application.Repositories.TypeUses.Interfaces
 {
     public interface ITypeUseReadOnlyRepository
     {
-        ISpecification GetByName(string use);
+        ISpecification GetByUse(TypeUse use);
     }
 }

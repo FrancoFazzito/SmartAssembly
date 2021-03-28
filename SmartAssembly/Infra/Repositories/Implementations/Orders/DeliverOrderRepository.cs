@@ -17,9 +17,9 @@ namespace Infra.Repositories.Implementations.Orders
             this.connection = connection;
         }
 
-        public void Deliver(Order orderToBuild)
+        public void Deliver(Order orderToDeliver)
         {
-            connection.Execute(new SqlCommand[] { CommandBuild(orderToBuild) });
+            connection.Execute(new SqlCommand[] { CommandBuild(orderToDeliver) });
         }
 
         private SqlCommand CommandBuild(Order orderToDeliver)

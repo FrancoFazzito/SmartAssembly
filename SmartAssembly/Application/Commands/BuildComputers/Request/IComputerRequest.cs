@@ -1,4 +1,5 @@
-﻿using Application.Commands.BuildComputers.Specifications;
+﻿using Application.Commands.BuildComputers.Importances;
+using Application.Commands.BuildComputers.Specifications;
 
 namespace Application.Commands.BuildComputers.Request
 {
@@ -6,5 +7,6 @@ namespace Application.Commands.BuildComputers.Request
     {
         decimal Budget { get; }
         ISpecification Specification { get; }
+        Importance Importance{ get; }
     }
 }

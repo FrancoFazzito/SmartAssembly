@@ -1,5 +1,6 @@
 ﻿using Application.Commands.BuildComputers.Specifications;
 using Application.Repositories.TypeUses.Interfaces;
+using Domain.Computers;
 using Infra.Interfaces.Connections;
 using Infra.Repositories.Convert;
 using Infra.Repositories.Implementations.Abstracts;
@@ -16,9 +17,9 @@ namespace Infra.Repositories.Implementations.TypeUses
 
         protected override string QuerySelectAll => "SELECT * FROM TypeUse";
 
-        public ISpecification GetByName(string use)
+        public ISpecification GetByUse(TypeUse use)
         {
-            return All.FirstOrDefault(c => c.Use.ToString() == use);
+            return All.FirstOrDefault(c => c.Use == use);
         }
 
         protected override ISpecification NewRecord(IDataReader reader)

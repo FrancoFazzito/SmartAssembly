@@ -3,7 +3,6 @@ using Application.Commands.BuildComputers.Directors;
 using Application.Commands.BuildComputers.Importances;
 using Application.Commands.BuildComputers.Orders;
 using Application.Commands.BuildComputers.Request;
-using Application.Commands.BuildComputers.Specifications;
 using Application.Commands.BuildOrders;
 using Application.Commands.DeliverOrders;
 using Application.Factories.Compatibilities;
@@ -16,6 +15,7 @@ using Application.Repositories.Interfaces.Orders;
 using Application.Repositories.Orders.Interfaces;
 using Application.Repositories.TypeUses.Interfaces;
 using Application.Strategies.OrderBy;
+using Domain.Computers;
 using Domain.Orders.States;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
@@ -31,16 +31,17 @@ namespace Tests
         public void DeliverOrder()
         {
             var container = new DependencyContainerMock();
-            var computer = new DirectorComputer(new BuilderComputer(new ComputerRequest(TypeUse.gaming, 1200000, container.Resolve<ITypeUseReadOnlyRepository>()), Importance.Price, container.Resolve<IStrategyOrderBy>(), container.Resolve<IFactoryCompatibility>(), container.Resolve<IFactoryEnough>(), container.Resolve<IComponentReadOnlyRepository>())).Build().Computers.ElementAt(0);
-            var repoComputerStock = container.Resolve<IComputerStockRepository>();
-            var submitOrder = new SubmitOrder(container.Resolve<ISubmitOrderRepository>(), container.Resolve<IEmployeeReadOnlyRepository>(), container.Resolve<IClientReadOnlyRepository>(), repoComputerStock); //ver si poner un mediator en el medio para la application
+            var request = new ComputerRequest(TypeUse.gaming, 1200000, Importance.Price, container.Resolve<ITypeUseReadOnlyRepository>());
+            var director = container.Resolve<IDirectorComputer>();
+            var resultDirector = director.Build(request);
+            var computer = resultDirector.Computers.ElementAt(0);
+            var submitOrder = container.Resolve<ISubmitOrder>();
             submitOrder.Add(computer, 3);
             var order = submitOrder.Submit(ClientEmail, "comentario de prueba");
             var builder = container.Resolve<IBuilderOrder>();
             order = builder.GetOrdersByEmployee(order.Employee.Email).Last();
             builder.Build(order);
-
-            DeliverOrder deliverOrder = new DeliverOrder(container.Resolve<IOrderReadOnlyRepository>(), container.Resolve<IDeliverOrderRepository>());
+            var deliverOrder = container.Resolve<IDeliverOrder>();
             var ordersClient = deliverOrder.GetOrdersByClient(ClientEmail);
             var resultDelivery = deliverOrder.Deliver(ordersClient.Last());
             var orderDelivered = container.Resolve<IOrderReadOnlyRepository>().All.FirstOrDefault(c => c.Id == resultDelivery.Order.Id);
@@ -52,8 +53,9 @@ namespace Tests
         public void DeliverOrderNotComplete()
         {
             var container = new DependencyContainerMock();
-            DeliverOrder deliverOrder = new DeliverOrder(container.Resolve<IOrderReadOnlyRepository>(), container.Resolve<IDeliverOrderRepository>());
-            deliverOrder.Deliver(new Domain.Orders.Order() { State = OrderState.Mistake });
+            var deliverOrder = container.Resolve<IDeliverOrder>();
+            var order = new Domain.Orders.Order() { State = OrderState.Error };
+            deliverOrder.Deliver(order);
         }
     }
 }

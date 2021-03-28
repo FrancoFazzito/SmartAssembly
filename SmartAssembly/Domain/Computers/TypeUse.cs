@@ -1,4 +1,4 @@
-﻿namespace Application.Commands.BuildComputers.Specifications
+﻿namespace Domain.Computers
 {
     public enum TypeUse
     {

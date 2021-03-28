@@ -1,14 +1,10 @@
-﻿using Domain.Components;
-using System;
-
-namespace Application.Commands.RegisterComputerError.Errors.Results
+﻿namespace Application.Commands.RegisterComputerError.Errors.Results
 {
     public interface IErrorResult
     {
-        decimal DifferencePrice { get; }
-        DateTime DateError { get; }
-        Component OldComponent { get; }
-        Component NewComponent { get; }
+        decimal PriceDifference { get; }
+        string NewComponent { get; }
+        string OldComponent { get; }
         string Commentary { get; }
     }
 }

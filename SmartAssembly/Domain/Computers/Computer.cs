@@ -24,7 +24,7 @@ namespace Domain.Computers
         }
 
         public int Id { get; set; }
-        public string TypeUse { get; set; }
+        public TypeUse TypeUse { get; set; }
         public IEnumerable<Component> Components { get => components; set => components = value.ToList(); }
         public decimal Price => components.Sum(c => c.Price);
         public int TotalConsumption => components.Sum(c => c.Watts);

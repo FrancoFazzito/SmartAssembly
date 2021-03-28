@@ -15,156 +15,153 @@ using System.Linq;
 
 namespace Application.Commands.BuildComputers.Builders
 {
-    public class BuilderComputer : IBuilder
-    {
-        private Computer computer;
 
-        public BuilderComputer(IComputerRequest request, Importance importance, IStrategyOrderBy orderBy, IFactoryCompatibility factoryCompatibility, IFactoryEnough factoryEnough, IComponentReadOnlyRepository repository)
+    public class BuilderComputer : IBuilderComputer
+    {
+        private IEnumerable<Component> components;
+        private IComputerRequest request;
+        private readonly IStrategyOrderBy orderBy;
+        private readonly IFactoryCompatibility factoryCompatibility;
+        private readonly IFactoryEnough factoryEnough;
+        private readonly IComponentReadOnlyRepository repository;
+
+        public BuilderComputer(IStrategyOrderBy orderBy, IFactoryCompatibility factoryCompatibility, IFactoryEnough factoryEnough, IComponentReadOnlyRepository repository)
         {
-            Components = orderBy.GetOrderedComponents(repository.All, importance);
-            Request = request;
-            SetComputer();
-            FactoryCompatibilty = factoryCompatibility;
-            FactoryEnough = factoryEnough;
+            this.orderBy = orderBy;
+            this.factoryCompatibility = factoryCompatibility;
+            this.factoryEnough = factoryEnough;
+            this.repository = repository;
         }
 
-        public void AddCpu(Component root)
+        public IEnumerable<Component> ComponentsRoot(IComputerRequest request)
         {
-            if (root.IsEnough(FactoryEnough[Enough.Level], Request.Specification.Cpu))
+            components = orderBy.GetOrderedComponents(repository.All, request.Importance);
+            this.request = request;
+            return components.Where(c => c.IsType(TypePart.cpu));
+        }
+
+        public void AddCpu(Component cpu)
+        {
+            SetComputer();
+            if (cpu.IsEnough(factoryEnough[Enough.Level], request.Specification.Cpu))
             {
-                Add(root);
+                Add(cpu);
             }
             else
             {
-                ThrowInvalidAdd(root.Name);
+                ThrowInvalidAdd();
             }
         }
 
         public void AddFan()
         {
-            if (computer[TypePart.cpu].IsEnough(FactoryEnough[Enough.Fan], Request.Specification.Fan))
+            if (Cpu.IsEnough(factoryEnough[Enough.Fan], request.Specification.Fan))
             {
-                Add(Components.Where(c => c.IsType(TypePart.fan))
-                                           .Where(c => c.IsCompatibleWith(FactoryCompatibilty[Compatibility.Fan], computer[TypePart.cpu]))
-                                           .FirstOrDefault(c => c.IsEnough(FactoryEnough[Enough.Level], Request.Specification.Fan)));
+                Add(components.Where(c => c.IsType(TypePart.fan))
+                                           .Where(c => c.IsCompatibleWith(factoryCompatibility[Compatibility.Fan], Cpu))
+                                           .FirstOrDefault(c => c.IsEnough(factoryEnough[Enough.Level], request.Specification.Fan)));
             }
         }
 
         public void AddGpu()
         {
-            if (computer[TypePart.cpu].IsEnough(FactoryEnough[Enough.VideoLevel], Request.Specification.Gpu))
+            if (Cpu.IsEnough(factoryEnough[Enough.VideoLevel], request.Specification.Gpu))
             {
-                Add(Components.Where(c => c.IsType(TypePart.gpu))
-                                           .FirstOrDefault(c => c.IsEnough(FactoryEnough[Enough.Level], Request.Specification.Gpu)));
+                Add(components.Where(c => c.IsType(TypePart.gpu))
+                                           .FirstOrDefault(c => c.IsEnough(factoryEnough[Enough.Level], request.Specification.Gpu)));
                 return;
             }
 
-            if (!computer[TypePart.cpu].IsCompatibleWith(FactoryCompatibilty[Compatibility.IntegratedVideo], computer[TypePart.mother]))
+            if (!Computer[TypePart.cpu].IsCompatibleWith(factoryCompatibility[Compatibility.IntegratedVideo], Computer[TypePart.mother]))
             {
-                ThrowInvalidAdd("integrated video");
+                ThrowInvalidAdd();
             }
         }
 
         public void AddHardDiskHDD()
         {
-            Add(Components.Where(c => c.IsType(TypePart.hdd))
-                                       .FirstOrDefault(c => c.IsEnough(FactoryEnough[Enough.Capacity], Request.Specification.Hdd)));
+            Add(components.Where(c => c.IsType(TypePart.hdd))
+                                       .FirstOrDefault(c => c.IsEnough(factoryEnough[Enough.Capacity], request.Specification.Hdd)));
         }
 
         public void AddHardDiskSSD()
         {
-            Add(Components.Where(c => c.IsType(TypePart.ssd))
-                                       .FirstOrDefault(c => c.IsEnough(FactoryEnough[Enough.Capacity], Request.Specification.Ssd)));
+            Add(components.Where(c => c.IsType(TypePart.ssd))
+                                       .FirstOrDefault(c => c.IsEnough(factoryEnough[Enough.Capacity], request.Specification.Ssd)));
         }
 
         public void AddMother()
         {
-            Add(Components.Where(c => c.IsType(TypePart.mother))
-                                       .Where(c => c.IsCompatibleWith(FactoryCompatibilty[Compatibility.Mother], computer[TypePart.cpu]))
-                                       .Where(c => c.IsEnough(FactoryEnough[Enough.Channels], computer[TypePart.cpu].Channels))
-                                       .FirstOrDefault(c => c.IsEnough(FactoryEnough[Enough.Level], Request.Specification.Mother)));
+            Add(components.Where(c => c.IsType(TypePart.mother))
+                                       .Where(c => c.IsCompatibleWith(factoryCompatibility[Compatibility.Mother], Cpu))
+                                       .Where(c => c.IsEnough(factoryEnough[Enough.Channels], Cpu.Channels))
+                                       .FirstOrDefault(c => c.IsEnough(factoryEnough[Enough.Level], request.Specification.Mother)));
         }
 
         public void AddRam()
         {
 
-            if (computer[TypePart.cpu].IsEnough(FactoryEnough[Enough.MultipleRam], Request.Specification.Ram))
+            if (Computer[TypePart.cpu].IsEnough(factoryEnough[Enough.MultipleRam], request.Specification.Ram))
             {
-                Add(Components.Where(c => c.IsType(TypePart.ram))
-                                           .Where(c => c.IsCompatibleWith(FactoryCompatibilty[Compatibility.Ram], computer[TypePart.cpu]))
-                                           .FirstOrDefault(c => c.IsEnough(FactoryEnough[Enough.Capacity],
-                                                                Request.Specification.Ram / computer[TypePart.cpu].Channels))
-                    , computer[TypePart.cpu].Channels);
-
+                var ram = components.Where(c => c.IsType(TypePart.ram))
+                                                 .Where(c => c.IsCompatibleWith(factoryCompatibility[Compatibility.Ram], Cpu))
+                                                 .FirstOrDefault(c => c.IsEnough(factoryEnough[Enough.Capacity], request.Specification.Ram / Cpu.Channels));
+                Add(ram, Cpu.Channels);
             }
             else
             {
-                Add(Components.FirstOrDefault(c => c.IsEnough(FactoryEnough[Enough.Capacity], Request.Specification.Ram)));
+                Add(components.FirstOrDefault(c => c.IsEnough(factoryEnough[Enough.Capacity], request.Specification.Ram)));
             }
         }
 
         public void AddTower()
         {
-            Add(Components.Where(c => c.IsType(TypePart.tower))
-                                       .Where(c => c.IsCompatibleWith(FactoryCompatibilty[Compatibility.CaseFan], computer[TypePart.fan]))
-                                       .FirstOrDefault(c => c.IsCompatibleWith(FactoryCompatibilty[Compatibility.CaseMother], computer[TypePart.mother])));
+            Add(components.Where(c => c.IsType(TypePart.tower))
+                                       .Where(c => c.IsCompatibleWith(factoryCompatibility[Compatibility.CaseFan], Computer[TypePart.fan]))
+                                       .FirstOrDefault(c => c.IsCompatibleWith(factoryCompatibility[Compatibility.CaseMother], Computer[TypePart.mother])));
         }
 
         public void AddPsu()
         {
-            Add(Components.Where(c => c.IsType(TypePart.psu))
-                                       .FirstOrDefault(c => c.IsEnough(FactoryEnough[Enough.Capacity], computer.TotalConsumption)));
+            Add(components.Where(c => c.IsType(TypePart.psu))
+                                       .FirstOrDefault(c => c.IsEnough(factoryEnough[Enough.Capacity], Computer.TotalConsumption)));
         }
 
         private void Add(Component component, int quantity = 1)
         {
-            if (ValidComponent(component, quantity) && ValidBudget(component))
+            if (InvalidComponent(component, quantity) || InvalidBudget(component))
             {
-                computer.Add(component, quantity);
+                ThrowInvalidAdd();
             }
-            else
-            {
-                ThrowInvalidAdd(component.Name);
-            }
+
+            Computer.Add(component, quantity);
         }
 
-        private bool ValidBudget(Component component)
+        private bool InvalidBudget(Component component)
         {
-            return computer.Price + component.Price <= Request.Budget;
+            return Computer.Price + component.Price >= request.Budget;
         }
 
-        private bool ValidComponent(Component component, int quantity)
+        private bool InvalidComponent(Component component, int quantity)
         {
-            return component != null && component.IsEnough(FactoryEnough[Enough.Stock], quantity);
+            return component == null || !component.IsEnough(factoryEnough[Enough.Stock], quantity);
         }
 
-        private void ThrowInvalidAdd(string nameComponent)
+        private void ThrowInvalidAdd()
         {
             SetComputer();
-            throw new InvalidAddException(nameComponent);
+            throw new InvalidAddException();
         }
 
         private void SetComputer()
         {
-            computer = new Computer
+            Computer = new Computer
             {
-                TypeUse = Request.Specification.Use.ToString()
+                TypeUse = request.Specification.Use
             };
         }
 
-        public Computer Computer
-        {
-            get
-            {
-                var computer = this.computer;
-                SetComputer();
-                return computer;
-            }
-        }
-
-        public IComputerRequest Request { get; }
-        public IFactoryCompatibility FactoryCompatibilty { get; }
-        public IFactoryEnough FactoryEnough { get; }
-        public IEnumerable<Component> Components { get; }
+        public Computer Computer { get; private set; }
+        private Component Cpu => Computer[TypePart.cpu];
     }
 }

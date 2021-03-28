@@ -5,7 +5,7 @@ using Domain.Orders;
 
 namespace Application.Commands.BuildComputers.Orders
 {
-    public interface ISubmirOrder
+    public interface ISubmitOrder
     {
         void Add(Computer computerDto, int quantity);
         void Remove(Computer computerDto);

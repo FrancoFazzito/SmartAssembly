@@ -30,7 +30,7 @@ namespace Infra.Repositories.Implementations.Computers
             return new Computer()
             {
                 Id = ConvertReader<int>.WithName(reader, "ID"),
-                TypeUse = ConvertReader<string>.WithName(reader, "TypeUse"),
+                TypeUse = ConvertReader<TypeUse>.EnumWithName(reader, "TypeUse"),
                 Components = ComponentRepository.GetByComputer(ConvertReader<int>.WithName(reader, "ID"))
             };
         }

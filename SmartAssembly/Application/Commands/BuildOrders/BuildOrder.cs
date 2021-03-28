@@ -31,7 +31,7 @@ namespace Application.Commands.BuildOrders
         {
             return OrderRepository.All.Where(c => c.Employee.Email == email)
                                       .Where(c => c.State == OrderState.Uncompleted ||
-                                                  c.State == OrderState.Mistake);
+                                                  c.State == OrderState.Error);
         }
     }
 }

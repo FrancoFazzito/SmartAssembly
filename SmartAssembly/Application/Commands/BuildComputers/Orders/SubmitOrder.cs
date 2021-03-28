@@ -8,7 +8,7 @@ using Domain.Orders.States;
 
 namespace Application.Commands.BuildComputers.Orders
 {
-    public class SubmitOrder : ISubmirOrder
+    public class SubmitOrder : ISubmitOrder
     {
         public SubmitOrder(ISubmitOrderRepository repository, IEmployeeReadOnlyRepository employeeRepository, IClientReadOnlyRepository clientRepository, IComputerStockRepository computerStock)
         {

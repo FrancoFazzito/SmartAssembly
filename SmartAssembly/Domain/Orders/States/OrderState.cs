@@ -5,6 +5,6 @@
         Uncompleted = 1,
         Completed = 2,
         Delivered = 3,
-        Mistake = 4
+        Error = 4
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Application.Commands.BuildComputers.Specifications
+﻿using Domain.Computers;
+
+namespace Application.Commands.BuildComputers.Specifications
 {
     public interface ISpecification
     {

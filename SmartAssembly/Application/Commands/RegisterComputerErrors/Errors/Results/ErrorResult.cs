@@ -1,22 +1,22 @@
 ﻿using Domain.Components;
-using System;
 
 namespace Application.Commands.RegisterComputerError.Errors.Results
 {
     public class ErrorResult : IErrorResult
     {
+        private readonly Component oldComponent;
+        private readonly Component newComponent;
+
         public ErrorResult(Component oldComponent, Component newComponent, string commentary)
         {
-            DateError = DateTime.Now;
-            OldComponent = oldComponent;
-            NewComponent = newComponent;
+            this.oldComponent = oldComponent;
+            this.newComponent = newComponent;
             Commentary = commentary;
         }
 
-        public decimal DifferencePrice => NewComponent.Price - OldComponent.Price;
-        public DateTime DateError { get; }
-        public Component OldComponent { get; }
-        public Component NewComponent { get; }
+        public decimal PriceDifference => newComponent.Price - oldComponent.Price;
+        public string NewComponent => newComponent.Name;
+        public string OldComponent => oldComponent.Name;
         public string Commentary { get; }
     }
 }

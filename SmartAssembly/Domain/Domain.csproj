@@ -47,6 +47,7 @@
     <Compile Include="Components\Types\TypeFormat.cs" />
     <Compile Include="Components\Types\TypeMemory.cs" />
     <Compile Include="Components\Types\TypePart.cs" />
+    <Compile Include="Computers\TypeUse.cs" />
     <Compile Include="Employees\Employee.cs" />
     <Compile Include="Enoughs\Enums\Enough.cs" />
     <Compile Include="Enoughs\Implementations\EnoughCapacity.cs" />
