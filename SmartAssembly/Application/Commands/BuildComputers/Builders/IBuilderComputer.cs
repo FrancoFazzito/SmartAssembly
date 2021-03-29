@@ -1,7 +1,4 @@
-﻿using Application.Commands.BuildComputers.Importances;
-using Application.Commands.BuildComputers.Request;
-using Application.Factories.Compatibilities;
-using Application.Factories.Enoughs;
+﻿using Application.Commands.BuildComputers.Request;
 using Domain.Components;
 using Domain.Computers;
 using System.Collections.Generic;

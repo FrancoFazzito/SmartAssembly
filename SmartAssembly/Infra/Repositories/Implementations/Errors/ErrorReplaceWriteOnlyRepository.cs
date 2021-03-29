@@ -82,7 +82,7 @@ namespace Infra.Repositories.Implementations.Errors
 
         private SqlCommand CommandError(Component componentWithError, int idComputer, string commentary, Component componentToReplace)
         {
-            var commandError = new SqlCommand($"INSERT INTO Computer_Error VALUES (@{PARAM_COMPUTER},@{PARAM_COMPONENT_ERROR},@{PARAM_COMPONENT_REPLACE},@{PARAM_COMMENTARY})");
+            var commandError = new SqlCommand($"INSERT INTO Computer_Error VALUES (@{PARAM_COMPUTER},@{PARAM_COMPONENT_ERROR},@{PARAM_COMPONENT_REPLACE},@{PARAM_COMMENTARY},GETDATE())");
             commandError.Parameters.AddWithValue(PARAM_COMPUTER, idComputer);
             commandError.Parameters.AddWithValue(PARAM_COMPONENT_ERROR, componentWithError.Id);
             commandError.Parameters.AddWithValue(PARAM_COMPONENT_REPLACE, componentToReplace.Id);

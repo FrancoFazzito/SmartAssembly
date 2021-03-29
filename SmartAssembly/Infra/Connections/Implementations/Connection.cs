@@ -5,7 +5,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace Infra.SqlServer.Connections
+namespace Infra.Implementations.Connections
 {
     public class Connection : IConnection
     {
@@ -23,11 +23,6 @@ namespace Infra.SqlServer.Connections
                 connection.Open();
             }
             return connection;
-        }
-
-        private void Close()
-        {
-            connection.Close();
         }
 
         public void Execute(IEnumerable<SqlCommand> commands)
@@ -53,7 +48,7 @@ namespace Infra.SqlServer.Connections
                     transaction.Rollback();
                     throw new Exception(ex.Message);
                 }
-                finally { Close(); }
+                finally { connection.Close(); }
             }
         }
 

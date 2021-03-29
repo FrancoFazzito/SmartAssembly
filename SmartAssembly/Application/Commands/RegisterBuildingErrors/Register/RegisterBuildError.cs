@@ -1,5 +1,5 @@
-﻿using Application.Commands.RegisterComputerError.Errors.Results;
-using Application.Commands.RegisterComputerError.Replacers;
+﻿using Application.Commands.RegisterBuildError.Errors.Results;
+using Application.Commands.RegisterBuildError.Replacers;
 using Application.Factories.Compatibilities;
 using Application.Factories.Enoughs;
 using Application.Repositories.Components.Interfaces;
@@ -8,9 +8,9 @@ using Domain.Components;
 using Domain.Computers;
 using Domain.Orders.States;
 
-namespace Application.Commands.RegisterComputerError.Errors
+namespace Application.Commands.RegisterBuildError.Errors
 {
-    public class RegisterError : IRegisterError
+    public class RegisterBuildError : IRegisterBuildError
     {
         private readonly IComponentReadOnlyRepository componenRepository;
         private readonly IFactoryCompatibility compatibilities;
@@ -18,7 +18,7 @@ namespace Application.Commands.RegisterComputerError.Errors
         private readonly IErrorWriteOnlyRepository errorRepository;
         private readonly IErrorReplaceWriteOnlyRepository errorReplaceRepository;
 
-        public RegisterError(IComponentReadOnlyRepository componenRepository, IFactoryCompatibility compatibilities, IFactoryEnough enoughs, IErrorWriteOnlyRepository errorRepository, IErrorReplaceWriteOnlyRepository errorReplaceRepository)
+        public RegisterBuildError(IComponentReadOnlyRepository componenRepository, IFactoryCompatibility compatibilities, IFactoryEnough enoughs, IErrorWriteOnlyRepository errorRepository, IErrorReplaceWriteOnlyRepository errorReplaceRepository)
         {
             this.componenRepository = componenRepository;
             this.compatibilities = compatibilities;

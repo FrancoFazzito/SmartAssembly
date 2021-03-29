@@ -47,6 +47,7 @@
     <Compile Include="Repositories\Implementations\Computers\ComputerStockRepository.cs" />
     <Compile Include="Repositories\Implementations\Computers\ComputerReadOnlyRepository.cs" />
     <Compile Include="Repositories\Implementations\Employees\EmployeeReadOnlyRepository.cs" />
+    <Compile Include="Repositories\Implementations\Errors\ErrorOrderWriteOnlyRepository.cs" />
     <Compile Include="Repositories\Implementations\Errors\ErrorReplaceWriteOnlyRepository.cs" />
     <Compile Include="Repositories\Implementations\Errors\ErrorWriteOnlyRepository.cs" />
     <Compile Include="Repositories\Implementations\Orders\BuildOrderRepository.cs" />
@@ -56,7 +57,7 @@
     <Compile Include="Repositories\Implementations\TypeUses\TypeUseReadOnlyRepository.cs" />
     <Compile Include="Repositories\ConvertHelper\ConvertReader.cs" />
     <Compile Include="Repositories\Implementations\Abstracts\AbstractReadOnlyRepository.cs" />
-    <Compile Include="Connections\SqlServer\Connection.cs" />
+    <Compile Include="Connections\Implementations\Connection.cs" />
     <Compile Include="Repositories\Implementations\Components\ComponentReadOnlyRepository.cs" />
     <Compile Include="Connections\Interfaces\IConnection.cs" />
   </ItemGroup>

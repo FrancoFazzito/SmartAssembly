@@ -1,12 +1,7 @@
-﻿using Application.Commands.BuildComputers.Builders;
-using Application.Commands.BuildComputers.Directors;
+﻿using Application.Commands.BuildComputers.Directors;
 using Application.Commands.BuildComputers.Importances;
 using Application.Commands.BuildComputers.Request;
-using Application.Factories.Compatibilities;
-using Application.Factories.Enoughs;
-using Application.Repositories.Components.Interfaces;
 using Application.Repositories.TypeUses.Interfaces;
-using Application.Strategies.OrderBy;
 using Domain.Computers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;

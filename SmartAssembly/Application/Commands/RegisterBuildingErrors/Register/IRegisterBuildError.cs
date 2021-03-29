@@ -1,10 +1,10 @@
-﻿using Application.Commands.RegisterComputerError.Errors.Results;
+﻿using Application.Commands.RegisterBuildError.Errors.Results;
 using Domain.Components;
 using Domain.Computers;
 
-namespace Application.Commands.RegisterComputerError.Errors
+namespace Application.Commands.RegisterBuildError.Errors
 {
-    public interface IRegisterError
+    public interface IRegisterBuildError
     {
         IErrorResult Register(Computer computer, Component componentWithError, string commentary, bool deleteComponentWithError);
     }

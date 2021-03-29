@@ -7,6 +7,6 @@ namespace Application.Commands.BuildComputers.Request
     {
         decimal Budget { get; }
         ISpecification Specification { get; }
-        Importance Importance{ get; }
+        Importance Importance { get; }
     }
 }

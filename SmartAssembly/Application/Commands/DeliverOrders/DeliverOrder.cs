@@ -28,7 +28,7 @@ namespace Application.Commands.DeliverOrders
             throw new NotCompletedOrderException();
         }
 
-        public IEnumerable<Order> GetOrdersByClient(string emailClient)
+        public IEnumerable<Order> GetOrdersToDeliverByClient(string emailClient)
         {
             return OrderRepository.All.Where(c => c.Client.Email == emailClient)
                                       .Where(c => c.State == OrderState.Completed);

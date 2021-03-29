@@ -6,6 +6,6 @@ namespace Application.Commands.DeliverOrders
     public interface IDeliverOrder
     {
         DeliverResult Deliver(Order order);
-        IEnumerable<Order> GetOrdersByClient(string emailClient);
+        IEnumerable<Order> GetOrdersToDeliverByClient(string emailClient);
     }
 }

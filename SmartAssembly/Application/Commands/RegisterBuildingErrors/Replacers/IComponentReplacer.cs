@@ -2,7 +2,7 @@
 using Application.Factories.Enoughs;
 using Domain.Components;
 
-namespace Application.Commands.RegisterComputerError.Replacers
+namespace Application.Commands.RegisterBuildError.Replacers
 {
     internal interface IComponentReplacer
     {

@@ -8,9 +8,4 @@ namespace Application.Repositories.Interfaces.Error
     {
         void Insert(Component componentWithError, Computer computer, string commentary, OrderState newStateOrder, bool deleteComponentError);
     }
-
-    public interface IErrorReplaceWriteOnlyRepository
-    {
-        void Insert(Component componentWithError, Component componentToReplace, Computer computer, string commentary, OrderState newStateOrder, bool deleteComponentError);
-    }
 }

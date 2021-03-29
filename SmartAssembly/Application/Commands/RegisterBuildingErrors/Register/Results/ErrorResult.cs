@@ -1,6 +1,6 @@
 ﻿using Domain.Components;
 
-namespace Application.Commands.RegisterComputerError.Errors.Results
+namespace Application.Commands.RegisterBuildError.Errors.Results
 {
     public class ErrorResult : IErrorResult
     {
