@@ -3,9 +3,6 @@ using Application.Commands.BuildComputers.Importances;
 using Application.Commands.BuildComputers.Orders;
 using Application.Commands.BuildComputers.Request;
 using Application.Commands.RegisterBuildError.Errors;
-using Application.Repositories.Employees.Interfaces;
-using Application.Repositories.Interfaces.Clients;
-using Application.Repositories.Interfaces.Computers;
 using Application.Repositories.Orders.Interfaces;
 using Application.Repositories.TypeUses.Interfaces;
 using Domain.Computers;
@@ -27,7 +24,7 @@ namespace Tests
             var resultDirector = director.Build(request);
             var computer = resultDirector.Computers.ElementAt(0);
             var submitOrder = container.Resolve<ISubmitOrder>();
-            submitOrder.Add(computer, 1);
+            submitOrder.Add(computer, 3);
             submitOrder.Submit("juan@gmail", "comentario de prueba");
 
             var lastOrder = container.Resolve<IOrderReadOnlyRepository>().All.Last();

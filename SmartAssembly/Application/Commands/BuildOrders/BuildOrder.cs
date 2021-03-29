@@ -29,9 +29,20 @@ namespace Application.Commands.BuildOrders
 
         public IEnumerable<Order> GetOrdersByEmployee(string email)
         {
-            return OrderRepository.All.Where(c => c.Employee.Email == email)
-                                      .Where(c => c.State == OrderState.Uncompleted ||
-                                                  c.State == OrderState.Error);
+            return OrderRepository.All
+                                  .Where(order => order.Employee.Email == email)
+                                  .Where(order => order.State == OrderState.Uncompleted || order.State == OrderState.Error)
+                                  .Select(order => new Order()
+                                  {
+                                      Client = order.Client,
+                                      Commentary = order.Commentary,
+                                      Computers = order.Computers.Where(c => c.Completed == false).ToList(),
+                                      DateDelivered = order.DateDelivered,
+                                      DateRequested = order.DateRequested,
+                                      Employee = order.Employee,
+                                      Id = order.Id,
+                                      State = order.State
+                                  });
         }
     }
 }

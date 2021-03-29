@@ -15,10 +15,10 @@ namespace Application.Commands.RegisterBuildError.Errors
         private readonly IComponentReadOnlyRepository componenRepository;
         private readonly IFactoryCompatibility compatibilities;
         private readonly IFactoryEnough enoughs;
-        private readonly IErrorWriteOnlyRepository errorRepository;
+        private readonly IErrorBuildingWriteOnlyRepository errorRepository;
         private readonly IErrorReplaceWriteOnlyRepository errorReplaceRepository;
 
-        public RegisterBuildError(IComponentReadOnlyRepository componenRepository, IFactoryCompatibility compatibilities, IFactoryEnough enoughs, IErrorWriteOnlyRepository errorRepository, IErrorReplaceWriteOnlyRepository errorReplaceRepository)
+        public RegisterBuildError(IComponentReadOnlyRepository componenRepository, IFactoryCompatibility compatibilities, IFactoryEnough enoughs, IErrorBuildingWriteOnlyRepository errorRepository, IErrorReplaceWriteOnlyRepository errorReplaceRepository)
         {
             this.componenRepository = componenRepository;
             this.compatibilities = compatibilities;

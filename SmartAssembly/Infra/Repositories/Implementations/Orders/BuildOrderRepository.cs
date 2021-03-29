@@ -18,13 +18,20 @@ namespace Infra.Repositories.Implementations.Orders
 
         public void Build(Order orderToBuild)
         {
-            connection.Execute(new SqlCommand[] { CommandBuild(orderToBuild) });
+            connection.Execute(new SqlCommand[] { CommandBuild(orderToBuild), CommandCompleted(orderToBuild) });
         }
 
         private SqlCommand CommandBuild(Order orderToBuild)
         {
             var commandBuild = new SqlCommand($"UPDATE [Order] SET  OrderState = @{PARAMETER_STATE} WHERE ID = @{PARAMETER_ID}");
             commandBuild.Parameters.AddWithValue(PARAMETER_STATE, (int)orderToBuild.State);
+            commandBuild.Parameters.AddWithValue(PARAMETER_ID, orderToBuild.Id);
+            return commandBuild;
+        }
+
+        private SqlCommand CommandCompleted(Order orderToBuild)
+        {
+            var commandBuild = new SqlCommand($"UPDATE Computer SET Completed = 1 WHERE Computer.ID_Order = @{PARAMETER_ID}");
             commandBuild.Parameters.AddWithValue(PARAMETER_ID, orderToBuild.Id);
             return commandBuild;
         }

@@ -20,7 +20,7 @@ namespace Infra.Repositories.Implementations.Errors
 
         public void Insert(Computer computer, string commentary, OrderState newState)
         {
-            connection.Execute(new SqlCommand[] { CommandError(computer, commentary), CommandUpdateError(computer, commentary, newState) });
+            connection.Execute(new SqlCommand[] { CommandError(computer, commentary), CommandUpdateError(computer, commentary, newState), CommandUncompleted(computer) });
         }
 
         private SqlCommand CommandUpdateError(Computer computer, string commentary, OrderState newState)
@@ -38,6 +38,13 @@ namespace Infra.Repositories.Implementations.Errors
             command.Parameters.AddWithValue(PARAM_COMPUTER, computer.Id);
             command.Parameters.AddWithValue(PARAM_COMMENTARY, commentary);
             return command;
+        }
+
+        private SqlCommand CommandUncompleted(Computer computer)
+        {
+            var commandBuild = new SqlCommand("UPDATE Computer SET Completed = 0 WHERE Computer.ID = @id");
+            commandBuild.Parameters.AddWithValue("id", computer.Id);
+            return commandBuild;
         }
     }
 }

@@ -47,9 +47,9 @@
     <Compile Include="Repositories\Implementations\Computers\ComputerStockRepository.cs" />
     <Compile Include="Repositories\Implementations\Computers\ComputerReadOnlyRepository.cs" />
     <Compile Include="Repositories\Implementations\Employees\EmployeeReadOnlyRepository.cs" />
-    <Compile Include="Repositories\Implementations\Errors\ErrorOrderWriteOnlyRepository.cs" />
-    <Compile Include="Repositories\Implementations\Errors\ErrorReplaceWriteOnlyRepository.cs" />
-    <Compile Include="Repositories\Implementations\Errors\ErrorWriteOnlyRepository.cs" />
+    <Compile Include="Repositories\Implementations\Errors\Orders\ErrorOrderWriteOnlyRepository.cs" />
+    <Compile Include="Repositories\Implementations\Errors\Buildings\ErrorBuildingReplaceWriteOnlyRepository.cs" />
+    <Compile Include="Repositories\Implementations\Errors\Buildings\ErrorBuildingWriteOnlyRepository.cs" />
     <Compile Include="Repositories\Implementations\Orders\BuildOrderRepository.cs" />
     <Compile Include="Repositories\Implementations\Orders\DeliverOrderRepository.cs" />
     <Compile Include="Repositories\Implementations\Orders\OrderReadOnlyRepository.cs" />

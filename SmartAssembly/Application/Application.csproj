@@ -50,6 +50,8 @@
     <Compile Include="Commands\BuildComputers\Request\ComputerRequest.cs" />
     <Compile Include="Commands\BuildComputers\Request\IComputerRequest.cs" />
     <Compile Include="Commands\BuildOrders\IBuilderOrder.cs" />
+    <Compile Include="Commands\CreateReports\ReportOrders.cs" />
+    <Compile Include="Commands\CreateReports\IReportOrders.cs" />
     <Compile Include="Commands\DeliverOrders\DeliverOrder.cs" />
     <Compile Include="Commands\DeliverOrders\DeliverResult.cs" />
     <Compile Include="Commands\DeliverOrders\IDeliverOrder.cs" />
@@ -62,8 +64,8 @@
     <Compile Include="Commands\RegisterBuildingErrors\Register\Results\IErrorResult.cs" />
     <Compile Include="Commands\RegisterBuildingErrors\Replacers\ComponentReplacer.cs" />
     <Compile Include="Commands\RegisterBuildingErrors\Replacers\IComponentReplacer.cs" />
-    <Compile Include="Commands\RegisterComputerErrors\IRegisterOrderError.cs" />
-    <Compile Include="Commands\RegisterComputerErrors\RegisterOrderError.cs" />
+    <Compile Include="Commands\RegisterOrderErrors\IRegisterOrderError.cs" />
+    <Compile Include="Commands\RegisterOrderErrors\RegisterOrderError.cs" />
     <Compile Include="Factories\Compatibilities\FactoryCompatibility.cs" />
     <Compile Include="Factories\Enoughs\FactoryEnough.cs" />
     <Compile Include="Repositories\Interfaces\Clients\IClientReadOnlyRepository.cs" />
@@ -71,7 +73,7 @@
     <Compile Include="Repositories\Interfaces\Computers\ICompouterStockRepository.cs" />
     <Compile Include="Repositories\Interfaces\Error\IErrorComputerWriteOnlyRepository.cs" />
     <Compile Include="Repositories\Interfaces\Error\IErrorReplaceWriteOnlyRepository.cs" />
-    <Compile Include="Repositories\Interfaces\Error\IErrorWriteOnlyRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Error\IErrorBuildingWriteOnlyRepository.cs" />
     <Compile Include="Repositories\Interfaces\Orders\IBuildOrderRepository.cs" />
     <Compile Include="Repositories\Interfaces\Orders\IDeliverOrderRepository.cs" />
     <Compile Include="Repositories\Interfaces\Orders\IOrderReadOnlyRepository.cs" />

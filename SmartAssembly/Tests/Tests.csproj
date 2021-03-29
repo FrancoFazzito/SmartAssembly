@@ -49,6 +49,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Tests\CreateReport\ReportTest.cs" />
     <Compile Include="Tests\SubmitErrorComputer\SubmitErrorComputerTest.cs" />
     <Compile Include="Tests\Deliver\DeliveredTest.cs" />
     <Compile Include="Tests\Build\BuildOrderTest.cs" />

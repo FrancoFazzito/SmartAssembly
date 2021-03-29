@@ -65,7 +65,7 @@ namespace Infra.Repositories.Implementations.Orders
 
         private SqlCommand CommandComputer(Computer computer)
         {
-            using (var commandComputer = new SqlCommand($"INSERT INTO [Computer] VALUES((SELECT IDENT_CURRENT('order')),@{PARAMETER_TYPE_USE})"))
+            using (var commandComputer = new SqlCommand($"INSERT INTO [Computer] VALUES((SELECT IDENT_CURRENT('order')),@{PARAMETER_TYPE_USE},0)"))
             {
                 commandComputer.Parameters.AddWithValue(PARAMETER_TYPE_USE, computer.TypeUse.ToString());
                 return commandComputer;

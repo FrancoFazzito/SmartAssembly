@@ -31,7 +31,8 @@ namespace Infra.Repositories.Implementations.Computers
             {
                 Id = ConvertReader<int>.WithName(reader, "ID"),
                 TypeUse = ConvertReader<TypeUse>.EnumWithName(reader, "TypeUse"),
-                Components = ComponentRepository.GetByComputer(ConvertReader<int>.WithName(reader, "ID"))
+                Components = ComponentRepository.GetByComputer(ConvertReader<int>.WithName(reader, "ID")),
+                Completed = ConvertReader<bool>.WithName(reader, "Completed")
             };
         }
     }

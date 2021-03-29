@@ -2,6 +2,7 @@
 using Application.Commands.BuildComputers.Directors;
 using Application.Commands.BuildComputers.Orders;
 using Application.Commands.BuildOrders;
+using Application.Commands.CreateReports;
 using Application.Commands.DeliverOrders;
 using Application.Commands.RegisterBuildError.Errors;
 using Application.Commands.RegisterOrderErrors;
@@ -17,6 +18,7 @@ using Application.Repositories.Orders.Interfaces;
 using Application.Repositories.TypeUses.Interfaces;
 using Application.Strategies.OrderBy;
 using Console_.Container;
+using Infra.Implementations.Connections;
 using Infra.Interfaces.Connections;
 using Infra.Repositories.Implementations.Clients;
 using Infra.Repositories.Implementations.Components;
@@ -25,7 +27,6 @@ using Infra.Repositories.Implementations.Employees;
 using Infra.Repositories.Implementations.Errors;
 using Infra.Repositories.Implementations.Orders;
 using Infra.Repositories.Implementations.TypeUses;
-using Infra.Implementations.Connections;
 using System;
 
 namespace Tests
@@ -43,8 +44,8 @@ namespace Tests
             container.Register<IEmployeeReadOnlyRepository>(() => new EmployeeReadOnlyRepository(container.Resolve<IConnection>()));
             container.Register<ISubmitOrderRepository>(() => new SubmitOrderRepository(container.Resolve<IConnection>()));
             container.Register<IClientReadOnlyRepository>(() => new ClientReadOnlyRepository(container.Resolve<IConnection>()));
-            container.Register<IErrorWriteOnlyRepository>(() => new ErrorWriteOnlyRepository(container.Resolve<IConnection>()));
-            container.Register<IErrorReplaceWriteOnlyRepository>(() => new ErrorReplaceWriteOnlyRepository(container.Resolve<IConnection>()));
+            container.Register<IErrorBuildingWriteOnlyRepository>(() => new ErrorBuildingWriteOnlyRepository(container.Resolve<IConnection>()));
+            container.Register<IErrorReplaceWriteOnlyRepository>(() => new ErrorBuildingReplaceWriteOnlyRepository(container.Resolve<IConnection>()));
             container.Register<IComputerReadOnlyRepository>(() => new ComputerReadOnlyRepository(container.Resolve<IConnection>(), container.Resolve<IComponentReadOnlyRepository>()));
             container.Register<IOrderReadOnlyRepository>(() => new OrderReadOnlyRepository(container.Resolve<IConnection>(), container.Resolve<IComputerReadOnlyRepository>(), container.Resolve<IEmployeeReadOnlyRepository>(), container.Resolve<IClientReadOnlyRepository>()));
             container.Register<IComputerStockRepository>(() => new ComputerStockRepository(container.Resolve<IComponentReadOnlyRepository>()));
@@ -54,13 +55,14 @@ namespace Tests
             container.Register<IFactoryEnough>(() => new FactoryEnough());
             container.Register<IStrategyOrderBy>(() => new StrategyOrderBy());
             container.Register<IDeliverOrderRepository>(() => new DeliverOrderRepository(container.Resolve<IConnection>()));
-            container.Register<IRegisterBuildError>(() => new RegisterBuildError(container.Resolve<IComponentReadOnlyRepository>(), container.Resolve<IFactoryCompatibility>(), container.Resolve<IFactoryEnough>(), container.Resolve<IErrorWriteOnlyRepository>(), container.Resolve<IErrorReplaceWriteOnlyRepository>()));
+            container.Register<IRegisterBuildError>(() => new RegisterBuildError(container.Resolve<IComponentReadOnlyRepository>(), container.Resolve<IFactoryCompatibility>(), container.Resolve<IFactoryEnough>(), container.Resolve<IErrorBuildingWriteOnlyRepository>(), container.Resolve<IErrorReplaceWriteOnlyRepository>()));
             container.Register<IDeliverOrder>(() => new DeliverOrder(container.Resolve<IOrderReadOnlyRepository>(), container.Resolve<IDeliverOrderRepository>()));
             container.Register<IBuilderComputer>(() => new BuilderComputer(container.Resolve<IStrategyOrderBy>(), container.Resolve<IFactoryCompatibility>(), container.Resolve<IFactoryEnough>(), container.Resolve<IComponentReadOnlyRepository>()));
             container.Register<IDirectorComputer>(() => new DirectorComputer(container.Resolve<IBuilderComputer>()));
             container.Register<ISubmitOrder>(() => new SubmitOrder(container.Resolve<ISubmitOrderRepository>(), container.Resolve<IEmployeeReadOnlyRepository>(), container.Resolve<IClientReadOnlyRepository>(), container.Resolve<IComputerStockRepository>()));
             container.Register<IErrorComputerWriteOnlyRepository>(() => new ErrorOrderWriteOnlyRepository(container.Resolve<IConnection>()));
             container.Register<IRegisterOrderError>(() => new RegisterOrderError(container.Resolve<IErrorComputerWriteOnlyRepository>(), container.Resolve<IOrderReadOnlyRepository>()));
+            container.Register<IReportOrders>(() => new ReportOrders(container.Resolve<IOrderReadOnlyRepository>()));
         }
 
         public void Register<T>(Func<T> createInstance, string instanceName = null)
