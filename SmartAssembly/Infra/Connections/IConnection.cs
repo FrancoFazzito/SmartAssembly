@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 
-namespace Infra.Interfaces.Connections
+namespace Infra.Connections
 {
     public interface IConnection
     {

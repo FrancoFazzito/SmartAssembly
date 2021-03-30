@@ -2,7 +2,7 @@
 using Domain.Components;
 using Domain.Computers;
 using Domain.Orders.States;
-using Infra.Interfaces.Connections;
+using Infra.Connections;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 

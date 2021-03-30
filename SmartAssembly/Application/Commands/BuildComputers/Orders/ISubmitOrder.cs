@@ -1,6 +1,6 @@
 ﻿using Domain.Computers;
 
-namespace Application.Commands.BuildComputers.Orders
+namespace Application.Commands.BuildComputers
 {
     public interface ISubmitOrder
     {

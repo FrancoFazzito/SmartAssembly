@@ -10,7 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Application.Commands.RegisterBuildError.Replacers
+namespace Application.Commands.RegisterBuildingError
 {
     internal class ComponentReplacer : IComponentReplacer
     {

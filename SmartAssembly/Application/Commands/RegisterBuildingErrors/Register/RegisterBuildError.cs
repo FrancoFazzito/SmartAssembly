@@ -1,5 +1,4 @@
-﻿using Application.Commands.RegisterBuildError.Errors.Results;
-using Application.Commands.RegisterBuildError.Replacers;
+﻿using Application.Commands.RegisterBuildingError.Errors.Results;
 using Application.Factories.Compatibilities;
 using Application.Factories.Enoughs;
 using Application.Repositories.Components.Interfaces;
@@ -8,7 +7,7 @@ using Domain.Components;
 using Domain.Computers;
 using Domain.Orders.States;
 
-namespace Application.Commands.RegisterBuildError.Errors
+namespace Application.Commands.RegisterBuildingError
 {
     public class RegisterBuildError : IRegisterBuildError
     {

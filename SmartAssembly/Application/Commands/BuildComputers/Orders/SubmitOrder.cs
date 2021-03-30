@@ -7,7 +7,7 @@ using Domain.Computers;
 using Domain.Orders;
 using Domain.Orders.States;
 
-namespace Application.Commands.BuildComputers.Orders
+namespace Application.Commands.BuildComputers
 {
     public class SubmitOrder : ISubmitOrder
     {
@@ -32,7 +32,7 @@ namespace Application.Commands.BuildComputers.Orders
         {
             if (!computerStock.IsValid(computer, quantity))
             {
-                throw new ErrorStockException(quantity);
+                throw new ErrorAddingStockException(quantity);
             }
             order.Add(computer, quantity);
         }

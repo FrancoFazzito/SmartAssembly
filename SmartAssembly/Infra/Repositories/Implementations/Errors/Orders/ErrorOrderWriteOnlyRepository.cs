@@ -1,7 +1,7 @@
 ﻿using Application.Repositories.Interfaces.Error;
 using Domain.Computers;
 using Domain.Orders.States;
-using Infra.Interfaces.Connections;
+using Infra.Connections;
 using System.Data.SqlClient;
 
 namespace Infra.Repositories.Implementations.Errors

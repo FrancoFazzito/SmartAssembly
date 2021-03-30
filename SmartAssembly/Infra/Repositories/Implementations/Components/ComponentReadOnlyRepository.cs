@@ -1,7 +1,7 @@
 ﻿using Application.Repositories.Components.Interfaces;
 using Domain.Components;
 using Domain.Components.Types;
-using Infra.Interfaces.Connections;
+using Infra.Connections;
 using Infra.Repositories.Convert;
 using Infra.Repositories.Implementations.Abstracts;
 using System.Collections.Generic;

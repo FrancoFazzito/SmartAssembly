@@ -1,6 +1,4 @@
-﻿using Application.Commands.BuildComputers.Directors;
-using Application.Commands.BuildComputers.Orders;
-using Application.Commands.BuildComputers.Request;
+﻿using Application.Commands.BuildComputers;
 using Application.Commands.BuildOrders;
 using Application.Commands.CreateReports;
 using Application.Commands.DeliverOrders;

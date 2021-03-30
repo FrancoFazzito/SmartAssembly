@@ -1,6 +1,4 @@
-﻿using Application.Commands.BuildComputers.Directors;
-using Application.Commands.BuildComputers.Orders;
-using Application.Commands.BuildComputers.Request;
+﻿using Application.Commands.BuildComputers;
 using Application.Repositories.Orders.Interfaces;
 using Application.Repositories.TypeUses.Interfaces;
 using Domain.Computers;
@@ -35,7 +33,7 @@ namespace Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ErrorStockException))]
+        [ExpectedException(typeof(ErrorAddingStockException))]
         public void SubmitOrderWithoutStock()
         {
             var container = new DependencyContainerMock();

@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace Application.Commands.BuildComputers.Orders
+namespace Application.Commands.BuildComputers
 {
-    public class ErrorStockException : Exception
+    public class ErrorAddingStockException : Exception
     {
         private readonly int quantity;
 
-        public ErrorStockException(int quantity)
+        public ErrorAddingStockException(int quantity)
         {
             this.quantity = quantity;
         }

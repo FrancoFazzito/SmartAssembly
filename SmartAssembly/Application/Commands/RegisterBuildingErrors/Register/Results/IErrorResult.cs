@@ -1,4 +1,4 @@
-﻿namespace Application.Commands.RegisterBuildError.Errors.Results
+﻿namespace Application.Commands.RegisterBuildingError.Errors.Results
 {
     public interface IErrorResult
     {

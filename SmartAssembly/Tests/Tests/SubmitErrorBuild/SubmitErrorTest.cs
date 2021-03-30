@@ -1,7 +1,5 @@
-﻿using Application.Commands.BuildComputers.Directors;
-using Application.Commands.BuildComputers.Orders;
-using Application.Commands.BuildComputers.Request;
-using Application.Commands.RegisterBuildError.Errors;
+﻿using Application.Commands.BuildComputers;
+using Application.Commands.RegisterBuildingError;
 using Application.Repositories.Orders.Interfaces;
 using Application.Repositories.TypeUses.Interfaces;
 using Domain.Computers;

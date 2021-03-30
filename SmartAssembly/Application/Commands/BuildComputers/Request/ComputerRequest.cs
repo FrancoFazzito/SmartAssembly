@@ -1,9 +1,8 @@
-﻿using Application.Commands.BuildComputers.Specifications;
-using Application.Repositories.TypeUses.Interfaces;
+﻿using Application.Repositories.TypeUses.Interfaces;
 using Domain.Computers;
 using Domain.Importance;
 
-namespace Application.Commands.BuildComputers.Request
+namespace Application.Commands.BuildComputers
 {
     public class ComputerRequest : IComputerRequest
     {

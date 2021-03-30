@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Application.Commands.BuildComputers.Builders
+namespace Application.Commands.BuildComputers
 {
     public class InvalidAddException : Exception
     {

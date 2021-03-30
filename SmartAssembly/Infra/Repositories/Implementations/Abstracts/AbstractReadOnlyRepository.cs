@@ -1,4 +1,4 @@
-﻿using Infra.Interfaces.Connections;
+﻿using Infra.Connections;
 using System.Collections.Generic;
 using System.Data;
 

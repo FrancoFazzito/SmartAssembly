@@ -1,6 +1,5 @@
 ﻿using Domain.Clients;
 using Domain.Computers;
-using Domain.Configurations;
 using Domain.Employees;
 using Domain.Orders.States;
 using System;

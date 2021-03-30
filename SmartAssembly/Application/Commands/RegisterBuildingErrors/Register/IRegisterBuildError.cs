@@ -1,8 +1,8 @@
-﻿using Application.Commands.RegisterBuildError.Errors.Results;
+﻿using Application.Commands.RegisterBuildingError.Errors.Results;
 using Domain.Components;
 using Domain.Computers;
 
-namespace Application.Commands.RegisterBuildError.Errors
+namespace Application.Commands.RegisterBuildingError
 {
     public interface IRegisterBuildError
     {

@@ -1,6 +1,6 @@
 ﻿using Application.Repositories.Interfaces.Orders;
 using Domain.Orders;
-using Infra.Interfaces.Connections;
+using Infra.Connections;
 using System.Data.SqlClient;
 
 namespace Infra.Repositories.Implementations.Orders

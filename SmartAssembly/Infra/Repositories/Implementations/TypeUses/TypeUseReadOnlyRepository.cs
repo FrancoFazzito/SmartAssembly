@@ -1,7 +1,7 @@
-﻿using Application.Commands.BuildComputers.Specifications;
+﻿using Application.Commands.BuildComputers;
 using Application.Repositories.TypeUses.Interfaces;
 using Domain.Computers;
-using Infra.Interfaces.Connections;
+using Infra.Connections;
 using Infra.Repositories.Convert;
 using Infra.Repositories.Implementations.Abstracts;
 using System.Data;

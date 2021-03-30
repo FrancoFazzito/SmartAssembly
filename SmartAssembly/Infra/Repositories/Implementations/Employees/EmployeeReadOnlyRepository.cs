@@ -1,6 +1,6 @@
 ﻿using Application.Repositories.Employees.Interfaces;
 using Domain.Employees;
-using Infra.Interfaces.Connections;
+using Infra.Connections;
 using Infra.Repositories.Convert;
 using Infra.Repositories.Implementations.Abstracts;
 using System.Data;

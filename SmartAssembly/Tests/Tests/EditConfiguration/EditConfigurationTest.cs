@@ -1,12 +1,6 @@
-﻿using Application.Commands.BuildComputers.Directors;
-using Application.Commands.BuildComputers.Request;
-using Application.Commands.EditCongifuration;
-using Application.Repositories.TypeUses.Interfaces;
-using Domain.Computers;
-using Domain.Importance;
+﻿using Application.Commands.EditCongifuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Configuration;
-using System.Linq;
 
 namespace Tests
 {

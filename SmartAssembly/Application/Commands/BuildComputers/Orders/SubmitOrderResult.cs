@@ -2,7 +2,7 @@
 using Domain.Orders;
 using System.Collections.Generic;
 
-namespace Application.Commands.BuildComputers.Orders
+namespace Application.Commands.BuildComputers
 {
     public class SubmitOrderResult
     {

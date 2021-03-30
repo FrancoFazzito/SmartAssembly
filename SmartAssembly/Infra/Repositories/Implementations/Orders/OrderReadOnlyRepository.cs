@@ -4,7 +4,7 @@ using Application.Repositories.Interfaces.Computers;
 using Application.Repositories.Orders.Interfaces;
 using Domain.Orders;
 using Domain.Orders.States;
-using Infra.Interfaces.Connections;
+using Infra.Connections;
 using Infra.Repositories.Convert;
 using Infra.Repositories.Implementations.Abstracts;
 using System;

@@ -50,16 +50,16 @@
     <Compile Include="Repositories\Implementations\Errors\Orders\ErrorOrderWriteOnlyRepository.cs" />
     <Compile Include="Repositories\Implementations\Errors\Buildings\ErrorBuildingReplaceWriteOnlyRepository.cs" />
     <Compile Include="Repositories\Implementations\Errors\Buildings\ErrorBuildingWriteOnlyRepository.cs" />
-    <Compile Include="Repositories\Implementations\Orders\BuildOrderRepository.cs" />
-    <Compile Include="Repositories\Implementations\Orders\DeliverOrderRepository.cs" />
+    <Compile Include="Repositories\Implementations\Orders\Build\BuildOrderRepository.cs" />
+    <Compile Include="Repositories\Implementations\Orders\Deliver\DeliverOrderRepository.cs" />
     <Compile Include="Repositories\Implementations\Orders\OrderReadOnlyRepository.cs" />
-    <Compile Include="Repositories\Implementations\Orders\SubmitOrderRepository.cs" />
+    <Compile Include="Repositories\Implementations\Orders\Submit\SubmitOrderRepository.cs" />
     <Compile Include="Repositories\Implementations\TypeUses\TypeUseReadOnlyRepository.cs" />
     <Compile Include="Repositories\ConvertHelper\ConvertReader.cs" />
     <Compile Include="Repositories\Implementations\Abstracts\AbstractReadOnlyRepository.cs" />
-    <Compile Include="Connections\Implementations\Connection.cs" />
+    <Compile Include="Connections\Connection.cs" />
     <Compile Include="Repositories\Implementations\Components\ComponentReadOnlyRepository.cs" />
-    <Compile Include="Connections\Interfaces\IConnection.cs" />
+    <Compile Include="Connections\IConnection.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj">

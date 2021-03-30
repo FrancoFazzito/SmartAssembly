@@ -1,11 +1,10 @@
-﻿using Infra.Interfaces.Connections;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace Infra.Implementations.Connections
+namespace Infra.Connections
 {
     public class Connection : IConnection
     {

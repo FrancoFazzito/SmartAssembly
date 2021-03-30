@@ -1,12 +1,10 @@
-﻿using Application.Commands.BuildComputers.Builders;
-using Application.Commands.BuildComputers.Directors;
-using Application.Commands.BuildComputers.Orders;
+﻿using Application.Commands.BuildComputers;
 using Application.Commands.BuildOrders;
 using Application.Commands.ControlStock;
 using Application.Commands.CreateReports;
 using Application.Commands.DeliverOrders;
 using Application.Commands.EditCongifuration;
-using Application.Commands.RegisterBuildError.Errors;
+using Application.Commands.RegisterBuildingError;
 using Application.Commands.RegisterOrderErrors;
 using Application.Factories.Compatibilities;
 using Application.Factories.Enoughs;
@@ -20,8 +18,7 @@ using Application.Repositories.Orders.Interfaces;
 using Application.Repositories.TypeUses.Interfaces;
 using Application.Strategies.OrderBy;
 using Console_.Container;
-using Infra.Implementations.Connections;
-using Infra.Interfaces.Connections;
+using Infra.Connections;
 using Infra.Repositories.Implementations.Clients;
 using Infra.Repositories.Implementations.Components;
 using Infra.Repositories.Implementations.Computers;
@@ -29,7 +26,6 @@ using Infra.Repositories.Implementations.Employees;
 using Infra.Repositories.Implementations.Errors;
 using Infra.Repositories.Implementations.Orders;
 using Infra.Repositories.Implementations.TypeUses;
-using System.Configuration;
 
 namespace Console_
 {
@@ -40,18 +36,6 @@ namespace Console_
         private static void Main()
         {
             RegisterDependencies();
-            int newcost = 5000;
-            int newMultiplier = 7000;
-            var editor = container.Resolve<IConfigurationEditor>();
-            var oldCost = int.Parse(ConfigurationManager.AppSettings["BUILD_COST"]);
-            var oldMultiplier = int.Parse(ConfigurationManager.AppSettings["PRICE_PERFOMANCE_MULTIPLIER"]);
-            editor.EditCostBuild(newcost);
-            editor.EditPricePerfomanceMultiplier(newMultiplier);
-            var editedCost = int.Parse(ConfigurationManager.AppSettings["BUILD_COST"]) == newcost;
-            var editerMultiplier = int.Parse(ConfigurationManager.AppSettings["PRICE_PERFOMANCE_MULTIPLIER"]) == newMultiplier;
-            var assert = editedCost && editerMultiplier;
-            editor.EditCostBuild(oldCost);
-            editor.EditPricePerfomanceMultiplier(oldMultiplier);
         }
 
         private static void RegisterDependencies()

@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\BuildComputers\Directors\NotAvailableComputersException.cs" />
-    <Compile Include="Commands\BuildComputers\Orders\ErrorStockException.cs" />
+    <Compile Include="Commands\BuildComputers\Orders\ErrorAddingStockException.cs" />
     <Compile Include="Commands\BuildComputers\Orders\SubmitOrderResult.cs" />
     <Compile Include="Commands\BuildOrders\BuilderOrderResult.cs" />
     <Compile Include="Commands\BuildOrders\BuildOrder.cs" />

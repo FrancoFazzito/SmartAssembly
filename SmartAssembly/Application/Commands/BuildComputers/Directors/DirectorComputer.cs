@@ -1,11 +1,9 @@
-﻿using Application.Commands.BuildComputers.Builders;
-using Application.Commands.BuildComputers.Request;
-using Domain.Components;
+﻿using Domain.Components;
 using Domain.Computers;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Application.Commands.BuildComputers.Directors
+namespace Application.Commands.BuildComputers
 {
     public class DirectorComputer : IDirectorComputer
     {
