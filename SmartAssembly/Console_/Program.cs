@@ -33,9 +33,22 @@ namespace Console_
     public class Program
     {
         private static IContainer container;
-        //generar reporte
-        //pedido a proveedores
-
+        //control Stock
+            //add limit stock
+        //control configuration -> in app config
+            //build cost
+            //price perfomace multiplier
+        //ABM component
+            //if null -> DBNull.Value
+        //BM order -> B -> Computer
+        //ABM employee
+        //ABM client
+            //add if not exists excepction in submit
+        //rest API
+        //JWT
+            //add rols
+        //Logger
+        //mailing y PDF
         private static void Main()
         {
             RegisterDependencies();
