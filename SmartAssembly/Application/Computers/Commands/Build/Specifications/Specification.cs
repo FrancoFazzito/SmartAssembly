@@ -1,8 +1,8 @@
 ﻿using Domain.Computers;
 
-namespace Application.Commands.BuildComputers
+namespace Application.Computers.Commands.Build.Specification
 {
-    public class Specification : ISpecification //pasar a domain y poner un manager
+    public class Specification : ISpecification
     {
         public Specification(int cpu, int fan, int ram, int gpu, int hdd, int ssd, TypeUse use)
         {

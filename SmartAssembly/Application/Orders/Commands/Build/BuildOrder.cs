@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Application.Commands.BuildOrders
+namespace Application.Orders.Commands.Build
 {
     public class BuildOrder : IBuilderOrder
     {

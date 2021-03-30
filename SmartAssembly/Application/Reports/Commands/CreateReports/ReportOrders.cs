@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Application.Commands.CreateReports
+namespace Application.Reports.Commands.CreateReports
 {
     public class ReportOrders : IReportOrders
     {

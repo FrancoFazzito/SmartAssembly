@@ -1,5 +1,5 @@
-﻿using Application.Factories.Compatibilities;
-using Application.Factories.Enoughs;
+﻿using Application.Common.Factories.Compatibilities;
+using Application.Common.Factories.Enoughs;
 using Application.Repositories.Components.Interfaces;
 using Domain.Compatibility.Enums;
 using Domain.Components;
@@ -10,7 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Application.Commands.RegisterBuildingError
+namespace Application.Orders.Commands.Replacers
 {
     internal class ComponentReplacer : IComponentReplacer
     {

@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 
-namespace Application.Commands.EditCongifuration
+namespace Application.Configurations.Commands.Edit
 {
     public class ConfigurationEditor : IConfigurationEditor
     {

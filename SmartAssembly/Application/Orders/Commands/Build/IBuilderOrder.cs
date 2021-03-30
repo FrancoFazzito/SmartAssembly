@@ -1,7 +1,7 @@
 ﻿using Domain.Orders;
 using System.Collections.Generic;
 
-namespace Application.Commands.BuildOrders
+namespace Application.Orders.Commands.Build
 {
     public interface IBuilderOrder
     {

@@ -2,7 +2,7 @@
 using Domain.Orders;
 using System.Collections.Generic;
 
-namespace Application.Commands.RegisterOrderErrors
+namespace Application.Orders.Commands.RegisterErrorOrderDelivered
 {
     public interface IRegisterErrorOrderDelivered
     {

@@ -1,7 +1,7 @@
 ﻿using Domain.Compatibilities.Interfaces;
 using Domain.Compatibility.Enums;
 
-namespace Application.Factories.Compatibilities
+namespace Application.Common.Factories.Compatibilities
 {
     public interface IFactoryCompatibility
     {

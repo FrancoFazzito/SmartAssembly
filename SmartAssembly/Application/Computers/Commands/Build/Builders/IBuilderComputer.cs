@@ -1,8 +1,9 @@
-﻿using Domain.Components;
+﻿using Application.Computers.Commands.Build.Requests;
+using Domain.Components;
 using Domain.Computers;
 using System.Collections.Generic;
 
-namespace Application.Commands.BuildComputers
+namespace Application.Computers.Commands.Build.Builders
 {
     public interface IBuilderComputer
     {

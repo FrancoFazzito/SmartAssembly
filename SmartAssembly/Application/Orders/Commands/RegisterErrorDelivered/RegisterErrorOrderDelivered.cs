@@ -6,7 +6,7 @@ using Domain.Orders.States;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Application.Commands.RegisterOrderErrors
+namespace Application.Orders.Commands.RegisterErrorOrderDelivered
 {
     public class RegisterErrorOrderDelivered : IRegisterErrorOrderDelivered
     {

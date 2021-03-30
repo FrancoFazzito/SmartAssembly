@@ -24,6 +24,13 @@ namespace Infra.Connections
             return connection;
         }
 
+        public void Execute(SqlCommand command)
+        {
+            Open();
+            command.ExecuteNonQuery();
+            Close();
+        }
+
         public void Execute(IEnumerable<SqlCommand> commands)
         {
             connection.Open();
@@ -47,8 +54,13 @@ namespace Infra.Connections
                     transaction.Rollback();
                     throw new Exception(ex.Message);
                 }
-                finally { connection.Close(); }
+                finally { Close(); }
             }
+        }
+
+        private void Close()
+        {
+            connection.Close();
         }
 
         public IDataReader GetDataReader(string command)

@@ -2,7 +2,7 @@
 using Domain.Importance;
 using System.Collections.Generic;
 
-namespace Application.Strategies.OrderBy
+namespace Application.Common.Strategies.OrderBy
 {
     public interface IStrategyOrderBy
     {

@@ -1,6 +1,6 @@
 ﻿using Domain.Orders;
 
-namespace Application.Commands.DeliverOrders
+namespace Application.Orders.Commands.Deliver
 {
     public class DeliverResult
     {

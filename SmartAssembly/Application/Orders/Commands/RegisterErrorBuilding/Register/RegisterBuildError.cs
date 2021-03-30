@@ -1,13 +1,15 @@
-﻿using Application.Commands.RegisterBuildingError.Errors.Results;
-using Application.Factories.Compatibilities;
-using Application.Factories.Enoughs;
+﻿
+using Application.Common.Factories.Compatibilities;
+using Application.Common.Factories.Enoughs;
+using Application.Orders.Commands.Register.RegisterErrorBuilding.Results;
+using Application.Orders.Commands.Replacers;
 using Application.Repositories.Components.Interfaces;
 using Application.Repositories.Interfaces.Error;
 using Domain.Components;
 using Domain.Computers;
 using Domain.Orders.States;
 
-namespace Application.Commands.RegisterBuildingError
+namespace Application.Orders.Commands.Register.RegisterErrorBuilding
 {
     public class RegisterBuildError : IRegisterBuildError
     {

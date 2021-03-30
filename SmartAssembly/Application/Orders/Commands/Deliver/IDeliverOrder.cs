@@ -1,7 +1,7 @@
 ﻿using Domain.Orders;
 using System.Collections.Generic;
 
-namespace Application.Commands.DeliverOrders
+namespace Application.Orders.Commands.Deliver
 {
     public interface IDeliverOrder
     {

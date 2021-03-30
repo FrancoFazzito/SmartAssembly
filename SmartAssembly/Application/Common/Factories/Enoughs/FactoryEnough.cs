@@ -4,7 +4,7 @@ using Domain.Enoughs.Implementations;
 using Domain.Enoughs.Interfaces;
 using System.Collections.Generic;
 
-namespace Application.Factories.Enoughs
+namespace Application.Common.Factories.Enoughs
 {
     public class FactoryEnough : IFactoryEnough
     {

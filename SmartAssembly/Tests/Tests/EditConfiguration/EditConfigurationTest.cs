@@ -1,4 +1,4 @@
-﻿using Application.Commands.EditCongifuration;
+﻿using Application.Configurations.Commands.Edit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Configuration;
 

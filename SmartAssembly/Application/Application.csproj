@@ -48,8 +48,8 @@
     <Compile Include="Orders\Commands\Build\BuilderOrderResult.cs" />
     <Compile Include="Orders\Commands\Build\BuildOrder.cs" />
     <Compile Include="Orders\Commands\Submit\ISubmitOrder.cs" />
-    <Compile Include="Computers\Commands\Build\Request\ComputerRequest.cs" />
-    <Compile Include="Computers\Commands\Build\Request\IComputerRequest.cs" />
+    <Compile Include="Computers\Commands\Build\Requests\ComputerRequest.cs" />
+    <Compile Include="Computers\Commands\Build\Requests\IComputerRequest.cs" />
     <Compile Include="Orders\Commands\Build\IBuilderOrder.cs" />
     <Compile Include="Components\Commands\ControlStock\ControlStock.cs" />
     <Compile Include="Components\Commands\ControlStock\IControlStock.cs" />
@@ -106,8 +106,6 @@
       <Name>Domain</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Computers\Commands\Build\Orders\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

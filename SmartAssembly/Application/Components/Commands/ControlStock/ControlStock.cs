@@ -3,7 +3,7 @@ using Domain.Components;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Application.Commands.ControlStock
+namespace Application.Components.Commands.ControlStock
 {
     public class ControlStock : IControlStock
     {

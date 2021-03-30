@@ -1,7 +1,7 @@
 ﻿using Domain.Enoughs.Enums;
 using Domain.Enoughs.Interfaces;
 
-namespace Application.Factories.Enoughs
+namespace Application.Common.Factories.Enoughs
 {
     public interface IFactoryEnough
     {

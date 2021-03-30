@@ -3,7 +3,7 @@ using Domain.Compatibilities.Interfaces;
 using Domain.Compatibility.Enums;
 using System.Collections.Generic;
 
-namespace Application.Factories.Compatibilities
+namespace Application.Common.Factories.Compatibilities
 {
     public class FactoryCompatibility : IFactoryCompatibility
     {

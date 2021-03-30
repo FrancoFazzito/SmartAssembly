@@ -3,7 +3,7 @@ using Domain.Importance;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Application.Strategies.OrderBy
+namespace Application.Common.Strategies.OrderBy
 {
     public class StrategyOrderBy : IStrategyOrderBy
     {

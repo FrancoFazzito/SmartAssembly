@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Application.Commands.DeliverOrders
+namespace Application.Orders.Commands.Deliver
 {
     public class DeliverOrder : IDeliverOrder
     {

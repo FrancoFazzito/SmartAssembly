@@ -1,4 +1,4 @@
-﻿using Application.Commands.BuildComputers;
+﻿using Application.Computers.Commands.Build.Specification;
 using Domain.Computers;
 
 namespace Application.Repositories.TypeUses.Interfaces

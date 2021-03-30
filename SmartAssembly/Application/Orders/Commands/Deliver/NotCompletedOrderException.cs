@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Application.Commands.DeliverOrders
+namespace Application.Orders.Commands.Deliver
 {
     public class NotCompletedOrderException : Exception
     {

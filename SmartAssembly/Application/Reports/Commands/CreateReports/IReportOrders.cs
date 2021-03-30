@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Application.Commands.CreateReports
+namespace Application.Reports.Commands.CreateReports
 {
     public interface IReportOrders
     {

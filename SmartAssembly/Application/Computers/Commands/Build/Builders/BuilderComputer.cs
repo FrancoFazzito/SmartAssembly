@@ -1,7 +1,8 @@
-﻿using Application.Factories.Compatibilities;
-using Application.Factories.Enoughs;
+﻿using Application.Common.Factories.Compatibilities;
+using Application.Common.Factories.Enoughs;
+using Application.Common.Strategies.OrderBy;
+using Application.Computers.Commands.Build.Requests;
 using Application.Repositories.Components.Interfaces;
-using Application.Strategies.OrderBy;
 using Domain.Compatibility.Enums;
 using Domain.Components;
 using Domain.Components.Types;
@@ -10,7 +11,7 @@ using Domain.Enoughs.Enums;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Application.Commands.BuildComputers
+namespace Application.Computers.Commands.Build.Builders
 {
 
     public class BuilderComputer : IBuilderComputer

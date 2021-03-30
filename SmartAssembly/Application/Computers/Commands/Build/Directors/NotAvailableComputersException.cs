@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Application.Commands.BuildComputers
+namespace Application.Computers.Commands.Build.Directors
 {
     public class NotAvailableComputersException : Exception
     {

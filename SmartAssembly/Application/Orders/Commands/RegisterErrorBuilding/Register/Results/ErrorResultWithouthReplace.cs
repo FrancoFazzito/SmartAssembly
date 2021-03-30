@@ -1,6 +1,6 @@
 ﻿using Domain.Components;
 
-namespace Application.Commands.RegisterBuildingError.Errors.Results
+namespace Application.Orders.Commands.Register.RegisterErrorBuilding.Results
 {
     public class ErrorWithouthReplaceResult : IErrorResult
     {

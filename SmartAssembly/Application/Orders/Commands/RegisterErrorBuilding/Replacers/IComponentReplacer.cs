@@ -1,6 +1,6 @@
 ﻿using Domain.Components;
 
-namespace Application.Commands.RegisterBuildingError
+namespace Application.Orders.Commands.Replacers
 {
     internal interface IComponentReplacer
     {

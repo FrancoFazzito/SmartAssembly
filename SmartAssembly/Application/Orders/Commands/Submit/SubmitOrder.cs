@@ -1,4 +1,4 @@
-﻿using Application.Commands.ControlStock;
+﻿using Application.Components.Commands.ControlStock;
 using Application.Repositories.Employees.Interfaces;
 using Application.Repositories.Interfaces.Clients;
 using Application.Repositories.Interfaces.Computers;
@@ -7,7 +7,7 @@ using Domain.Computers;
 using Domain.Orders;
 using Domain.Orders.States;
 
-namespace Application.Commands.BuildComputers
+namespace Application.Orders.Commands.Submit
 {
     public class SubmitOrder : ISubmitOrder
     {

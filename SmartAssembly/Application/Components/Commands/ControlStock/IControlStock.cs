@@ -1,7 +1,7 @@
 ﻿using Domain.Components;
 using System.Collections.Generic;
 
-namespace Application.Commands.ControlStock
+namespace Application.Components.Commands.ControlStock
 {
     public interface IControlStock
     {

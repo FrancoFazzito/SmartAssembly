@@ -2,7 +2,7 @@
 using Domain.Orders;
 using System;
 
-namespace Application.Commands.BuildOrders
+namespace Application.Orders.Commands.Build
 {
     public class BuilderOrderResult
     {
