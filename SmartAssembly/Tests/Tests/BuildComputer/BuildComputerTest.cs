@@ -1,8 +1,8 @@
 ﻿using Application.Commands.BuildComputers.Directors;
-using Application.Commands.BuildComputers.Importances;
 using Application.Commands.BuildComputers.Request;
 using Application.Repositories.TypeUses.Interfaces;
 using Domain.Computers;
+using Domain.Importance;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 

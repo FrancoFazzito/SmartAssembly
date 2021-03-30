@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -48,6 +49,8 @@
     <Compile Include="Components\Types\TypeMemory.cs" />
     <Compile Include="Components\Types\TypePart.cs" />
     <Compile Include="Computers\TypeUse.cs" />
+    <Compile Include="Configuration\ConfigurationCosts.cs" />
+    <Compile Include="Configuration\IConfigurationCost.cs" />
     <Compile Include="Employees\Employee.cs" />
     <Compile Include="Enoughs\Enums\Enough.cs" />
     <Compile Include="Enoughs\Implementations\EnoughCapacity.cs" />

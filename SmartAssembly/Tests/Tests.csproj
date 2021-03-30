@@ -46,14 +46,16 @@
       <HintPath>..\packages\MSTest.TestFramework.2.1.1\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Tests\EditConfiguration\EditConfigurationTest.cs" />
     <Compile Include="Tests\CreateReport\ReportTest.cs" />
     <Compile Include="Tests\SubmitErrorComputer\SubmitErrorComputerTest.cs" />
     <Compile Include="Tests\Deliver\DeliveredTest.cs" />
-    <Compile Include="Tests\Build\BuildOrderTest.cs" />
-    <Compile Include="Tests\Build\BuildComputerTest.cs" />
+    <Compile Include="Tests\BuildOrder\BuildOrderTest.cs" />
+    <Compile Include="Tests\BuildComputer\BuildComputerTest.cs" />
     <Compile Include="Mocks\DependencyContainerMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\SubmitErrorBuild\SubmitErrorTest.cs" />

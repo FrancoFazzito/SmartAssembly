@@ -1,5 +1,6 @@
 ﻿using Domain.Clients;
 using Domain.Computers;
+using Domain.Configurations;
 using Domain.Employees;
 using Domain.Orders.States;
 using System;
@@ -10,8 +11,6 @@ namespace Domain.Orders
 {
     public class Order
     {
-        private const int BUILD_COST = 500;
-
         public void Add(Computer computer, int quantity)
         {
             for (var i = 0; i < quantity; i++)
@@ -26,7 +25,7 @@ namespace Domain.Orders
         }
 
         public int Id { get; set; }
-        public decimal Price => Computers.Sum(c => c.Price) + (Computers.Count * BUILD_COST);
+        public decimal Price => Computers.Sum(c => c.Price);
         public DateTime DateRequested { get; set; }
         public DateTime DateToDelivery => DateRequested.AddDays(Computers.Count);
         public DateTime DateDelivered { get; set; }

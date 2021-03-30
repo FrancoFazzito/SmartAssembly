@@ -1,10 +1,10 @@
 ﻿using Application.Commands.BuildComputers.Directors;
-using Application.Commands.BuildComputers.Importances;
 using Application.Commands.BuildComputers.Orders;
 using Application.Commands.BuildComputers.Request;
 using Application.Repositories.Orders.Interfaces;
 using Application.Repositories.TypeUses.Interfaces;
 using Domain.Computers;
+using Domain.Importance;
 using Domain.Orders.States;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;

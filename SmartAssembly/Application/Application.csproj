@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -59,6 +60,8 @@
     <Compile Include="Commands\DeliverOrders\IDeliverOrder.cs" />
     <Compile Include="Commands\DeliverOrders\NotCompletedOrderException.cs" />
     <Compile Include="Commands\BuildComputers\Builders\BuilderComputer.cs" />
+    <Compile Include="Commands\EditCongifuration\ConfigurationEditor.cs" />
+    <Compile Include="Commands\EditCongifuration\IConfigurationEditor.cs" />
     <Compile Include="Commands\RegisterBuildingErrors\Register\IRegisterBuildError.cs" />
     <Compile Include="Commands\RegisterBuildingErrors\Register\RegisterBuildError.cs" />
     <Compile Include="Commands\RegisterBuildingErrors\Register\Results\ErrorResult.cs" />
@@ -103,8 +106,6 @@
       <Name>Domain</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\EditCongifuration\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

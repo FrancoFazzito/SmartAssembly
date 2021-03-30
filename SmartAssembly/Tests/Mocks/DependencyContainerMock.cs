@@ -5,6 +5,7 @@ using Application.Commands.BuildOrders;
 using Application.Commands.ControlStock;
 using Application.Commands.CreateReports;
 using Application.Commands.DeliverOrders;
+using Application.Commands.EditCongifuration;
 using Application.Commands.RegisterBuildError.Errors;
 using Application.Commands.RegisterOrderErrors;
 using Application.Factories.Compatibilities;
@@ -65,6 +66,7 @@ namespace Tests
             container.Register<IErrorComputerWriteOnlyRepository>(() => new ErrorOrderWriteOnlyRepository(container.Resolve<IConnection>()));
             container.Register<IRegisterOrderError>(() => new RegisterOrderError(container.Resolve<IErrorComputerWriteOnlyRepository>(), container.Resolve<IOrderReadOnlyRepository>()));
             container.Register<IReportOrders>(() => new ReportOrders(container.Resolve<IOrderReadOnlyRepository>()));
+            container.Register<IConfigurationEditor>(() => new ConfigurationEditor());
         }
 
         public void Register<T>(Func<T> createInstance, string instanceName = null)

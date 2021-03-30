@@ -1,6 +1,3 @@
-control configuration -> in app config
-	build cost
-	price perfomace multiplier
 ABM component
 	if null -> DBNull.Value
 BM order -> B -> Computer

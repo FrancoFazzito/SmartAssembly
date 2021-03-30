@@ -5,6 +5,7 @@ using Application.Commands.BuildOrders;
 using Application.Commands.ControlStock;
 using Application.Commands.CreateReports;
 using Application.Commands.DeliverOrders;
+using Application.Commands.EditCongifuration;
 using Application.Commands.RegisterBuildError.Errors;
 using Application.Commands.RegisterOrderErrors;
 using Application.Factories.Compatibilities;
@@ -28,6 +29,7 @@ using Infra.Repositories.Implementations.Employees;
 using Infra.Repositories.Implementations.Errors;
 using Infra.Repositories.Implementations.Orders;
 using Infra.Repositories.Implementations.TypeUses;
+using System.Configuration;
 
 namespace Console_
 {
@@ -38,6 +40,18 @@ namespace Console_
         private static void Main()
         {
             RegisterDependencies();
+            int newcost = 5000;
+            int newMultiplier = 7000;
+            var editor = container.Resolve<IConfigurationEditor>();
+            var oldCost = int.Parse(ConfigurationManager.AppSettings["BUILD_COST"]);
+            var oldMultiplier = int.Parse(ConfigurationManager.AppSettings["PRICE_PERFOMANCE_MULTIPLIER"]);
+            editor.EditCostBuild(newcost);
+            editor.EditPricePerfomanceMultiplier(newMultiplier);
+            var editedCost = int.Parse(ConfigurationManager.AppSettings["BUILD_COST"]) == newcost;
+            var editerMultiplier = int.Parse(ConfigurationManager.AppSettings["PRICE_PERFOMANCE_MULTIPLIER"]) == newMultiplier;
+            var assert = editedCost && editerMultiplier;
+            editor.EditCostBuild(oldCost);
+            editor.EditPricePerfomanceMultiplier(oldMultiplier);
         }
 
         private static void RegisterDependencies()
@@ -69,6 +83,7 @@ namespace Console_
             container.Register<IErrorComputerWriteOnlyRepository>(() => new ErrorOrderWriteOnlyRepository(container.Resolve<IConnection>()));
             container.Register<IRegisterOrderError>(() => new RegisterOrderError(container.Resolve<IErrorComputerWriteOnlyRepository>(), container.Resolve<IOrderReadOnlyRepository>()));
             container.Register<IReportOrders>(() => new ReportOrders(container.Resolve<IOrderReadOnlyRepository>()));
+            container.Register<IConfigurationEditor>(() => new ConfigurationEditor());
         }
     }
 }
