@@ -1,5 +1,5 @@
-﻿using Application.Commands.BuildComputers.Importances;
-using Application.Commands.BuildComputers.Specifications;
+﻿using Application.Commands.BuildComputers.Specifications;
+using Domain.Importance;
 
 namespace Application.Commands.BuildComputers.Request
 {

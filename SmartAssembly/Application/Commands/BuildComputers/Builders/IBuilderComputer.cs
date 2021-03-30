@@ -17,6 +17,6 @@ namespace Application.Commands.BuildComputers.Builders
         void AddRam();
         void AddTower();
         void AddPsu();
-        IEnumerable<Component> ComponentsRoot(IComputerRequest request);
+        IEnumerable<Component> GetComponentsRoot(IComputerRequest request);
     }
 }

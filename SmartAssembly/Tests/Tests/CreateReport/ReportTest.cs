@@ -1,5 +1,4 @@
 ﻿using Application.Commands.BuildComputers.Directors;
-using Application.Commands.BuildComputers.Importances;
 using Application.Commands.BuildComputers.Orders;
 using Application.Commands.BuildComputers.Request;
 using Application.Commands.BuildOrders;
@@ -7,6 +6,7 @@ using Application.Commands.CreateReports;
 using Application.Commands.DeliverOrders;
 using Application.Repositories.TypeUses.Interfaces;
 using Domain.Computers;
+using Domain.Importance;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
@@ -35,7 +35,7 @@ namespace Tests
             computer = resultDirector.Computers.ElementAt(0);
             submitOrder = container.Resolve<ISubmitOrder>();
             submitOrder.Add(computer, 3);
-            var order = submitOrder.Submit("juan@gmail", "comentario de prueba");
+            var order = submitOrder.Submit("juan@gmail", "comentario de prueba").Order;
 
             var builder = container.Resolve<IBuilderOrder>();
             order = builder.GetOrdersByEmployee(order.Employee.Email).Last();

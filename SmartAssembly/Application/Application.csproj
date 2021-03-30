@@ -43,13 +43,15 @@
   <ItemGroup>
     <Compile Include="Commands\BuildComputers\Directors\NotAvailableComputersException.cs" />
     <Compile Include="Commands\BuildComputers\Orders\ErrorStockException.cs" />
+    <Compile Include="Commands\BuildComputers\Orders\SubmitOrderResult.cs" />
     <Compile Include="Commands\BuildOrders\BuilderOrderResult.cs" />
     <Compile Include="Commands\BuildOrders\BuildOrder.cs" />
-    <Compile Include="Commands\BuildComputers\Importances\Importance.cs" />
     <Compile Include="Commands\BuildComputers\Orders\ISubmitOrder.cs" />
     <Compile Include="Commands\BuildComputers\Request\ComputerRequest.cs" />
     <Compile Include="Commands\BuildComputers\Request\IComputerRequest.cs" />
     <Compile Include="Commands\BuildOrders\IBuilderOrder.cs" />
+    <Compile Include="Commands\ControlStock\ControlStock.cs" />
+    <Compile Include="Commands\ControlStock\IControlStock.cs" />
     <Compile Include="Commands\CreateReports\ReportOrders.cs" />
     <Compile Include="Commands\CreateReports\IReportOrders.cs" />
     <Compile Include="Commands\DeliverOrders\DeliverOrder.cs" />
@@ -101,6 +103,8 @@
       <Name>Domain</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Commands\EditCongifuration\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

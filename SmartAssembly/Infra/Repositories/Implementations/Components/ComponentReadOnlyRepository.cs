@@ -20,7 +20,7 @@ namespace Infra.Repositories.Implementations.Components
 
         public IEnumerable<Component> GetByComputer(int id)
         {
-            return GetRecords("SELECT cmp.[ID],[Name],[Price],[Perfomance],[TypePart],[TypeFormat],[TypeMemory],[Socket],[HasIntegratedVideo],[Channels],[VideoLevel],[FanLevel],[NeedHighFrecuency],[Capacity],[FanSize],[MaxFrecuency],[Stock],[Watts] from Component cmp inner join Component_Computer c on ID = c.ID_Component  inner join Computer on Computer.ID = c.ID_Computer where c.ID_Computer = @id", new Dictionary<string, object>() { { "id", id } });
+            return GetRecords("SELECT * from Component cmp inner join Component_Computer c on ID = c.ID_Component where c.ID_Computer = @id", new Dictionary<string, object>() { { "id", id } });
         }
 
         protected override Component NewRecord(IDataReader reader)
@@ -44,7 +44,8 @@ namespace Infra.Repositories.Implementations.Components
                 FanSize = ConvertReader<int>.WithName(reader, "FanSize"),
                 MaxFrecuency = ConvertReader<int>.WithName(reader, "MaxFrecuency"),
                 Stock = ConvertReader<int>.WithName(reader, "Stock"),
-                Watts = ConvertReader<int>.WithName(reader, "Watts")
+                Watts = ConvertReader<int>.WithName(reader, "Watts"),
+                StockLimit = ConvertReader<int>.WithName(reader, "Stock_Limit")
             };
         }
     }

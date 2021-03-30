@@ -1,11 +1,11 @@
 ﻿using Application.Commands.BuildComputers.Directors;
-using Application.Commands.BuildComputers.Importances;
 using Application.Commands.BuildComputers.Orders;
 using Application.Commands.BuildComputers.Request;
 using Application.Commands.BuildOrders;
 using Application.Repositories.Orders.Interfaces;
 using Application.Repositories.TypeUses.Interfaces;
 using Domain.Computers;
+using Domain.Importance;
 using Domain.Orders.States;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
@@ -25,9 +25,9 @@ namespace Tests
             var computer = resultDirector.Computers.ElementAt(0);
             var submitOrder = container.Resolve<ISubmitOrder>();
             submitOrder.Add(computer, 3);
-            var order = submitOrder.Submit("juan@gmail", "comentario de prueba");
+            var submitResult = submitOrder.Submit("juan@gmail", "comentario de prueba");
 
-            var lastOrder = container.Resolve<IBuilderOrder>().GetOrdersByEmployee(order.Employee.Email).Last();
+            var lastOrder = container.Resolve<IBuilderOrder>().GetOrdersByEmployee(submitResult.Order.Employee.Email).Last();
             var result = container.Resolve<IBuilderOrder>().Build(lastOrder);
             var orderBuilded = container.Resolve<IOrderReadOnlyRepository>().GetById(result.OrderBuilded.Id);
             Assert.IsTrue(orderBuilded.State == OrderState.Completed);

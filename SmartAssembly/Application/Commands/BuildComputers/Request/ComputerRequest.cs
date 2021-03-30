@@ -1,7 +1,7 @@
-﻿using Application.Commands.BuildComputers.Importances;
-using Application.Commands.BuildComputers.Specifications;
+﻿using Application.Commands.BuildComputers.Specifications;
 using Application.Repositories.TypeUses.Interfaces;
 using Domain.Computers;
+using Domain.Importance;
 
 namespace Application.Commands.BuildComputers.Request
 {

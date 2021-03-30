@@ -10,10 +10,13 @@ namespace Application.Commands.DeliverOrders
 {
     public class DeliverOrder : IDeliverOrder
     {
+        private readonly IOrderReadOnlyRepository orderRepository;
+        private readonly IDeliverOrderRepository deliverRepository;
+
         public DeliverOrder(IOrderReadOnlyRepository orderRepository, IDeliverOrderRepository deliverRepository)
         {
-            OrderRepository = orderRepository;
-            DeliverRepository = deliverRepository;
+            this.orderRepository = orderRepository;
+            this.deliverRepository = deliverRepository;
         }
 
         public DeliverResult Deliver(Order order)
@@ -22,7 +25,7 @@ namespace Application.Commands.DeliverOrders
             {
                 order.State = OrderState.Delivered;
                 order.DateDelivered = DateTime.Now;
-                DeliverRepository.Deliver(order);
+                deliverRepository.Deliver(order);
                 return new DeliverResult(order);
             }
             throw new NotCompletedOrderException();
@@ -30,11 +33,8 @@ namespace Application.Commands.DeliverOrders
 
         public IEnumerable<Order> GetOrdersToDeliverByClient(string emailClient)
         {
-            return OrderRepository.All.Where(c => c.Client.Email == emailClient)
+            return orderRepository.All.Where(c => c.Client.Email == emailClient)
                                       .Where(c => c.State == OrderState.Completed);
         }
-
-        public IOrderReadOnlyRepository OrderRepository { get; }
-        public IDeliverOrderRepository DeliverRepository { get; }
     }
 }

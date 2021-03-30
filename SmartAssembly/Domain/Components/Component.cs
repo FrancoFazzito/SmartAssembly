@@ -24,6 +24,7 @@ namespace Domain.Components
         public TypeMemory TypeMemory { get; set; }
         public int MaxFrecuency { get; set; }
         public int Stock { get; set; }
+        public int StockLimit { get; set; }
 
         public bool IsCompatibleWith(ICompatible Compatibility, Component component)
         {

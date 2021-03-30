@@ -1,5 +1,4 @@
 ﻿using Application.Commands.BuildComputers.Request;
-
 using Application.Factories.Compatibilities;
 using Application.Factories.Enoughs;
 using Application.Repositories.Components.Interfaces;
@@ -32,7 +31,7 @@ namespace Application.Commands.BuildComputers.Builders
             this.repository = repository;
         }
 
-        public IEnumerable<Component> ComponentsRoot(IComputerRequest request)
+        public IEnumerable<Component> GetComponentsRoot(IComputerRequest request)
         {
             components = orderBy.GetOrderedComponents(repository.All, request.Importance);
             this.request = request;

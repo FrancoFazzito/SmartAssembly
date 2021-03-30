@@ -2,6 +2,7 @@
 using Application.Commands.BuildComputers.Directors;
 using Application.Commands.BuildComputers.Orders;
 using Application.Commands.BuildOrders;
+using Application.Commands.ControlStock;
 using Application.Commands.CreateReports;
 using Application.Commands.DeliverOrders;
 using Application.Commands.RegisterBuildError.Errors;
@@ -59,7 +60,8 @@ namespace Tests
             container.Register<IDeliverOrder>(() => new DeliverOrder(container.Resolve<IOrderReadOnlyRepository>(), container.Resolve<IDeliverOrderRepository>()));
             container.Register<IBuilderComputer>(() => new BuilderComputer(container.Resolve<IStrategyOrderBy>(), container.Resolve<IFactoryCompatibility>(), container.Resolve<IFactoryEnough>(), container.Resolve<IComponentReadOnlyRepository>()));
             container.Register<IDirectorComputer>(() => new DirectorComputer(container.Resolve<IBuilderComputer>()));
-            container.Register<ISubmitOrder>(() => new SubmitOrder(container.Resolve<ISubmitOrderRepository>(), container.Resolve<IEmployeeReadOnlyRepository>(), container.Resolve<IClientReadOnlyRepository>(), container.Resolve<IComputerStockRepository>()));
+            container.Register<IControlStock>(() => new ControlStock(container.Resolve<IComponentReadOnlyRepository>()));
+            container.Register<ISubmitOrder>(() => new SubmitOrder(container.Resolve<ISubmitOrderRepository>(), container.Resolve<IEmployeeReadOnlyRepository>(), container.Resolve<IClientReadOnlyRepository>(), container.Resolve<IComputerStockRepository>(), container.Resolve<IControlStock>()));
             container.Register<IErrorComputerWriteOnlyRepository>(() => new ErrorOrderWriteOnlyRepository(container.Resolve<IConnection>()));
             container.Register<IRegisterOrderError>(() => new RegisterOrderError(container.Resolve<IErrorComputerWriteOnlyRepository>(), container.Resolve<IOrderReadOnlyRepository>()));
             container.Register<IReportOrders>(() => new ReportOrders(container.Resolve<IOrderReadOnlyRepository>()));

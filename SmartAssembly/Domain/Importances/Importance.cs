@@ -1,4 +1,4 @@
-﻿namespace Application.Commands.BuildComputers.Importances
+﻿namespace Domain.Importance
 {
     public enum Importance
     {

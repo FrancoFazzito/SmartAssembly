@@ -1,4 +1,5 @@
-﻿using Application.Repositories.Employees.Interfaces;
+﻿using Application.Commands.ControlStock;
+using Application.Repositories.Employees.Interfaces;
 using Application.Repositories.Interfaces.Clients;
 using Application.Repositories.Interfaces.Computers;
 using Application.Repositories.Orders.Interfaces;
@@ -10,45 +11,52 @@ namespace Application.Commands.BuildComputers.Orders
 {
     public class SubmitOrder : ISubmitOrder
     {
-        public SubmitOrder(ISubmitOrderRepository repository, IEmployeeReadOnlyRepository employeeRepository, IClientReadOnlyRepository clientRepository, IComputerStockRepository computerStock)
+        private readonly Order order;
+        private readonly ISubmitOrderRepository orderRepository;
+        private readonly IEmployeeReadOnlyRepository employeeRepository;
+        private readonly IClientReadOnlyRepository clientRepository;
+        private readonly IComputerStockRepository computerStock;
+        private readonly IControlStock controlStock;
+
+        public SubmitOrder(ISubmitOrderRepository repository, IEmployeeReadOnlyRepository employeeRepository, IClientReadOnlyRepository clientRepository, IComputerStockRepository computerStock, IControlStock controlStock)
         {
-            Order = new Order();
-            OrderRepository = repository;
-            EmployeeRepository = employeeRepository;
-            ClientRepository = clientRepository;
-            ComputerStock = computerStock;
+            order = new Order();
+            orderRepository = repository;
+            this.employeeRepository = employeeRepository;
+            this.clientRepository = clientRepository;
+            this.computerStock = computerStock;
+            this.controlStock = controlStock;
         }
 
         public void Add(Computer computer, int quantity)
         {
-            if (!ComputerStock.IsValid(computer, quantity))
+            if (!computerStock.IsValid(computer, quantity))
             {
                 throw new ErrorStockException(quantity);
             }
-            Order.Add(computer, quantity);
+            order.Add(computer, quantity);
         }
 
         public void Remove(Computer computer)
         {
-            Order.Remove(computer);
+            order.Remove(computer);
         }
 
-        public Order Submit(string clientEmail, string commentary)
+        public SubmitOrderResult Submit(string clientEmail, string commentary)
         {
-            Order.DateRequested = System.DateTime.Now;
-            Order.Client = ClientRepository.GetByEmail(clientEmail);
-            Order.Commentary = commentary;
-            var employee = EmployeeRepository.GetEmployeeWithoutOrder();
-            Order.Employee = employee ?? EmployeeRepository.GetMostInactiveEmployee();
-            Order.State = OrderState.Uncompleted;
-            OrderRepository.Insert(Order);
-            return Order;
+            PopulateOrder(clientEmail, commentary);
+            orderRepository.Insert(order);
+            return new SubmitOrderResult(controlStock.ComponentsLowStock, order);
         }
 
-        public ISubmitOrderRepository OrderRepository { get; }
-        public IEmployeeReadOnlyRepository EmployeeRepository { get; }
-        public IClientReadOnlyRepository ClientRepository { get; }
-        public IComputerStockRepository ComputerStock { get; }
-        public Order Order { get; }
+        private void PopulateOrder(string clientEmail, string commentary)
+        {
+            order.DateRequested = System.DateTime.Now;
+            order.Client = clientRepository.GetByEmail(clientEmail);
+            order.Commentary = commentary;
+            order.State = OrderState.Uncompleted;
+            var employee = employeeRepository.GetEmployeeWithoutOrder();
+            order.Employee = employee ?? employeeRepository.GetMostInactiveEmployee();
+        }
     }
 }

@@ -15,14 +15,19 @@ namespace Application.Commands.RegisterBuildError.Replacers
     internal class ComponentReplacer : IComponentReplacer
     {
         private readonly Dictionary<TypePart, Func<Component>> replaces;
+        private readonly IFactoryCompatibility compatibilities;
+        private readonly IFactoryEnough enoughs;
+        private readonly IEnumerable<Component> components;
+        private readonly Computer computer;
+        private readonly Component component;
 
         public ComponentReplacer(Computer computer, Component component, IComponentReadOnlyRepository componentRepository, IFactoryCompatibility compatibilities, IFactoryEnough enoughs)
         {
-            Compatibilities = compatibilities;
-            Enoughs = enoughs;
-            Computer = computer;
-            Component = component;
-            Components = componentRepository.All.Where(c => c.TypePart == component.TypePart)
+            this.compatibilities = compatibilities;
+            this.enoughs = enoughs;
+            this.computer = computer;
+            this.component = component;
+            components = componentRepository.All.Where(c => c.TypePart == component.TypePart)
                                                 .Where(c => c.IsEnough(enoughs[Enough.Level], GetLevelToReplace(component)))
                                                 .Where(c => c.Id != component.Id)
                                                 .OrderBy(c => c.Price);
@@ -49,58 +54,52 @@ namespace Application.Commands.RegisterBuildError.Replacers
 
         public Component Replace()
         {
-            return replaces[Component.TypePart]();
+            return replaces[component.TypePart]();
         }
 
         public Component ReplaceCpu()
         {
-            return Components.FirstOrDefault(c => c.IsCompatibleWith(Compatibilities[Compatibility.Cpu], Component));
+            return components.FirstOrDefault(c => c.IsCompatibleWith(compatibilities[Compatibility.Cpu], component));
         }
 
         public Component ReplaceMother()
         {
-            return Components.Where(c => c.IsCompatibleWith(Compatibilities[Compatibility.CaseMother], Computer[TypePart.tower]))
-                             .Where(c => Computer[TypePart.ram].IsCompatibleWith(Compatibilities[Compatibility.Ram], c))
-                             .FirstOrDefault(c => c.IsCompatibleWith(Compatibilities[Compatibility.Mother], Component));
+            return components.Where(c => c.IsCompatibleWith(compatibilities[Compatibility.CaseMother], computer[TypePart.tower]))
+                             .Where(c => computer[TypePart.ram].IsCompatibleWith(compatibilities[Compatibility.Ram], c))
+                             .FirstOrDefault(c => c.IsCompatibleWith(compatibilities[Compatibility.Mother], component));
         }
 
         public Component ReplaceFan()
         {
-            return Components.Where(c => c.IsCompatibleWith(Compatibilities[Compatibility.CaseFan], Computer[TypePart.tower]))
-                             .FirstOrDefault(c => c.IsCompatibleWith(Compatibilities[Compatibility.Fan], Component));
+            return components.Where(c => c.IsCompatibleWith(compatibilities[Compatibility.CaseFan], computer[TypePart.tower]))
+                             .FirstOrDefault(c => c.IsCompatibleWith(compatibilities[Compatibility.Fan], component));
         }
 
         public Component ReplaceRam()
         {
-            return Components.Where(c => c.IsEnough(Enoughs[Enough.Capacity], Component.Capacity))
-                             .FirstOrDefault(c => c.IsCompatibleWith(Compatibilities[Compatibility.Ram], Component));
+            return components.Where(c => c.IsEnough(enoughs[Enough.Capacity], component.Capacity))
+                             .FirstOrDefault(c => c.IsCompatibleWith(compatibilities[Compatibility.Ram], component));
         }
 
         public Component ReplaceGpu()
         {
-            return Components.FirstOrDefault();
+            return components.FirstOrDefault();
         }
 
         public Component ReplaceCapacity()
         {
-            return Components.FirstOrDefault(c => c.IsEnough(Enoughs[Enough.Capacity], Component.Capacity));
+            return components.FirstOrDefault(c => c.IsEnough(enoughs[Enough.Capacity], component.Capacity));
         }
 
         public Component ReplaceTower()
         {
-            return Components.Where(c => c.IsCompatibleWith(Compatibilities[Compatibility.CaseMother], Component))
-                             .FirstOrDefault(c => c.IsCompatibleWith(Compatibilities[Compatibility.CaseFan], Component));
+            return components.Where(c => c.IsCompatibleWith(compatibilities[Compatibility.CaseMother], component))
+                             .FirstOrDefault(c => c.IsCompatibleWith(compatibilities[Compatibility.CaseFan], component));
         }
 
         public Component ReplaceAccesory()
         {
-            return Components.FirstOrDefault(c => c.IsCompatibleWith(Compatibilities[Compatibility.Accesory], Component));
+            return components.FirstOrDefault(c => c.IsCompatibleWith(compatibilities[Compatibility.Accesory], component));
         }
-
-        public IFactoryCompatibility Compatibilities { get; }
-        public IFactoryEnough Enoughs { get; }
-        public IEnumerable<Component> Components { get; }
-        public Computer Computer { get; }
-        public Component Component { get; }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Application.Commands.BuildComputers.Directors;
-using Application.Commands.BuildComputers.Importances;
 using Application.Commands.BuildComputers.Orders;
 using Application.Commands.BuildComputers.Request;
 using Application.Commands.BuildOrders;
@@ -7,6 +6,7 @@ using Application.Commands.DeliverOrders;
 using Application.Repositories.Orders.Interfaces;
 using Application.Repositories.TypeUses.Interfaces;
 using Domain.Computers;
+using Domain.Importance;
 using Domain.Orders.States;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
@@ -16,8 +16,6 @@ namespace Tests
     [TestClass]
     public class DeliveredTest
     {
-        private const string ClientEmail = "juan@gmail";
-
         [TestMethod]
         public void DeliverOrder()
         {
@@ -28,14 +26,14 @@ namespace Tests
             var computer = resultDirector.Computers.ElementAt(0);
             var submitOrder = container.Resolve<ISubmitOrder>();
             submitOrder.Add(computer, 3);
-            var order = submitOrder.Submit(ClientEmail, "comentario de prueba");
+            var order = submitOrder.Submit("juan@gmail", "comentario de prueba").Order;
 
             var builder = container.Resolve<IBuilderOrder>();
             order = builder.GetOrdersByEmployee(order.Employee.Email).Last();
             builder.Build(order);
 
             var deliverOrder = container.Resolve<IDeliverOrder>();
-            var ordersClient = deliverOrder.GetOrdersToDeliverByClient(ClientEmail);
+            var ordersClient = deliverOrder.GetOrdersToDeliverByClient("juan@gmail");
             var resultDelivery = deliverOrder.Deliver(ordersClient.Last());
             var orderDelivered = container.Resolve<IOrderReadOnlyRepository>().All.FirstOrDefault(c => c.Id == resultDelivery.Order.Id);
             Assert.IsTrue(orderDelivered.State == OrderState.Delivered);

@@ -58,6 +58,7 @@
     <Compile Include="Enoughs\Implementations\EnoughMultipleRam.cs" />
     <Compile Include="Enoughs\Implementations\EnoughStock.cs" />
     <Compile Include="Enoughs\Interfaces\IEnough.cs" />
+    <Compile Include="Importances\Importance.cs" />
     <Compile Include="Orders\Order.cs" />
     <Compile Include="Compatibilities\Implementations\CompatibleFan.cs" />
     <Compile Include="Compatibilities\Enums\Compatibility.cs" />

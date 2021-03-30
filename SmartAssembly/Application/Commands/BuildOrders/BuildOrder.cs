@@ -10,26 +10,25 @@ namespace Application.Commands.BuildOrders
 {
     public class BuildOrder : IBuilderOrder
     {
+        private readonly IBuildOrderRepository buildRepository;
+        private readonly IOrderReadOnlyRepository orderRepository;
+
         public BuildOrder(IBuildOrderRepository buildRepository, IOrderReadOnlyRepository orderRepository)
         {
-            BuildRepository = buildRepository;
-            OrderRepository = orderRepository;
+            this.buildRepository = buildRepository;
+            this.orderRepository = orderRepository;
         }
-
-        public IBuildOrderRepository BuildRepository { get; }
-        public IOrderReadOnlyRepository OrderRepository { get; }
-        public string NameEmployee { get; private set; }
 
         public BuilderOrderResult Build(Order orderToBuild)
         {
             orderToBuild.State = OrderState.Completed;
-            BuildRepository.Build(orderToBuild);
+            buildRepository.Build(orderToBuild);
             return new BuilderOrderResult(orderToBuild, DateTime.Now, orderToBuild.Employee);
         }
 
         public IEnumerable<Order> GetOrdersByEmployee(string email)
         {
-            return OrderRepository.All
+            return orderRepository.All
                                   .Where(order => order.Employee.Email == email)
                                   .Where(order => order.State == OrderState.Uncompleted || order.State == OrderState.Error)
                                   .Select(order => new Order()

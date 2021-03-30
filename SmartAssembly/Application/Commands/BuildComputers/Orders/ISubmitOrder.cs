@@ -1,7 +1,4 @@
-﻿using Application.Repositories.Employees.Interfaces;
-using Application.Repositories.Orders.Interfaces;
-using Domain.Computers;
-using Domain.Orders;
+﻿using Domain.Computers;
 
 namespace Application.Commands.BuildComputers.Orders
 {
@@ -9,8 +6,6 @@ namespace Application.Commands.BuildComputers.Orders
     {
         void Add(Computer computerDto, int quantity);
         void Remove(Computer computerDto);
-        Order Submit(string email, string commentary);
-        ISubmitOrderRepository OrderRepository { get; }
-        IEmployeeReadOnlyRepository EmployeeRepository { get; }
+        SubmitOrderResult Submit(string email, string commentary);
     }
 }
