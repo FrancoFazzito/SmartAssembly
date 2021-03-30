@@ -34,7 +34,7 @@ namespace Tests
             var ordersClient = deliverOrder.GetOrdersToDeliverByClient("juan@gmail");
             deliverOrder.Deliver(ordersClient.Last());
 
-            var registerError = container.Resolve<IRegisterOrderError>();
+            var registerError = container.Resolve<IRegisterErrorOrderDelivered>();
             var lastOrderDelivered = registerError.GetOrdersDeliveredByClient("juan@gmail").Last();
             registerError.Register(lastOrder.Computers.ElementAt(0), "error de prueba");
             var OrderWithError = container.Resolve<IOrderReadOnlyRepository>().All.FirstOrDefault(c => c.Id == lastOrder.Id);

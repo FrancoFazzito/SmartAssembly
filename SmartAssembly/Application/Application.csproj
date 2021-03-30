@@ -42,37 +42,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\BuildComputers\Directors\NotAvailableComputersException.cs" />
-    <Compile Include="Commands\BuildComputers\Orders\ErrorAddingStockException.cs" />
-    <Compile Include="Commands\BuildComputers\Orders\SubmitOrderResult.cs" />
-    <Compile Include="Commands\BuildOrders\BuilderOrderResult.cs" />
-    <Compile Include="Commands\BuildOrders\BuildOrder.cs" />
-    <Compile Include="Commands\BuildComputers\Orders\ISubmitOrder.cs" />
-    <Compile Include="Commands\BuildComputers\Request\ComputerRequest.cs" />
-    <Compile Include="Commands\BuildComputers\Request\IComputerRequest.cs" />
-    <Compile Include="Commands\BuildOrders\IBuilderOrder.cs" />
-    <Compile Include="Commands\ControlStock\ControlStock.cs" />
-    <Compile Include="Commands\ControlStock\IControlStock.cs" />
-    <Compile Include="Commands\CreateReports\ReportOrders.cs" />
-    <Compile Include="Commands\CreateReports\IReportOrders.cs" />
-    <Compile Include="Commands\DeliverOrders\DeliverOrder.cs" />
-    <Compile Include="Commands\DeliverOrders\DeliverResult.cs" />
-    <Compile Include="Commands\DeliverOrders\IDeliverOrder.cs" />
-    <Compile Include="Commands\DeliverOrders\NotCompletedOrderException.cs" />
-    <Compile Include="Commands\BuildComputers\Builders\BuilderComputer.cs" />
-    <Compile Include="Commands\EditCongifuration\ConfigurationEditor.cs" />
-    <Compile Include="Commands\EditCongifuration\IConfigurationEditor.cs" />
-    <Compile Include="Commands\RegisterBuildingErrors\Register\IRegisterBuildError.cs" />
-    <Compile Include="Commands\RegisterBuildingErrors\Register\RegisterBuildError.cs" />
-    <Compile Include="Commands\RegisterBuildingErrors\Register\Results\ErrorResult.cs" />
-    <Compile Include="Commands\RegisterBuildingErrors\Register\Results\ErrorResultWithouthReplace.cs" />
-    <Compile Include="Commands\RegisterBuildingErrors\Register\Results\IErrorResult.cs" />
-    <Compile Include="Commands\RegisterBuildingErrors\Replacers\ComponentReplacer.cs" />
-    <Compile Include="Commands\RegisterBuildingErrors\Replacers\IComponentReplacer.cs" />
-    <Compile Include="Commands\RegisterOrderErrors\IRegisterOrderError.cs" />
-    <Compile Include="Commands\RegisterOrderErrors\RegisterOrderError.cs" />
-    <Compile Include="Factories\Compatibilities\FactoryCompatibility.cs" />
-    <Compile Include="Factories\Enoughs\FactoryEnough.cs" />
+    <Compile Include="Computers\Commands\Build\Directors\NotAvailableComputersException.cs" />
+    <Compile Include="Orders\Commands\Submit\ErrorAddingStockException.cs" />
+    <Compile Include="Orders\Commands\Submit\SubmitOrderResult.cs" />
+    <Compile Include="Orders\Commands\Build\BuilderOrderResult.cs" />
+    <Compile Include="Orders\Commands\Build\BuildOrder.cs" />
+    <Compile Include="Orders\Commands\Submit\ISubmitOrder.cs" />
+    <Compile Include="Computers\Commands\Build\Request\ComputerRequest.cs" />
+    <Compile Include="Computers\Commands\Build\Request\IComputerRequest.cs" />
+    <Compile Include="Orders\Commands\Build\IBuilderOrder.cs" />
+    <Compile Include="Components\Commands\ControlStock\ControlStock.cs" />
+    <Compile Include="Components\Commands\ControlStock\IControlStock.cs" />
+    <Compile Include="Reports\Commands\CreateReports\ReportOrders.cs" />
+    <Compile Include="Reports\Commands\CreateReports\IReportOrders.cs" />
+    <Compile Include="Orders\Commands\Deliver\DeliverOrder.cs" />
+    <Compile Include="Orders\Commands\Deliver\DeliverResult.cs" />
+    <Compile Include="Orders\Commands\Deliver\IDeliverOrder.cs" />
+    <Compile Include="Orders\Commands\Deliver\NotCompletedOrderException.cs" />
+    <Compile Include="Computers\Commands\Build\Builders\BuilderComputer.cs" />
+    <Compile Include="Configuration\Commands\Edit\ConfigurationEditor.cs" />
+    <Compile Include="Configuration\Commands\Edit\IConfigurationEditor.cs" />
+    <Compile Include="Orders\Commands\RegisterErrorBuilding\Register\IRegisterBuildError.cs" />
+    <Compile Include="Orders\Commands\RegisterErrorBuilding\Register\RegisterBuildError.cs" />
+    <Compile Include="Orders\Commands\RegisterErrorBuilding\Register\Results\ErrorResult.cs" />
+    <Compile Include="Orders\Commands\RegisterErrorBuilding\Register\Results\ErrorResultWithouthReplace.cs" />
+    <Compile Include="Orders\Commands\RegisterErrorBuilding\Register\Results\IErrorResult.cs" />
+    <Compile Include="Orders\Commands\RegisterErrorBuilding\Replacers\ComponentReplacer.cs" />
+    <Compile Include="Orders\Commands\RegisterErrorBuilding\Replacers\IComponentReplacer.cs" />
+    <Compile Include="Orders\Commands\RegisterErrorDelivered\IRegisterErrorOrderDelivered.cs" />
+    <Compile Include="Orders\Commands\RegisterErrorDelivered\RegisterErrorOrderDelivered.cs" />
+    <Compile Include="Common\Factories\Compatibilities\FactoryCompatibility.cs" />
+    <Compile Include="Common\Factories\Enoughs\FactoryEnough.cs" />
     <Compile Include="Repositories\Interfaces\Clients\IClientReadOnlyRepository.cs" />
     <Compile Include="Repositories\Interfaces\Computers\IComputerReadOnlyRepository.cs" />
     <Compile Include="Repositories\Interfaces\Computers\ICompouterStockRepository.cs" />
@@ -82,20 +82,20 @@
     <Compile Include="Repositories\Interfaces\Orders\IBuildOrderRepository.cs" />
     <Compile Include="Repositories\Interfaces\Orders\IDeliverOrderRepository.cs" />
     <Compile Include="Repositories\Interfaces\Orders\IOrderReadOnlyRepository.cs" />
-    <Compile Include="Strategies\StrategyOrderBy.cs" />
-    <Compile Include="Strategies\IStrategyOrderBy.cs" />
-    <Compile Include="Factories\Compatibilities\IFactoryCompatibility.cs" />
-    <Compile Include="Factories\Enoughs\IFactoryEnough.cs" />
-    <Compile Include="Commands\BuildComputers\Builders\IBuilderComputer.cs" />
-    <Compile Include="Commands\BuildComputers\Directors\DirectorComputer.cs" />
-    <Compile Include="Commands\BuildComputers\Directors\IDirectorComputer.cs" />
-    <Compile Include="Commands\BuildComputers\Specifications\ISpecification.cs" />
-    <Compile Include="Commands\BuildComputers\Specifications\Specification.cs" />
-    <Compile Include="Commands\BuildComputers\Builders\InvalidAddException.cs" />
-    <Compile Include="Commands\BuildComputers\Orders\SubmitOrder.cs" />
+    <Compile Include="Common\Strategies\OrderBy\StrategyOrderBy.cs" />
+    <Compile Include="Common\Strategies\OrderBy\IStrategyOrderBy.cs" />
+    <Compile Include="Common\Factories\Compatibilities\IFactoryCompatibility.cs" />
+    <Compile Include="Common\Factories\Enoughs\IFactoryEnough.cs" />
+    <Compile Include="Computers\Commands\Build\Builders\IBuilderComputer.cs" />
+    <Compile Include="Computers\Commands\Build\Directors\DirectorComputer.cs" />
+    <Compile Include="Computers\Commands\Build\Directors\IDirectorComputer.cs" />
+    <Compile Include="Computers\Commands\Build\Specifications\ISpecification.cs" />
+    <Compile Include="Computers\Commands\Build\Specifications\Specification.cs" />
+    <Compile Include="Computers\Commands\Build\Builders\InvalidAddException.cs" />
+    <Compile Include="Orders\Commands\Submit\SubmitOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Interfaces\Components\IComponentReadOnlyRepository.cs" />
-    <Compile Include="Commands\BuildComputers\Builders\BuilderComputerResult.cs" />
+    <Compile Include="Computers\Commands\Build\Builders\BuilderComputerResult.cs" />
     <Compile Include="Repositories\Interfaces\Employees\IEmployeeReadOnlyRepository.cs" />
     <Compile Include="Repositories\Interfaces\TypeUses\ITypeUseReadOnlyRepository.cs" />
     <Compile Include="Repositories\Interfaces\Orders\ISubmitOrderRepository.cs" />
@@ -106,6 +106,8 @@
       <Name>Domain</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Computers\Commands\Build\Orders\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

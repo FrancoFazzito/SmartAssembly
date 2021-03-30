@@ -8,12 +8,12 @@ using System.Linq;
 
 namespace Application.Commands.RegisterOrderErrors
 {
-    public class RegisterOrderError : IRegisterOrderError
+    public class RegisterErrorOrderDelivered : IRegisterErrorOrderDelivered
     {
         private readonly IErrorComputerWriteOnlyRepository errorComputerRepository;
         private readonly IOrderReadOnlyRepository orderRepository;
 
-        public RegisterOrderError(IErrorComputerWriteOnlyRepository errorComputerRepository, IOrderReadOnlyRepository orderRepository)
+        public RegisterErrorOrderDelivered(IErrorComputerWriteOnlyRepository errorComputerRepository, IOrderReadOnlyRepository orderRepository)
         {
             this.errorComputerRepository = errorComputerRepository;
             this.orderRepository = orderRepository;
