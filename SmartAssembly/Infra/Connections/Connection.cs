@@ -26,7 +26,7 @@ namespace Infra.Connections
 
         public void Execute(SqlCommand command)
         {
-            Open();
+            command.Connection = Open();
             command.ExecuteNonQuery();
             Close();
         }

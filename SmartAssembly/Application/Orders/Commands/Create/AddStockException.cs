@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace Application.Orders.Commands.Submit
+namespace Application.Orders.Commands.Create
 {
-    public class ErrorAddingStockException : Exception
+    public class AddStockException : Exception
     {
         private readonly int quantity;
 
-        public ErrorAddingStockException(int quantity)
+        public AddStockException(int quantity)
         {
             this.quantity = quantity;
         }

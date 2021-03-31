@@ -2,11 +2,11 @@
 using Domain.Orders;
 using System.Collections.Generic;
 
-namespace Application.Orders.Commands.Submit
+namespace Application.Orders.Commands.Create
 {
-    public class SubmitOrderResult
+    public class CreateOrderResult
     {
-        public SubmitOrderResult(IEnumerable<Component> componentsLowStock, Order order)
+        public CreateOrderResult(IEnumerable<Component> componentsLowStock, Order order)
         {
             ComponentsLowStock = componentsLowStock;
             Order = order;

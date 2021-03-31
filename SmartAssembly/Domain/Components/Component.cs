@@ -11,7 +11,7 @@ namespace Domain.Components
         public decimal Price { get; set; }
         public int PerfomanceLevel { get; set; }
         public TypePart TypePart { get; set; }
-        public int Watts { get; set; }
+        public int Watts { get; set; } = 20;
         public string Socket { get; set; }
         public bool HasIntegratedVideo { get; set; }
         public int Channels { get; set; }
@@ -24,7 +24,7 @@ namespace Domain.Components
         public TypeMemory TypeMemory { get; set; }
         public int MaxFrecuency { get; set; }
         public int Stock { get; set; }
-        public int StockLimit { get; set; }
+        public int StockLimit { get; set; } = 1;
 
         public bool IsCompatibleWith(ICompatible Compatibility, Component component)
         {

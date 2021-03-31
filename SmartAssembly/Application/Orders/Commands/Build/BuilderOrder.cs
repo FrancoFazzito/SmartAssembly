@@ -8,12 +8,12 @@ using System.Linq;
 
 namespace Application.Orders.Commands.Build
 {
-    public class BuildOrder : IBuilderOrder
+    public class BuilderOrder : IBuilderOrder
     {
         private readonly IBuildOrderRepository buildRepository;
         private readonly IOrderReadOnlyRepository orderRepository;
 
-        public BuildOrder(IBuildOrderRepository buildRepository, IOrderReadOnlyRepository orderRepository)
+        public BuilderOrder(IBuildOrderRepository buildRepository, IOrderReadOnlyRepository orderRepository)
         {
             this.buildRepository = buildRepository;
             this.orderRepository = orderRepository;

@@ -2,9 +2,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace Application.Reports.Commands.CreateReports
+namespace Application.Reports.Commands.Create
 {
-    public interface IReportOrders
+    public interface ICreateReport
     {
         Dictionary<string, int> MostRequestedComponents { get; }
         IEnumerable<Order> OrdersRequested { get; }

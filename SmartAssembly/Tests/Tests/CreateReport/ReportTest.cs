@@ -2,8 +2,8 @@
 using Application.Computers.Commands.Build.Requests;
 using Application.Orders.Commands.Build;
 using Application.Orders.Commands.Deliver;
-using Application.Orders.Commands.Submit;
-using Application.Reports.Commands.CreateReports;
+using Application.Orders.Commands.Create;
+using Application.Reports.Commands.Create;
 using Application.Repositories.TypeUses.Interfaces;
 using Domain.Computers;
 using Domain.Importance;
@@ -14,7 +14,7 @@ using System.Linq;
 namespace Tests
 {
     [TestClass]
-    public class ReportTest
+    public class CreateReportTest
     {
 
         [TestMethod]
@@ -25,7 +25,7 @@ namespace Tests
             var director = container.Resolve<IDirectorComputer>();
             var resultDirector = director.Build(request);
             var computer = resultDirector.Computers.ElementAt(0);
-            var submitOrder = container.Resolve<ISubmitOrder>();
+            var submitOrder = container.Resolve<ICreateOrder>();
             submitOrder.Add(computer, 3);
             submitOrder.Submit("juan@gmail", "comentario de prueba");
 
@@ -33,7 +33,7 @@ namespace Tests
             director = container.Resolve<IDirectorComputer>();
             resultDirector = director.Build(request);
             computer = resultDirector.Computers.ElementAt(0);
-            submitOrder = container.Resolve<ISubmitOrder>();
+            submitOrder = container.Resolve<ICreateOrder>();
             submitOrder.Add(computer, 3);
             var order = submitOrder.Submit("juan@gmail", "comentario de prueba").Order;
 
@@ -45,7 +45,7 @@ namespace Tests
             var ordersClient = deliverOrder.GetOrdersToDeliverByClient("juan@gmail");
             deliverOrder.Deliver(ordersClient.Last());
 
-            var report = container.Resolve<IReportOrders>();
+            var report = container.Resolve<ICreateReport>();
             report.Create(DateTime.Parse("1970/05/05"), DateTime.Now);
             foreach (var item in report.MostRequestedComponents)
             {

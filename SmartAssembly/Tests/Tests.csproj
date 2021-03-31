@@ -50,6 +50,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Tests\CRUD component\Delete\DeleteComponentTest.cs" />
+    <Compile Include="Tests\CRUD component\Update\UpdateComponentTest.cs" />
+    <Compile Include="Tests\CRUD component\Create\CreateComponentTest.cs" />
     <Compile Include="Tests\EditConfiguration\EditConfigurationTest.cs" />
     <Compile Include="Tests\CreateReport\ReportTest.cs" />
     <Compile Include="Tests\SubmitErrorComputer\SubmitErrorComputerTest.cs" />

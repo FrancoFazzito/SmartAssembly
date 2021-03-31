@@ -1,6 +1,6 @@
 ﻿using Application.Computers.Commands.Build.Directors;
 using Application.Computers.Commands.Build.Requests;
-using Application.Orders.Commands.Submit;
+using Application.Orders.Commands.Create;
 using Application.Repositories.Orders.Interfaces;
 using Application.Repositories.TypeUses.Interfaces;
 using Domain.Computers;
@@ -25,7 +25,7 @@ namespace Tests
             var director = container.Resolve<IDirectorComputer>();
             var resultDirector = director.Build(request);
             var computer = resultDirector.Computers.ElementAt(0);
-            var submitOrder = container.Resolve<ISubmitOrder>();
+            var submitOrder = container.Resolve<ICreateOrder>();
             submitOrder.Add(computer, 3);
             submitOrder.Submit("juan@gmail", "comentario de prueba");
 
@@ -35,7 +35,7 @@ namespace Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ErrorAddingStockException))]
+        [ExpectedException(typeof(AddStockException))]
         public void SubmitOrderWithoutStock()
         {
             var container = new DependencyContainerMock();
@@ -43,7 +43,7 @@ namespace Tests
             var director = container.Resolve<IDirectorComputer>();
             var resultDirector = director.Build(request);
             var computer = resultDirector.Computers.ElementAt(0);
-            var submitOrder = container.Resolve<ISubmitOrder>();
+            var submitOrder = container.Resolve<ICreateOrder>();
             submitOrder.Add(computer, 1000);
         }
     }

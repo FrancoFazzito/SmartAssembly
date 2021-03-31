@@ -7,9 +7,9 @@ using Domain.Computers;
 using Domain.Orders;
 using Domain.Orders.States;
 
-namespace Application.Orders.Commands.Submit
+namespace Application.Orders.Commands.Create
 {
-    public class SubmitOrder : ISubmitOrder
+    public class CreateOrder : ICreateOrder
     {
         private readonly Order order;
         private readonly ISubmitOrderRepository orderRepository;
@@ -18,7 +18,7 @@ namespace Application.Orders.Commands.Submit
         private readonly IComputerStockRepository computerStock;
         private readonly IControlStock controlStock;
 
-        public SubmitOrder(ISubmitOrderRepository repository, IEmployeeReadOnlyRepository employeeRepository, IClientReadOnlyRepository clientRepository, IComputerStockRepository computerStock, IControlStock controlStock)
+        public CreateOrder(ISubmitOrderRepository repository, IEmployeeReadOnlyRepository employeeRepository, IClientReadOnlyRepository clientRepository, IComputerStockRepository computerStock, IControlStock controlStock)
         {
             order = new Order();
             orderRepository = repository;
@@ -32,7 +32,7 @@ namespace Application.Orders.Commands.Submit
         {
             if (!computerStock.IsValid(computer, quantity))
             {
-                throw new ErrorAddingStockException(quantity);
+                throw new AddStockException(quantity);
             }
             order.Add(computer, quantity);
         }
@@ -42,11 +42,11 @@ namespace Application.Orders.Commands.Submit
             order.Remove(computer);
         }
 
-        public SubmitOrderResult Submit(string clientEmail, string commentary)
+        public CreateOrderResult Submit(string clientEmail, string commentary)
         {
             PopulateOrder(clientEmail, commentary);
             orderRepository.Insert(order);
-            return new SubmitOrderResult(controlStock.ComponentsLowStock, order);
+            return new CreateOrderResult(controlStock.ComponentsLowStock, order);
         }
 
         private void PopulateOrder(string clientEmail, string commentary)

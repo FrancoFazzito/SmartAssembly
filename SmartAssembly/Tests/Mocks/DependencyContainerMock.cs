@@ -9,8 +9,8 @@ using Application.Orders.Commands.Build;
 using Application.Orders.Commands.Deliver;
 using Application.Orders.Commands.Register.RegisterErrorBuilding;
 using Application.Orders.Commands.RegisterErrorOrderDelivered;
-using Application.Orders.Commands.Submit;
-using Application.Reports.Commands.CreateReports;
+using Application.Orders.Commands.Create;
+using Application.Reports.Commands.Create;
 using Application.Repositories.Components.Interfaces;
 using Application.Repositories.Employees.Interfaces;
 using Application.Repositories.Interfaces.Clients;
@@ -29,6 +29,8 @@ using Infra.Repositories.Implementations.Errors;
 using Infra.Repositories.Implementations.Orders;
 using Infra.Repositories.Implementations.TypeUses;
 using System;
+using Application.Repositories.Interfaces;
+using Domain.Components;
 
 namespace Tests
 {
@@ -51,7 +53,7 @@ namespace Tests
             container.Register<IOrderReadOnlyRepository>(() => new OrderReadOnlyRepository(container.Resolve<IConnection>(), container.Resolve<IComputerReadOnlyRepository>(), container.Resolve<IEmployeeReadOnlyRepository>(), container.Resolve<IClientReadOnlyRepository>()));
             container.Register<IComputerStockRepository>(() => new ComputerStockRepository(container.Resolve<IComponentReadOnlyRepository>()));
             container.Register<IBuildOrderRepository>(() => new BuildOrderRepository(container.Resolve<IConnection>()));
-            container.Register<IBuilderOrder>(() => new BuildOrder(container.Resolve<IBuildOrderRepository>(), container.Resolve<IOrderReadOnlyRepository>()));
+            container.Register<IBuilderOrder>(() => new BuilderOrder(container.Resolve<IBuildOrderRepository>(), container.Resolve<IOrderReadOnlyRepository>()));
             container.Register<IFactoryCompatibility>(() => new FactoryCompatibility());
             container.Register<IFactoryEnough>(() => new FactoryEnough());
             container.Register<IStrategyOrderBy>(() => new StrategyOrderBy());
@@ -61,11 +63,14 @@ namespace Tests
             container.Register<IBuilderComputer>(() => new BuilderComputer(container.Resolve<IStrategyOrderBy>(), container.Resolve<IFactoryCompatibility>(), container.Resolve<IFactoryEnough>(), container.Resolve<IComponentReadOnlyRepository>()));
             container.Register<IDirectorComputer>(() => new DirectorComputer(container.Resolve<IBuilderComputer>()));
             container.Register<IControlStock>(() => new ControlStock(container.Resolve<IComponentReadOnlyRepository>()));
-            container.Register<ISubmitOrder>(() => new SubmitOrder(container.Resolve<ISubmitOrderRepository>(), container.Resolve<IEmployeeReadOnlyRepository>(), container.Resolve<IClientReadOnlyRepository>(), container.Resolve<IComputerStockRepository>(), container.Resolve<IControlStock>()));
+            container.Register<ICreateOrder>(() => new CreateOrder(container.Resolve<ISubmitOrderRepository>(), container.Resolve<IEmployeeReadOnlyRepository>(), container.Resolve<IClientReadOnlyRepository>(), container.Resolve<IComputerStockRepository>(), container.Resolve<IControlStock>()));
             container.Register<IErrorComputerWriteOnlyRepository>(() => new ErrorOrderWriteOnlyRepository(container.Resolve<IConnection>()));
             container.Register<IRegisterErrorOrderDelivered>(() => new RegisterErrorOrderDelivered(container.Resolve<IErrorComputerWriteOnlyRepository>(), container.Resolve<IOrderReadOnlyRepository>()));
-            container.Register<IReportOrders>(() => new ReportOrders(container.Resolve<IOrderReadOnlyRepository>()));
+            container.Register<ICreateReport>(() => new CreateReport(container.Resolve<IOrderReadOnlyRepository>()));
             container.Register<IConfigurationEditor>(() => new ConfigurationEditor());
+            container.Register<ICreate<Component>>(() => new CreateComponentRepository(container.Resolve<IConnection>()));
+            container.Register<IUpdate<Component>>(() => new UpdateComponentRepository(container.Resolve<IConnection>()));
+            container.Register<IDelete<Component>>(() => new DeleteComponentRepository(container.Resolve<IConnection>()));
         }
 
         public void Register<T>(Func<T> createInstance, string instanceName = null)

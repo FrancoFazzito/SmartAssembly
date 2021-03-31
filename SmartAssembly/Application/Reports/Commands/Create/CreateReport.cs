@@ -5,13 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Application.Reports.Commands.CreateReports
+namespace Application.Reports.Commands.Create
 {
-    public class ReportOrders : IReportOrders
+    public class CreateReport : ICreateReport
     {
         private readonly IOrderReadOnlyRepository orderRepository;
 
-        public ReportOrders(IOrderReadOnlyRepository orderRepository)
+        public CreateReport(IOrderReadOnlyRepository orderRepository)
         {
             this.orderRepository = orderRepository;
         }
