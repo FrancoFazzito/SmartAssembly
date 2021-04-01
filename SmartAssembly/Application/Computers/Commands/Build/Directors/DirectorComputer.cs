@@ -16,8 +16,8 @@ namespace Application.Computers.Commands.Build.Directors
 
         public BuilderComputerResult Build(IComputerRequest request)
         {
-            var computersBuilded = ComputersBuilded(request);
-            return computersBuilded.Count() == 0 ? throw new NotAvailableComputersException() : new BuilderComputerResult(computersBuilded);
+            var computersBuilded = ComputersBuilded(request).ToList();
+            return computersBuilded.Any() ? new BuilderComputerResult(computersBuilded) : throw new NotAvailableComputersException();
         }
 
         private IEnumerable<Computer> ComputersBuilded(IComputerRequest request)

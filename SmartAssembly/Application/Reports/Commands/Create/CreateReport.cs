@@ -17,7 +17,7 @@ namespace Application.Reports.Commands.Create
         }
 
         public IEnumerable<Order> OrdersRequested { get; private set; }
-        public Dictionary<string, int> MostRequestedComponents => GetComponentsMostRequested(OrdersRequested);
+        public IEnumerable<KeyValuePair<string, int>> MostRequestedComponents => ComponentsOrderByMostRequested(OrdersRequested);
         public IEnumerable<Order> OrdersWithError => OrdersRequested.Where(o => o.State == OrderState.Error);
         public IEnumerable<Order> OrdersDelivered => OrdersRequested.Where(o => o.State == OrderState.Delivered);
 
@@ -26,22 +26,12 @@ namespace Application.Reports.Commands.Create
             OrdersRequested = orderRepository.All.Where(o => Between(since, until, o.DateRequested));
         }
 
-        private Dictionary<string, int> GetComponentsMostRequested(IEnumerable<Order> orders)
+        private IEnumerable<KeyValuePair<string, int>> ComponentsOrderByMostRequested(IEnumerable<Order> orders)
         {
-            var componentQuantity = new Dictionary<string, int>();
-
-            foreach (var componentName in orders.SelectMany(order => order.Computers.SelectMany(computer => computer.Components.Select(c => c.Name))))
-            {
-                if (componentQuantity.ContainsKey(componentName))
-                {
-                    componentQuantity[componentName] += 1;
-                }
-                else
-                {
-                    componentQuantity.Add(componentName, 1);
-                }
-            }
-            return componentQuantity.OrderByDescending(c => c.Value).Take(10).ToDictionary(c => c.Key, c => c.Value);
+            return orders.SelectMany(o => o.Computers.SelectMany(c => c.Components))
+                         .GroupBy(c => c.Name)
+                         .ToDictionary(c => c.Key, c => c.Count())
+                         .OrderByDescending(c => c.Value);
         }
 
         private bool Between(DateTime since, DateTime until, DateTime date)

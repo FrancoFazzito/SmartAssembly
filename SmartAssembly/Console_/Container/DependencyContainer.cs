@@ -13,9 +13,9 @@ namespace Console_.Container
         }
 
         //register
-        public void Register<T>(Func<T> createInstanceDelegate, string instanceName = null)
+        public void Register<T>(Func<T> createInstance, string instanceName = null)
         {
-            Register(typeof(T), createInstanceDelegate as Func<object>, instanceName);
+            Register(typeof(T), createInstance as Func<object>, instanceName);
         }
 
         private void Register(Type type, Func<object> createInstanceDelegate, string instanceName = null)

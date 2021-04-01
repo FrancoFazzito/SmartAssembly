@@ -1,11 +1,8 @@
-ABM component
-	if null -> DBNull.Value
-BM order -> B -> Computer
-ABM employee
-ABM client
-	add if not exists excepction in submit
+A client -> add if not exists excepction in submit
+Testing ABM
 rest API
 JWT
 	add rols
 Logger
 mailing y PDF
+

@@ -46,6 +46,8 @@
     <Compile Include="Components\Commands\Delete\DeleteComponent.cs" />
     <Compile Include="Components\Commands\Update\UpdateComponent.cs" />
     <Compile Include="Computers\Commands\Build\Directors\NotAvailableComputersException.cs" />
+    <Compile Include="Computers\Commands\Delete\DeleteComputer.cs" />
+    <Compile Include="Employees\Commands\Create\CreateEmployee.cs" />
     <Compile Include="Orders\Commands\Create\AddStockException.cs" />
     <Compile Include="Orders\Commands\Create\CreateOrderResult.cs" />
     <Compile Include="Orders\Commands\Build\BuilderOrderResult.cs" />
@@ -56,6 +58,8 @@
     <Compile Include="Orders\Commands\Build\IBuilderOrder.cs" />
     <Compile Include="Components\Commands\ControlStock\ControlStock.cs" />
     <Compile Include="Components\Commands\ControlStock\IControlStock.cs" />
+    <Compile Include="Orders\Commands\Delete\DeleteOrder.cs" />
+    <Compile Include="Orders\Commands\Update\UpdateOrder.cs" />
     <Compile Include="Reports\Commands\Create\CreateReport.cs" />
     <Compile Include="Reports\Commands\Create\ICreateReport.cs" />
     <Compile Include="Orders\Commands\Deliver\DeliverOrder.cs" />
@@ -76,12 +80,13 @@
     <Compile Include="Orders\Commands\RegisterErrorDelivered\RegisterErrorOrderDelivered.cs" />
     <Compile Include="Common\Factories\Compatibilities\FactoryCompatibility.cs" />
     <Compile Include="Common\Factories\Enoughs\FactoryEnough.cs" />
-    <Compile Include="Repositories\Interfaces\Clients\IClientReadOnlyRepository.cs" />
-    <Compile Include="Repositories\Interfaces\Computers\IComputerReadOnlyRepository.cs" />
-    <Compile Include="Repositories\Interfaces\Computers\ICompouterStockRepository.cs" />
-    <Compile Include="Repositories\Interfaces\Error\IErrorComputerWriteOnlyRepository.cs" />
-    <Compile Include="Repositories\Interfaces\Error\IErrorReplaceWriteOnlyRepository.cs" />
-    <Compile Include="Repositories\Interfaces\Error\IErrorBuildingWriteOnlyRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Clients\Read\IClientReadOnlyRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Computers\Read\IComputerReadOnlyRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Computers\Stock\ICompouterStockRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Employees\Delete\IDeleteEmployee.cs" />
+    <Compile Include="Repositories\Interfaces\Error\Order\IErrorOrderWriteOnlyRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Error\Building\IErrorBuildingWithReplaceWriteOnlyRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Error\Building\IErrorBuildingWriteOnlyRepository.cs" />
     <Compile Include="Repositories\Interfaces\Generics\ICreate.cs" />
     <Compile Include="Repositories\Interfaces\Generics\IDelete.cs" />
     <Compile Include="Repositories\Interfaces\Generics\IUpdate.cs" />
@@ -100,9 +105,9 @@
     <Compile Include="Computers\Commands\Build\Builders\InvalidAddException.cs" />
     <Compile Include="Orders\Commands\Create\CreateOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\Interfaces\Components\IComponentReadOnlyRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Components\Read\IComponentReadOnlyRepository.cs" />
     <Compile Include="Computers\Commands\Build\Builders\BuilderComputerResult.cs" />
-    <Compile Include="Repositories\Interfaces\Employees\IEmployeeReadOnlyRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Employees\Read\IEmployeeReadOnlyRepository.cs" />
     <Compile Include="Repositories\Interfaces\TypeUses\ITypeUseReadOnlyRepository.cs" />
     <Compile Include="Repositories\Interfaces\Orders\ISubmitOrderRepository.cs" />
   </ItemGroup>

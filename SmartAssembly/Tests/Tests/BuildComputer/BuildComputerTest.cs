@@ -19,7 +19,7 @@ namespace Tests
             var director = container.Resolve<IDirectorComputer>();
             var result = director.Build(request);
             var computers = result.Computers;
-            Assert.IsTrue(computers.Count() > 0);
+            Assert.IsTrue(computers.Any());
         }
 
         [TestMethod]

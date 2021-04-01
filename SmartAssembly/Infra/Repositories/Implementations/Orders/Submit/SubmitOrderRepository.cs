@@ -47,45 +47,37 @@ namespace Infra.Repositories.Implementations.Orders
 
         private SqlCommand CommandStock(Component component)
         {
-            using (var commandStock = new SqlCommand($"UPDATE [Component] SET Stock = Stock - 1 WHERE ID = @{PARAMETER_ID_COMPONENT}"))
-            {
-                commandStock.Parameters.AddWithValue(PARAMETER_ID_COMPONENT, component.Id);
-                return commandStock;
-            }
+            var commandStock = new SqlCommand($"UPDATE [Component] SET Stock = Stock - 1 WHERE ID = @{PARAMETER_ID_COMPONENT}");
+            commandStock.Parameters.AddWithValue(PARAMETER_ID_COMPONENT, component.Id);
+            return commandStock;
         }
 
         private SqlCommand CommandComponent(Component component)
         {
-            using (var commandComponent = new SqlCommand($"INSERT INTO [Component_Computer] VALUES (@{PARAMETER_ID_COMPONENT} , (SELECT IDENT_CURRENT('computer')))"))
-            {
-                commandComponent.Parameters.AddWithValue(PARAMETER_ID_COMPONENT, component.Id);
-                return commandComponent;
-            }
+            var commandComponent = new SqlCommand($"INSERT INTO [Component_Computer] VALUES (@{PARAMETER_ID_COMPONENT} , (SELECT IDENT_CURRENT('computer')))");
+            commandComponent.Parameters.AddWithValue(PARAMETER_ID_COMPONENT, component.Id);
+            return commandComponent;
         }
 
         private SqlCommand CommandComputer(Computer computer)
         {
-            using (var commandComputer = new SqlCommand($"INSERT INTO [Computer] VALUES((SELECT IDENT_CURRENT('order')),@{PARAMETER_TYPE_USE},0)"))
-            {
-                commandComputer.Parameters.AddWithValue(PARAMETER_TYPE_USE, computer.TypeUse.ToString());
-                return commandComputer;
-            }
+            var commandComputer = new SqlCommand($"INSERT INTO [Computer] VALUES((SELECT IDENT_CURRENT('order')),@{PARAMETER_TYPE_USE},0)");
+            commandComputer.Parameters.AddWithValue(PARAMETER_TYPE_USE, computer.TypeUse.ToString());
+            return commandComputer;
         }
 
         private SqlCommand CommandOrder(Order order)
         {
-            using (var commandOrder = new SqlCommand($"INSERT INTO [Order] VALUES (@{PARAMETER_PRICE},@{PARAMETER_ORDER_DATE},@{PARAMATER_ORDER_DELIVERY},@{PARAMETER_ID_EMPLOYEE},@{PARAMETER_EMAIL_CLIENT},@{PARAMETER_COMMENTARY},@{PARAMETER_STATE},@DateDelivered)"))
-            {
-                commandOrder.Parameters.AddWithValue(PARAMETER_PRICE, order.Price);
-                commandOrder.Parameters.AddWithValue(PARAMETER_ORDER_DATE, order.DateRequested);
-                commandOrder.Parameters.AddWithValue(PARAMATER_ORDER_DELIVERY, order.DateToDelivery);
-                commandOrder.Parameters.AddWithValue(PARAMETER_ID_EMPLOYEE, order.Employee.Email);
-                commandOrder.Parameters.AddWithValue(PARAMETER_EMAIL_CLIENT, order.Client.Email);
-                commandOrder.Parameters.AddWithValue(PARAMETER_COMMENTARY, order.Commentary);
-                commandOrder.Parameters.AddWithValue(PARAMETER_STATE, (int)order.State);
-                commandOrder.Parameters.AddWithValue(PARAMETER_DELIVERED, System.DBNull.Value);
-                return commandOrder;
-            }
+            var commandOrder = new SqlCommand($"INSERT INTO [Order] VALUES (@{PARAMETER_PRICE},@{PARAMETER_ORDER_DATE},@{PARAMATER_ORDER_DELIVERY},@{PARAMETER_ID_EMPLOYEE},@{PARAMETER_EMAIL_CLIENT},@{PARAMETER_COMMENTARY},@{PARAMETER_STATE},@DateDelivered)");
+            commandOrder.Parameters.AddWithValue(PARAMETER_PRICE, order.Price);
+            commandOrder.Parameters.AddWithValue(PARAMETER_ORDER_DATE, order.DateRequested);
+            commandOrder.Parameters.AddWithValue(PARAMATER_ORDER_DELIVERY, order.DateToDelivery);
+            commandOrder.Parameters.AddWithValue(PARAMETER_ID_EMPLOYEE, order.Employee.Email);
+            commandOrder.Parameters.AddWithValue(PARAMETER_EMAIL_CLIENT, order.Client.Email);
+            commandOrder.Parameters.AddWithValue(PARAMETER_COMMENTARY, order.Commentary);
+            commandOrder.Parameters.AddWithValue(PARAMETER_STATE, (int)order.State);
+            commandOrder.Parameters.AddWithValue(PARAMETER_DELIVERED, System.DBNull.Value);
+            return commandOrder;
         }
     }
 }

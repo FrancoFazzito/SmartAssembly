@@ -1,9 +1,9 @@
 ﻿using Application.Computers.Commands.Build.Directors;
 using Application.Computers.Commands.Build.Requests;
 using Application.Orders.Commands.Build;
+using Application.Orders.Commands.Create;
 using Application.Orders.Commands.Deliver;
 using Application.Orders.Commands.RegisterErrorOrderDelivered;
-using Application.Orders.Commands.Create;
 using Application.Repositories.Orders.Interfaces;
 using Application.Repositories.TypeUses.Interfaces;
 using Domain.Computers;
@@ -37,7 +37,6 @@ namespace Tests
             deliverOrder.Deliver(ordersClient.Last());
 
             var registerError = container.Resolve<IRegisterErrorOrderDelivered>();
-            var lastOrderDelivered = registerError.GetOrdersDeliveredByClient("juan@gmail").Last();
             registerError.Register(lastOrder.Computers.ElementAt(0), "error de prueba");
             var OrderWithError = container.Resolve<IOrderReadOnlyRepository>().All.FirstOrDefault(c => c.Id == lastOrder.Id);
 

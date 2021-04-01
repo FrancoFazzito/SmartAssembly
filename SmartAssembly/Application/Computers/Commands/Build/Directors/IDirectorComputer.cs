@@ -6,6 +6,7 @@ namespace Application.Computers.Commands.Build.Directors
     public interface IDirectorComputer
     {
         IBuilderComputer Builder { get; }
+
         BuilderComputerResult Build(IComputerRequest request);
     }
 }

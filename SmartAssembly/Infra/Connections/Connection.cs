@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -27,14 +26,23 @@ namespace Infra.Connections
         public void Execute(SqlCommand command)
         {
             command.Connection = Open();
-            command.ExecuteNonQuery();
+            command.Transaction = Transaction();
+            try
+            {
+                command.ExecuteNonQuery();
+                command.Transaction.Commit();
+            }
+            catch
+            {
+                command.Transaction.Rollback();
+            }
             Close();
         }
 
         public void Execute(IEnumerable<SqlCommand> commands)
         {
-            connection.Open();
-            using (var transaction = connection.BeginTransaction())
+            Open();
+            using (var transaction = Transaction())
             {
                 foreach (var command in commands)
                 {
@@ -49,13 +57,17 @@ namespace Infra.Connections
                     }
                     transaction.Commit();
                 }
-                catch (Exception ex)
+                catch
                 {
                     transaction.Rollback();
-                    throw new Exception(ex.Message);
                 }
                 finally { Close(); }
             }
+        }
+
+        private SqlTransaction Transaction()
+        {
+            return connection.BeginTransaction();
         }
 
         private void Close()

@@ -1,8 +1,6 @@
-﻿using Domain.Components;
-
-namespace Application.Repositories.Interfaces
+﻿namespace Application.Repositories.Interfaces
 {
-    public interface IUpdate<T>
+    public interface IUpdate<in T>
     {
         void Update(T value);
     }

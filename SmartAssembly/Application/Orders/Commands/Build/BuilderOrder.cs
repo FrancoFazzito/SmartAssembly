@@ -35,7 +35,7 @@ namespace Application.Orders.Commands.Build
                                   {
                                       Client = order.Client,
                                       Commentary = order.Commentary,
-                                      Computers = order.Computers.Where(c => c.Completed == false).ToList(),
+                                      Computers = order.Computers.Where(c => !c.Completed).ToList(),
                                       DateDelivered = order.DateDelivered,
                                       DateRequested = order.DateRequested,
                                       Employee = order.Employee,

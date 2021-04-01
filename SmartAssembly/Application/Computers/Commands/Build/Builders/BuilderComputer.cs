@@ -13,7 +13,6 @@ using System.Linq;
 
 namespace Application.Computers.Commands.Build.Builders
 {
-
     public class BuilderComputer : IBuilderComputer
     {
         private IEnumerable<Component> components;
@@ -38,17 +37,16 @@ namespace Application.Computers.Commands.Build.Builders
             return components.Where(c => c.IsType(TypePart.cpu));
         }
 
-        public void AddCpu(Component cpu)
+        public void AddCpu(Component root)
         {
             SetComputer();
-            if (cpu.IsEnough(factoryEnough[Enough.Level], request.Specification.Cpu))
+            if (root.IsEnough(factoryEnough[Enough.Level], request.Specification.Cpu))
             {
-                Add(cpu);
+                Add(root);
+                return;
             }
-            else
-            {
-                ThrowInvalidAdd();
-            }
+
+            ThrowInvalidAdd();
         }
 
         public void AddFan()
@@ -69,7 +67,11 @@ namespace Application.Computers.Commands.Build.Builders
                                            .FirstOrDefault(c => c.IsEnough(factoryEnough[Enough.Level], request.Specification.Gpu)));
                 return;
             }
+            checkIntregatedVideo();
+        }
 
+        private void checkIntregatedVideo()
+        {
             if (!Computer[TypePart.cpu].IsCompatibleWith(factoryCompatibility[Compatibility.IntegratedVideo], Computer[TypePart.mother]))
             {
                 ThrowInvalidAdd();
@@ -98,18 +100,16 @@ namespace Application.Computers.Commands.Build.Builders
 
         public void AddRam()
         {
-
             if (Computer[TypePart.cpu].IsEnough(factoryEnough[Enough.MultipleRam], request.Specification.Ram))
             {
                 var ram = components.Where(c => c.IsType(TypePart.ram))
                                                  .Where(c => c.IsCompatibleWith(factoryCompatibility[Compatibility.Ram], Cpu))
                                                  .FirstOrDefault(c => c.IsEnough(factoryEnough[Enough.Capacity], request.Specification.Ram / Cpu.Channels));
                 Add(ram, Cpu.Channels);
+                return;
             }
-            else
-            {
-                Add(components.FirstOrDefault(c => c.IsEnough(factoryEnough[Enough.Capacity], request.Specification.Ram)));
-            }
+
+            Add(components.FirstOrDefault(c => c.IsEnough(factoryEnough[Enough.Capacity], request.Specification.Ram)));
         }
 
         public void AddTower()
@@ -127,7 +127,7 @@ namespace Application.Computers.Commands.Build.Builders
 
         private void Add(Component component, int quantity = 1)
         {
-            if (InvalidComponent(component, quantity) || InvalidBudget(component))
+            if (InvalidComponent(component, quantity))
             {
                 ThrowInvalidAdd();
             }
@@ -135,12 +135,17 @@ namespace Application.Computers.Commands.Build.Builders
             Computer.Add(component, quantity);
         }
 
-        private bool InvalidBudget(Component component)
+        private bool InvalidComponent(Component component, int quantity)
+        {
+            return CheckInvalidComponent(component, quantity) || CheckInvalidBudget(component);
+        }
+
+        private bool CheckInvalidBudget(Component component)
         {
             return Computer.Price + component.Price >= request.Budget;
         }
 
-        private bool InvalidComponent(Component component, int quantity)
+        private bool CheckInvalidComponent(Component component, int quantity)
         {
             return component == null || !component.IsEnough(factoryEnough[Enough.Stock], quantity);
         }

@@ -1,5 +1,4 @@
-﻿
-using Application.Common.Factories.Compatibilities;
+﻿using Application.Common.Factories.Compatibilities;
 using Application.Common.Factories.Enoughs;
 using Application.Orders.Commands.Register.RegisterErrorBuilding.Results;
 using Application.Orders.Commands.Replacers;
@@ -17,9 +16,9 @@ namespace Application.Orders.Commands.Register.RegisterErrorBuilding
         private readonly IFactoryCompatibility compatibilities;
         private readonly IFactoryEnough enoughs;
         private readonly IErrorBuildingWriteOnlyRepository errorRepository;
-        private readonly IErrorReplaceWriteOnlyRepository errorReplaceRepository;
+        private readonly IErrorBuildingWithReplaceWriteOnlyRepository errorReplaceRepository;
 
-        public RegisterBuildError(IComponentReadOnlyRepository componenRepository, IFactoryCompatibility compatibilities, IFactoryEnough enoughs, IErrorBuildingWriteOnlyRepository errorRepository, IErrorReplaceWriteOnlyRepository errorReplaceRepository)
+        public RegisterBuildError(IComponentReadOnlyRepository componenRepository, IFactoryCompatibility compatibilities, IFactoryEnough enoughs, IErrorBuildingWriteOnlyRepository errorRepository, IErrorBuildingWithReplaceWriteOnlyRepository errorReplaceRepository)
         {
             this.componenRepository = componenRepository;
             this.compatibilities = compatibilities;

@@ -14,7 +14,6 @@ namespace Tests
     [TestClass]
     public class SubmitTest
     {
-
         [TestMethod]
         public void SubmitOrder()
         {

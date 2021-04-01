@@ -9,8 +9,11 @@ namespace Application.Common.Strategies.OrderBy
     {
         public IEnumerable<Component> GetOrderedComponents(IEnumerable<Component> components, Importance order)
         {
-            return order == Importance.Price ? components.OrderBy(c => c.Price) : components.OrderByDescending(c => c.PerfomanceLevel);
+            if (order == Importance.Price)
+            {
+                return components.OrderBy(c => c.Price);
+            }
+            return components.OrderByDescending(c => c.PerfomanceLevel);
         }
     }
-
 }

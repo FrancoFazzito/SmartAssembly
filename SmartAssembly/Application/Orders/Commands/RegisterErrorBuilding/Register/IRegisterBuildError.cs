@@ -1,5 +1,4 @@
-﻿
-using Application.Orders.Commands.Register.RegisterErrorBuilding.Results;
+﻿using Application.Orders.Commands.Register.RegisterErrorBuilding.Results;
 using Domain.Components;
 using Domain.Computers;
 

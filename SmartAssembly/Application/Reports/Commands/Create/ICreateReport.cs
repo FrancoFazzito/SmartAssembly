@@ -6,7 +6,7 @@ namespace Application.Reports.Commands.Create
 {
     public interface ICreateReport
     {
-        Dictionary<string, int> MostRequestedComponents { get; }
+        IEnumerable<KeyValuePair<string, int>> MostRequestedComponents { get; }
         IEnumerable<Order> OrdersRequested { get; }
         IEnumerable<Order> OrdersWithError { get; }
         IEnumerable<Order> OrdersDelivered { get; }

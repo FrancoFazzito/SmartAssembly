@@ -5,9 +5,9 @@ namespace Domain.Enoughs.Implementations
 {
     public class EnoughMultipleRam : IEnough
     {
-        public bool IsEnough(Component component, int capacity)
+        public bool IsEnough(Component component, int quantity)
         {
-            return component.PerfomanceLevel >= 30 && capacity >= 4;
+            return component.PerfomanceLevel >= 30 && quantity >= 4;
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿
-using Domain.Enoughs.Enums;
+﻿using Domain.Enoughs.Enums;
 using Domain.Enoughs.Implementations;
 using Domain.Enoughs.Interfaces;
 using System.Collections.Generic;

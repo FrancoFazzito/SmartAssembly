@@ -34,6 +34,7 @@ namespace Application.Orders.Commands.Create
             {
                 throw new AddStockException(quantity);
             }
+
             order.Add(computer, quantity);
         }
 

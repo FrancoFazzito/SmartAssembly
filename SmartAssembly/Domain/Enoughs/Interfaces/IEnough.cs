@@ -4,6 +4,6 @@ namespace Domain.Enoughs.Interfaces
 {
     public interface IEnough
     {
-        bool IsEnough(Component Component, int quantity);
+        bool IsEnough(Component component, int quantity);
     }
 }

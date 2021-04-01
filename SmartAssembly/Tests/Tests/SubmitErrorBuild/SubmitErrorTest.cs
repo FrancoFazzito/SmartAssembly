@@ -1,7 +1,7 @@
 ﻿using Application.Computers.Commands.Build.Directors;
 using Application.Computers.Commands.Build.Requests;
-using Application.Orders.Commands.Register.RegisterErrorBuilding;
 using Application.Orders.Commands.Create;
+using Application.Orders.Commands.Register.RegisterErrorBuilding;
 using Application.Repositories.Orders.Interfaces;
 using Application.Repositories.TypeUses.Interfaces;
 using Domain.Computers;

@@ -1,8 +1,8 @@
 ﻿using Application.Computers.Commands.Build.Directors;
 using Application.Computers.Commands.Build.Requests;
 using Application.Orders.Commands.Build;
-using Application.Orders.Commands.Deliver;
 using Application.Orders.Commands.Create;
+using Application.Orders.Commands.Deliver;
 using Application.Reports.Commands.Create;
 using Application.Repositories.TypeUses.Interfaces;
 using Domain.Computers;
@@ -16,7 +16,6 @@ namespace Tests
     [TestClass]
     public class CreateReportTest
     {
-
         [TestMethod]
         public void CreateReport()
         {
@@ -51,7 +50,7 @@ namespace Tests
             {
                 Console.WriteLine(item.Key + " " + item.Value);
             }
-            Assert.IsTrue(report.MostRequestedComponents.Count == 10 && report.OrdersWithError.Count() >= 1 && report.OrdersRequested.Count() >= 1 && report.OrdersDelivered.Count() >= 1);
+            Assert.IsTrue(report.MostRequestedComponents.Count() == 10 && report.OrdersWithError.Any() && report.OrdersRequested.Any() && report.OrdersDelivered.Any());
         }
     }
 }

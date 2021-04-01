@@ -1,13 +1,6 @@
-﻿using Domain.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Application.Repositories.Interfaces
+﻿namespace Application.Repositories.Interfaces
 {
-    public interface ICreate<T>
+    public interface ICreate<in T>
     {
         void Create(T value);
     }

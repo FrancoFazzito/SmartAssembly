@@ -20,6 +20,7 @@
     <TestProjectType>UnitTest</TestProjectType>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <SonarQubeTestProject>True</SonarQubeTestProject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,9 +51,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Tests\CRUD component\Delete\DeleteComponentTest.cs" />
-    <Compile Include="Tests\CRUD component\Update\UpdateComponentTest.cs" />
-    <Compile Include="Tests\CRUD component\Create\CreateComponentTest.cs" />
+    <Compile Include="Tests\component\CRUD\Delete\DeleteComponentTest.cs" />
+    <Compile Include="Tests\component\CRUD\Update\UpdateComponentTest.cs" />
+    <Compile Include="Tests\component\CRUD\Create\CreateComponentTest.cs" />
     <Compile Include="Tests\EditConfiguration\EditConfigurationTest.cs" />
     <Compile Include="Tests\CreateReport\ReportTest.cs" />
     <Compile Include="Tests\SubmitErrorComputer\SubmitErrorComputerTest.cs" />

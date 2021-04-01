@@ -44,25 +44,31 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Convert\ConvertWriter.cs" />
-    <Compile Include="Repositories\Implementations\Clients\ClientReadOnlyRepository.cs" />
-    <Compile Include="Repositories\Implementations\Components\CreateComponentRepository.cs" />
-    <Compile Include="Repositories\Implementations\Components\DeleteComponentRepository.cs" />
-    <Compile Include="Repositories\Implementations\Components\UpdateComponentRepository.cs" />
-    <Compile Include="Repositories\Implementations\Computers\ComputerStockRepository.cs" />
-    <Compile Include="Repositories\Implementations\Computers\ComputerReadOnlyRepository.cs" />
-    <Compile Include="Repositories\Implementations\Employees\EmployeeReadOnlyRepository.cs" />
-    <Compile Include="Repositories\Implementations\Errors\Orders\ErrorOrderWriteOnlyRepository.cs" />
-    <Compile Include="Repositories\Implementations\Errors\Buildings\ErrorBuildingReplaceWriteOnlyRepository.cs" />
-    <Compile Include="Repositories\Implementations\Errors\Buildings\ErrorBuildingWriteOnlyRepository.cs" />
+    <Compile Include="Repositories\Implementations\Clients\Read\ClientReadOnlyRepository.cs" />
+    <Compile Include="Repositories\Implementations\Components\Create\CreateComponentRepository.cs" />
+    <Compile Include="Repositories\Implementations\Components\Common\Populate.cs" />
+    <Compile Include="Repositories\Implementations\Components\Delete\DeleteComponentRepository.cs" />
+    <Compile Include="Repositories\Implementations\Components\Update\UpdateComponentRepository.cs" />
+    <Compile Include="Repositories\Implementations\Computers\Stock\ComputerStockRepository.cs" />
+    <Compile Include="Repositories\Implementations\Computers\Read\ComputerReadOnlyRepository.cs" />
+    <Compile Include="Repositories\Implementations\Computers\Delete\DeleteComputerRepository.cs" />
+    <Compile Include="Repositories\Implementations\Employees\Create\CreateEmployeeRepository.cs" />
+    <Compile Include="Repositories\Implementations\Employees\Delete\DeleteEmployeeRepository.cs" />
+    <Compile Include="Repositories\Implementations\Employees\Read\EmployeeReadOnlyRepository.cs" />
+    <Compile Include="Repositories\Implementations\Errors\RegisterOrder\ErrorOrderWriteOnlyRepository.cs" />
+    <Compile Include="Repositories\Implementations\Errors\RegisterBuilding\ErrorBuildingReplaceWriteOnlyRepository.cs" />
+    <Compile Include="Repositories\Implementations\Errors\RegisterBuilding\ErrorBuildingWriteOnlyRepository.cs" />
     <Compile Include="Repositories\Implementations\Orders\Build\BuildOrderRepository.cs" />
+    <Compile Include="Repositories\Implementations\Orders\Update\UpdateOrderRepository.cs" />
     <Compile Include="Repositories\Implementations\Orders\Deliver\DeliverOrderRepository.cs" />
-    <Compile Include="Repositories\Implementations\Orders\OrderReadOnlyRepository.cs" />
+    <Compile Include="Repositories\Implementations\Orders\Read\OrderReadOnlyRepository.cs" />
     <Compile Include="Repositories\Implementations\Orders\Submit\SubmitOrderRepository.cs" />
-    <Compile Include="Repositories\Implementations\TypeUses\TypeUseReadOnlyRepository.cs" />
+    <Compile Include="Repositories\Implementations\Orders\Delete\DeleteOrderRepository.cs" />
+    <Compile Include="Repositories\Implementations\TypeUses\Read\TypeUseReadOnlyRepository.cs" />
     <Compile Include="Repositories\Convert\ConvertReader.cs" />
-    <Compile Include="Repositories\Implementations\Abstracts\AbstractReadOnlyRepository.cs" />
+    <Compile Include="Repositories\Implementations\Abstracts\Read\AbstractReadOnlyRepository.cs" />
     <Compile Include="Connections\Connection.cs" />
-    <Compile Include="Repositories\Implementations\Components\ComponentReadOnlyRepository.cs" />
+    <Compile Include="Repositories\Implementations\Components\Read\ComponentReadOnlyRepository.cs" />
     <Compile Include="Connections\IConnection.cs" />
   </ItemGroup>
   <ItemGroup>

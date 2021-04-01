@@ -7,4 +7,3 @@ namespace Application.Repositories.Orders.Interfaces
         void Insert(Order order);
     }
 }
-

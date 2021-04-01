@@ -10,10 +10,10 @@ namespace Application.Orders.Commands.RegisterErrorOrderDelivered
 {
     public class RegisterErrorOrderDelivered : IRegisterErrorOrderDelivered
     {
-        private readonly IErrorComputerWriteOnlyRepository errorComputerRepository;
+        private readonly IErrorOrderWriteOnlyRepository errorComputerRepository;
         private readonly IOrderReadOnlyRepository orderRepository;
 
-        public RegisterErrorOrderDelivered(IErrorComputerWriteOnlyRepository errorComputerRepository, IOrderReadOnlyRepository orderRepository)
+        public RegisterErrorOrderDelivered(IErrorOrderWriteOnlyRepository errorComputerRepository, IOrderReadOnlyRepository orderRepository)
         {
             this.errorComputerRepository = errorComputerRepository;
             this.orderRepository = orderRepository;
@@ -29,6 +29,5 @@ namespace Application.Orders.Commands.RegisterErrorOrderDelivered
             return orderRepository.All.Where(c => c.Client.Email == email)
                                       .Where(c => c.State == OrderState.Delivered);
         }
-
     }
 }
