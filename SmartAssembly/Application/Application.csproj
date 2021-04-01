@@ -92,7 +92,7 @@
     <Compile Include="Repositories\Interfaces\Error\Building\IErrorBuildingWithReplaceWriteOnlyRepository.cs" />
     <Compile Include="Repositories\Interfaces\Error\Building\IErrorBuildingWriteOnlyRepository.cs" />
     <Compile Include="Repositories\Interfaces\Common\ICreate.cs" />
-    <Compile Include="Repositories\Interfaces\Common\IDelete.cs" />
+    <Compile Include="Repositories\Interfaces\Common\IDeleteById.cs" />
     <Compile Include="Repositories\Interfaces\Common\IUpdate.cs" />
     <Compile Include="Repositories\Interfaces\Orders\IBuildOrderRepository.cs" />
     <Compile Include="Repositories\Interfaces\Orders\IDeliverOrderRepository.cs" />

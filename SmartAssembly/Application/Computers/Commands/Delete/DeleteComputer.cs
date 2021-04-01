@@ -5,9 +5,9 @@ namespace Application.Computers.Commands.Delete
 {
     public class DeleteComputer
     {
-        private readonly IDelete<Computer> delete;
+        private readonly IDeleteById delete;
 
-        public DeleteComputer(IDelete<Computer> delete)
+        public DeleteComputer(IDeleteById delete)
         {
             this.delete = delete;
         }

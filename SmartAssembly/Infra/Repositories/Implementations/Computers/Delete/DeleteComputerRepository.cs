@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace Infra.Repositories.Implementations.Computers
 {
-    public class DeleteComputerRepository : IDelete<Computer>
+    public class DeleteComputerRepository : IDeleteById
     {
         private readonly IConnection connection;
 

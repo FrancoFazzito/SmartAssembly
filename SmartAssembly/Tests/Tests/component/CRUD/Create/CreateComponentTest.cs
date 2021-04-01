@@ -37,7 +37,7 @@ namespace Tests
             new CreateComponent(container.Resolve<ICreate<Component>>()).Create(component);
             var componentAdded = container.Resolve<IComponentReadOnlyRepository>().All.FirstOrDefault(c => c.Name == "example");
             Assert.IsTrue(component != null);
-            new DeleteComponent(container.Resolve<IDelete<Component>>()).Delete(componentAdded.Id);
+            new DeleteComponent(container.Resolve<IDeleteById>(typeof(Component).ToString())).Delete(componentAdded.Id);
         }
     }
 }

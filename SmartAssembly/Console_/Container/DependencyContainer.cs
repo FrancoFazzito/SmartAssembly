@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Console_.Container
 {
-    public class DependencyContainer : IContainer
+    public class DependencyContainer : IDependencyContainer
     {
         private readonly Dictionary<Tuple<Type, string>, Func<object>> mappings;
 
@@ -13,25 +13,25 @@ namespace Console_.Container
         }
 
         //register
-        public void Register<T>(Func<T> createInstance, string instanceName = null)
+        public void Register<T>(Func<T> createInstance, string typeName = null)
         {
-            Register(typeof(T), createInstance as Func<object>, instanceName);
+            Register(typeof(T), createInstance as Func<object>, typeName);
         }
 
-        private void Register(Type type, Func<object> createInstanceDelegate, string instanceName = null)
+        private void Register(Type type, Func<object> createInstanceDelegate, string typeName = null)
         {
-            mappings.Add(CreateMapping(type, instanceName), createInstanceDelegate);
+            mappings.Add(CreateMapping(type, typeName), createInstanceDelegate);
         }
 
         //resolve
-        public T Resolve<T>(string instanceName = null)
+        public T Resolve<T>(string typeName = null)
         {
-            return (T)Resolve(typeof(T), instanceName);
+            return (T)Resolve(typeof(T), typeName);
         }
 
-        private object Resolve(Type type, string instanceName = null)
+        private object Resolve(Type type, string typeName = null)
         {
-            return mappings[CreateMapping(type, instanceName)]();
+            return mappings[CreateMapping(type, typeName)]();
         }
 
         private Tuple<Type, string> CreateMapping(Type type, string instanceName)

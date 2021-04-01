@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace Infra.Repositories.Implementations.Components
 {
-    public class DeleteComponentRepository : IDelete<Component>
+    public class DeleteComponentRepository : IDeleteById
     {
         private readonly IConnection connection;
 

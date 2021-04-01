@@ -50,7 +50,7 @@ namespace Console_
 {
     public static class Program
     {
-        private static IContainer container;
+        private static IDependencyContainer container;
 
         private static void Main()
         {
@@ -94,9 +94,9 @@ namespace Console_
             container.Register<ICreate<Component>>(() => new CreateComponentRepository(container.Resolve<IConnection>()));
             container.Register<IUpdate<Component>>(() => new UpdateComponentRepository(container.Resolve<IConnection>()));
             container.Register<IUpdate<Order>>(() => new UpdateOrderRepository(container.Resolve<IConnection>()));
-            container.Register<IDelete<Component>>(() => new DeleteComponentRepository(container.Resolve<IConnection>()));
-            container.Register<IDelete<Computer>>(() => new DeleteComputerRepository(container.Resolve<IConnection>()));
-            container.Register<IDelete<Order>>(() => new DeleteOrderRepository(container.Resolve<IConnection>()));
+            container.Register<IDeleteById>(() => new DeleteComponentRepository(container.Resolve<IConnection>()),typeof(Component).ToString());
+            container.Register<IDeleteById>(() => new DeleteComputerRepository(container.Resolve<IConnection>()),typeof(Computer).ToString());
+            container.Register<IDeleteById>(() => new DeleteOrderRepository(container.Resolve<IConnection>()),typeof(Order).ToString());
             container.Register<ICreate<Employee>>(() => new CreateEmployeeRepository(container.Resolve<IConnection>()));
             container.Register<IDeleteByEmail>(() => new DeleteEmployeeRepository(container.Resolve<IConnection>()));
         }

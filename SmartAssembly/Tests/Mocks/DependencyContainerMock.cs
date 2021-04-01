@@ -44,7 +44,7 @@ namespace Tests
 {
     public class DependencyContainerMock
     {
-        private readonly IContainer container;
+        private readonly IDependencyContainer container;
 
         public DependencyContainerMock()
         {
@@ -77,23 +77,25 @@ namespace Tests
             container.Register<ICreateReport>(() => new CreateReport(container.Resolve<IOrderReadOnlyRepository>()));
             container.Register<IConfigurationEditor>(() => new ConfigurationEditor());
             container.Register<ICreate<Component>>(() => new CreateComponentRepository(container.Resolve<IConnection>()));
+            container.Register<ICreate<Employee>>(() => new CreateEmployeeRepository(container.Resolve<IConnection>()));
             container.Register<IUpdate<Component>>(() => new UpdateComponentRepository(container.Resolve<IConnection>()));
             container.Register<IUpdate<Order>>(() => new UpdateOrderRepository(container.Resolve<IConnection>()));
-            container.Register<IDelete<Component>>(() => new DeleteComponentRepository(container.Resolve<IConnection>()));
-            container.Register<IDelete<Computer>>(() => new DeleteComputerRepository(container.Resolve<IConnection>()));
-            container.Register<IDelete<Order>>(() => new DeleteOrderRepository(container.Resolve<IConnection>()));
-            container.Register<ICreate<Employee>>(() => new CreateEmployeeRepository(container.Resolve<IConnection>()));
+            container.Register<IDeleteById>(() => new DeleteComponentRepository(container.Resolve<IConnection>()),typeof(Component).ToString());
+            container.Register<IDeleteById>(() => new DeleteComputerRepository(container.Resolve<IConnection>()),typeof(Computer).ToString());
+            container.Register<IDeleteById>(() => new DeleteOrderRepository(container.Resolve<IConnection>()),typeof(Order).ToString());
             container.Register<IDeleteByEmail>(() => new DeleteEmployeeRepository(container.Resolve<IConnection>()));
         }
 
-        public void Register<T>(Func<T> createInstance, string instanceName = null)
+        public void Register<T>(Func<T> createInstance, string typeName = null)
         {
-            container.Register(createInstance, instanceName);
+            container.Register(createInstance, typeName);
         }
 
-        public T Resolve<T>(string instanceName = null)
+        public T Resolve<T>(string typeName = null)
         {
-            return container.Resolve<T>(instanceName);
+            return container.Resolve<T>(typeName);
         }
     }
+
+
 }

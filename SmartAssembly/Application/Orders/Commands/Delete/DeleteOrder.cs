@@ -5,9 +5,9 @@ namespace Application.Orders.Commands.Delete
 {
     public class DeleteOrder
     {
-        private readonly IDelete<Order> delete;
+        private readonly IDeleteById delete;
 
-        public DeleteOrder(IDelete<Order> delete)
+        public DeleteOrder(IDeleteById delete)
         {
             this.delete = delete;
         }

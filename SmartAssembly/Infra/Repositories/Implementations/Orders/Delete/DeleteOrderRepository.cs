@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace Infra.Repositories.Implementations.Orders.Delete
 {
-    public class DeleteOrderRepository : IDelete<Order>
+    public class DeleteOrderRepository : IDeleteById
     {
         private readonly IConnection connection;
 

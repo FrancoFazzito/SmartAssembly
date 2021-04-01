@@ -17,7 +17,7 @@ namespace Tests
             var container = new DependencyContainerMock();
             var componentToAdd = container.Resolve<IComponentReadOnlyRepository>().All.Last();
             var componentToRemove = container.Resolve<IComponentReadOnlyRepository>().All.Last();
-            new DeleteComponent(container.Resolve<IDelete<Component>>()).Delete(componentToRemove.Id);
+            new DeleteComponent(container.Resolve<IDeleteById>(typeof(Component).ToString())).Delete(componentToRemove.Id);
             var componentRemoved = container.Resolve<IComponentReadOnlyRepository>().All.FirstOrDefault(c => c.Id == componentToRemove.Id);
             Assert.IsTrue(componentRemoved == null);
             new CreateComponent(container.Resolve<ICreate<Component>>()).Create(componentToAdd);

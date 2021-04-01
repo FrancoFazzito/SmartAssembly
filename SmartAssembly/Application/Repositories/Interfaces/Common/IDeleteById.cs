@@ -1,6 +1,6 @@
 ﻿namespace Application.Repositories.Interfaces
 {
-    public interface IDelete<T>
+    public interface IDeleteById
     {
         void Delete(int id);
     }

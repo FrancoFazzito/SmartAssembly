@@ -5,9 +5,9 @@ namespace Application.Components.Commands.Delete
 {
     public class DeleteComponent
     {
-        private readonly IDelete<Component> delete;
+        private readonly IDeleteById delete;
 
-        public DeleteComponent(IDelete<Component> delete)
+        public DeleteComponent(IDeleteById delete)
         {
             this.delete = delete;
         }
