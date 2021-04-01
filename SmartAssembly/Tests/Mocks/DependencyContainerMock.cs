@@ -16,6 +16,7 @@ using Application.Repositories.Employees.Interfaces;
 using Application.Repositories.Interfaces;
 using Application.Repositories.Interfaces.Clients;
 using Application.Repositories.Interfaces.Computers;
+using Application.Repositories.Interfaces.Employees.Delete;
 using Application.Repositories.Interfaces.Error;
 using Application.Repositories.Interfaces.Orders;
 using Application.Repositories.Orders.Interfaces;
@@ -23,12 +24,15 @@ using Application.Repositories.TypeUses.Interfaces;
 using Console_.Container;
 using Domain.Components;
 using Domain.Computers;
+using Domain.Employees;
 using Domain.Orders;
 using Infra.Connections;
 using Infra.Repositories.Implementations.Clients;
 using Infra.Repositories.Implementations.Components;
 using Infra.Repositories.Implementations.Computers;
 using Infra.Repositories.Implementations.Employees;
+using Infra.Repositories.Implementations.Employees.Create;
+using Infra.Repositories.Implementations.Employees.Delete;
 using Infra.Repositories.Implementations.Errors;
 using Infra.Repositories.Implementations.Orders;
 using Infra.Repositories.Implementations.Orders.Delete;
@@ -44,7 +48,6 @@ namespace Tests
 
         public DependencyContainerMock()
         {
-            container = new DependencyContainer();
             container.Register<IConnection>(() => new Connection());
             container.Register<IComponentReadOnlyRepository>(() => new ComponentReadOnlyRepository(container.Resolve<IConnection>()));
             container.Register<ITypeUseReadOnlyRepository>(() => new TypeUseReadOnlyRepository(container.Resolve<IConnection>()));
@@ -78,6 +81,8 @@ namespace Tests
             container.Register<IDelete<Component>>(() => new DeleteComponentRepository(container.Resolve<IConnection>()));
             container.Register<IDelete<Computer>>(() => new DeleteComputerRepository(container.Resolve<IConnection>()));
             container.Register<IDelete<Order>>(() => new DeleteOrderRepository(container.Resolve<IConnection>()));
+            container.Register<ICreate<Employee>>(() => new CreateEmployeeRepository(container.Resolve<IConnection>()));
+            container.Register<IDeleteEmployee>(() => new DeleteEmployeeRepository(container.Resolve<IConnection>()));
         }
 
         public void Register<T>(Func<T> createInstance, string instanceName = null)

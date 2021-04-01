@@ -48,6 +48,7 @@
     <Compile Include="Computers\Commands\Build\Directors\NotAvailableComputersException.cs" />
     <Compile Include="Computers\Commands\Delete\DeleteComputer.cs" />
     <Compile Include="Employees\Commands\Create\CreateEmployee.cs" />
+    <Compile Include="Employees\Commands\Delete\DeleteEmployee.cs" />
     <Compile Include="Orders\Commands\Create\AddStockException.cs" />
     <Compile Include="Orders\Commands\Create\CreateOrderResult.cs" />
     <Compile Include="Orders\Commands\Build\BuilderOrderResult.cs" />
