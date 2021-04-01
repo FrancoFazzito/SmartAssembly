@@ -48,6 +48,7 @@ namespace Tests
 
         public DependencyContainerMock()
         {
+            container = new DependencyContainer();
             container.Register<IConnection>(() => new Connection());
             container.Register<IComponentReadOnlyRepository>(() => new ComponentReadOnlyRepository(container.Resolve<IConnection>()));
             container.Register<ITypeUseReadOnlyRepository>(() => new TypeUseReadOnlyRepository(container.Resolve<IConnection>()));
@@ -82,7 +83,7 @@ namespace Tests
             container.Register<IDelete<Computer>>(() => new DeleteComputerRepository(container.Resolve<IConnection>()));
             container.Register<IDelete<Order>>(() => new DeleteOrderRepository(container.Resolve<IConnection>()));
             container.Register<ICreate<Employee>>(() => new CreateEmployeeRepository(container.Resolve<IConnection>()));
-            container.Register<IDeleteEmployee>(() => new DeleteEmployeeRepository(container.Resolve<IConnection>()));
+            container.Register<IDeleteByEmail>(() => new DeleteEmployeeRepository(container.Resolve<IConnection>()));
         }
 
         public void Register<T>(Func<T> createInstance, string instanceName = null)

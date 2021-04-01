@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client\Commands\Create\CreateClient.cs" />
+    <Compile Include="Client\Commands\Delete\DeleteClient.cs" />
     <Compile Include="Components\Commands\Create\CreateComponent.cs" />
     <Compile Include="Components\Commands\Delete\DeleteComponent.cs" />
     <Compile Include="Components\Commands\Update\UpdateComponent.cs" />
@@ -49,7 +51,7 @@
     <Compile Include="Computers\Commands\Delete\DeleteComputer.cs" />
     <Compile Include="Employees\Commands\Create\CreateEmployee.cs" />
     <Compile Include="Employees\Commands\Delete\DeleteEmployee.cs" />
-    <Compile Include="Orders\Commands\Create\AddStockException.cs" />
+    <Compile Include="Orders\Commands\Create\Exceptions\AddStockException.cs" />
     <Compile Include="Orders\Commands\Create\CreateOrderResult.cs" />
     <Compile Include="Orders\Commands\Build\BuilderOrderResult.cs" />
     <Compile Include="Orders\Commands\Build\BuilderOrder.cs" />
@@ -59,6 +61,7 @@
     <Compile Include="Orders\Commands\Build\IBuilderOrder.cs" />
     <Compile Include="Components\Commands\ControlStock\ControlStock.cs" />
     <Compile Include="Components\Commands\ControlStock\IControlStock.cs" />
+    <Compile Include="Orders\Commands\Create\Exceptions\NotExistClientException.cs" />
     <Compile Include="Orders\Commands\Delete\DeleteOrder.cs" />
     <Compile Include="Orders\Commands\Update\UpdateOrder.cs" />
     <Compile Include="Reports\Commands\Create\CreateReport.cs" />
@@ -84,13 +87,13 @@
     <Compile Include="Repositories\Interfaces\Clients\Read\IClientReadOnlyRepository.cs" />
     <Compile Include="Repositories\Interfaces\Computers\Read\IComputerReadOnlyRepository.cs" />
     <Compile Include="Repositories\Interfaces\Computers\Stock\ICompouterStockRepository.cs" />
-    <Compile Include="Repositories\Interfaces\Employees\Delete\IDeleteEmployee.cs" />
+    <Compile Include="Repositories\Interfaces\Common\IDeleteEmployee.cs" />
     <Compile Include="Repositories\Interfaces\Error\Order\IErrorOrderWriteOnlyRepository.cs" />
     <Compile Include="Repositories\Interfaces\Error\Building\IErrorBuildingWithReplaceWriteOnlyRepository.cs" />
     <Compile Include="Repositories\Interfaces\Error\Building\IErrorBuildingWriteOnlyRepository.cs" />
-    <Compile Include="Repositories\Interfaces\Generics\ICreate.cs" />
-    <Compile Include="Repositories\Interfaces\Generics\IDelete.cs" />
-    <Compile Include="Repositories\Interfaces\Generics\IUpdate.cs" />
+    <Compile Include="Repositories\Interfaces\Common\ICreate.cs" />
+    <Compile Include="Repositories\Interfaces\Common\IDelete.cs" />
+    <Compile Include="Repositories\Interfaces\Common\IUpdate.cs" />
     <Compile Include="Repositories\Interfaces\Orders\IBuildOrderRepository.cs" />
     <Compile Include="Repositories\Interfaces\Orders\IDeliverOrderRepository.cs" />
     <Compile Include="Repositories\Interfaces\Orders\IOrderReadOnlyRepository.cs" />

@@ -98,7 +98,7 @@ namespace Console_
             container.Register<IDelete<Computer>>(() => new DeleteComputerRepository(container.Resolve<IConnection>()));
             container.Register<IDelete<Order>>(() => new DeleteOrderRepository(container.Resolve<IConnection>()));
             container.Register<ICreate<Employee>>(() => new CreateEmployeeRepository(container.Resolve<IConnection>()));
-            container.Register<IDeleteEmployee>(() => new DeleteEmployeeRepository(container.Resolve<IConnection>()));
+            container.Register<IDeleteByEmail>(() => new DeleteEmployeeRepository(container.Resolve<IConnection>()));
         }
     }
 }

@@ -16,7 +16,25 @@ namespace Infra.Repositories.Implementations.Components
 
         public void Create(Component value)
         {
-            var command = new SqlCommand("INSERT INTO Component VALUES (@name,@price,@perfomance,@TypePart,@TypeFormat,@TypeMemory,@Socket,@HasIntegratedVideo,@Channels,@VideoLevel,@FanLevel,@NeedHighFrecuency,@Capacity,@FanSize,@MaxFrecuency,@Stock,@Watts,@Stock_Limit)");
+            var command = new SqlCommand("INSERT INTO Component VALUES (" +
+                "@name," +
+                "@price," +
+                "@perfomance," +
+                "@TypePart," +
+                "@TypeFormat," +
+                "@TypeMemory," +
+                "@Socket," +
+                "@HasIntegratedVideo," +
+                "@Channels," +
+                "@VideoLevel," +
+                "@FanLevel," +
+                "@NeedHighFrecuency," +
+                "@Capacity," +
+                "@FanSize," +
+                "@MaxFrecuency," +
+                "@Stock," +
+                "@Watts," +
+                "@Stock_Limit)");
             Populate.CommandComponent(value, command);
             connection.Execute(command);
         }

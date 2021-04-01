@@ -44,6 +44,8 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Convert\ConvertWriter.cs" />
+    <Compile Include="Repositories\Implementations\Clients\Create\CreateClientRepository.cs" />
+    <Compile Include="Repositories\Implementations\Clients\Delete\DeleteClientRepository.cs" />
     <Compile Include="Repositories\Implementations\Clients\Read\ClientReadOnlyRepository.cs" />
     <Compile Include="Repositories\Implementations\Components\Create\CreateComponentRepository.cs" />
     <Compile Include="Repositories\Implementations\Components\Common\Populate.cs" />
@@ -66,7 +68,7 @@
     <Compile Include="Repositories\Implementations\Orders\Delete\DeleteOrderRepository.cs" />
     <Compile Include="Repositories\Implementations\TypeUses\Read\TypeUseReadOnlyRepository.cs" />
     <Compile Include="Repositories\Convert\ConvertReader.cs" />
-    <Compile Include="Repositories\Implementations\Abstracts\Read\AbstractReadOnlyRepository.cs" />
+    <Compile Include="Repositories\Implementations\Common\Abstracts\Read\AbstractReadOnlyRepository.cs" />
     <Compile Include="Connections\Connection.cs" />
     <Compile Include="Repositories\Implementations\Components\Read\ComponentReadOnlyRepository.cs" />
     <Compile Include="Connections\IConnection.cs" />

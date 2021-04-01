@@ -4,9 +4,9 @@ namespace Application.Employees.Commands.Delete
 {
     public class DeleteEmployee
     {
-        private readonly IDeleteEmployee delete;
+        private readonly IDeleteByEmail delete;
 
-        public DeleteEmployee(IDeleteEmployee delete)
+        public DeleteEmployee(IDeleteByEmail delete)
         {
             this.delete = delete;
         }

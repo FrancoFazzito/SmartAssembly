@@ -45,6 +45,11 @@ namespace Application.Orders.Commands.Create
 
         public CreateOrderResult Submit(string clientEmail, string commentary)
         {
+            if (clientRepository.GetByEmail(clientEmail) == null)
+            {
+                throw new NotExistClientException();
+            }
+
             PopulateOrder(clientEmail, commentary);
             orderRepository.Insert(order);
             return new CreateOrderResult(controlStock.ComponentsLowStock, order);
