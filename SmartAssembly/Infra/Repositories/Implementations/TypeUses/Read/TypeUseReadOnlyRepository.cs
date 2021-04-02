@@ -1,5 +1,5 @@
-﻿using Application.Computers.Commands.Build.Specification;
-using Application.Repositories.TypeUses.Interfaces;
+﻿using Application.Computers.Commands.Build;
+using Application.Repositories.Interfaces;
 using Domain.Computers;
 using Infra.Connections;
 using Infra.Repositories.Convert;

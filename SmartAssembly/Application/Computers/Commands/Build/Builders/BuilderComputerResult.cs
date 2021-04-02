@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Application.Computers.Commands.Build.Builders
+namespace Application.Computers.Commands.Build
 {
     public class BuilderComputerResult
     {

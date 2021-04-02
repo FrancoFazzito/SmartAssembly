@@ -1,7 +1,7 @@
 ﻿using Domain.Computers;
 using System.Collections.Generic;
 
-namespace Application.Repositories.Interfaces.Computers
+namespace Application.Repositories.Interfaces
 {
     public interface IComputerReadOnlyRepository
     {

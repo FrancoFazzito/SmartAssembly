@@ -1,6 +1,5 @@
-﻿using Application.Computers.Commands.Build.Directors;
-using Application.Computers.Commands.Build.Requests;
-using Application.Repositories.TypeUses.Interfaces;
+﻿using Application.Computers.Commands.Build;
+using Application.Repositories.Interfaces;
 using Domain.Computers;
 using Domain.Importance;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

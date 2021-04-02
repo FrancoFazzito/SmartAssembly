@@ -1,7 +1,7 @@
 ﻿using Domain.Orders;
 using System.Collections.Generic;
 
-namespace Application.Repositories.Orders.Interfaces
+namespace Application.Repositories.Interfaces
 {
     public interface IOrderReadOnlyRepository
     {

@@ -1,10 +1,9 @@
-﻿using Application.Computers.Commands.Build.Directors;
-using Application.Computers.Commands.Build.Requests;
+﻿using Application.Computers.Commands.Build;
 using Application.Orders.Commands.Build;
 using Application.Orders.Commands.Create;
 using Application.Orders.Commands.Deliver;
 using Application.Reports.Commands.Create;
-using Application.Repositories.TypeUses.Interfaces;
+using Application.Repositories.Interfaces;
 using Domain.Computers;
 using Domain.Importance;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

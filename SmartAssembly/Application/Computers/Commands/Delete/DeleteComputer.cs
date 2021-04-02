@@ -1,5 +1,4 @@
 ﻿using Application.Repositories.Interfaces;
-using Domain.Computers;
 
 namespace Application.Computers.Commands.Delete
 {

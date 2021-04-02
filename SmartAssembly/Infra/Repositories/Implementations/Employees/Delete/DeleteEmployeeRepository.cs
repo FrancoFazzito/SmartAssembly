@@ -1,4 +1,4 @@
-﻿using Application.Repositories.Interfaces.Employees.Delete;
+﻿using Application.Repositories.Interfaces;
 using Infra.Connections;
 using System.Data.SqlClient;
 

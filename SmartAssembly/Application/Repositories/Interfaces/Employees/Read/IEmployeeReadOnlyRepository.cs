@@ -1,7 +1,7 @@
 ﻿using Domain.Employees;
 using System.Collections.Generic;
 
-namespace Application.Repositories.Employees.Interfaces
+namespace Application.Repositories.Interfaces
 {
     public interface IEmployeeReadOnlyRepository
     {

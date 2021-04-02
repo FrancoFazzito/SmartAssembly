@@ -1,6 +1,6 @@
 ﻿using Domain.Orders;
 
-namespace Application.Repositories.Orders.Interfaces
+namespace Application.Repositories.Interfaces
 {
     public interface ISubmitOrderRepository
     {

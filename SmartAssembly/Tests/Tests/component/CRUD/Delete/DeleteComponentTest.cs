@@ -1,6 +1,5 @@
 ﻿using Application.Components.Commands.Create;
 using Application.Components.Commands.Delete;
-using Application.Repositories.Components.Interfaces;
 using Application.Repositories.Interfaces;
 using Domain.Components;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

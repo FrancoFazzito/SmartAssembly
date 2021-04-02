@@ -1,8 +1,5 @@
 ﻿using Application.Components.Commands.ControlStock;
-using Application.Repositories.Employees.Interfaces;
-using Application.Repositories.Interfaces.Clients;
-using Application.Repositories.Interfaces.Computers;
-using Application.Repositories.Orders.Interfaces;
+using Application.Repositories.Interfaces;
 using Domain.Computers;
 using Domain.Orders;
 using Domain.Orders.States;

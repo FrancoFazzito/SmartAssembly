@@ -1,4 +1,4 @@
-﻿using Application.Repositories.Interfaces.Error;
+﻿using Application.Repositories.Interfaces;
 using Domain.Components;
 using Domain.Computers;
 using Domain.Orders.States;

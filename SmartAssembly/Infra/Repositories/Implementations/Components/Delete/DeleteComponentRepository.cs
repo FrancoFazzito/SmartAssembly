@@ -1,5 +1,4 @@
 ﻿using Application.Repositories.Interfaces;
-using Domain.Components;
 using Infra.Connections;
 using System.Data.SqlClient;
 

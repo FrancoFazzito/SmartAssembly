@@ -1,6 +1,6 @@
 ﻿using Domain.Computers;
 
-namespace Application.Computers.Commands.Build.Specification
+namespace Application.Computers.Commands.Build
 {
     public class Specification : ISpecification
     {

@@ -2,32 +2,16 @@
 using Application.Common.Factories.Enoughs;
 using Application.Common.Strategies.OrderBy;
 using Application.Components.Commands.ControlStock;
-using Application.Components.Commands.Create;
-using Application.Components.Commands.Delete;
-using Application.Computers.Commands.Build.Builders;
-using Application.Computers.Commands.Build.Directors;
-using Application.Computers.Commands.Build.Requests;
+using Application.Computers.Commands.Build;
 using Application.Configurations.Commands.Edit;
-using Application.Employees.Commands.Delete;
 using Application.Orders.Commands.Build;
 using Application.Orders.Commands.Create;
 using Application.Orders.Commands.Deliver;
-using Application.Orders.Commands.Register.RegisterErrorBuilding;
-using Application.Orders.Commands.RegisterErrorOrderDelivered;
+using Application.Orders.Commands.RegisterError;
 using Application.Reports.Commands.Create;
-using Application.Repositories.Components.Interfaces;
-using Application.Repositories.Employees.Interfaces;
 using Application.Repositories.Interfaces;
-using Application.Repositories.Interfaces.Clients;
-using Application.Repositories.Interfaces.Computers;
-using Application.Repositories.Interfaces.Employees.Delete;
-using Application.Repositories.Interfaces.Error;
-using Application.Repositories.Interfaces.Orders;
-using Application.Repositories.Orders.Interfaces;
-using Application.Repositories.TypeUses.Interfaces;
 using Console_.Container;
 using Domain.Components;
-using Domain.Components.Types;
 using Domain.Computers;
 using Domain.Employees;
 using Domain.Importance;
@@ -44,7 +28,6 @@ using Infra.Repositories.Implementations.Orders;
 using Infra.Repositories.Implementations.Orders.Delete;
 using Infra.Repositories.Implementations.Orders.Update;
 using Infra.Repositories.Implementations.TypeUses;
-using System.Linq;
 
 namespace Console_
 {
@@ -58,7 +41,7 @@ namespace Console_
             var request = new ComputerRequest(TypeUse.gaming, 1200000, Importance.Price, container.Resolve<ITypeUseReadOnlyRepository>());
             var director = container.Resolve<IDirectorComputer>();
             var result = director.Build(request);
-            var computers = result.Computers;
+            _ = result.Computers;
         }
 
         private static void RegisterDependencies()
@@ -94,9 +77,9 @@ namespace Console_
             container.Register<ICreate<Component>>(() => new CreateComponentRepository(container.Resolve<IConnection>()));
             container.Register<IUpdate<Component>>(() => new UpdateComponentRepository(container.Resolve<IConnection>()));
             container.Register<IUpdate<Order>>(() => new UpdateOrderRepository(container.Resolve<IConnection>()));
-            container.Register<IDeleteById>(() => new DeleteComponentRepository(container.Resolve<IConnection>()),typeof(Component).ToString());
-            container.Register<IDeleteById>(() => new DeleteComputerRepository(container.Resolve<IConnection>()),typeof(Computer).ToString());
-            container.Register<IDeleteById>(() => new DeleteOrderRepository(container.Resolve<IConnection>()),typeof(Order).ToString());
+            container.Register<IDeleteById>(() => new DeleteComponentRepository(container.Resolve<IConnection>()), typeof(Component).ToString());
+            container.Register<IDeleteById>(() => new DeleteComputerRepository(container.Resolve<IConnection>()), typeof(Computer).ToString());
+            container.Register<IDeleteById>(() => new DeleteOrderRepository(container.Resolve<IConnection>()), typeof(Order).ToString());
             container.Register<ICreate<Employee>>(() => new CreateEmployeeRepository(container.Resolve<IConnection>()));
             container.Register<IDeleteByEmail>(() => new DeleteEmployeeRepository(container.Resolve<IConnection>()));
         }

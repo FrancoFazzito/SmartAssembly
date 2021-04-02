@@ -1,8 +1,7 @@
 ﻿using Application.Common.Factories.Compatibilities;
 using Application.Common.Factories.Enoughs;
 using Application.Common.Strategies.OrderBy;
-using Application.Computers.Commands.Build.Requests;
-using Application.Repositories.Components.Interfaces;
+using Application.Repositories.Interfaces;
 using Domain.Compatibility.Enums;
 using Domain.Components;
 using Domain.Components.Types;
@@ -11,7 +10,7 @@ using Domain.Enoughs.Enums;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Application.Computers.Commands.Build.Builders
+namespace Application.Computers.Commands.Build
 {
     public class BuilderComputer : IBuilderComputer
     {
@@ -67,10 +66,10 @@ namespace Application.Computers.Commands.Build.Builders
                                            .FirstOrDefault(c => c.IsEnough(factoryEnough[Enough.Level], request.Specification.Gpu)));
                 return;
             }
-            checkIntregatedVideo();
+            CheckIntregatedVideo();
         }
 
-        private void checkIntregatedVideo()
+        private void CheckIntregatedVideo()
         {
             if (!Computer[TypePart.cpu].IsCompatibleWith(factoryCompatibility[Compatibility.IntegratedVideo], Computer[TypePart.mother]))
             {

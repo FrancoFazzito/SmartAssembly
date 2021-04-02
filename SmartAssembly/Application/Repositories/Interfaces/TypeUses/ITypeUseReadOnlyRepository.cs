@@ -1,7 +1,7 @@
-﻿using Application.Computers.Commands.Build.Specification;
+﻿using Application.Computers.Commands.Build;
 using Domain.Computers;
 
-namespace Application.Repositories.TypeUses.Interfaces
+namespace Application.Repositories.Interfaces
 {
     public interface ITypeUseReadOnlyRepository
     {

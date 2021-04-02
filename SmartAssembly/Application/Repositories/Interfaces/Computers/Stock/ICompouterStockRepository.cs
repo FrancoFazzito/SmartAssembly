@@ -1,6 +1,6 @@
 ﻿using Domain.Computers;
 
-namespace Application.Repositories.Interfaces.Computers
+namespace Application.Repositories.Interfaces
 {
     public interface IComputerStockRepository
     {

@@ -1,7 +1,4 @@
-﻿using Application.Computers.Commands.Build.Builders;
-using Application.Computers.Commands.Build.Requests;
-
-namespace Application.Computers.Commands.Build.Directors
+﻿namespace Application.Computers.Commands.Build
 {
     public interface IDirectorComputer
     {

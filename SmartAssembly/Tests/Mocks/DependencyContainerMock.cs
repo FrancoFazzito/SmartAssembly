@@ -2,25 +2,14 @@
 using Application.Common.Factories.Enoughs;
 using Application.Common.Strategies.OrderBy;
 using Application.Components.Commands.ControlStock;
-using Application.Computers.Commands.Build.Builders;
-using Application.Computers.Commands.Build.Directors;
+using Application.Computers.Commands.Build;
 using Application.Configurations.Commands.Edit;
 using Application.Orders.Commands.Build;
 using Application.Orders.Commands.Create;
 using Application.Orders.Commands.Deliver;
-using Application.Orders.Commands.Register.RegisterErrorBuilding;
-using Application.Orders.Commands.RegisterErrorOrderDelivered;
+using Application.Orders.Commands.RegisterError;
 using Application.Reports.Commands.Create;
-using Application.Repositories.Components.Interfaces;
-using Application.Repositories.Employees.Interfaces;
 using Application.Repositories.Interfaces;
-using Application.Repositories.Interfaces.Clients;
-using Application.Repositories.Interfaces.Computers;
-using Application.Repositories.Interfaces.Employees.Delete;
-using Application.Repositories.Interfaces.Error;
-using Application.Repositories.Interfaces.Orders;
-using Application.Repositories.Orders.Interfaces;
-using Application.Repositories.TypeUses.Interfaces;
 using Console_.Container;
 using Domain.Components;
 using Domain.Computers;
@@ -80,9 +69,9 @@ namespace Tests
             container.Register<ICreate<Employee>>(() => new CreateEmployeeRepository(container.Resolve<IConnection>()));
             container.Register<IUpdate<Component>>(() => new UpdateComponentRepository(container.Resolve<IConnection>()));
             container.Register<IUpdate<Order>>(() => new UpdateOrderRepository(container.Resolve<IConnection>()));
-            container.Register<IDeleteById>(() => new DeleteComponentRepository(container.Resolve<IConnection>()),typeof(Component).ToString());
-            container.Register<IDeleteById>(() => new DeleteComputerRepository(container.Resolve<IConnection>()),typeof(Computer).ToString());
-            container.Register<IDeleteById>(() => new DeleteOrderRepository(container.Resolve<IConnection>()),typeof(Order).ToString());
+            container.Register<IDeleteById>(() => new DeleteComponentRepository(container.Resolve<IConnection>()), typeof(Component).ToString());
+            container.Register<IDeleteById>(() => new DeleteComputerRepository(container.Resolve<IConnection>()), typeof(Computer).ToString());
+            container.Register<IDeleteById>(() => new DeleteOrderRepository(container.Resolve<IConnection>()), typeof(Order).ToString());
             container.Register<IDeleteByEmail>(() => new DeleteEmployeeRepository(container.Resolve<IConnection>()));
         }
 

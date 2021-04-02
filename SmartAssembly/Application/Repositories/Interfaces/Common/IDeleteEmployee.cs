@@ -1,4 +1,4 @@
-﻿namespace Application.Repositories.Interfaces.Employees.Delete
+﻿namespace Application.Repositories.Interfaces
 {
     public interface IDeleteByEmail
     {

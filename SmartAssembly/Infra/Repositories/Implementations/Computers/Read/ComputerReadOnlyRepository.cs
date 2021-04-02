@@ -1,5 +1,4 @@
-﻿using Application.Repositories.Components.Interfaces;
-using Application.Repositories.Interfaces.Computers;
+﻿using Application.Repositories.Interfaces;
 using Domain.Computers;
 using Infra.Connections;
 using Infra.Repositories.Convert;

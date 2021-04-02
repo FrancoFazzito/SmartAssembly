@@ -1,4 +1,4 @@
-﻿using Application.Repositories.Components.Interfaces;
+﻿using Application.Repositories.Interfaces;
 using Domain.Components;
 using Domain.Components.Types;
 using Infra.Connections;

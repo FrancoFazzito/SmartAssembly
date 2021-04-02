@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Application.Computers.Commands.Build.Directors
+namespace Application.Computers.Commands.Build
 {
     [Serializable]
     public class NotAvailableComputersException : Exception

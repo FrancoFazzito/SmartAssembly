@@ -1,4 +1,4 @@
-﻿using Application.Repositories.Interfaces.Error;
+﻿using Application.Repositories.Interfaces;
 using Domain.Components;
 using Domain.Computers;
 using Domain.Orders.States;
@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace Infra.Repositories.Implementations.Errors
 {
-    public class ErrorBuildingWriteOnlyRepository : IErrorBuildingWriteOnlyRepository //separate repository with replace and withouth replace
+    public class ErrorBuildingWriteOnlyRepository : IErrorBuildingWriteOnlyRepository
     {
         private const string PARAM_COMPUTER = "ID_Computer";
         private const string PARAM_COMPONENT_REPLACE = "ID_Component_Replace";

@@ -1,5 +1,4 @@
 ﻿using Application.Repositories.Interfaces;
-using Domain.Orders;
 
 namespace Application.Orders.Commands.Delete
 {

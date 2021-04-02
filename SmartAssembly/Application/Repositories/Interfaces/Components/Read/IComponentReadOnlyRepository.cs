@@ -1,7 +1,7 @@
 ﻿using Domain.Components;
 using System.Collections.Generic;
 
-namespace Application.Repositories.Components.Interfaces
+namespace Application.Repositories.Interfaces
 {
     public interface IComponentReadOnlyRepository
     {

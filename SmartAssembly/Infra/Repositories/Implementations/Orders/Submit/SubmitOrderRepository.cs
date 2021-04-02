@@ -1,4 +1,4 @@
-﻿using Application.Repositories.Orders.Interfaces;
+﻿using Application.Repositories.Interfaces;
 using Domain.Components;
 using Domain.Computers;
 using Domain.Orders;

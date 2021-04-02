@@ -1,5 +1,4 @@
 ﻿using Application.Components.Commands.Update;
-using Application.Repositories.Components.Interfaces;
 using Application.Repositories.Interfaces;
 using Domain.Components;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

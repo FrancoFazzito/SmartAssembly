@@ -1,4 +1,4 @@
-﻿using Application.Repositories.Interfaces.Clients;
+﻿using Application.Repositories.Interfaces;
 using Domain.Clients;
 using Infra.Connections;
 using Infra.Repositories.Convert;

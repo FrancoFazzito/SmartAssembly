@@ -1,5 +1,4 @@
-﻿using Application.Repositories.Interfaces.Orders;
-using Application.Repositories.Orders.Interfaces;
+﻿using Application.Repositories.Interfaces;
 using Domain.Orders;
 using Domain.Orders.States;
 using System;

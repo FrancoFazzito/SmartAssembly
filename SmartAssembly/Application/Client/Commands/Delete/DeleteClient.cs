@@ -1,9 +1,4 @@
-﻿using Application.Repositories.Interfaces.Employees.Delete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Repositories.Interfaces;
 
 namespace Application.Client.Commands.Delete
 {

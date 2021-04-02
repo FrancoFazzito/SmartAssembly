@@ -1,7 +1,6 @@
-﻿using Application.Computers.Commands.Build.Specification;
-using Domain.Importance;
+﻿using Domain.Importance;
 
-namespace Application.Computers.Commands.Build.Requests
+namespace Application.Computers.Commands.Build
 {
     public interface IComputerRequest
     {

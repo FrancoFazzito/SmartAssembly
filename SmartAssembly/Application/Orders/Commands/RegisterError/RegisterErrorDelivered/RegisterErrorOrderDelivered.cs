@@ -1,12 +1,11 @@
-﻿using Application.Repositories.Interfaces.Error;
-using Application.Repositories.Orders.Interfaces;
+﻿using Application.Repositories.Interfaces;
 using Domain.Computers;
 using Domain.Orders;
 using Domain.Orders.States;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Application.Orders.Commands.RegisterErrorOrderDelivered
+namespace Application.Orders.Commands.RegisterError
 {
     public class RegisterErrorOrderDelivered : IRegisterErrorOrderDelivered
     {

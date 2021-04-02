@@ -1,7 +1,7 @@
 ﻿using Domain.Computers;
 using Domain.Orders.States;
 
-namespace Application.Repositories.Interfaces.Error
+namespace Application.Repositories.Interfaces
 {
     public interface IErrorOrderWriteOnlyRepository
     {
