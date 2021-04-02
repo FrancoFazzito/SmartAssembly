@@ -20,7 +20,7 @@ namespace Application.Computers.Commands.Build
 
         private IEnumerable<Computer> ComputersBuilded(IComputerRequest request)
         {
-            return from cpu in Builder.GetComponentsRoot(request)
+            return from cpu in Builder.GetComponents(request)
                    let computer = BuildComputer(cpu)
                    where computer != null
                    select computer;

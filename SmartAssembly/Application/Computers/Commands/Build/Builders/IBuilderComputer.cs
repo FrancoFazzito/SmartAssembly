@@ -26,6 +26,6 @@ namespace Application.Computers.Commands.Build
 
         void AddPsu();
 
-        IEnumerable<Component> GetComponentsRoot(IComputerRequest request);
+        IEnumerable<Component> GetComponents(IComputerRequest request);
     }
 }

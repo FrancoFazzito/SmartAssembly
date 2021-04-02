@@ -29,7 +29,7 @@ namespace Application.Computers.Commands.Build
             this.repository = repository;
         }
 
-        public IEnumerable<Component> GetComponentsRoot(IComputerRequest request)
+        public IEnumerable<Component> GetComponents(IComputerRequest request)
         {
             components = orderBy.GetOrderedComponents(repository.All, request.Importance);
             this.request = request;
@@ -71,7 +71,7 @@ namespace Application.Computers.Commands.Build
 
         private void CheckIntregatedVideo()
         {
-            if (!Computer[TypePart.cpu].IsCompatibleWith(factoryCompatibility[Compatibility.IntegratedVideo], Computer[TypePart.mother]))
+            if (!Cpu.IsCompatibleWith(factoryCompatibility[Compatibility.IntegratedVideo], Mother))
             {
                 ThrowInvalidAdd();
             }
@@ -99,12 +99,11 @@ namespace Application.Computers.Commands.Build
 
         public void AddRam()
         {
-            if (Computer[TypePart.cpu].IsEnough(factoryEnough[Enough.MultipleRam], request.Specification.Ram))
+            if (Cpu.IsEnough(factoryEnough[Enough.MultipleRam], request.Specification.Ram))
             {
-                var ram = components.Where(c => c.IsType(TypePart.ram))
-                                                 .Where(c => c.IsCompatibleWith(factoryCompatibility[Compatibility.Ram], Cpu))
-                                                 .FirstOrDefault(c => c.IsEnough(factoryEnough[Enough.Capacity], request.Specification.Ram / Cpu.Channels));
-                Add(ram, Cpu.Channels);
+                Add(components.Where(c => c.IsType(TypePart.ram))
+                              .Where(c => c.IsCompatibleWith(factoryCompatibility[Compatibility.Ram], Cpu))
+                              .FirstOrDefault(c => c.IsEnough(factoryEnough[Enough.Capacity], request.Specification.Ram / Cpu.Channels)), Cpu.Channels);
                 return;
             }
 
@@ -114,8 +113,8 @@ namespace Application.Computers.Commands.Build
         public void AddTower()
         {
             Add(components.Where(c => c.IsType(TypePart.tower))
-                                       .Where(c => c.IsCompatibleWith(factoryCompatibility[Compatibility.CaseFan], Computer[TypePart.fan]))
-                                       .FirstOrDefault(c => c.IsCompatibleWith(factoryCompatibility[Compatibility.CaseMother], Computer[TypePart.mother])));
+                                       .Where(c => c.IsCompatibleWith(factoryCompatibility[Compatibility.CaseFan], Fan))
+                                       .FirstOrDefault(c => c.IsCompatibleWith(factoryCompatibility[Compatibility.CaseMother], Mother)));
         }
 
         public void AddPsu()
@@ -165,5 +164,7 @@ namespace Application.Computers.Commands.Build
 
         public Computer Computer { get; private set; }
         private Component Cpu => Computer[TypePart.cpu];
+        private Component Mother => Computer[TypePart.mother];
+        private Component Fan => Computer[TypePart.fan];
     }
 }
