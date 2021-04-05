@@ -11,9 +11,9 @@ namespace Application.Configuration.Commands.Update
             this.update = update;
         }
 
-        public void Update(string name,int value)
+        public void Update(string name, int value)
         {
-            update.EditValue(name,value);
+            update.EditValue(name, value);
         }
     }
 }

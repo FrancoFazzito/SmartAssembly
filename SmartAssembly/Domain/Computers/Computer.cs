@@ -8,8 +8,15 @@ namespace Domain.Computers
 {
     public class Computer
     {
-        private readonly IConfigurationCosts configuration = new ConfigurationCosts();
         private ICollection<Component> components = new List<Component>();
+        private readonly int multiplier;
+        private readonly int cost;
+
+        public Computer(int multiplier,int cost)
+        {
+            this.multiplier = multiplier;
+            this.cost = cost;
+        }
 
         public void Add(Component element, int quantity = 1)
         {
@@ -28,10 +35,10 @@ namespace Domain.Computers
         public TypeUse TypeUse { get; set; }
         public bool Completed { get; set; }
         public IEnumerable<Component> Components { get => components; set => components = value.ToList(); }
-        public decimal Price => components.Sum(c => c.Price) + configuration.BuildCost;
+        public decimal Price => components.Sum(c => c.Price) + cost;
         public int TotalConsumption => components.Sum(c => c.Watts);
         public decimal Perfomance => components.Sum(c => c.PerfomanceLevel);
-        public decimal PricePerfomance => System.Math.Round(Perfomance / Price * configuration.PricePerfomanceMultiplier, 2);
+        public decimal PricePerfomance => System.Math.Round(Perfomance / Price * multiplier, 2);
         public Component this[TypePart part] => Components.FirstOrDefault(c => c.TypePart == part);
     }
 }

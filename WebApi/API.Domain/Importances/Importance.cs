@@ -2,7 +2,7 @@
 {
     public enum Importance
     {
-        Price,
-        Perfomance
+        price,
+        perfomance
     }
 }

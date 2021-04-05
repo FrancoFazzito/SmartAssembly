@@ -1,17 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Application.Common.Factories.Compatibilities;
+using Application.Common.Factories.Enoughs;
+using Application.Common.Strategies.OrderBy;
+using Application.Computers.Commands.Build;
+using Application.Repositories.Interfaces;
 using Infra.Connections;
+using Infra.Repositories.Implementations.Components;
+using Infra.Repositories.Implementations.Costs.Read;
+using Infra.Repositories.Implementations.TypeUses;
 using Infra.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace WebApi
 {
@@ -31,8 +32,15 @@ namespace WebApi
             services.AddOptions();
 
             //register dependencies
-            services.AddTransient<IConnection,Connection>();
-
+            services.AddTransient<IConnection, Connection>();
+            services.AddTransient<IComponentReadOnlyRepository, ComponentReadOnlyRepository>();
+            services.AddTransient<IFactoryCompatibility, FactoryCompatibility>();
+            services.AddTransient<IFactoryEnough, FactoryEnough>();
+            services.AddTransient<IStrategyOrderBy, StrategyOrderBy>();
+            services.AddTransient<ICostsReadOnlyRepository, CostsReadOnlyRepository>();
+            services.AddTransient<IBuilderComputer, BuilderComputer>();
+            services.AddTransient<IDirectorComputer, DirectorComputer>();
+            services.AddTransient<ITypeUseReadOnlyRepository, TypeUseReadOnlyRepository>();
             services.AddControllers();
         }
 

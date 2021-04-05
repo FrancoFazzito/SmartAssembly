@@ -9,7 +9,7 @@ namespace Application.Common.Strategies.OrderBy
     {
         public IEnumerable<Component> GetOrderedComponents(IEnumerable<Component> components, Importance order)
         {
-            if (order == Importance.Price)
+            if (order == Importance.price)
             {
                 return components.OrderBy(c => c.Price);
             }

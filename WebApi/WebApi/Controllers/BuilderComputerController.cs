@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Infra.Connections;
+﻿using Application.Computers.Commands.Build;
+using Application.Repositories.Interfaces;
+using Domain.Computers;
+using Domain.Importance;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
 
 namespace WebApi.Controllers
 {
@@ -12,9 +12,26 @@ namespace WebApi.Controllers
     [Route("[controller]")]
     public class BuilderComputerController : ControllerBase
     {
-        public BuilderComputerController()
+        private readonly IDirectorComputer director;
+        private readonly ITypeUseReadOnlyRepository typeRepo;
+
+        public BuilderComputerController(IDirectorComputer director, ITypeUseReadOnlyRepository typeRepo)
         {
-            
+            this.director = director;
+            this.typeRepo = typeRepo;
+        }
+
+        [HttpGet]
+        public string GetCExample()
+        {
+            return "120000/gaming/price";
+        }
+
+        // GET api/price/use/importance
+        [HttpGet("{price}/{use}/{importance}")]
+        public IEnumerable<Computer> GetComputers(decimal price, string use, string importance)
+        {
+            return director.Build(new ComputerRequest((TypeUse)Enum.Parse(typeof(TypeUse), use), price, (Importance)Enum.Parse(typeof(Importance), importance), typeRepo)).Computers;
         }
     }
 }

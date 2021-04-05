@@ -13,11 +13,11 @@ namespace Infra.Repositories.Implementations.Costs.Update
             this.connection = connection;
         }
 
-        public void EditValue(string name,int newValue)
+        public void EditValue(string name, int newValue)
         {
             var command = new SqlCommand("UPDATE Costs SET [Value] = @value WHERE [Name] = @name");
-            command.Parameters.AddWithValue("value",newValue);
-            command.Parameters.AddWithValue("name",name);
+            command.Parameters.AddWithValue("value", newValue);
+            command.Parameters.AddWithValue("name", name);
             connection.Execute(command);
         }
     }

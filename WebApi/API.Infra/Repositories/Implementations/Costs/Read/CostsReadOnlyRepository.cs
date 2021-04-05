@@ -2,11 +2,8 @@
 using Infra.Connections;
 using Infra.Repositories.Implementations.Abstracts;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 
 namespace Infra.Repositories.Implementations.Costs.Read
 {
@@ -23,11 +20,11 @@ namespace Infra.Repositories.Implementations.Costs.Read
 
         public int PricePerfomanceMultiplier => All.FirstOrDefault(c => c.Item1 == PARAM_MULTIPLIER).Item2;
 
-        protected override string QuerySelectAll => "SELECT * FROM Costs";
+        protected override string QuerySelectAll => "SELECT * FROM Cost";
 
-        protected override Tuple<string,int> NewRecord(IDataReader reader)
+        protected override Tuple<string, int> NewRecord(IDataReader reader)
         {
-            return new Tuple<string, int>(reader.GetString(0),reader.GetInt32(1));
+            return new Tuple<string, int>(reader.GetString(0), reader.GetInt32(1));
         }
     }
 }
