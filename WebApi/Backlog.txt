@@ -1,4 +1,5 @@
 rest API
+	register depencies 
 JWT -> add rols
 Logger
 mailing y PDF

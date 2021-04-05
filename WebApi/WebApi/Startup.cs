@@ -30,7 +30,7 @@ namespace WebApi
             services.Configure<DatabaseSettings>(Configuration.GetSection("DatabaseSettings"));
             services.AddOptions();
 
-
+            //register dependencies
             services.AddTransient<IConnection,Connection>();
 
             services.AddControllers();
