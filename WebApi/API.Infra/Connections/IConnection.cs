@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Infra.Settings;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 

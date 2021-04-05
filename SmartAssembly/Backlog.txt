@@ -1,5 +1,3 @@
-https://stackoverflow.com/questions/27880433/using-iconfiguration-in-c-sharp-class-library
-configure container -> add dbsettings like param to connection
 rest API
 JWT -> add rols
 Logger

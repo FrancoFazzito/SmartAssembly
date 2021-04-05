@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Infra.Settings;
+using Microsoft.Extensions.Options;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -7,10 +9,11 @@ namespace Infra.Connections
     public class Connection : IConnection
     {
         private readonly SqlConnection connection;
+        //private string connectionString;
 
-        public Connection(string connectionString)
+        public Connection(IOptions<DatabaseSettings> dbOptions)
         {
-            connection = new SqlConnection(connectionString);
+            connection = new SqlConnection(dbOptions.Value.ConnectionString);
         }
 
         private SqlConnection Open()
