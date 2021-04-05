@@ -1,5 +1,6 @@
 rest API
-	register depencies 
+	change to return order with client and commentary
+	submit order object
 JWT -> add rols
 Logger
 mailing y PDF

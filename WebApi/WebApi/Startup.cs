@@ -1,11 +1,17 @@
 using Application.Common.Factories.Compatibilities;
 using Application.Common.Factories.Enoughs;
 using Application.Common.Strategies.OrderBy;
+using Application.Components.Commands.ControlStock;
 using Application.Computers.Commands.Build;
+using Application.Orders.Commands.Create;
 using Application.Repositories.Interfaces;
 using Infra.Connections;
+using Infra.Repositories.Implementations.Clients;
 using Infra.Repositories.Implementations.Components;
+using Infra.Repositories.Implementations.Computers;
 using Infra.Repositories.Implementations.Costs.Read;
+using Infra.Repositories.Implementations.Employees;
+using Infra.Repositories.Implementations.Orders;
 using Infra.Repositories.Implementations.TypeUses;
 using Infra.Settings;
 using Microsoft.AspNetCore.Builder;
@@ -32,6 +38,7 @@ namespace WebApi
             services.AddOptions();
 
             //register dependencies
+            //build computer
             services.AddTransient<IConnection, Connection>();
             services.AddTransient<IComponentReadOnlyRepository, ComponentReadOnlyRepository>();
             services.AddTransient<IFactoryCompatibility, FactoryCompatibility>();
@@ -41,6 +48,15 @@ namespace WebApi
             services.AddTransient<IBuilderComputer, BuilderComputer>();
             services.AddTransient<IDirectorComputer, DirectorComputer>();
             services.AddTransient<ITypeUseReadOnlyRepository, TypeUseReadOnlyRepository>();
+
+            //create order
+            services.AddTransient<ISubmitOrderRepository, SubmitOrderRepository>();
+            services.AddTransient<IEmployeeReadOnlyRepository, EmployeeReadOnlyRepository>();
+            services.AddTransient<IClientReadOnlyRepository, ClientReadOnlyRepository>();
+            services.AddTransient<IComputerStockRepository, ComputerStockRepository>();
+            services.AddTransient<IControlStock, ControlStock>();
+            services.AddTransient<ICreateOrder,CreateOrder>();
+
             services.AddControllers();
         }
 
