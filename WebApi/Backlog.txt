@@ -1,8 +1,8 @@
 rest API
-	change to return order with client and commentary
-	submit order object
+add responses and refactor headers and tasks
 JWT -> add rols
 Logger
+Swagger
 mailing y PDF
 Testing ABM
 

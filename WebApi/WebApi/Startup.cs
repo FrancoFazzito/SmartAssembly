@@ -55,7 +55,8 @@ namespace WebApi
             services.AddTransient<IClientReadOnlyRepository, ClientReadOnlyRepository>();
             services.AddTransient<IComputerStockRepository, ComputerStockRepository>();
             services.AddTransient<IControlStock, ControlStock>();
-            services.AddTransient<ICreateOrder,CreateOrder>();
+            services.AddTransient<ICreateOrder, CreateOrder>();
+            
 
             services.AddControllers();
         }

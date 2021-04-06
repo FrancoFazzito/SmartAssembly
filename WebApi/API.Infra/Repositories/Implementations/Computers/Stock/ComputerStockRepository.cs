@@ -1,8 +1,6 @@
 ﻿using Application.Repositories.Interfaces;
-using Domain.Components;
 using Domain.Computers;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Infra.Repositories.Implementations.Computers
 {
@@ -17,7 +15,7 @@ namespace Infra.Repositories.Implementations.Computers
 
         public bool IsValid(Computer computer, int quantity)
         {
-            var componentsQuantity = new Dictionary<int,int>();
+            var componentsQuantity = new Dictionary<int, int>();
             foreach (var component in computer.Components)
             {
                 if (componentsQuantity.ContainsKey(component.Id))
@@ -26,7 +24,7 @@ namespace Infra.Repositories.Implementations.Computers
                 }
                 else
                 {
-                    componentsQuantity.Add(component.Id ,computer.QuantityOf(component) * quantity);
+                    componentsQuantity.Add(component.Id, computer.QuantityOf(component) * quantity);
                 }
             }
 

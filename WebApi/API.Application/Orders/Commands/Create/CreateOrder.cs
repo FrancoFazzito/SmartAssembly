@@ -1,6 +1,8 @@
 ﻿using Application.Components.Commands.ControlStock;
 using Application.Repositories.Interfaces;
+using Domain.Clients;
 using Domain.Computers;
+using Domain.Employees;
 using Domain.Orders;
 using Domain.Orders.States;
 
@@ -25,7 +27,7 @@ namespace Application.Orders.Commands.Create
             this.controlStock = controlStock;
         }
 
-        public void Add(Computer computer, int quantity)
+        public Order Add(Computer computer, int quantity)
         {
             if (!computerStock.IsValid(computer, quantity))
             {
@@ -33,33 +35,33 @@ namespace Application.Orders.Commands.Create
             }
 
             order.Add(computer, quantity);
+            return order;
         }
 
-        public void Remove(Computer computer)
+        public Order Remove(Computer computer)
         {
             order.Remove(computer);
+            return order;
         }
 
-        public CreateOrderResult Submit(string clientEmail, string commentary)
+        public CreateOrderResult Submit(Order order, string clientEmail)
         {
-            if (clientRepository.GetByEmail(clientEmail) == null)
-            {
-                throw new NotExistClientException();
-            }
-
-            PopulateOrder(clientEmail, commentary);
+            order.DateRequested = System.DateTime.Now;
+            order.State = OrderState.Uncompleted;
+            order.Client = GetClient(clientEmail);
+            order.Employee = GetEmployeeMostInactive();
             orderRepository.Insert(order);
             return new CreateOrderResult(controlStock.ComponentsLowStock, order);
         }
 
-        private void PopulateOrder(string clientEmail, string commentary)
+        private Client GetClient(string clientEmail)
         {
-            order.DateRequested = System.DateTime.Now;
-            order.Client = clientRepository.GetByEmail(clientEmail);
-            order.Commentary = commentary;
-            order.State = OrderState.Uncompleted;
-            var employee = employeeRepository.GetEmployeeWithoutOrder();
-            order.Employee = employee ?? employeeRepository.GetMostInactiveEmployee();
+            return clientRepository.GetByEmail(clientEmail) ?? throw new NotExistClientException();
+        }
+
+        private Employee GetEmployeeMostInactive()
+        {
+            return employeeRepository.GetEmployeeWithoutOrder() ?? employeeRepository.GetMostInactiveEmployee();
         }
     }
 }
