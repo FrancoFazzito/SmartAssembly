@@ -22,6 +22,6 @@ namespace Application.Computers.Commands.Build
         {
         }
 
-        public override string Message => "cannot find computers to this budget or/and use";
+        public override string Message => "cannot find computers to this budget or-and use";
     }
 }

@@ -28,7 +28,7 @@ namespace Application.Orders.Commands.Build
 
         public IEnumerable<Order> GetOrdersByEmployee(string email)
         {
-            return orderRepository.All
+            var orders = orderRepository.All
                                   .Where(order => order.Employee.Email == email)
                                   .Where(order => order.State == OrderState.Uncompleted || order.State == OrderState.Error)
                                   .Select(order => new Order()
@@ -42,6 +42,8 @@ namespace Application.Orders.Commands.Build
                                       Id = order.Id,
                                       State = order.State
                                   });
+
+            return orders.Any() ? orders : throw new NotAvailableOrders();
         }
     }
 }

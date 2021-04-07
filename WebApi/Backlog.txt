@@ -1,8 +1,9 @@
-rest API
-add responses and refactor headers and tasks
+validate rest
+HATEOAS
 JWT -> add rols
-Logger
 Swagger
+Logger
 mailing y PDF
 Testing ABM
+
 
