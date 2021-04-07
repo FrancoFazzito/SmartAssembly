@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 
-namespace WebApi.Controllers
+namespace WebApi.Controllers.BuildComputer
 {
     [ApiController]
     [Produces("application/json")]
@@ -41,7 +41,7 @@ namespace WebApi.Controllers
         [Route("submit")]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<SubmitResult>))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public IActionResult Submit(OrderParam order)
+        public IActionResult Submit([FromBody] OrderParam order)
         {
             var result = createOrder.Submit(order.Order, order.Email);
             return Ok(new ApiResponse<SubmitResult>(result));

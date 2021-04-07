@@ -3,6 +3,7 @@ using Application.Common.Factories.Enoughs;
 using Application.Common.Strategies.OrderBy;
 using Application.Components.Commands.ControlStock;
 using Application.Computers.Commands.Build;
+using Application.Orders.Commands.Build;
 using Application.Orders.Commands.Create;
 using Application.Repositories.Interfaces;
 using Infra.Connections;
@@ -38,7 +39,8 @@ namespace WebApi
             services.AddOptions();
 
             //register dependencies
-            //build computer
+
+            //get computers
             services.AddTransient<IConnection, Connection>();
             services.AddTransient<IComponentReadOnlyRepository, ComponentReadOnlyRepository>();
             services.AddTransient<IFactoryCompatibility, FactoryCompatibility>();
@@ -56,7 +58,12 @@ namespace WebApi
             services.AddTransient<IComputerStockRepository, ComputerStockRepository>();
             services.AddTransient<IComponentStock, ControlStock>();
             services.AddTransient<ISubmitOrder, SubmitOrder>();
-            
+
+            //build order
+            services.AddTransient<IComputerReadOnlyRepository, ComputerReadOnlyRepository>();
+            services.AddTransient<IBuildOrderRepository, BuildOrderRepository>();
+            services.AddTransient<IOrderReadOnlyRepository, OrderReadOnlyRepository>();
+            services.AddTransient<IBuilderOrder, BuilderOrder>();
 
             services.AddControllers();
         }

@@ -1,5 +1,4 @@
-﻿using Domain.Computers;
-using Domain.Orders;
+﻿using Domain.Orders;
 
 namespace Application.Orders.Commands.Create
 {

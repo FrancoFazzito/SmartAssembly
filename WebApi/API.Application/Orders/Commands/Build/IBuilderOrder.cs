@@ -5,7 +5,7 @@ namespace Application.Orders.Commands.Build
 {
     public interface IBuilderOrder
     {
-        BuilderOrderResult Build(Order orderToBuild);
+        BuilderOrderResult Build(int id);
 
         IEnumerable<Order> GetOrdersByEmployee(string email);
     }

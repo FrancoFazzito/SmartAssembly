@@ -18,11 +18,12 @@ namespace Application.Orders.Commands.Build
             this.orderRepository = orderRepository;
         }
 
-        public BuilderOrderResult Build(Order orderToBuild)
+        public BuilderOrderResult Build(int id)
         {
-            orderToBuild.State = OrderState.Completed;
-            buildRepository.Build(orderToBuild);
-            return new BuilderOrderResult(orderToBuild, DateTime.Now, orderToBuild.Employee);
+            var order = orderRepository.GetById(id);
+            order.State = OrderState.Completed;
+            buildRepository.Build(order);
+            return new BuilderOrderResult(order, DateTime.Now, order.Employee);
         }
 
         public IEnumerable<Order> GetOrdersByEmployee(string email)
