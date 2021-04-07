@@ -3,61 +3,48 @@ using Application.Orders.Commands.Create;
 using Application.Repositories.Interfaces;
 using Domain.Computers;
 using Domain.Importance;
-using Domain.Orders;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Net;
 
 namespace WebApi.Controllers
 {
     [ApiController]
-    [Route("api/buildComputer")]
+    [Produces("application/json")]
+    [Route("api/[controller]")]
     public class BuildComputerController : ControllerBase
     {
         private readonly IDirectorComputer director;
         private readonly ITypeUseReadOnlyRepository typeRepo;
-        private readonly ICreateOrder createOrder;
+        private readonly ISubmitOrder createOrder;
 
-        public BuildComputerController(IDirectorComputer director, ITypeUseReadOnlyRepository typeRepo, ICreateOrder createOrder)
+        public BuildComputerController(IDirectorComputer director, ITypeUseReadOnlyRepository typeRepo, ISubmitOrder createOrder)
         {
             this.director = director;
             this.typeRepo = typeRepo;
             this.createOrder = createOrder;
         }
 
-        [HttpGet]
-        public OrderParam GetExample()
-        {
-            return null;
-        }
-
-        // GET api/price/use/importance
+        // GET api/buildComputer/price/use/importance
         [HttpGet("{price}/{use}/{importance}")]
-        public IEnumerable<Computer> GetComputers(decimal price, string use, string importance)
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<IEnumerable<Computer>>))]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public IActionResult GetComputers(decimal price, string use, string importance)
         {
-            return director.Build(new ComputerRequest((TypeUse)Enum.Parse(typeof(TypeUse), use), price, (Importance)Enum.Parse(typeof(Importance), importance), typeRepo)).Computers;
+            var computers = director.Build(new ComputerRequest((TypeUse)Enum.Parse(typeof(TypeUse), use), price, (Importance)Enum.Parse(typeof(Importance), importance), typeRepo)).Computers;
+            return Ok(new ApiResponse<IEnumerable<Computer>>(computers));
         }
 
-        [HttpPost]
-        [Route("add")]
-        public Order Add(ComputerParam request)
-        {
-            return createOrder.Add(request.Computer, request.Quantity);
-        }
-
-
-        [HttpPost]
-        [Route("remove")]
-        public Order Remove(Computer computer)
-        {
-            return createOrder.Remove(computer);
-        }
-
+        //POST api/buildComputer/submit
         [HttpPost]
         [Route("submit")]
-        public CreateOrderResult Submit(OrderParam order)
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<SubmitResult>))]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public IActionResult Submit(OrderParam order)
         {
-            return createOrder.Submit(order.Order, order.Email);
+            var result = createOrder.Submit(order.Order, order.Email);
+            return Ok(new ApiResponse<SubmitResult>(result));
         }
     }
 }

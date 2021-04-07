@@ -1,57 +1,46 @@
 ﻿using Application.Components.Commands.ControlStock;
 using Application.Repositories.Interfaces;
 using Domain.Clients;
-using Domain.Computers;
 using Domain.Employees;
 using Domain.Orders;
 using Domain.Orders.States;
 
 namespace Application.Orders.Commands.Create
 {
-    public class CreateOrder : ICreateOrder
+    public class SubmitOrder : ISubmitOrder
     {
-        private readonly Order order;
         private readonly ISubmitOrderRepository orderRepository;
         private readonly IEmployeeReadOnlyRepository employeeRepository;
         private readonly IClientReadOnlyRepository clientRepository;
         private readonly IComputerStockRepository computerStock;
-        private readonly IControlStock controlStock;
+        private readonly IComponentStock componentStock;
 
-        public CreateOrder(ISubmitOrderRepository repository, IEmployeeReadOnlyRepository employeeRepository, IClientReadOnlyRepository clientRepository, IComputerStockRepository computerStock, IControlStock controlStock)
+        public SubmitOrder(ISubmitOrderRepository orderRepository, IEmployeeReadOnlyRepository employeeRepository, IClientReadOnlyRepository clientRepository, IComputerStockRepository computerStock, IComponentStock componentStock)
         {
-            order = new Order();
-            orderRepository = repository;
+            this.orderRepository = orderRepository;
             this.employeeRepository = employeeRepository;
             this.clientRepository = clientRepository;
             this.computerStock = computerStock;
-            this.controlStock = controlStock;
+            this.componentStock = componentStock;
         }
 
-        public Order Add(Computer computer, int quantity)
+        public SubmitResult Submit(Order order, string clientEmail)
         {
-            if (!computerStock.IsValid(computer, quantity))
-            {
-                throw new AddStockException(quantity);
-            }
-
-            order.Add(computer, quantity);
-            return order;
-        }
-
-        public Order Remove(Computer computer)
-        {
-            order.Remove(computer);
-            return order;
-        }
-
-        public CreateOrderResult Submit(Order order, string clientEmail)
-        {
+            CheckStock(order);
             order.DateRequested = System.DateTime.Now;
             order.State = OrderState.Uncompleted;
             order.Client = GetClient(clientEmail);
             order.Employee = GetEmployeeMostInactive();
             orderRepository.Insert(order);
-            return new CreateOrderResult(controlStock.ComponentsLowStock, order);
+            return new SubmitResult(componentStock.ComponentsLowStock, order);
+        }
+
+        private void CheckStock(Order order)
+        {
+            if (!computerStock.IsValid(order.Computers))
+            {
+                throw new AddStockException(order.Computers.Count);
+            }
         }
 
         private Client GetClient(string clientEmail)

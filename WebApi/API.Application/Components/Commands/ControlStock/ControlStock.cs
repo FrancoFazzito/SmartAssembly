@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Application.Components.Commands.ControlStock
 {
-    public class ControlStock : IControlStock
+    public class ControlStock : IComponentStock
     {
         private readonly IComponentReadOnlyRepository componentRepo;
 

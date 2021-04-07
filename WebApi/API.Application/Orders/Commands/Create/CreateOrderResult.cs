@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace Application.Orders.Commands.Create
 {
-    public class CreateOrderResult
+    public class SubmitResult
     {
-        public CreateOrderResult(IEnumerable<Component> componentsLowStock, Order order)
+        public SubmitResult(IEnumerable<Component> componentsLowStock, Order order)
         {
             ComponentsLowStock = componentsLowStock;
             Order = order;
