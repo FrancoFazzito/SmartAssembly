@@ -19,7 +19,5 @@ namespace Infra.Repositories.Implementations.Clients.Delete
             command.Parameters.AddWithValue("email", email);
             connection.Execute(command);
         }
-
-
     }
 }

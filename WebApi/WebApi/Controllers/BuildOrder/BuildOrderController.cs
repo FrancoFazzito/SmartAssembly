@@ -9,7 +9,6 @@ using System.Net;
 
 namespace WebApi.Controllers.BuildOrder
 {
-
     [ApiController]
     [Produces("application/json")]
     [Route("api/buildOrder")]
@@ -20,12 +19,6 @@ namespace WebApi.Controllers.BuildOrder
         public BuildOrderController(IBuilderOrder builderOrder)
         {
             this.builderOrder = builderOrder;
-        }
-
-        [HttpGet]
-        public int example()
-        {
-            return 1;
         }
 
         // GET: api/buildOrder/email
