@@ -7,6 +7,6 @@ namespace Application.Repositories.Interfaces
     {
         IEnumerable<Order> All { get; }
 
-        Order GetById(int id);
+        Order GetById(int? id);
     }
 }

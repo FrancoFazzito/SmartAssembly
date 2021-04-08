@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Application.Orders.Commands.Create
 {
     [Serializable]
-    internal class NotExistClientException : Exception
+    public class NotExistClientException : Exception
     {
         public NotExistClientException()
         {

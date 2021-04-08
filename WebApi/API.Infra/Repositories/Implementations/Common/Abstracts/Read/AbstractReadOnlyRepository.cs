@@ -73,7 +73,7 @@ namespace Infra.Repositories.Implementations.Abstracts
             return null;
         }
 
-        public T GetById(int id)
+        public T GetById(int? id)
         {
             return GetRecord(QuerySelectById, new Dictionary<string, object>
             {

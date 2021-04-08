@@ -1,4 +1,5 @@
-﻿using Application.Repositories.Interfaces;
+﻿using Application.Orders.Commands.Create;
+using Application.Repositories.Interfaces;
 using Domain.Orders;
 using Domain.Orders.States;
 using System;
@@ -18,12 +19,18 @@ namespace Application.Orders.Commands.Build
             this.orderRepository = orderRepository;
         }
 
-        public BuilderOrderResult Build(int id)
+        public BuilderOrderResult Build(int? id)
         {
-            var order = orderRepository.GetById(id);
+            var order = GetOrder(id);
+
             order.State = OrderState.Completed;
             buildRepository.Build(order);
             return new BuilderOrderResult(order, DateTime.Now, order.Employee);
+        }
+
+        private Order GetOrder(int? id)
+        {
+            return orderRepository.GetById(id) ?? throw new NotExistsOrderException();
         }
 
         public IEnumerable<Order> GetOrdersByEmployee(string email)
@@ -43,7 +50,7 @@ namespace Application.Orders.Commands.Build
                                       State = order.State
                                   });
 
-            return orders.Any() ? orders : throw new NotAvailableOrders();
+            return orders.Any() ? orders : throw new NotAvailableOrdersExcetion();
         }
     }
 }

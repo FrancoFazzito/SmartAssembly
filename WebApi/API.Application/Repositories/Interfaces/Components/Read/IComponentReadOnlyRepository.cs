@@ -7,7 +7,7 @@ namespace Application.Repositories.Interfaces
     {
         IEnumerable<Component> All { get; }
 
-        Component GetById(int id);
+        Component GetById(int? id);
 
         IEnumerable<Component> GetByComputer(int id);
     }

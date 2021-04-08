@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WebApi.Controllers.BuildOrder
 {
@@ -34,13 +33,12 @@ namespace WebApi.Controllers.BuildOrder
             {
                 return BadRequest();
             }
-
             try
             {
                 var orders = builderOrder.GetOrdersByEmployee(email).ToList();
                 return Ok(new ApiResponse<IEnumerable<Order>>(orders));
             }
-            catch (NotAvailableOrders ex)
+            catch (NotAvailableOrdersExcetion ex)
             {
                 return NotFound(ex.Message);
             }
@@ -50,18 +48,34 @@ namespace WebApi.Controllers.BuildOrder
         [HttpPost(Name = nameof(Build))]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<BuilderOrderResult>))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public IActionResult Build([FromBody] int id)
+        public IActionResult Build(int? id)
         {
-            var buildResult = builderOrder.Build(id);
-            return Ok(new ApiResponse<BuilderOrderResult>(buildResult));
+            if (!id.HasValue)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                var buildResult = builderOrder.Build(id);
+                return Ok(new ApiResponse<BuilderOrderResult>(buildResult));
+            }
+            catch (OrderNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         //POST api/buildComputer/submit
         [HttpPost(Name = nameof(Submit))]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<SubmitResult>))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public IActionResult Submit([FromBody] OrderParam order)
+        public IActionResult Submit(OrderParam order)
         {
+            if (order.Order.Computers.Any())
+            {
+                return BadRequest("cannot submit order withouth computers");
+            }
+
             var result = submitOrder.Submit(order.Order, order.Email);
             return Ok(new ApiResponse<SubmitResult>(result));
         }
