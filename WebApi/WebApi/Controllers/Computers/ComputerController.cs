@@ -7,11 +7,11 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 
-namespace WebApi.Controllers.BuildComputer
+namespace WebApi.Controllers.Computers
 {
     [ApiController]
     [Produces("application/json")]
-    [Route("api/[controller]")]
+    [Route("api/computer/[controller]")]
     public class ComputerController : ControllerBase
     {
         private readonly IDirectorComputer director;
@@ -25,7 +25,7 @@ namespace WebApi.Controllers.BuildComputer
 
         // GET /api/computer?price=value&use=value&importance=value
         [HttpGet(Name = nameof(GetAvailableComputers))]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<IEnumerable<Computer>>))]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<IEnumerable<Domain.Computers.Computer>>))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public IActionResult GetAvailableComputers(decimal? price, string use, string importance)
         {
@@ -47,7 +47,7 @@ namespace WebApi.Controllers.BuildComputer
             try
             {
                 var computers = director.Build(new ComputerRequest(typeUse, price, typeImportance, typeRepo)).Computers;
-                return Ok(new ApiResponse<IEnumerable<Computer>>(computers));
+                return base.Ok(new ApiResponse<IEnumerable<Domain.Computers.Computer>>(computers));
             }
             catch (NotAvailableComputersException ex)
             {

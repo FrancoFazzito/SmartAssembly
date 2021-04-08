@@ -1,4 +1,5 @@
-﻿using Application.Repositories.Interfaces;
+﻿using Application.Orders.Commands.Create;
+using Application.Repositories.Interfaces;
 using Domain.Orders;
 using Domain.Orders.States;
 using System;
@@ -18,8 +19,9 @@ namespace Application.Orders.Commands.Deliver
             this.deliverRepository = deliverRepository;
         }
 
-        public DeliverResult Deliver(Order order)
+        public DeliverResult Deliver(int? id)
         {
+            var order = GetOrder(id);
             if (order.State == OrderState.Completed)
             {
                 order.State = OrderState.Delivered;
@@ -34,6 +36,11 @@ namespace Application.Orders.Commands.Deliver
         {
             return orderRepository.All.Where(c => c.Client.Email == emailClient)
                                       .Where(c => c.State == OrderState.Completed);
+        }
+
+        private Order GetOrder(int? id)
+        {
+            return orderRepository.GetById(id) ?? throw new NotExistsOrderException();
         }
     }
 }

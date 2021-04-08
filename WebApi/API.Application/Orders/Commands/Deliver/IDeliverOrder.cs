@@ -5,7 +5,7 @@ namespace Application.Orders.Commands.Deliver
 {
     public interface IDeliverOrder
     {
-        DeliverResult Deliver(Order order);
+        DeliverResult Deliver(int? id);
 
         IEnumerable<Order> GetOrdersToDeliverByClient(string emailClient);
     }

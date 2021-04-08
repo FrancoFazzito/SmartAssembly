@@ -139,17 +139,22 @@ namespace Application.Computers.Commands.Build
 
         private bool InvalidComponent(Component component, int quantity)
         {
-            return CheckInvalidComponent(component, quantity) || CheckInvalidBudget(component);
+            return InvalidComponent(component) || InvalidStock(component, quantity) || InvalidBudget(component);
         }
 
-        private bool CheckInvalidBudget(Component component)
+        private bool InvalidBudget(Component component)
         {
             return Computer.Price + component.Price >= request.Budget;
         }
 
-        private bool CheckInvalidComponent(Component component, int quantity)
+        private static bool InvalidComponent(Component component)
         {
-            return component == null || !component.IsEnough(factoryEnough[Enough.Stock], quantity);
+            return component == null;
+        }
+
+        private bool InvalidStock(Component component, int quantity)
+        {
+            return !component.IsEnough(factoryEnough[Enough.Stock], quantity);
         }
 
         private void ThrowInvalidAdd()

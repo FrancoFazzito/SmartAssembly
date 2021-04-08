@@ -64,6 +64,11 @@ namespace WebApi
             services.AddTransient<IBuildOrderRepository, BuildOrderRepository>();
             services.AddTransient<IOrderReadOnlyRepository, OrderReadOnlyRepository>();
             services.AddTransient<IBuilderOrder, BuilderOrder>();
+            
+            //deliver order
+            services.AddTransient<IDeliverOrderRepository,DeliverOrderRepository>();
+
+
 
             services.AddControllers();
         }
