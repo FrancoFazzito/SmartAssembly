@@ -3,8 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Net;
 
-
-namespace WebApi.Controllers.Orders
+namespace WebApi.Controllers.Orders.Submit
 {
     [ApiController]
     [Produces("application/json")]

@@ -3,14 +3,17 @@ using Application.Common.Factories.Enoughs;
 using Application.Common.Strategies.OrderBy;
 using Application.Components.Commands.ControlStock;
 using Application.Computers.Commands.Build;
+using Application.Costs.Commands.Update;
 using Application.Orders.Commands.Build;
 using Application.Orders.Commands.Create;
 using Application.Repositories.Interfaces;
+using Application.Repositories.Interfaces.Confuguration.Update;
 using Infra.Connections;
 using Infra.Repositories.Implementations.Clients;
 using Infra.Repositories.Implementations.Components;
 using Infra.Repositories.Implementations.Computers;
 using Infra.Repositories.Implementations.Costs.Read;
+using Infra.Repositories.Implementations.Costs.Update;
 using Infra.Repositories.Implementations.Employees;
 using Infra.Repositories.Implementations.Orders;
 using Infra.Repositories.Implementations.TypeUses;
@@ -68,7 +71,9 @@ namespace WebApi
             //deliver order
             services.AddTransient<IDeliverOrderRepository,DeliverOrderRepository>();
 
-
+            //update configuration
+            services.AddTransient<IUpdateCostRepository,UpdateCostRepository>();
+            services.AddTransient<IUpdateCost,UpdateCost>();
 
             services.AddControllers();
         }

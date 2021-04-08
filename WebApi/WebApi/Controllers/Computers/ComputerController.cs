@@ -11,7 +11,7 @@ namespace WebApi.Controllers.Computers
 {
     [ApiController]
     [Produces("application/json")]
-    [Route("api/computer/[controller]")]
+    [Route("api/[controller]")]
     public class ComputerController : ControllerBase
     {
         private readonly IDirectorComputer director;
@@ -24,10 +24,10 @@ namespace WebApi.Controllers.Computers
         }
 
         // GET /api/computer?price=value&use=value&importance=value
-        [HttpGet(Name = nameof(GetAvailableComputers))]
+        [HttpGet]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<IEnumerable<Domain.Computers.Computer>>))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public IActionResult GetAvailableComputers(decimal? price, string use, string importance)
+        public IActionResult Get(decimal? price, string use, string importance)
         {
             if (!price.HasValue)
             {
