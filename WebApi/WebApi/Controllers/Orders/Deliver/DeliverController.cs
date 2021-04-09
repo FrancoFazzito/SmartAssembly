@@ -35,7 +35,7 @@ namespace WebApi.Controllers.Orders.Deliver
                 var orders = deliver.GetOrdersToDeliverByClient(email).ToList();
                 return Ok(new ApiResponse<IEnumerable<Order>>(orders));
             }
-            catch (NotAvailableOrdersExcetion ex)
+            catch (NotAvailableOrdersException ex)
             {
                 return NotFound(ex.Message);
             }

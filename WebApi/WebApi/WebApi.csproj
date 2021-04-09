@@ -10,11 +10,5 @@
     <ProjectReference Include="..\API.Infra\Infra.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\Error\ErrorOrderBuild\" />
-    <Folder Include="Controllers\Error\ErrorOrderDelivered\" />
-    <Folder Include="Controllers\Error\" />
-  </ItemGroup>
-
 
 </Project>

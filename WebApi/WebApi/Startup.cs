@@ -6,6 +6,7 @@ using Application.Computers.Commands.Build;
 using Application.Costs.Commands.Update;
 using Application.Orders.Commands.Build;
 using Application.Orders.Commands.Create;
+using Application.Orders.Commands.RegisterError;
 using Application.Repositories.Interfaces;
 using Application.Repositories.Interfaces.Confuguration.Update;
 using Infra.Connections;
@@ -15,6 +16,7 @@ using Infra.Repositories.Implementations.Computers;
 using Infra.Repositories.Implementations.Costs.Read;
 using Infra.Repositories.Implementations.Costs.Update;
 using Infra.Repositories.Implementations.Employees;
+using Infra.Repositories.Implementations.Errors;
 using Infra.Repositories.Implementations.Orders;
 using Infra.Repositories.Implementations.TypeUses;
 using Infra.Settings;
@@ -74,6 +76,17 @@ namespace WebApi
             //update configuration
             services.AddTransient<IUpdateCostRepository,UpdateCostRepository>();
             services.AddTransient<IUpdateCost,UpdateCost>();
+
+            //register error build
+            services.AddTransient<IErrorBuildingWriteOnlyRepository,ErrorBuildingWriteOnlyRepository>();
+            services.AddTransient<IErrorBuildingWithReplaceWriteOnlyRepository,ErrorBuildingWithReplaceWriteOnlyRepository>();
+            services.AddTransient<IComputerReadOnlyRepository,ComputerReadOnlyRepository>();
+            services.AddTransient<IRegisterBuildError,RegisterBuildError>();
+
+            //register error delivered
+            services.AddTransient<IErrorOrderWriteOnlyRepository,ErrorOrderWriteOnlyRepository>();
+            services.AddTransient<IOrderReadOnlyRepository,OrderReadOnlyRepository>();
+            services.AddTransient<IRegisterErrorOrderDelivered,RegisterErrorOrderDelivered>();
 
             services.AddControllers();
         }

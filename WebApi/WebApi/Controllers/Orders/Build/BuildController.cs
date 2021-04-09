@@ -34,10 +34,10 @@ namespace WebApi.Controllers.Orders.Build
             }
             try
             {
-                var orders = builder.GetOrdersByEmployee(email).ToList();
+                var orders = builder.GetOrdersByEmployee(email);
                 return Ok(new ApiResponse<IEnumerable<Order>>(orders));
             }
-            catch (NotAvailableOrdersExcetion ex)
+            catch (NotAvailableOrdersException ex)
             {
                 return NotFound(ex.Message);
             }

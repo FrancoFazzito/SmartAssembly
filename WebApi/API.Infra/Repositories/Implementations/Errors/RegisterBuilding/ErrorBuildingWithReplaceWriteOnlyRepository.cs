@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 
 namespace Infra.Repositories.Implementations.Errors
 {
-    public class ErrorBuildingReplaceWriteOnlyRepository : IErrorBuildingWithReplaceWriteOnlyRepository
+    public class ErrorBuildingWithReplaceWriteOnlyRepository : IErrorBuildingWithReplaceWriteOnlyRepository
     {
         private const string PARAM_COMPUTER = "ID_Computer";
         private const string PARAM_COMPONENT_REPLACE = "ID_Component_Replace";
@@ -19,7 +19,7 @@ namespace Infra.Repositories.Implementations.Errors
         private const string PARAM_QUANTITY = "Quantity";
         private readonly IConnection connection;
 
-        public ErrorBuildingReplaceWriteOnlyRepository(IConnection connection)
+        public ErrorBuildingWithReplaceWriteOnlyRepository(IConnection connection)
         {
             this.connection = connection;
         }

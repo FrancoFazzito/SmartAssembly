@@ -8,5 +8,7 @@ namespace Application.Repositories.Interfaces
         IEnumerable<Computer> All { get; }
 
         IEnumerable<Computer> GetByOrder(int id);
+
+        Computer GetById(int? id);
     }
 }

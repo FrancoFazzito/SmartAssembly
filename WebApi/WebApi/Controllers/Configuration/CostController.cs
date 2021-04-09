@@ -5,13 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers.Configuration
 {
-    [Route("api/[controller]")]
+    [Route("api/cost/[controller]")]
     [ApiController]
-    public class ConfigurationController : ControllerBase
+    public class CostController : ControllerBase
     {
         private readonly IUpdateCost update;
 
-        public ConfigurationController(IUpdateCost update)
+        public CostController(IUpdateCost update)
         {
             this.update = update;
         }
@@ -34,5 +34,12 @@ namespace WebApi.Controllers.Configuration
                 return NotFound();
             }
         }
+
+        //[HttpGet]
+        //public IActionResult GetBuildCost()
+        //{
+
+        //    return Ok(new ApiResponse<int>())
+        //}
     }
 }

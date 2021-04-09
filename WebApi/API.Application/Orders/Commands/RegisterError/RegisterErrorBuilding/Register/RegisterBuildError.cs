@@ -14,22 +14,36 @@ namespace Application.Orders.Commands.RegisterError
         private readonly IFactoryEnough enoughs;
         private readonly IErrorBuildingWriteOnlyRepository errorRepository;
         private readonly IErrorBuildingWithReplaceWriteOnlyRepository errorReplaceRepository;
+        private readonly IComputerReadOnlyRepository computerRepository;
 
-        public RegisterBuildError(IComponentReadOnlyRepository componenRepository, IFactoryCompatibility compatibilities, IFactoryEnough enoughs, IErrorBuildingWriteOnlyRepository errorRepository, IErrorBuildingWithReplaceWriteOnlyRepository errorReplaceRepository)
+        public RegisterBuildError(IComponentReadOnlyRepository componenRepository, IFactoryCompatibility compatibilities, IFactoryEnough enoughs, IErrorBuildingWriteOnlyRepository errorRepository, IErrorBuildingWithReplaceWriteOnlyRepository errorReplaceRepository, IComputerReadOnlyRepository computerRepository)
         {
             this.componenRepository = componenRepository;
             this.compatibilities = compatibilities;
             this.enoughs = enoughs;
             this.errorRepository = errorRepository;
             this.errorReplaceRepository = errorReplaceRepository;
+            this.computerRepository = computerRepository;
         }
 
-        public IErrorResult Register(Computer computer, Component componentWithError, string commentary, bool deleteComponentWithError)
+        public IErrorResult Register(int? idComputer, int? idComponentWithError, string commentary, bool deleteComponentWithError)
         {
-            var replace = new ComponentReplacer(computer, componentWithError, componenRepository, compatibilities, enoughs).Replace();
+            var computer = GetComputer(idComputer);
+            var component = GetComponent(idComponentWithError);
+            var replace = new ComponentReplacer(computer, component, componenRepository, compatibilities, enoughs).Replace();
             commentary = $" {commentary}";
-            return replace == null ? Insert(computer, componentWithError, commentary, deleteComponentWithError)
-                                   : Insert(computer, componentWithError, replace, commentary, deleteComponentWithError);
+            return replace == null ? Insert(computer, component, commentary, deleteComponentWithError)
+                                   : Insert(computer, component, replace, commentary, deleteComponentWithError);
+        }
+
+        private Component GetComponent(int? idComponentWithError)
+        {
+            return componenRepository.GetById(idComponentWithError) ?? throw new NotFoundComponentException();
+        }
+
+        private Computer GetComputer(int? idComputer)
+        {
+            return computerRepository.GetById(idComputer) ?? throw new NotFoundComputerException();
         }
 
         private IErrorResult Insert(Computer computer, Component componentWithError, Component replace, string commentary, bool deleteComponentWithError)

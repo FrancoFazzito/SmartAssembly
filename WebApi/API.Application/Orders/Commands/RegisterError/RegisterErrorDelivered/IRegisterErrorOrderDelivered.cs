@@ -8,6 +8,6 @@ namespace Application.Orders.Commands.RegisterError
     {
         IEnumerable<Order> GetOrdersDeliveredByClient(string email);
 
-        void Register(Computer computer, string commentary);
+        void Register(int? id, string commentary);
     }
 }

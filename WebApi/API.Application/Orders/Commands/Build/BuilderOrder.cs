@@ -50,7 +50,7 @@ namespace Application.Orders.Commands.Build
                                       State = order.State
                                   });
 
-            return orders.Any() ? orders : throw new NotAvailableOrdersExcetion();
+            return orders.Any() ? orders : throw new NotAvailableOrdersException();
         }
     }
 }
