@@ -13,7 +13,7 @@ namespace Infra.Repositories.Implementations.Computers
             this.connection = connection;
         }
 
-        public void Delete(int id)
+        public void Delete(int? id)
         {
             var command = new SqlCommand("DELETE FROM Computer WHERE ID = @id");
             command.Parameters.AddWithValue("id", id);

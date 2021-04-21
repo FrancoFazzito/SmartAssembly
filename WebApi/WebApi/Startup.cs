@@ -25,11 +25,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Collections.Generic;
 
 namespace WebApi
 {
     public class Startup
     {
+        public delegate IDeleteById DeleteByIdResolver(Delete key);
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -44,7 +47,6 @@ namespace WebApi
             services.AddOptions();
 
             //register dependencies
-
             //get computers
             services.AddTransient<IConnection, Connection>();
             services.AddTransient<IComponentReadOnlyRepository, ComponentReadOnlyRepository>();
@@ -87,6 +89,26 @@ namespace WebApi
             services.AddTransient<IErrorOrderWriteOnlyRepository,ErrorOrderWriteOnlyRepository>();
             services.AddTransient<IOrderReadOnlyRepository,OrderReadOnlyRepository>();
             services.AddTransient<IRegisterErrorOrderDelivered,RegisterErrorOrderDelivered>();
+
+            //delete computer
+            services.AddTransient<DeleteComputerRepository>();
+
+            //delete component
+            services.AddTransient<DeleteComponentRepository>();
+
+
+            services.AddTransient<DeleteByIdResolver>(serviceProvider => key =>
+            {
+                switch (key)
+                {
+                    case Delete.Computer:
+                        return serviceProvider.GetService<DeleteComputerRepository>();
+                    case Delete.Component:
+                        return serviceProvider.GetService<DeleteComponentRepository>();
+                    default:
+                        throw new KeyNotFoundException();
+                }
+            });
 
             services.AddControllers();
         }

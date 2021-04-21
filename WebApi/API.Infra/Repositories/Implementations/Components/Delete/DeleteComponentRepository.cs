@@ -13,7 +13,7 @@ namespace Infra.Repositories.Implementations.Components
             this.connection = connection;
         }
 
-        public void Delete(int id)
+        public void Delete(int? id)
         {
             var command = new SqlCommand("DELETE FROM Component WHERE ID = @id");
             command.Parameters.AddWithValue("id", id);
