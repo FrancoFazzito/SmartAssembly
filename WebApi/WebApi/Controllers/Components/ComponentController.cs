@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using Application.Components.Commands.Create;
 using Application.Components.Commands.Delete;
 using Application.Orders.Commands.RegisterError;
 using Application.Repositories.Interfaces;
+using Domain.Components;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers.Components
@@ -11,10 +13,12 @@ namespace WebApi.Controllers.Components
     public class ComponentController : ControllerBase
     {
         private readonly DeleteComponent delete;
+        private readonly CreateComponent create;
 
-        public ComponentController(Startup.DeleteByIdResolver deleteAccesor, IComponentReadOnlyRepository read)
+        public ComponentController(Startup.DeleteByIdResolver deleteAccesor, IComponentReadOnlyRepository read, ICreate<Component> createComponent)
         {
             delete = new DeleteComponent(deleteAccesor(WebApi.Delete.Component), read);
+            create = new CreateComponent(createComponent,read);
         }
 
 
@@ -32,17 +36,24 @@ namespace WebApi.Controllers.Components
         //    return "value";
         //}
 
-        //// POST api/<ComponentController>
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
-
-        //// PUT api/<ComponentController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
+        // POST api/<ComponentController>
+        [HttpPost]
+        public IActionResult Post(Component component)
+        {
+            if (component.Name != null && component.Name != string.Empty)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                create.Create(component);
+                return Ok();
+            }
+            catch (ComponentNameAlreadyExistException)
+            {
+                return BadRequest();
+            }
+        }
 
         // DELETE api/component/5
         [HttpDelete("{id}")]

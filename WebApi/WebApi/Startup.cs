@@ -9,6 +9,7 @@ using Application.Orders.Commands.Create;
 using Application.Orders.Commands.RegisterError;
 using Application.Repositories.Interfaces;
 using Application.Repositories.Interfaces.Confuguration.Update;
+using Domain.Components;
 using Infra.Connections;
 using Infra.Repositories.Implementations.Clients;
 using Infra.Repositories.Implementations.Components;
@@ -96,6 +97,8 @@ namespace WebApi
             //delete component
             services.AddTransient<DeleteComponentRepository>();
 
+            //create component
+            services.AddTransient<ICreate<Component>,CreateComponentRepository>();
 
             services.AddTransient<DeleteByIdResolver>(serviceProvider => key =>
             {

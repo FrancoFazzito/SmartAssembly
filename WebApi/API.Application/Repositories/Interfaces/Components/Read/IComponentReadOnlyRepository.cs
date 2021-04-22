@@ -9,6 +9,8 @@ namespace Application.Repositories.Interfaces
 
         Component GetById(int? id);
 
+        Component GetByName(string name);
+
         IEnumerable<Component> GetByComputer(int id);
     }
 }

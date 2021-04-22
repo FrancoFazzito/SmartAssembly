@@ -23,7 +23,11 @@ namespace Application.Reports.Commands.Create
 
         public void Create(DateTime since, DateTime until)
         {
-            OrdersRequested = orderRepository.All.Where(o => Between(since, until, o.DateRequested));
+            if (since > until)
+            {
+                throw new InvalidDateException();
+            }
+            OrdersRequested = orderRepository.All.Where(order => Between(since, until, order.DateRequested));
         }
 
         private IEnumerable<KeyValuePair<string, int>> ComponentsOrderByMostRequested(IEnumerable<Order> orders)

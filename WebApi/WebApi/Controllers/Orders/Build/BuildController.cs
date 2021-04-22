@@ -1,4 +1,5 @@
 ﻿using Application.Orders.Commands.Build;
+using Application.Orders.Commands.Create;
 using Application.Orders.Commands.Deliver;
 using Domain.Orders;
 using Microsoft.AspNetCore.Mvc;
@@ -59,7 +60,7 @@ namespace WebApi.Controllers.Orders.Build
                 var buildResult = builder.Build(id);
                 return Ok(new ApiResponse<BuilderOrderResult>(buildResult));
             }
-            catch (OrderNotFoundException ex)
+            catch (NotFoundOrderException ex)
             {
                 return NotFound(ex.Message);
             }

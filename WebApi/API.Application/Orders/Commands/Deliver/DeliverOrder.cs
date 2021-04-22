@@ -40,7 +40,7 @@ namespace Application.Orders.Commands.Deliver
 
         private Order GetOrder(int? id)
         {
-            return orderRepository.GetById(id) ?? throw new NotExistsOrderException();
+            return orderRepository.GetById(id) ?? throw new NotFoundOrderException();
         }
     }
 }

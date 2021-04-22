@@ -30,7 +30,7 @@ namespace Application.Orders.Commands.Build
 
         private Order GetOrder(int? id)
         {
-            return orderRepository.GetById(id) ?? throw new NotExistsOrderException();
+            return orderRepository.GetById(id) ?? throw new NotFoundOrderException();
         }
 
         public IEnumerable<Order> GetOrdersByEmployee(string email)

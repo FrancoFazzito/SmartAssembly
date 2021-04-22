@@ -22,6 +22,14 @@ namespace Infra.Repositories.Implementations.Components
             return GetRecords("SELECT * from Component cmp inner join Component_Computer c on ID = c.ID_Component where c.ID_Computer = @id", new Dictionary<string, object>() { { "id", id } });
         }
 
+        public Component GetByName(string name)
+        {
+            return GetRecord("SELECT * FROM Component WHERE Component.Name = @name", new Dictionary<string, object>
+            {
+                { "name", name }
+            });
+        }
+
         protected override Component NewRecord(IDataReader reader)
         {
             return new Component

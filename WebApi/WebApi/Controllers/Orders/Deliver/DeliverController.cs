@@ -56,7 +56,7 @@ namespace WebApi.Controllers.Orders.Deliver
                 var result = deliver.Deliver(id);
                 return Ok(result);
             }
-            catch (NotExistsOrderException)
+            catch (NotFoundOrderException)
             {
                 return BadRequest();
             }
