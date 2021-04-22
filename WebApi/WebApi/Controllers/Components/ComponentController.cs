@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Application.Components.Commands.Create;
 using Application.Components.Commands.Delete;
+using Application.Components.Commands.Read;
+using Application.Components.Commands.Update;
 using Application.Orders.Commands.RegisterError;
 using Application.Repositories.Interfaces;
 using Domain.Components;
@@ -14,29 +16,48 @@ namespace WebApi.Controllers.Components
     {
         private readonly DeleteComponent delete;
         private readonly CreateComponent create;
+        private readonly UpdateComponent update;
+        private readonly ReadComponent read;
 
-        public ComponentController(Startup.DeleteByIdResolver deleteAccesor, IComponentReadOnlyRepository read, ICreate<Component> createComponent)
+        public ComponentController(Startup.DeleteByIdResolver deleteAccesor, IComponentReadOnlyRepository readComponent, ICreate<Component> createComponent, IUpdate<Component> updateComponent)
         {
-            delete = new DeleteComponent(deleteAccesor(WebApi.Delete.Component), read);
-            create = new CreateComponent(createComponent,read);
+            delete = new DeleteComponent(deleteAccesor(WebApi.Delete.Component), readComponent);
+            create = new CreateComponent(createComponent, readComponent);
+            update = new UpdateComponent(updateComponent, readComponent);
+            read = new ReadComponent(readComponent);
         }
 
+        // GET: api/component
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(new ApiResponse<IEnumerable<Component>>(read.All));
+        }
 
-        //// GET: api/<ComponentController>
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
+        // PUT api/component/5
+        [HttpPut("{id}")]
+        public IActionResult Update(int? id,Component component)
+        {
+            if (!id.HasValue)
+            {
+                return BadRequest();
+            }
+            if (component.Name != null && component.Name != string.Empty)
+            {
+                update.Update(id,component);
+                return BadRequest();
+            }
+            try
+            {
+                return Ok();
+            }
+            catch (NotFoundComponentException)
+            {
+                return NotFound();
+            }
+        }
 
-        //// GET api/<ComponentController>/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
-
-        // POST api/<ComponentController>
+        // POST api/component
         [HttpPost]
         public IActionResult Post(Component component)
         {

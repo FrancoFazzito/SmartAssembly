@@ -100,6 +100,9 @@ namespace WebApi
             //create component
             services.AddTransient<ICreate<Component>,CreateComponentRepository>();
 
+            //update component
+            services.AddTransient<IUpdate<Component>,UpdateComponentRepository>();
+
             services.AddTransient<DeleteByIdResolver>(serviceProvider => key =>
             {
                 switch (key)
