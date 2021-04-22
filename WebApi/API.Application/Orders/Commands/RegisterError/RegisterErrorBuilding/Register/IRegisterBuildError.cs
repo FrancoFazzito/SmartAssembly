@@ -1,7 +1,4 @@
-﻿using Domain.Components;
-using Domain.Computers;
-
-namespace Application.Orders.Commands.RegisterError
+﻿namespace Application.Orders.Commands.RegisterError
 {
     public interface IRegisterBuildError
     {

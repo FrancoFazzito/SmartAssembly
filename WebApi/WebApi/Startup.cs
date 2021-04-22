@@ -19,6 +19,7 @@ using Infra.Repositories.Implementations.Costs.Update;
 using Infra.Repositories.Implementations.Employees;
 using Infra.Repositories.Implementations.Errors;
 using Infra.Repositories.Implementations.Orders;
+using Infra.Repositories.Implementations.Orders.Delete;
 using Infra.Repositories.Implementations.TypeUses;
 using Infra.Settings;
 using Microsoft.AspNetCore.Builder;
@@ -72,36 +73,42 @@ namespace WebApi
             services.AddTransient<IBuildOrderRepository, BuildOrderRepository>();
             services.AddTransient<IOrderReadOnlyRepository, OrderReadOnlyRepository>();
             services.AddTransient<IBuilderOrder, BuilderOrder>();
-            
-            //deliver order
-            services.AddTransient<IDeliverOrderRepository,DeliverOrderRepository>();
 
-            //update configuration
-            services.AddTransient<IUpdateCostRepository,UpdateCostRepository>();
-            services.AddTransient<IUpdateCost,UpdateCost>();
+            //deliver order
+            services.AddTransient<IDeliverOrderRepository, DeliverOrderRepository>();
+
+            //update costs
+            services.AddTransient<IUpdateCostRepository, UpdateCostRepository>();
+            services.AddTransient<IUpdateCost, UpdateCost>();
+
+            //get costs
+            services.AddTransient<ICostsReadOnlyRepository, CostsReadOnlyRepository>();
 
             //register error build
-            services.AddTransient<IErrorBuildingWriteOnlyRepository,ErrorBuildingWriteOnlyRepository>();
-            services.AddTransient<IErrorBuildingWithReplaceWriteOnlyRepository,ErrorBuildingWithReplaceWriteOnlyRepository>();
-            services.AddTransient<IComputerReadOnlyRepository,ComputerReadOnlyRepository>();
-            services.AddTransient<IRegisterBuildError,RegisterBuildError>();
+            services.AddTransient<IErrorBuildingWriteOnlyRepository, ErrorBuildingWriteOnlyRepository>();
+            services.AddTransient<IErrorBuildingWithReplaceWriteOnlyRepository, ErrorBuildingWithReplaceWriteOnlyRepository>();
+            services.AddTransient<IComputerReadOnlyRepository, ComputerReadOnlyRepository>();
+            services.AddTransient<IRegisterBuildError, RegisterBuildError>();
 
             //register error delivered
-            services.AddTransient<IErrorOrderWriteOnlyRepository,ErrorOrderWriteOnlyRepository>();
-            services.AddTransient<IOrderReadOnlyRepository,OrderReadOnlyRepository>();
-            services.AddTransient<IRegisterErrorOrderDelivered,RegisterErrorOrderDelivered>();
+            services.AddTransient<IErrorOrderWriteOnlyRepository, ErrorOrderWriteOnlyRepository>();
+            services.AddTransient<IOrderReadOnlyRepository, OrderReadOnlyRepository>();
+            services.AddTransient<IRegisterErrorOrderDelivered, RegisterErrorOrderDelivered>();
 
             //delete computer
             services.AddTransient<DeleteComputerRepository>();
+
+            //delete order
+            services.AddTransient<DeleteOrderRepository>();
 
             //delete component
             services.AddTransient<DeleteComponentRepository>();
 
             //create component
-            services.AddTransient<ICreate<Component>,CreateComponentRepository>();
+            services.AddTransient<ICreate<Component>, CreateComponentRepository>();
 
             //update component
-            services.AddTransient<IUpdate<Component>,UpdateComponentRepository>();
+            services.AddTransient<IUpdate<Component>, UpdateComponentRepository>();
 
             services.AddTransient<DeleteByIdResolver>(serviceProvider => key =>
             {
@@ -111,6 +118,8 @@ namespace WebApi
                         return serviceProvider.GetService<DeleteComputerRepository>();
                     case Delete.Component:
                         return serviceProvider.GetService<DeleteComponentRepository>();
+                    case Delete.Order:
+                        return serviceProvider.GetService<DeleteOrderRepository>();
                     default:
                         throw new KeyNotFoundException();
                 }

@@ -9,7 +9,7 @@ namespace Application.Components.Commands.Update
         private readonly IUpdate<Component> update;
         private readonly IComponentReadOnlyRepository read;
 
-        public UpdateComponent(IUpdate<Component> update,IComponentReadOnlyRepository read)
+        public UpdateComponent(IUpdate<Component> update, IComponentReadOnlyRepository read)
         {
             this.update = update;
             this.read = read;

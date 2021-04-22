@@ -1,5 +1,4 @@
-﻿using Domain.Computers;
-using Domain.Orders;
+﻿using Domain.Orders;
 using System.Collections.Generic;
 
 namespace Application.Orders.Commands.RegisterError

@@ -1,22 +1,27 @@
 ﻿using Application.Costs.Commands.Update;
+using Application.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WebApi.Controllers.Configuration
 {
-    [Route("api/cost/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class CostController : ControllerBase
     {
         private readonly IUpdateCost update;
+        private readonly ICostsReadOnlyRepository read;
 
-        public CostController(IUpdateCost update)
+        public CostController(IUpdateCost update, ICostsReadOnlyRepository read)
         {
             this.update = update;
+            this.read = read;
         }
 
-        // PUT api/ConfigurationController/5
+        // PUT api/Cost/5
         [HttpPut("{name}")]
         public IActionResult Update(string name, [FromBody] int? value)
         {
@@ -26,7 +31,7 @@ namespace WebApi.Controllers.Configuration
             }
             try
             {
-                update.Update(name,value);
+                update.Update(name, value);
                 return Ok();
             }
             catch (NotFoundCostException)
@@ -35,11 +40,10 @@ namespace WebApi.Controllers.Configuration
             }
         }
 
-        //[HttpGet]
-        //public IActionResult GetBuildCost()
-        //{
-
-        //    return Ok(new ApiResponse<int>())
-        //}
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(new ApiResponse<IEnumerable<Tuple<string, int>>>(read.All));
+        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Application.Components.Commands.Create;
+﻿using Application.Components.Commands.Create;
 using Application.Components.Commands.Delete;
 using Application.Components.Commands.Read;
 using Application.Components.Commands.Update;
@@ -7,6 +6,7 @@ using Application.Orders.Commands.RegisterError;
 using Application.Repositories.Interfaces;
 using Domain.Components;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace WebApi.Controllers.Components
 {
@@ -36,7 +36,7 @@ namespace WebApi.Controllers.Components
 
         // PUT api/component/5
         [HttpPut("{id}")]
-        public IActionResult Update(int? id,Component component)
+        public IActionResult Update(int? id, Component component)
         {
             if (!id.HasValue)
             {
@@ -44,7 +44,7 @@ namespace WebApi.Controllers.Components
             }
             if (component.Name != null && component.Name != string.Empty)
             {
-                update.Update(id,component);
+                update.Update(id, component);
                 return BadRequest();
             }
             try

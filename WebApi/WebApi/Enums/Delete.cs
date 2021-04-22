@@ -3,6 +3,7 @@
     public enum Delete
     {
         Computer,
-        Component
+        Component,
+        Order
     }
 }

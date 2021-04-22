@@ -1,6 +1,4 @@
-﻿using Domain.Computers;
-
-namespace WebApi.Controllers
+﻿namespace WebApi.Controllers
 {
     public class ComputerParam
     {

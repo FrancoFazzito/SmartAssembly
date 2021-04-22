@@ -1,4 +1,4 @@
-﻿namespace WebApi.Controllers.Error.ErrorOrderDelivered
+﻿namespace WebApi.Controllers.Errors.ErrorOrderDelivered
 {
     public class ErrorDeliveredParam
     {

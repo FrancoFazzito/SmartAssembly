@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Net;
 
-namespace WebApi.Controllers.Error.ErrorOrderDelivered
+namespace WebApi.Controllers.Errors.ErrorOrderDelivered
 {
     [Route("api/error/[controller]")]
     [ApiController]

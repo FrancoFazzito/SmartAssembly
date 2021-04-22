@@ -1,4 +1,4 @@
-﻿namespace WebApi.Controllers.Error.ErrorOrderBuild
+﻿namespace WebApi.Controllers.Errors.ErrorOrderBuild
 {
     public class ErrorBuildParam
     {

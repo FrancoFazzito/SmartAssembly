@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using Application.Orders.Commands.RegisterError;
+﻿using Application.Orders.Commands.RegisterError;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace WebApi.Controllers.Error.ErrorOrderBuild
+namespace WebApi.Controllers.Errors.ErrorOrderBuild
 {
     [Route("api/error/[controller]")]
     [ApiController]
