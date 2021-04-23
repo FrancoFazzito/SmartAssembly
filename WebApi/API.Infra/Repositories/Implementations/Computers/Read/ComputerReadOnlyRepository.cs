@@ -31,7 +31,7 @@ namespace Infra.Repositories.Implementations.Computers
             return new Computer()
             {
                 Id = ConvertReader<int>.WithName(reader, "ID"),
-                TypeUse = ConvertReader<TypeUse>.EnumWithName(reader, "TypeUse"),
+                TypeUse = ConvertReader<string>.WithName(reader, "TypeUse"),
                 Components = componentRepository.GetByComputer(ConvertReader<int>.WithName(reader, "ID")),
                 Completed = ConvertReader<bool>.WithName(reader, "Completed"),
                 CostBuild = costRepo.BuildCost,

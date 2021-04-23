@@ -1,4 +1,5 @@
-﻿using Application.Costs.Commands.Update;
+﻿using Application.Common.Exceptions;
+using Application.Costs.Commands.Update;
 using Application.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;

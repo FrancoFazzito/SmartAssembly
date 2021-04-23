@@ -1,4 +1,5 @@
-﻿using Application.Common.Factories.Compatibilities;
+﻿using Application.Common.Exceptions;
+using Application.Common.Factories.Compatibilities;
 using Application.Common.Factories.Enoughs;
 using Application.Common.Strategies.OrderBy;
 using Application.Repositories.Interfaces;

@@ -1,4 +1,5 @@
-﻿using Application.Orders.Commands.Build;
+﻿using Application.Common.Exceptions;
+using Application.Orders.Commands.Build;
 using Application.Orders.Commands.Create;
 using Application.Orders.Commands.Deliver;
 using Domain.Orders;
@@ -37,9 +38,9 @@ namespace WebApi.Controllers.Orders.Build
                 var orders = builder.GetOrdersByEmployee(email);
                 return Ok(new ApiResponse<IEnumerable<Order>>(orders));
             }
-            catch (NotAvailableOrdersException ex)
+            catch (NotAvailableOrdersException)
             {
-                return NotFound(ex.Message);
+                return NotFound();
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using Application.Computers.Commands.Build;
+﻿using Application.Common.Exceptions;
+using Application.Computers.Commands.Build;
 using Application.Computers.Commands.Delete;
 using Application.Orders.Commands.RegisterError;
 using Application.Repositories.Interfaces;
@@ -38,7 +39,7 @@ namespace WebApi.Controllers.Computers
                 return BadRequest();
             }
 
-            if (!Enum.TryParse(use, true, out TypeUse typeUse))
+            if (use == null)
             {
                 return BadRequest();
             }
@@ -50,12 +51,12 @@ namespace WebApi.Controllers.Computers
 
             try
             {
-                var computers = director.Build(new ComputerRequest(typeUse, price, typeImportance, typeRepo)).Computers;
+                var computers = director.Build(new ComputerRequest(use, price, typeImportance, typeRepo)).Computers;
                 return base.Ok(new ApiResponse<IEnumerable<Computer>>(computers));
             }
-            catch (NotAvailableComputersException ex)
+            catch (NotAvailableComputersException)
             {
-                return NotFound(ex.Message);
+                return NotFound();
             }
         }
 

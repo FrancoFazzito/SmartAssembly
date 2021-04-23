@@ -5,6 +5,6 @@ namespace Application.Repositories.Interfaces
 {
     public interface ITypeUseReadOnlyRepository
     {
-        ISpecification GetByUse(TypeUse use);
+        ISpecification GetByUse(string use);
     }
 }

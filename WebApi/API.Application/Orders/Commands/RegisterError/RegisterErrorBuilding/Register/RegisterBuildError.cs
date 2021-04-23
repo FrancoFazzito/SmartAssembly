@@ -1,4 +1,5 @@
-﻿using Application.Common.Factories.Compatibilities;
+﻿using Application.Common.Exceptions;
+using Application.Common.Factories.Compatibilities;
 using Application.Common.Factories.Enoughs;
 using Application.Repositories.Interfaces;
 using Domain.Components;

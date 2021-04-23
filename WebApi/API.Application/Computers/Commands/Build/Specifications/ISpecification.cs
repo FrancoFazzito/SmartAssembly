@@ -4,7 +4,7 @@ namespace Application.Computers.Commands.Build
 {
     public interface ISpecification
     {
-        TypeUse TypeUse { get; }
+        string TypeUse { get; }
         int Cpu { get; }
         int Mother { get; }
         int Fan { get; }

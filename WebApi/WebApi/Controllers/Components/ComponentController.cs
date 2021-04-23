@@ -1,4 +1,5 @@
-﻿using Application.Components.Commands.Create;
+﻿using Application.Common.Exceptions;
+using Application.Components.Commands.Create;
 using Application.Components.Commands.Delete;
 using Application.Components.Commands.Read;
 using Application.Components.Commands.Update;

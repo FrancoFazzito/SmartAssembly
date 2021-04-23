@@ -1,4 +1,5 @@
-﻿using Application.Orders.Commands.RegisterError;
+﻿using Application.Common.Exceptions;
+using Application.Orders.Commands.RegisterError;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 

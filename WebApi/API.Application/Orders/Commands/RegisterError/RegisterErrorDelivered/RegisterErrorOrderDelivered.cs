@@ -1,4 +1,5 @@
-﻿using Application.Orders.Commands.Build;
+﻿using Application.Common.Exceptions;
+using Application.Orders.Commands.Build;
 using Application.Repositories.Interfaces;
 using Domain.Computers;
 using Domain.Orders;

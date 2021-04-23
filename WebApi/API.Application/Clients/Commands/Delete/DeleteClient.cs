@@ -1,4 +1,5 @@
-﻿using Application.Repositories.Interfaces;
+﻿using Application.Common.Exceptions;
+using Application.Repositories.Interfaces;
 
 namespace Application.Clients.Commands.Delete
 {

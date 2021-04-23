@@ -6,7 +6,7 @@ namespace Application.Computers.Commands.Build
 {
     public class ComputerRequest : IComputerRequest
     {
-        public ComputerRequest(TypeUse use, decimal? budget, Importance importance, ITypeUseReadOnlyRepository repo)
+        public ComputerRequest(string use, decimal? budget, Importance importance, ITypeUseReadOnlyRepository repo)
         {
             Specification = repo.GetByUse(use);
             Budget = budget;

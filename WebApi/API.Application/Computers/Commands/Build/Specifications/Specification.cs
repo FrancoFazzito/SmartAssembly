@@ -4,7 +4,7 @@ namespace Application.Computers.Commands.Build
 {
     public class Specification : ISpecification
     {
-        public Specification(int cpu, int fan, int ram, int gpu, int hdd, int ssd, TypeUse use)
+        public Specification(int cpu, int fan, int ram, int gpu, int hdd, int ssd, string use)
         {
             Cpu = cpu;
             Fan = fan;
@@ -22,6 +22,6 @@ namespace Application.Computers.Commands.Build
         public int Gpu { get; }
         public int Hdd { get; }
         public int Ssd { get; }
-        public TypeUse TypeUse { get; }
+        public string TypeUse { get; }
     }
 }

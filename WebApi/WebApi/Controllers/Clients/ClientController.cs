@@ -1,5 +1,6 @@
 ﻿using Application.Clients.Commands.Create;
 using Application.Clients.Commands.Delete;
+using Application.Common.Exceptions;
 using Application.Repositories.Interfaces;
 using Domain.Clients;
 using Microsoft.AspNetCore.Mvc;

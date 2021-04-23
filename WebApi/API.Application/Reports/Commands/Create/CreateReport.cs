@@ -1,4 +1,5 @@
-﻿using Application.Repositories.Interfaces;
+﻿using Application.Common.Exceptions;
+using Application.Repositories.Interfaces;
 using Domain.Orders;
 using Domain.Orders.States;
 using System;

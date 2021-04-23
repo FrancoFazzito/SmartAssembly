@@ -23,7 +23,7 @@ namespace Domain.Computers
         }
 
         public int Id { get; set; }
-        public TypeUse TypeUse { get; set; }
+        public string TypeUse { get; set; }
         public bool Completed { get; set; }
         public int CostBuild { get; set; }
         public int Multiplier { get; set; }

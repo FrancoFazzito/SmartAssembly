@@ -1,4 +1,5 @@
-﻿using Application.Orders.Commands.Build;
+﻿using Application.Common.Exceptions;
+using Application.Orders.Commands.Build;
 using Application.Orders.Commands.RegisterError;
 using Domain.Orders;
 using Microsoft.AspNetCore.Mvc;
