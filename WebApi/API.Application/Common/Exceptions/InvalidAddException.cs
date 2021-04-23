@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Application.Computers.Commands.Build
+namespace Application.Common.Exceptions
 {
     [Serializable]
     public class InvalidAddException : Exception

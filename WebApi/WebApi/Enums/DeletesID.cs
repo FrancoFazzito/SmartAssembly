@@ -1,6 +1,6 @@
 ﻿namespace WebApi
 {
-    public enum Delete
+    public enum DeletesID
     {
         Computer,
         Component,

@@ -24,7 +24,7 @@ namespace WebApi.Controllers.Computers
         {
             this.director = director;
             this.typeRepo = typeRepo;
-            delete = new DeleteComputer(deleteAccesor(WebApi.Delete.Computer), read);
+            delete = new DeleteComputer(deleteAccesor(WebApi.DeletesID.Computer), read);
         }
 
         // GET /api/computer?price=value&use=value&importance=value

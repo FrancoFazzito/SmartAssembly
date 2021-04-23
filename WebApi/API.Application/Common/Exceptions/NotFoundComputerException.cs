@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Application.Orders.Commands.RegisterError
+namespace Application.Common.Exceptions
 {
     [Serializable]
     public class NotFoundComputerException : Exception

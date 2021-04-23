@@ -18,7 +18,7 @@ namespace Application.Components.Commands.Create
         {
             if (read.GetByName(component.Name) != null)
             {
-                throw new ComponentNameAlreadyExistException();
+                throw new ComponentAlreadyExistException();
             }
 
             create.Create(component);

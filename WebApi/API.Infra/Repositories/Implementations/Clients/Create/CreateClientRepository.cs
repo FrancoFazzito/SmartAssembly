@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace Infra.Repositories.Implementations.Clients.Create
 {
-    internal class CreateClientRepository : ICreate<Client>
+    public class CreateClientRepository : ICreate<Client>
     {
         private readonly IConnection connection;
 

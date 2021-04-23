@@ -9,9 +9,12 @@ using Application.Orders.Commands.Create;
 using Application.Orders.Commands.RegisterError;
 using Application.Repositories.Interfaces;
 using Application.Repositories.Interfaces.Confuguration.Update;
+using Domain.Clients;
 using Domain.Components;
 using Infra.Connections;
 using Infra.Repositories.Implementations.Clients;
+using Infra.Repositories.Implementations.Clients.Create;
+using Infra.Repositories.Implementations.Clients.Delete;
 using Infra.Repositories.Implementations.Components;
 using Infra.Repositories.Implementations.Computers;
 using Infra.Repositories.Implementations.Costs.Read;
@@ -33,7 +36,9 @@ namespace WebApi
 {
     public class Startup
     {
-        public delegate IDeleteById DeleteByIdResolver(Delete key);
+        public delegate IDeleteById DeleteByIdResolver(DeletesID key);
+
+        public delegate IDeleteByEmail DeleteByEmailResolver(DeletesEmail key);
 
         public Startup(IConfiguration configuration)
         {
@@ -110,15 +115,32 @@ namespace WebApi
             //update component
             services.AddTransient<IUpdate<Component>, UpdateComponentRepository>();
 
+            //create client
+            services.AddTransient<ICreate<Client>, CreateClientRepository>();
+
+            //delete client
+            services.AddTransient<DeleteClientRepository>();
+
+            services.AddTransient<DeleteByEmailResolver>(serviceProvider => key =>
+            {
+                switch (key)
+                {
+                    case DeletesEmail.Client:
+                        return serviceProvider.GetService<DeleteClientRepository>();
+                    default:
+                        throw new KeyNotFoundException();
+                }
+            });
+
             services.AddTransient<DeleteByIdResolver>(serviceProvider => key =>
             {
                 switch (key)
                 {
-                    case Delete.Computer:
+                    case DeletesID.Computer:
                         return serviceProvider.GetService<DeleteComputerRepository>();
-                    case Delete.Component:
+                    case DeletesID.Component:
                         return serviceProvider.GetService<DeleteComponentRepository>();
-                    case Delete.Order:
+                    case DeletesID.Order:
                         return serviceProvider.GetService<DeleteOrderRepository>();
                     default:
                         throw new KeyNotFoundException();

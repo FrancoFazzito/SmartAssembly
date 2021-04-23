@@ -21,7 +21,7 @@ namespace WebApi.Controllers.Components
 
         public ComponentController(Startup.DeleteByIdResolver deleteAccesor, IComponentReadOnlyRepository readComponent, ICreate<Component> createComponent, IUpdate<Component> updateComponent)
         {
-            delete = new DeleteComponent(deleteAccesor(WebApi.Delete.Component), readComponent);
+            delete = new DeleteComponent(deleteAccesor(WebApi.DeletesID.Component), readComponent);
             create = new CreateComponent(createComponent, readComponent);
             update = new UpdateComponent(updateComponent, readComponent);
             read = new ReadComponent(readComponent);
@@ -70,7 +70,7 @@ namespace WebApi.Controllers.Components
                 create.Create(component);
                 return Ok();
             }
-            catch (ComponentNameAlreadyExistException)
+            catch (ComponentAlreadyExistException)
             {
                 return BadRequest();
             }

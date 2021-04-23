@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Application.Orders.Commands.Deliver
+namespace Application.Common.Exceptions
 {
     [Serializable]
     public class NotCompletedOrderException : Exception

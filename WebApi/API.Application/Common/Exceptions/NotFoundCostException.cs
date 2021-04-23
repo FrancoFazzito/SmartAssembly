@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Application.Costs.Commands.Update
+namespace Application.Common.Exceptions
 {
     [Serializable]
     public class NotFoundCostException : Exception

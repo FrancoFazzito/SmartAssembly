@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Application.Orders.Commands.Create
+namespace Application.Common.Exceptions
 {
     [Serializable]
     public class NotFoundOrderException : Exception
