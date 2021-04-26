@@ -1,16 +1,15 @@
-﻿using Application.Computers.Commands.Build;
-using Application.Repositories.Interfaces;
+﻿using Application.Repositories.Interfaces;
 using Domain.Specification;
 using Infra.Connections;
 using System.Data.SqlClient;
 
 namespace Infra.Repositories.Implementations.TypeUses.Create
 {
-    public class TypeUseWriteOnlyRepository : ICreate<ISpecification>
+    public class CreateTypeUseRepository : ICreate<ISpecification>
     {
         private readonly IConnection connection;
 
-        public TypeUseWriteOnlyRepository(IConnection connection)
+        public CreateTypeUseRepository(IConnection connection)
         {
             this.connection = connection;
         }

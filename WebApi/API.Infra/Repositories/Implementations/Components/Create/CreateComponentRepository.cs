@@ -35,7 +35,7 @@ namespace Infra.Repositories.Implementations.Components
                 "@Stock," +
                 "@Watts," +
                 "@Stock_Limit)");
-            Populate.CommandComponent(value, command);
+            PopulateComponent.Command(value, command);
             connection.Execute(command);
         }
     }

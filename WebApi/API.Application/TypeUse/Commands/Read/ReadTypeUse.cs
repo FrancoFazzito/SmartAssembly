@@ -1,9 +1,6 @@
-﻿using Application.Computers.Commands.Build;
-using Application.Repositories.Interfaces;
+﻿using Application.Repositories.Interfaces;
 using Domain.Specification;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Application.TypeUse.Commands.Read
 {
@@ -16,9 +13,6 @@ namespace Application.TypeUse.Commands.Read
             this.read = read;
         }
 
-        public IEnumerable<ISpecification> Read()
-        {
-            return read.All;
-        }
+        public IEnumerable<ISpecification> All => read.All;
     }
 }

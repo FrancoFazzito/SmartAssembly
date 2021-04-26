@@ -5,10 +5,10 @@ namespace Application.Clients.Commands.Delete
 {
     public class DeleteClient
     {
-        private readonly IDeleteByEmail delete;
+        private readonly IDeleteByName delete;
         private readonly IClientReadOnlyRepository read;
 
-        public DeleteClient(IDeleteByEmail delete, IClientReadOnlyRepository readClient)
+        public DeleteClient(IDeleteByName delete, IClientReadOnlyRepository readClient)
         {
             this.delete = delete;
             read = readClient;

@@ -7,10 +7,13 @@ using Application.Costs.Commands.Update;
 using Application.Orders.Commands.Build;
 using Application.Orders.Commands.Create;
 using Application.Orders.Commands.RegisterError;
+using Application.Reports.Commands.Create;
 using Application.Repositories.Interfaces;
 using Application.Repositories.Interfaces.Confuguration.Update;
 using Domain.Clients;
 using Domain.Components;
+using Domain.Employees;
+using Domain.Specification;
 using Infra.Connections;
 using Infra.Repositories.Implementations.Clients;
 using Infra.Repositories.Implementations.Clients.Create;
@@ -20,10 +23,14 @@ using Infra.Repositories.Implementations.Computers;
 using Infra.Repositories.Implementations.Costs.Read;
 using Infra.Repositories.Implementations.Costs.Update;
 using Infra.Repositories.Implementations.Employees;
+using Infra.Repositories.Implementations.Employees.Create;
+using Infra.Repositories.Implementations.Employees.Delete;
 using Infra.Repositories.Implementations.Errors;
 using Infra.Repositories.Implementations.Orders;
 using Infra.Repositories.Implementations.Orders.Delete;
 using Infra.Repositories.Implementations.TypeUses;
+using Infra.Repositories.Implementations.TypeUses.Create;
+using Infra.Repositories.Implementations.TypeUses.Delete;
 using Infra.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -38,7 +45,7 @@ namespace WebApi
     {
         public delegate IDeleteById DeleteByIdResolver(DeletesID key);
 
-        public delegate IDeleteByEmail DeleteByEmailResolver(DeletesEmail key);
+        public delegate IDeleteByName DeleteByNameResolver(DeletesEmail key);
 
         public Startup(IConfiguration configuration)
         {
@@ -55,29 +62,13 @@ namespace WebApi
 
             //register dependencies
             //get computers
-            services.AddTransient<IConnection, Connection>();
-            services.AddTransient<IComponentReadOnlyRepository, ComponentReadOnlyRepository>();
-            services.AddTransient<IFactoryCompatibility, FactoryCompatibility>();
-            services.AddTransient<IFactoryEnough, FactoryEnough>();
-            services.AddTransient<IStrategyOrderBy, StrategyOrderBy>();
-            services.AddTransient<ICostsReadOnlyRepository, CostsReadOnlyRepository>();
-            services.AddTransient<IBuilderComputer, BuilderComputer>();
-            services.AddTransient<IDirectorComputer, DirectorComputer>();
-            services.AddTransient<ITypeUseReadOnlyRepository, TypeUseReadOnlyRepository>();
+            RegisterServicesGetComputers(services);
 
             //create order
-            services.AddTransient<ISubmitOrderRepository, SubmitOrderRepository>();
-            services.AddTransient<IEmployeeReadOnlyRepository, EmployeeReadOnlyRepository>();
-            services.AddTransient<IClientReadOnlyRepository, ClientReadOnlyRepository>();
-            services.AddTransient<IComputerStockRepository, ComputerStockRepository>();
-            services.AddTransient<IComponentStock, ControlStock>();
-            services.AddTransient<ISubmitOrder, SubmitOrder>();
+            RegisterServicesCreateOrders(services);
 
             //build order
-            services.AddTransient<IComputerReadOnlyRepository, ComputerReadOnlyRepository>();
-            services.AddTransient<IBuildOrderRepository, BuildOrderRepository>();
-            services.AddTransient<IOrderReadOnlyRepository, OrderReadOnlyRepository>();
-            services.AddTransient<IBuilderOrder, BuilderOrder>();
+            RegisterServicesBuildOrder(services);
 
             //deliver order
             services.AddTransient<IDeliverOrderRepository, DeliverOrderRepository>();
@@ -100,6 +91,9 @@ namespace WebApi
             services.AddTransient<IOrderReadOnlyRepository, OrderReadOnlyRepository>();
             services.AddTransient<IRegisterErrorOrderDelivered, RegisterErrorOrderDelivered>();
 
+            //crear reporte
+            services.AddTransient<ICreateReport, CreateReport>();
+
             //delete computer
             services.AddTransient<DeleteComputerRepository>();
 
@@ -121,12 +115,28 @@ namespace WebApi
             //delete client
             services.AddTransient<DeleteClientRepository>();
 
-            services.AddTransient<DeleteByEmailResolver>(serviceProvider => key =>
+            //create employee
+            services.AddTransient<ICreate<Employee>, CreateEmployeeRepository>();
+
+            //delete employee
+            services.AddTransient<DeleteEmployeeRepository>();
+
+            //create typeuse
+            services.AddTransient<ICreate<ISpecification>,CreateTypeUseRepository>();
+
+            //delete typeuse
+            services.AddTransient<DeleteTypeUseRepository>();
+
+            services.AddTransient<DeleteByNameResolver>(serviceProvider => key =>
             {
                 switch (key)
                 {
                     case DeletesEmail.Client:
                         return serviceProvider.GetService<DeleteClientRepository>();
+                    case DeletesEmail.Employee:
+                        return serviceProvider.GetService<DeleteEmployeeRepository>();
+                    case DeletesEmail.TypeUse:
+                        return serviceProvider.GetService<DeleteTypeUseRepository>();
                     default:
                         throw new KeyNotFoundException();
                 }
@@ -148,6 +158,37 @@ namespace WebApi
             });
 
             services.AddControllers();
+        }
+
+        private static void RegisterServicesBuildOrder(IServiceCollection services)
+        {
+            services.AddTransient<IComputerReadOnlyRepository, ComputerReadOnlyRepository>();
+            services.AddTransient<IBuildOrderRepository, BuildOrderRepository>();
+            services.AddTransient<IOrderReadOnlyRepository, OrderReadOnlyRepository>();
+            services.AddTransient<IBuilderOrder, BuilderOrder>();
+        }
+
+        private static void RegisterServicesCreateOrders(IServiceCollection services)
+        {
+            services.AddTransient<ISubmitOrderRepository, SubmitOrderRepository>();
+            services.AddTransient<IEmployeeReadOnlyRepository, EmployeeReadOnlyRepository>();
+            services.AddTransient<IClientReadOnlyRepository, ClientReadOnlyRepository>();
+            services.AddTransient<IComputerStockRepository, ComputerStockRepository>();
+            services.AddTransient<IComponentStock, ControlStock>();
+            services.AddTransient<ISubmitOrder, SubmitOrder>();
+        }
+
+        private static void RegisterServicesGetComputers(IServiceCollection services)
+        {
+            services.AddTransient<IConnection, Connection>();
+            services.AddTransient<IComponentReadOnlyRepository, ComponentReadOnlyRepository>();
+            services.AddTransient<IFactoryCompatibility, FactoryCompatibility>();
+            services.AddTransient<IFactoryEnough, FactoryEnough>();
+            services.AddTransient<IStrategyOrderBy, StrategyOrderBy>();
+            services.AddTransient<ICostsReadOnlyRepository, CostsReadOnlyRepository>();
+            services.AddTransient<IBuilderComputer, BuilderComputer>();
+            services.AddTransient<IDirectorComputer, DirectorComputer>();
+            services.AddTransient<ITypeUseReadOnlyRepository, TypeUseReadOnlyRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

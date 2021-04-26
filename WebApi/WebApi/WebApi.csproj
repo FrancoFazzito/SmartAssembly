@@ -10,11 +10,5 @@
     <ProjectReference Include="..\API.Infra\Infra.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\Employees\" />
-    <Folder Include="Controllers\Reports\" />
-    <Folder Include="Controllers\TypeUses\" />
-  </ItemGroup>
-
 
 </Project>

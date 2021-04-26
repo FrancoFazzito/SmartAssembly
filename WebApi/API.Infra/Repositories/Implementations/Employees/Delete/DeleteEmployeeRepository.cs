@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 
 namespace Infra.Repositories.Implementations.Employees.Delete
 {
-    public class DeleteEmployeeRepository : IDeleteByEmail
+    public class DeleteEmployeeRepository : IDeleteByName
     {
         private readonly IConnection connection;
 

@@ -17,7 +17,7 @@ namespace WebApi.Controllers.Clients
         private readonly DeleteClient delete;
         private readonly ReadClient read;
 
-        public ClientController(Startup.DeleteByEmailResolver deleteAccesor, IClientReadOnlyRepository readClient, ICreate<Client> createClient, IUpdate<Client> updateClient)
+        public ClientController(Startup.DeleteByNameResolver deleteAccesor, IClientReadOnlyRepository readClient, ICreate<Client> createClient)
         {
             delete = new DeleteClient(deleteAccesor(DeletesEmail.Client), readClient);
             create = new CreateClient(createClient, readClient);

@@ -13,13 +13,13 @@
             Name = use;
         }
 
-        public int Cpu { get; }
-        public int Mother => (int)(Cpu * 0.80);
-        public int Fan { get; }
-        public int Ram { get; }
-        public int Gpu { get; }
-        public int Hdd { get; }
-        public int Ssd { get; }
+        public int? Cpu { get; }
+        public int? Mother => (int)(Cpu * 0.80);
+        public int? Fan { get; }
+        public int? Ram { get; }
+        public int? Gpu { get; }
+        public int? Hdd { get; }
+        public int? Ssd { get; }
         public string Name { get; }
     }
 }

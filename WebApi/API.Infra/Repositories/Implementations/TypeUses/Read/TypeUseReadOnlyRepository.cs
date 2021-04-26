@@ -1,10 +1,8 @@
-﻿using Application.Computers.Commands.Build;
-using Application.Repositories.Interfaces;
+﻿using Application.Repositories.Interfaces;
 using Domain.Specification;
 using Infra.Connections;
 using Infra.Repositories.Convert;
 using Infra.Repositories.Implementations.Abstracts;
-using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 

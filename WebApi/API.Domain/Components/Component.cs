@@ -31,7 +31,7 @@ namespace Domain.Components
             return Compatibility.IsCompatibleWith(this, component);
         }
 
-        public bool IsEnough(IEnough enough, int quantity)
+        public bool IsEnough(IEnough enough, int? quantity)
         {
             return enough.IsEnough(this, quantity);
         }

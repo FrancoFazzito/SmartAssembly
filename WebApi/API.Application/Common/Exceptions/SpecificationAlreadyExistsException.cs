@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Application.Common.Exceptions
 {
     [Serializable]
-    internal class SpecificationAlreadyExistsException : Exception
+    public class SpecificationAlreadyExistsException : Exception
     {
         public SpecificationAlreadyExistsException()
         {

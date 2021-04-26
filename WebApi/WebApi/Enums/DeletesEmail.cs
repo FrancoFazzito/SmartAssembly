@@ -3,6 +3,7 @@
     public enum DeletesEmail
     {
         Client,
-        Employee
+        Employee,
+        TypeUse
     }
 }

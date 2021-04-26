@@ -4,15 +4,21 @@ namespace Application.Employees.Commands.Delete
 {
     public class DeleteEmployee
     {
-        private readonly IDeleteByEmail delete;
+        private readonly IDeleteByName delete;
+        private readonly IEmployeeReadOnlyRepository read;
 
-        public DeleteEmployee(IDeleteByEmail delete)
+        public DeleteEmployee(IDeleteByName delete, IEmployeeReadOnlyRepository read)
         {
             this.delete = delete;
+            this.read = read;
         }
 
-        public void Create(string email)
+        public void Delete(string email)
         {
+            if (read.GetByName(email) == null)
+            {
+                throw new NotFoundEmployeeException();
+            }
             delete.Delete(email);
         }
     }
