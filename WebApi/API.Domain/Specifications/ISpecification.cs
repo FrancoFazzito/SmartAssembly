@@ -1,10 +1,8 @@
-﻿using Domain.Computers;
-
-namespace Application.Computers.Commands.Build
+﻿namespace Domain.Specification
 {
     public interface ISpecification
     {
-        string TypeUse { get; }
+        string Name { get; }
         int Cpu { get; }
         int Mother { get; }
         int Fan { get; }

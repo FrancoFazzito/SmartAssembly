@@ -1,5 +1,4 @@
 ﻿using Application.Common.Exceptions;
-using Application.Orders.Commands.Create;
 using Application.Repositories.Interfaces;
 using Domain.Orders;
 using Domain.Orders.States;

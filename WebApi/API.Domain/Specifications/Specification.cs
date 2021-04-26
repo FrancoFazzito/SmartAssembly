@@ -1,6 +1,4 @@
-﻿using Domain.Computers;
-
-namespace Application.Computers.Commands.Build
+﻿namespace Domain.Specification
 {
     public class Specification : ISpecification
     {
@@ -12,7 +10,7 @@ namespace Application.Computers.Commands.Build
             Gpu = gpu;
             Hdd = hdd;
             Ssd = ssd;
-            TypeUse = use;
+            Name = use;
         }
 
         public int Cpu { get; }
@@ -22,6 +20,6 @@ namespace Application.Computers.Commands.Build
         public int Gpu { get; }
         public int Hdd { get; }
         public int Ssd { get; }
-        public string TypeUse { get; }
+        public string Name { get; }
     }
 }

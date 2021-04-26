@@ -1,6 +1,6 @@
 ﻿using Application.Repositories.Interfaces;
-using Domain.Computers;
 using Domain.Importance;
+using Domain.Specification;
 
 namespace Application.Computers.Commands.Build
 {

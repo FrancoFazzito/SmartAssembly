@@ -1,5 +1,4 @@
 ﻿using Application.Common.Exceptions;
-using Application.Orders.Commands.RegisterError;
 using Application.Repositories.Interfaces;
 using Domain.Components;
 

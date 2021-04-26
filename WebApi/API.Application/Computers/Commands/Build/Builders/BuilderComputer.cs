@@ -168,7 +168,7 @@ namespace Application.Computers.Commands.Build
         {
             Computer = new Computer()
             {
-                TypeUse = request.Specification.TypeUse,
+                TypeUse = request.Specification.Name,
                 CostBuild = buildCost,
                 Multiplier = pricePerfomanceMultiplier
             };

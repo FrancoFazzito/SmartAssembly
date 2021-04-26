@@ -9,7 +9,6 @@ namespace Infra.Connections
     public class Connection : IConnection
     {
         private readonly SqlConnection connection;
-        //private string connectionString;
 
         public Connection(IOptions<DatabaseSettings> dbOptions)
         {
@@ -38,7 +37,7 @@ namespace Infra.Connections
             {
                 command.Transaction.Rollback();
             }
-            Close();
+            finally { Close(); }
         }
 
         public void Execute(IEnumerable<SqlCommand> commands)

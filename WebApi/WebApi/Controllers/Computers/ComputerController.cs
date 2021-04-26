@@ -1,7 +1,6 @@
 ﻿using Application.Common.Exceptions;
 using Application.Computers.Commands.Build;
 using Application.Computers.Commands.Delete;
-using Application.Orders.Commands.RegisterError;
 using Application.Repositories.Interfaces;
 using Domain.Computers;
 using Domain.Importance;

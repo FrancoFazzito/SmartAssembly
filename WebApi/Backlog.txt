@@ -1,8 +1,7 @@
+complete crud
 validate rest
-HATEOAS
 JWT -> add rols
 Swagger
-Logger
 mailing y PDF
 pagination en orders
 Testing ABM

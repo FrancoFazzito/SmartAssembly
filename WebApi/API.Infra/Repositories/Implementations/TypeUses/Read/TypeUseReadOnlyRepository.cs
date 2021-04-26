@@ -1,8 +1,10 @@
 ﻿using Application.Computers.Commands.Build;
 using Application.Repositories.Interfaces;
+using Domain.Specification;
 using Infra.Connections;
 using Infra.Repositories.Convert;
 using Infra.Repositories.Implementations.Abstracts;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 
@@ -10,6 +12,7 @@ namespace Infra.Repositories.Implementations.TypeUses
 {
     public class TypeUseReadOnlyRepository : AbstractReadOnlyRepository<ISpecification>, ITypeUseReadOnlyRepository
     {
+
         public TypeUseReadOnlyRepository(IConnection connection) : base(connection)
         {
         }
@@ -18,7 +21,7 @@ namespace Infra.Repositories.Implementations.TypeUses
 
         public ISpecification GetByUse(string use)
         {
-            return All.FirstOrDefault(c => c.TypeUse == use);
+            return All.FirstOrDefault(c => c.Name == use);
         }
 
         protected override ISpecification NewRecord(IDataReader reader)

@@ -3,7 +3,6 @@ using Application.Components.Commands.Create;
 using Application.Components.Commands.Delete;
 using Application.Components.Commands.Read;
 using Application.Components.Commands.Update;
-using Application.Orders.Commands.RegisterError;
 using Application.Repositories.Interfaces;
 using Domain.Components;
 using Microsoft.AspNetCore.Mvc;
