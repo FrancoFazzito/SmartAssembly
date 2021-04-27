@@ -7,6 +7,7 @@ using Application.Repositories.Interfaces;
 using Domain.Components;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Net;
 
 namespace WebApi.Controllers.Components
 {
@@ -29,6 +30,8 @@ namespace WebApi.Controllers.Components
 
         // GET: api/component
         [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<IEnumerable<Component>>))]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public IActionResult Get()
         {
             return Ok(new ApiResponse<IEnumerable<Component>>(read.All));
@@ -36,6 +39,7 @@ namespace WebApi.Controllers.Components
 
         // PUT api/component/5
         [HttpPut("{id}")]
+        [Route(nameof(Update))]
         public IActionResult Update(int? id, Component component)
         {
             if (!id.HasValue)
@@ -59,7 +63,8 @@ namespace WebApi.Controllers.Components
 
         // POST api/component
         [HttpPost]
-        public IActionResult Post(Component component)
+        [Route(nameof(Create))]
+        public IActionResult Create(Component component)
         {
             if (component.Name != null && component.Name != string.Empty)
             {
@@ -78,6 +83,7 @@ namespace WebApi.Controllers.Components
 
         // DELETE api/component/5
         [HttpDelete("{id}")]
+        [Route(nameof(Delete))]
         public IActionResult Delete(int? id)
         {
             if (!id.HasValue)

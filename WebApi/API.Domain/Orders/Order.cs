@@ -10,7 +10,7 @@ namespace Domain.Orders
 {
     public class Order
     {
-        public void Add(Computer computer, int quantity)
+        public void Add(Computer computer, int? quantity)
         {
             for (var i = 0; i < quantity; i++)
             {

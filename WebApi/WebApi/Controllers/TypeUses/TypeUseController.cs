@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
 using Application.Repositories.Interfaces;
@@ -31,12 +32,15 @@ namespace WebApi.Controllers.TypeUses
 
         // GET: api/TypeUse
         [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<IEnumerable<ISpecification>>))]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public IActionResult Get()
         {
             return Ok(new ApiResponse<IEnumerable<ISpecification>>(read.All));
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{name}")]
+        [Route(nameof(Delete))]
         public IActionResult Delete(string name)
         {
             if (name == null)
@@ -57,7 +61,8 @@ namespace WebApi.Controllers.TypeUses
 
         // POST api/TypeUse
         [HttpPost]
-        public IActionResult Post(ISpecification value)
+        [Route(nameof(Create))]
+        public IActionResult Create(ISpecification value)
         {
             if (!value.Cpu.HasValue || !value.Fan.HasValue || !value.Gpu.HasValue || !value.Hdd.HasValue || !value.Ssd.HasValue || !value.Ram.HasValue)
             {

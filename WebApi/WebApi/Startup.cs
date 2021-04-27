@@ -59,8 +59,13 @@ namespace WebApi
         {
             services.Configure<DatabaseSettings>(Configuration.GetSection("DatabaseSettings"));
             services.AddOptions();
-
             //register dependencies
+            RegisterServiceDependencies(services);
+            services.AddControllers();
+        }
+
+        private void RegisterServiceDependencies(IServiceCollection services)
+        {
             //get computers
             RegisterServicesGetComputers(services);
 
@@ -71,29 +76,53 @@ namespace WebApi
             RegisterServicesBuildOrder(services);
 
             //deliver order
-            services.AddTransient<IDeliverOrderRepository, DeliverOrderRepository>();
+            RegisterServicesDeliverOrder(services);
 
             //update costs
-            services.AddTransient<IUpdateCostRepository, UpdateCostRepository>();
-            services.AddTransient<IUpdateCost, UpdateCost>();
+            RegisterServicesUpdateCost(services);
 
             //get costs
-            services.AddTransient<ICostsReadOnlyRepository, CostsReadOnlyRepository>();
+            RegisterServicesGetCosts(services);
 
             //register error build
-            services.AddTransient<IErrorBuildingWriteOnlyRepository, ErrorBuildingWriteOnlyRepository>();
-            services.AddTransient<IErrorBuildingWithReplaceWriteOnlyRepository, ErrorBuildingWithReplaceWriteOnlyRepository>();
-            services.AddTransient<IComputerReadOnlyRepository, ComputerReadOnlyRepository>();
-            services.AddTransient<IRegisterBuildError, RegisterBuildError>();
+            RegisterServicesRegisterErrorBuild(services);
 
             //register error delivered
-            services.AddTransient<IErrorOrderWriteOnlyRepository, ErrorOrderWriteOnlyRepository>();
-            services.AddTransient<IOrderReadOnlyRepository, OrderReadOnlyRepository>();
-            services.AddTransient<IRegisterErrorOrderDelivered, RegisterErrorOrderDelivered>();
+            RegisterServicesRegisterErrorDelivered(services);
 
+            //update component
+            RegisterServicesUpdate(services);
+
+            RegisterServicesCreate(services);
+
+            RegisterServicesDelete(services);
+        }
+
+        private void RegisterServicesCreate(IServiceCollection services)
+        {
             //crear reporte
             services.AddTransient<ICreateReport, CreateReport>();
 
+            //create component
+            services.AddTransient<ICreate<Component>, CreateComponentRepository>();
+
+            //create client
+            services.AddTransient<ICreate<Client>, CreateClientRepository>();
+
+            //create employee
+            services.AddTransient<ICreate<Employee>, CreateEmployeeRepository>();
+
+            //create typeuse
+            services.AddTransient<ICreate<ISpecification>, CreateTypeUseRepository>();
+        }
+
+        private void RegisterServicesUpdate(IServiceCollection services)
+        {
+            services.AddTransient<IUpdate<Component>, UpdateComponentRepository>();
+        }
+
+        private void RegisterServicesDelete(IServiceCollection services)
+        {
             //delete computer
             services.AddTransient<DeleteComputerRepository>();
 
@@ -103,26 +132,11 @@ namespace WebApi
             //delete component
             services.AddTransient<DeleteComponentRepository>();
 
-            //create component
-            services.AddTransient<ICreate<Component>, CreateComponentRepository>();
-
-            //update component
-            services.AddTransient<IUpdate<Component>, UpdateComponentRepository>();
-
-            //create client
-            services.AddTransient<ICreate<Client>, CreateClientRepository>();
-
             //delete client
             services.AddTransient<DeleteClientRepository>();
 
-            //create employee
-            services.AddTransient<ICreate<Employee>, CreateEmployeeRepository>();
-
             //delete employee
             services.AddTransient<DeleteEmployeeRepository>();
-
-            //create typeuse
-            services.AddTransient<ICreate<ISpecification>,CreateTypeUseRepository>();
 
             //delete typeuse
             services.AddTransient<DeleteTypeUseRepository>();
@@ -156,11 +170,40 @@ namespace WebApi
                         throw new KeyNotFoundException();
                 }
             });
-
-            services.AddControllers();
         }
 
-        private static void RegisterServicesBuildOrder(IServiceCollection services)
+        private void RegisterServicesRegisterErrorDelivered(IServiceCollection services)
+        {
+            services.AddTransient<IErrorOrderWriteOnlyRepository, ErrorOrderWriteOnlyRepository>();
+            services.AddTransient<IOrderReadOnlyRepository, OrderReadOnlyRepository>();
+            services.AddTransient<IRegisterErrorOrderDelivered, RegisterErrorOrderDelivered>();
+        }
+
+        private void RegisterServicesRegisterErrorBuild(IServiceCollection services)
+        {
+            services.AddTransient<IErrorBuildingWriteOnlyRepository, ErrorBuildingWriteOnlyRepository>();
+            services.AddTransient<IErrorBuildingWithReplaceWriteOnlyRepository, ErrorBuildingWithReplaceWriteOnlyRepository>();
+            services.AddTransient<IComputerReadOnlyRepository, ComputerReadOnlyRepository>();
+            services.AddTransient<IRegisterBuildError, RegisterBuildError>();
+        }
+
+        private void RegisterServicesGetCosts(IServiceCollection services)
+        {
+            services.AddTransient<ICostsReadOnlyRepository, CostsReadOnlyRepository>();
+        }
+
+        private void RegisterServicesUpdateCost(IServiceCollection services)
+        {
+            services.AddTransient<IUpdateCostRepository, UpdateCostRepository>();
+            services.AddTransient<IUpdateCost, UpdateCost>();
+        }
+
+        private void RegisterServicesDeliverOrder(IServiceCollection services)
+        {
+            services.AddTransient<IDeliverOrderRepository, DeliverOrderRepository>();
+        }
+
+        private void RegisterServicesBuildOrder(IServiceCollection services)
         {
             services.AddTransient<IComputerReadOnlyRepository, ComputerReadOnlyRepository>();
             services.AddTransient<IBuildOrderRepository, BuildOrderRepository>();
@@ -168,7 +211,7 @@ namespace WebApi
             services.AddTransient<IBuilderOrder, BuilderOrder>();
         }
 
-        private static void RegisterServicesCreateOrders(IServiceCollection services)
+        private void RegisterServicesCreateOrders(IServiceCollection services)
         {
             services.AddTransient<ISubmitOrderRepository, SubmitOrderRepository>();
             services.AddTransient<IEmployeeReadOnlyRepository, EmployeeReadOnlyRepository>();
@@ -178,7 +221,7 @@ namespace WebApi
             services.AddTransient<ISubmitOrder, SubmitOrder>();
         }
 
-        private static void RegisterServicesGetComputers(IServiceCollection services)
+        private void RegisterServicesGetComputers(IServiceCollection services)
         {
             services.AddTransient<IConnection, Connection>();
             services.AddTransient<IComponentReadOnlyRepository, ComponentReadOnlyRepository>();

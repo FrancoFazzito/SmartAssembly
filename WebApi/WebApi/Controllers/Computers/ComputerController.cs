@@ -61,6 +61,7 @@ namespace WebApi.Controllers.Computers
 
         // DELETE /api/computer/10
         [HttpDelete("{id}")]
+        [Route(nameof(Delete))]
         public IActionResult Delete(int? id)
         {
             if (!id.HasValue)

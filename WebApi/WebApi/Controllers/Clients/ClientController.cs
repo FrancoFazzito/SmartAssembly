@@ -5,7 +5,7 @@ using Application.Repositories.Interfaces;
 using Domain.Clients;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-
+using System.Net;
 
 namespace WebApi.Controllers.Clients
 {
@@ -26,6 +26,8 @@ namespace WebApi.Controllers.Clients
 
         // GET: api/Client
         [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<IEnumerable<Client>>))]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public IActionResult Get()
         {
             return Ok(new ApiResponse<IEnumerable<Client>>(read.All));
@@ -33,7 +35,8 @@ namespace WebApi.Controllers.Clients
 
         // POST api/<ClientController>
         [HttpPost]
-        public IActionResult Post(Client value)
+        [Route(nameof(Create))]
+        public IActionResult Create(Client value)
         {
             if (value.Email == null)
             {
@@ -51,7 +54,8 @@ namespace WebApi.Controllers.Clients
         }
 
         // DELETE api/<ClientController>/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{email}")]
+        [Route(nameof(Delete))]
         public IActionResult Delete(string email)
         {
             if (email == null)

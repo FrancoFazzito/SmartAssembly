@@ -6,6 +6,7 @@ using Application.Repositories.Interfaces;
 using Domain.Employees;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Net;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -28,6 +29,8 @@ namespace WebApi.Controllers.Employees
 
         // GET: api/Employee
         [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<IEnumerable<Employee>>))]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public IActionResult Get()
         {
             return Ok(new ApiResponse<IEnumerable<Employee>>(read.All));
@@ -35,7 +38,8 @@ namespace WebApi.Controllers.Employees
 
         // POST api/Employee
         [HttpPost]
-        public IActionResult Post(Employee value)
+        [Route(nameof(Create))]
+        public IActionResult Create(Employee value)
         {
             if (value.Email == null)
             {
@@ -52,8 +56,9 @@ namespace WebApi.Controllers.Employees
             }
         }
 
-        // DELETE api/Employee/5
-        [HttpDelete("{id}")]
+        // DELETE api/Employee/juan
+        [HttpDelete("{email}")]
+        [Route(nameof(Delete))]
         public IActionResult Delete(string email)
         {
             if (email == null)

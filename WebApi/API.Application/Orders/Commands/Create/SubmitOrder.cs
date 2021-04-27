@@ -1,6 +1,7 @@
 ﻿using Application.Components.Commands.ControlStock;
 using Application.Repositories.Interfaces;
 using Domain.Clients;
+using Domain.Computers;
 using Domain.Employees;
 using Domain.Orders;
 using Domain.Orders.States;
@@ -24,6 +25,13 @@ namespace Application.Orders.Commands.Create
             this.computerStock = computerStock;
             this.componentStock = componentStock;
             this.orderReadOnlyRepository = orderReadOnlyRepository;
+        }
+
+        public Order AddComputer(Order order, Computer computer, int? quantity)
+        {
+            order.Add(computer, quantity);
+            CheckStock(order);
+            return order;
         }
 
         public SubmitResult Submit(Order order, string clientEmail)

@@ -5,6 +5,7 @@ using Application.Repositories.Interfaces;
 using Domain.Orders;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Net;
 
 namespace WebApi.Controllers.Orders.Delete
 {
@@ -15,7 +16,6 @@ namespace WebApi.Controllers.Orders.Delete
         private readonly DeleteOrder delete;
         private readonly ReadOrder read;
 
-
         public OrderController(Startup.DeleteByIdResolver deleteAccesor, IOrderReadOnlyRepository readOrder)
         {
             delete = new DeleteOrder(deleteAccesor(DeletesID.Order), readOrder);
@@ -24,6 +24,7 @@ namespace WebApi.Controllers.Orders.Delete
 
         //DELETE api/order/5
         [HttpDelete("{id}")]
+        [Route(nameof(Delete))]
         public IActionResult Delete(int? id)
         {
             if (!id.HasValue)
@@ -43,6 +44,8 @@ namespace WebApi.Controllers.Orders.Delete
 
         //GET api/order
         [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<IEnumerable<Order>>))]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public IActionResult Get()
         {
             return Ok(new ApiResponse<IEnumerable<Order>>(read.All));

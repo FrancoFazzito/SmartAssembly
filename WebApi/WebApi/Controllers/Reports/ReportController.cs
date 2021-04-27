@@ -1,9 +1,11 @@
 ﻿using Application.Common.Exceptions;
 using Application.Reports.Commands.Create;
+using Domain.Components;
 using Domain.Orders;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Net;
 
 namespace WebApi.Controllers.Reports
 {
@@ -18,13 +20,15 @@ namespace WebApi.Controllers.Reports
             this.createReport = createReport;
         }
 
-        public void Create(DateTime since, DateTime until)
+        private void Create(DateTime since, DateTime until)
         {
             createReport.Create(since, until);
         }
 
         [HttpGet]
         [Route("Order/delivered")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<IEnumerable<Order>>))]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public IActionResult Deliver(DateTime since, DateTime until)
         {
             try
@@ -40,6 +44,8 @@ namespace WebApi.Controllers.Reports
 
         [HttpGet]
         [Route("Order/requested")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<IEnumerable<Order>>))]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public IActionResult Requested(DateTime since, DateTime until)
         {
             try
@@ -55,6 +61,8 @@ namespace WebApi.Controllers.Reports
 
         [HttpGet]
         [Route("Order/error")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<IEnumerable<Order>>))]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public IActionResult Error(DateTime since, DateTime until)
         {
             try
@@ -70,6 +78,8 @@ namespace WebApi.Controllers.Reports
 
         [HttpGet]
         [Route("Component")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<IEnumerable<Component>>))]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public IActionResult Components(DateTime since, DateTime until)
         {
             try
