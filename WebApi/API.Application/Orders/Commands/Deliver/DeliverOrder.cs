@@ -34,8 +34,8 @@ namespace Application.Orders.Commands.Deliver
 
         public IEnumerable<Order> GetOrdersToDeliverByClient(string emailClient)
         {
-            return orderRepository.All.Where(c => c.Client.Email == emailClient)
-                                      .Where(c => c.State == OrderState.Completed);
+            return orderRepository.GetByClient(emailClient)
+                                  .Where(c => c.State == OrderState.Completed);
         }
 
         private Order GetOrder(int? id)

@@ -15,16 +15,14 @@ namespace Application.Orders.Commands.Create
         private readonly IClientReadOnlyRepository clientRepository;
         private readonly IComputerStockRepository computerStock;
         private readonly IComponentStock componentStock;
-        private readonly IOrderReadOnlyRepository orderReadOnlyRepository;
 
-        public SubmitOrder(ISubmitOrderRepository orderRepository, IEmployeeReadOnlyRepository employeeRepository, IClientReadOnlyRepository clientRepository, IComputerStockRepository computerStock, IComponentStock componentStock, IOrderReadOnlyRepository orderReadOnlyRepository)
+        public SubmitOrder(ISubmitOrderRepository orderRepository, IEmployeeReadOnlyRepository employeeRepository, IClientReadOnlyRepository clientRepository, IComputerStockRepository computerStock, IComponentStock componentStock)
         {
             this.orderRepository = orderRepository;
             this.employeeRepository = employeeRepository;
             this.clientRepository = clientRepository;
             this.computerStock = computerStock;
             this.componentStock = componentStock;
-            this.orderReadOnlyRepository = orderReadOnlyRepository;
         }
 
         public Order AddComputer(Order order, Computer computer, int? quantity)

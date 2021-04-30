@@ -34,7 +34,7 @@ namespace Application.Orders.Commands.RegisterError
 
         public IEnumerable<Order> GetOrdersDeliveredByClient(string email)
         {
-            var orders = orderRepository.All.Where(c => c.Client.Email == email)
+            var orders = orderRepository.GetByClient(email)
                                         .Where(c => c.State == OrderState.Delivered);
             return orders.Any() ? orders : throw new NotAvailableOrdersException();
         }

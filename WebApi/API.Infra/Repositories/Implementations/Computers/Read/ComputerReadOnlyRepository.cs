@@ -23,7 +23,7 @@ namespace Infra.Repositories.Implementations.Computers
 
         public IEnumerable<Computer> GetByOrder(int id)
         {
-            return GetRecords("SELECT * FROM Computer c inner join [Order] o on c.ID_Order = o.ID where o.ID = @id", new Dictionary<string, object>() { { "@id", id } });
+            return GetRecords("SELECT * FROM Computer where ID_Order = @id", new Dictionary<string, object>() { { "@id", id } });
         }
 
         protected override Computer NewRecord(IDataReader reader)

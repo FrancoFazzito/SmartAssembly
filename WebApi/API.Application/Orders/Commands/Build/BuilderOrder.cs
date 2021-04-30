@@ -22,7 +22,6 @@ namespace Application.Orders.Commands.Build
         public BuilderOrderResult Build(int? id)
         {
             var order = GetOrder(id);
-
             order.State = OrderState.Completed;
             buildRepository.Build(order);
             return new BuilderOrderResult(order, DateTime.Now, order.Employee);
@@ -35,20 +34,19 @@ namespace Application.Orders.Commands.Build
 
         public IEnumerable<Order> GetOrdersByEmployee(string email)
         {
-            var orders = orderRepository.All
-                                  .Where(order => order.Employee.Email == email)
-                                  .Where(order => order.State == OrderState.Uncompleted || order.State == OrderState.Error)
-                                  .Select(order => new Order()
-                                  {
-                                      Client = order.Client,
-                                      Commentary = order.Commentary,
-                                      Computers = order.Computers.Where(c => !c.Completed).ToList(),
-                                      DateDelivered = order.DateDelivered,
-                                      DateRequested = order.DateRequested,
-                                      Employee = order.Employee,
-                                      Id = order.Id,
-                                      State = order.State
-                                  });
+            var orders = orderRepository.GetByEmployee(email)
+                                        .Where(order => order.State == OrderState.Uncompleted || order.State == OrderState.Error)
+                                        .Select(order => new Order()
+                                        {
+                                            Client = order.Client,
+                                            Commentary = order.Commentary,
+                                            Computers = order.Computers.Where(c => !c.Completed).ToList(),
+                                            DateDelivered = order.DateDelivered,
+                                            DateRequested = order.DateRequested,
+                                            Employee = order.Employee,
+                                            Id = order.Id,
+                                            State = order.State
+                                        });
 
             return orders.Any() ? orders : throw new NotAvailableOrdersException();
         }

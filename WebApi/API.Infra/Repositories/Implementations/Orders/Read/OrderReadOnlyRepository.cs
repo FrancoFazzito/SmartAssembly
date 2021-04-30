@@ -5,6 +5,7 @@ using Infra.Connections;
 using Infra.Repositories.Convert;
 using Infra.Repositories.Implementations.Abstracts;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 
@@ -24,6 +25,16 @@ namespace Infra.Repositories.Implementations.Orders
         public IClientReadOnlyRepository ClientRepository { get; }
 
         protected override string QuerySelectAll => "SELECT * FROM [Order]";
+
+        public IEnumerable<Order> GetByEmployee(string email)
+        {
+            return GetRecords("SELECT * FROM [Order] where Email_Employee = @email", new Dictionary<string, object>() { { "@email", email } });
+        }
+
+        public IEnumerable<Order> GetByClient(string email)
+        {
+            return GetRecords("SELECT * FROM [Order] where Email_client = @email", new Dictionary<string, object>() { { "@email", email } });
+        }
 
         protected override Order NewRecord(IDataReader reader)
         {
