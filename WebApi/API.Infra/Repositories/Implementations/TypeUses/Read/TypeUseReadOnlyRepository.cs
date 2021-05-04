@@ -10,7 +10,6 @@ namespace Infra.Repositories.Implementations.TypeUses
 {
     public class TypeUseReadOnlyRepository : AbstractReadOnlyRepository<ISpecification>, ITypeUseReadOnlyRepository
     {
-
         public TypeUseReadOnlyRepository(IConnection connection) : base(connection)
         {
         }
@@ -19,7 +18,7 @@ namespace Infra.Repositories.Implementations.TypeUses
 
         public ISpecification GetByUse(string use)
         {
-            return All.FirstOrDefault(c => c.Name == use);
+            return GetAll().FirstOrDefault(c => c.Name == use);
         }
 
         protected override ISpecification NewRecord(IDataReader reader)

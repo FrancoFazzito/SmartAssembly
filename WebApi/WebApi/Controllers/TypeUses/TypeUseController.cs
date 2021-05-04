@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using Application.Common.Exceptions;
+﻿using Application.Common.Exceptions;
 using Application.Repositories.Interfaces;
 using Application.TypeUse.Commands.Create;
 using Application.TypeUse.Commands.Delete;
 using Application.TypeUse.Commands.Read;
 using Domain.Specification;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Net;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -57,7 +54,6 @@ namespace WebApi.Controllers.TypeUses
                 return NotFound();
             }
         }
-
 
         // POST api/TypeUse
         [HttpPost]

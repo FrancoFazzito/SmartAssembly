@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "API.Applicat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra", "API.Infra\Infra.csproj", "{4903BFD6-53AF-4132-B0BA-E3E14B64A5A8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebApi", "TesttWebApi\TestWebApi.csproj", "{C12EE6C8-A801-45FB-8C8B-5BD0E3745D64}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +44,12 @@ Global
 		{4903BFD6-53AF-4132-B0BA-E3E14B64A5A8}.NoVariablesDefault|Any CPU.Build.0 = Release|Any CPU
 		{4903BFD6-53AF-4132-B0BA-E3E14B64A5A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4903BFD6-53AF-4132-B0BA-E3E14B64A5A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C12EE6C8-A801-45FB-8C8B-5BD0E3745D64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C12EE6C8-A801-45FB-8C8B-5BD0E3745D64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C12EE6C8-A801-45FB-8C8B-5BD0E3745D64}.NoVariablesDefault|Any CPU.ActiveCfg = Release|Any CPU
+		{C12EE6C8-A801-45FB-8C8B-5BD0E3745D64}.NoVariablesDefault|Any CPU.Build.0 = Release|Any CPU
+		{C12EE6C8-A801-45FB-8C8B-5BD0E3745D64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C12EE6C8-A801-45FB-8C8B-5BD0E3745D64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

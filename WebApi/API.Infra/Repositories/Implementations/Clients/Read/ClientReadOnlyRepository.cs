@@ -18,7 +18,7 @@ namespace Infra.Repositories.Implementations.Clients
 
         public Client GetByEmail(string email)
         {
-            return All.FirstOrDefault(c => c.Email == email);
+            return GetAll().FirstOrDefault(c => c.Email == email);
         }
 
         protected override Client NewRecord(IDataReader reader)

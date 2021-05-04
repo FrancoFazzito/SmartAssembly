@@ -16,9 +16,9 @@ namespace Infra.Repositories.Implementations.Costs.Read
         {
         }
 
-        public int BuildCost => All.FirstOrDefault(c => c.Item1 == PARAM_BUILD).Item2;
+        public int BuildCost => GetAll().FirstOrDefault(c => c.Item1 == PARAM_BUILD).Item2;
 
-        public int PricePerfomanceMultiplier => All.FirstOrDefault(c => c.Item1 == PARAM_MULTIPLIER).Item2;
+        public int PricePerfomanceMultiplier => GetAll().FirstOrDefault(c => c.Item1 == PARAM_MULTIPLIER).Item2;
 
         protected override string QuerySelectAll => "SELECT * FROM Cost";
 

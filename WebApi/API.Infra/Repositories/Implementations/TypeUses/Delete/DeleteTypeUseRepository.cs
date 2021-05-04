@@ -1,9 +1,6 @@
 ﻿using Application.Repositories.Interfaces;
 using Infra.Connections;
-using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Text;
 
 namespace Infra.Repositories.Implementations.TypeUses.Delete
 {
@@ -22,6 +19,5 @@ namespace Infra.Repositories.Implementations.TypeUses.Delete
             command.Parameters.AddWithValue("@name", name);
             connection.Execute(command);
         }
-
     }
 }

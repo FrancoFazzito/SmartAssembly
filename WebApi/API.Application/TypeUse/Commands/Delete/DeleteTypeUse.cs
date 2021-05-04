@@ -1,8 +1,5 @@
 ﻿using Application.Common.Exceptions;
 using Application.Repositories.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Application.TypeUse.Commands.Delete
 {

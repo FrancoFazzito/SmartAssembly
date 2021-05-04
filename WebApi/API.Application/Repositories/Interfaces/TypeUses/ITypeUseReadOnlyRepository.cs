@@ -7,6 +7,6 @@ namespace Application.Repositories.Interfaces
     {
         ISpecification GetByUse(string use);
 
-        IEnumerable<ISpecification> All { get; }
+        IEnumerable<ISpecification> GetAll();
     }
 }

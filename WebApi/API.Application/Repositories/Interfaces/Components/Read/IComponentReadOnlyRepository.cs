@@ -5,8 +5,7 @@ namespace Application.Repositories.Interfaces
 {
     public interface IComponentReadOnlyRepository
     {
-        IEnumerable<Component> All { get; }
-
+        IEnumerable<Component> GetAll();
         Component GetById(int? id);
 
         Component GetByName(string name);

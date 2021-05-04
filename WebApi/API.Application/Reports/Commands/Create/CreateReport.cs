@@ -28,7 +28,7 @@ namespace Application.Reports.Commands.Create
             {
                 throw new InvalidDateException();
             }
-            OrdersRequested = orderRepository.All.Where(order => Between(since, until, order.DateRequested));
+            OrdersRequested = orderRepository.GetAll().Where(order => Between(since, until, order.DateRequested));
         }
 
         private IEnumerable<KeyValuePair<string, int>> ComponentsOrderByMostRequested(IEnumerable<Order> orders)

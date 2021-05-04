@@ -36,7 +36,7 @@ namespace Infra.Repositories.Implementations.Employees
 
         public Employee GetByName(string email)
         {
-            return All.FirstOrDefault(c => c.Email == email);
+            return GetAll().FirstOrDefault(c => c.Email == email);
         }
     }
 }

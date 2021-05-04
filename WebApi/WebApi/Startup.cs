@@ -143,32 +143,24 @@ namespace WebApi
 
             services.AddTransient<DeleteByNameResolver>(serviceProvider => key =>
             {
-                switch (key)
+                return key switch
                 {
-                    case DeletesEmail.Client:
-                        return serviceProvider.GetService<DeleteClientRepository>();
-                    case DeletesEmail.Employee:
-                        return serviceProvider.GetService<DeleteEmployeeRepository>();
-                    case DeletesEmail.TypeUse:
-                        return serviceProvider.GetService<DeleteTypeUseRepository>();
-                    default:
-                        throw new KeyNotFoundException();
-                }
+                    DeletesEmail.Client => serviceProvider.GetService<DeleteClientRepository>(),
+                    DeletesEmail.Employee => serviceProvider.GetService<DeleteEmployeeRepository>(),
+                    DeletesEmail.TypeUse => serviceProvider.GetService<DeleteTypeUseRepository>(),
+                    _ => throw new KeyNotFoundException(),
+                };
             });
 
             services.AddTransient<DeleteByIdResolver>(serviceProvider => key =>
             {
-                switch (key)
+                return key switch
                 {
-                    case DeletesID.Computer:
-                        return serviceProvider.GetService<DeleteComputerRepository>();
-                    case DeletesID.Component:
-                        return serviceProvider.GetService<DeleteComponentRepository>();
-                    case DeletesID.Order:
-                        return serviceProvider.GetService<DeleteOrderRepository>();
-                    default:
-                        throw new KeyNotFoundException();
-                }
+                    DeletesID.Computer => serviceProvider.GetService<DeleteComputerRepository>(),
+                    DeletesID.Component => serviceProvider.GetService<DeleteComponentRepository>(),
+                    DeletesID.Order => serviceProvider.GetService<DeleteOrderRepository>(),
+                    _ => throw new KeyNotFoundException(),
+                };
             });
         }
 

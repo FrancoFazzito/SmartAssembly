@@ -48,7 +48,7 @@ namespace WebApi.Controllers.Configuration
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public IActionResult Get()
         {
-            return Ok(new ApiResponse<IEnumerable<Tuple<string, int>>>(read.All));
+            return Ok(new ApiResponse<IEnumerable<Tuple<string, int>>>(read.GetAll()));
         }
     }
 }

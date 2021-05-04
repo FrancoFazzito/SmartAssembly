@@ -5,8 +5,7 @@ namespace Application.Repositories.Interfaces
 {
     public interface IEmployeeReadOnlyRepository
     {
-        IEnumerable<Employee> All { get; }
-
+        IEnumerable<Employee> GetAll();
         Employee GetMostInactiveEmployee();
 
         Employee GetEmployeeWithoutOrder();

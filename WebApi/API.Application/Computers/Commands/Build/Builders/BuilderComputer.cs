@@ -37,7 +37,7 @@ namespace Application.Computers.Commands.Build
         public IEnumerable<Component> GetComponents(IComputerRequest request)
         {
             this.request = request;
-            components = orderBy.GetOrderedComponents(repository.All, request.Importance);
+            components = orderBy.GetOrderedComponents(repository.GetAll(), request.Importance);
             return components.Where(c => c.IsType(TypePart.cpu));
         }
 

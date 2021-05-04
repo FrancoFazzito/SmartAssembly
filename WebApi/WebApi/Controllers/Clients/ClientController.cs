@@ -30,7 +30,14 @@ namespace WebApi.Controllers.Clients
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public IActionResult Get()
         {
-            return Ok(new ApiResponse<IEnumerable<Client>>(read.All));
+            try
+            {
+                return Ok(new ApiResponse<IEnumerable<Client>>(read.GetAll()));
+            }
+            catch
+            {
+                return NotFound();
+            }
         }
 
         // POST api/<ClientController>
@@ -45,11 +52,11 @@ namespace WebApi.Controllers.Clients
             try
             {
                 create.Create(value);
-                return Ok();
+                return NoContent();
             }
             catch (ClientAlreadyExistsException)
             {
-                return NotFound();
+                return BadRequest();
             }
         }
 
@@ -65,7 +72,7 @@ namespace WebApi.Controllers.Clients
             try
             {
                 delete.Delete(email);
-                return Ok();
+                return NoContent();
             }
             catch (NotFoundClientException)
             {
