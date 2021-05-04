@@ -6,9 +6,10 @@ using System.Net;
 
 namespace WebApi.Controllers.Orders.Submit
 {
-    [ApiController]
+    
     [Produces("application/json")]
     [Route("api/order/[controller]")]
+    [ApiController]
     public partial class SubmitController : ControllerBase
     {
         private readonly ISubmitOrder submit;

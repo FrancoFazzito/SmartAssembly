@@ -12,8 +12,9 @@ using System.Net;
 namespace WebApi.Controllers.Components
 {
     [Route("api/[controller]")]
+    [Produces("application/json")]
     [ApiController]
-    public class ComponentController : ControllerBase
+    public partial class ComponentController : ControllerBase
     {
         private readonly DeleteComponent delete;
         private readonly CreateComponent create;
@@ -60,6 +61,8 @@ namespace WebApi.Controllers.Components
                 return NotFound();
             }
         }
+
+
 
         // POST api/component
         [HttpPost]

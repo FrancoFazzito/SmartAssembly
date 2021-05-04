@@ -11,6 +11,7 @@ using System.Net;
 namespace WebApi.Controllers.Configuration
 {
     [Route("api/[controller]")]
+    [Produces("application/json")]
     [ApiController]
     public class CostController : ControllerBase
     {

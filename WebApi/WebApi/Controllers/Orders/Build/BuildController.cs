@@ -8,9 +8,10 @@ using System.Net;
 
 namespace WebApi.Controllers.Orders.Build
 {
-    [ApiController]
+    
     [Produces("application/json")]
     [Route("api/order/[controller]")]
+    [ApiController]
     public class BuildController : ControllerBase
     {
         private readonly IBuilderOrder builder;

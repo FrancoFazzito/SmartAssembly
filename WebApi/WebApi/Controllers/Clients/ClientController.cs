@@ -10,6 +10,7 @@ using System.Net;
 namespace WebApi.Controllers.Clients
 {
     [Route("api/[controller]")]
+    [Produces("application/json")]
     [ApiController]
     public class ClientController : ControllerBase
     {
@@ -40,7 +41,7 @@ namespace WebApi.Controllers.Clients
             }
         }
 
-        // POST api/<ClientController>
+        // POST api/client/create
         [HttpPost]
         [Route(nameof(Create))]
         public IActionResult Create(Client value)
@@ -60,10 +61,10 @@ namespace WebApi.Controllers.Clients
             }
         }
 
-        // DELETE api/<ClientController>/5
-        [HttpDelete("{email}")]
+        // DELETE api/client/delete?email="juan"
+        [HttpDelete]
         [Route(nameof(Delete))]
-        public IActionResult Delete(string email)
+        public IActionResult Delete([FromBody] string email)
         {
             if (email == null)
             {

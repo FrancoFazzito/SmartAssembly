@@ -8,6 +8,7 @@ using System.Net;
 namespace WebApi.Controllers.Errors.ErrorOrderDelivered
 {
     [Route("api/error/[controller]")]
+    [Produces("application/json")]
     [ApiController]
     public class DeliveredController : ControllerBase
     {

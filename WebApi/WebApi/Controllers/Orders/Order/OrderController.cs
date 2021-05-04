@@ -10,6 +10,7 @@ using System.Net;
 namespace WebApi.Controllers.Orders.Delete
 {
     [Route("api/[controller]")]
+    [Produces("application/json")]
     [ApiController]
     public class OrderController : ControllerBase
     {

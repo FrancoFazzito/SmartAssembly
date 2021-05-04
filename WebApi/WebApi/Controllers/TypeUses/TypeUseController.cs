@@ -12,6 +12,7 @@ using System.Net;
 
 namespace WebApi.Controllers.TypeUses
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class TypeUseController : ControllerBase

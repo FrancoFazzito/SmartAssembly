@@ -13,6 +13,7 @@ using System.Net;
 namespace WebApi.Controllers.Employees
 {
     [Route("api/[controller]")]
+    [Produces("application/json")]
     [ApiController]
     public class EmployeeController : ControllerBase
     {

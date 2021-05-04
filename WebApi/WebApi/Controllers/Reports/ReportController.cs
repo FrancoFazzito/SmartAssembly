@@ -9,6 +9,7 @@ using System.Net;
 
 namespace WebApi.Controllers.Reports
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class ReportController : ControllerBase

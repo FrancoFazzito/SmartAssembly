@@ -6,6 +6,7 @@ using System.Net;
 namespace WebApi.Controllers.Errors.ErrorOrderBuild
 {
     [Route("api/error/[controller]")]
+    [Produces("application/json")]
     [ApiController]
     public class BuildController : ControllerBase
     {

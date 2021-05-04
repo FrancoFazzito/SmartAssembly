@@ -9,9 +9,10 @@ using System.Net;
 
 namespace WebApi.Controllers.Orders.Deliver
 {
-    [ApiController]
+    
     [Produces("application/json")]
     [Route("api/order/[controller]")]
+    [ApiController]
     public class DeliverController : ControllerBase
     {
         private readonly IDeliverOrder deliver;
