@@ -13,9 +13,6 @@ namespace Application.Clients.Commands.Create
             this.read = read;
         }
 
-        public IEnumerable<Client> GetAll()
-        {
-            return read.GetAll();
-        }
+        public IEnumerable<Client> All => read.All;
     }
 }

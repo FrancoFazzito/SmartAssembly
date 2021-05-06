@@ -28,7 +28,7 @@ namespace Application.Costs.Commands.Update
 
         private bool NotExistsCost(string name)
         {
-            return read.GetAll().FirstOrDefault(c => c.Item1 == name) == null;
+            return read.All.FirstOrDefault(c => c.Item1 == name) == null;
         }
     }
 }

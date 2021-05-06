@@ -13,15 +13,18 @@ using System.Threading.Tasks;
 using TestWebApi.Provider;
 using Xunit;
 
-namespace TestWebApi.ClientTest
+namespace TestWebApi.Controller.Clients
 {
     public class ClientControllerTest
     {
         [Fact]
         public async Task Test_Get_All_Clients()
         {
+            //arrange
             var provider = new TestClientProvider();
             var client = provider.Client;
+
+            //act
             var response = await client.GetAsync("api/client");
             response.EnsureSuccessStatusCode();
 
@@ -34,7 +37,7 @@ namespace TestWebApi.ClientTest
         {
             //arrange
             var provider = new TestClientProvider();
-            var clientToSubmit = new Client() { Name = "franco", Adress = "calle falsa 123", Email = $"{Guid.NewGuid()}@gmail", Number = "12345" };
+            var clientToSubmit = new Domain.Clients.Client() { Name = "franco", Adress = "calle falsa 123", Email = $"{Guid.NewGuid()}@gmail", Number = "12345" };
             var json = JsonConvert.SerializeObject(clientToSubmit);
 
             // act
@@ -57,7 +60,7 @@ namespace TestWebApi.ClientTest
             var provider = new TestClientProvider();
             var client = provider.Client;
             var email = $"{Guid.NewGuid()}@gmail";
-            var json = JsonConvert.SerializeObject(new Client() { Name = "franco", Adress = "calle falsa 123", Email = email, Number = "12345" });
+            var json = JsonConvert.SerializeObject(new Domain.Clients.Client() { Name = "franco", Adress = "calle falsa 123", Email = email, Number = "12345" });
             await client.PostAsync("api/client/create", new StringContent(json, Encoding.UTF8, "application/json"));
 
             //act

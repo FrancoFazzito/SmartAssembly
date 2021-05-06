@@ -14,6 +14,6 @@ namespace Application.Components.Commands.ControlStock
             this.componentRepo = componentRepo;
         }
 
-        public IEnumerable<Component> ComponentsLowStock => componentRepo.GetAll().Where(c => c.Stock <= c.StockLimit);
+        public IEnumerable<Component> ComponentsLowStock => componentRepo.All.Where(c => c.Stock <= c.StockLimit);
     }
 }

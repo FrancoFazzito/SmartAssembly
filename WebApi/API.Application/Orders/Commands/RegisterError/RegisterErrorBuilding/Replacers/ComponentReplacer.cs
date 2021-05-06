@@ -27,7 +27,7 @@ namespace Application.Orders.Commands.RegisterError
             this.enoughs = enoughs;
             this.computer = computer;
             this.component = component;
-            components = componentRepository.GetAll().Where(c => c.TypePart == component.TypePart)
+            components = componentRepository.All.Where(c => c.TypePart == component.TypePart)
                                                 .Where(c => c.IsEnough(enoughs[Enough.Level], GetLevelToReplace(component)))
                                                 .Where(c => c.Id != component.Id)
                                                 .OrderBy(c => c.Price);

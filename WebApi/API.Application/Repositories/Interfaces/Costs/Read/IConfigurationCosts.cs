@@ -5,8 +5,7 @@ namespace Application.Repositories.Interfaces
 {
     public interface ICostsReadOnlyRepository
     {
-        IEnumerable<Tuple<string, int>> GetAll();
-
+        IEnumerable<Tuple<string, int>> All { get; }
         int BuildCost { get; }
         int PricePerfomanceMultiplier { get; }
     }

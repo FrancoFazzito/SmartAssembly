@@ -35,26 +35,34 @@ namespace WebApi.Controllers.Components
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public IActionResult Get()
         {
-            return Ok(new ApiResponse<IEnumerable<Component>>(read.All));
+            try
+            {
+                return Ok(new ApiResponse<IEnumerable<Component>>(read.All));
+            }
+            catch
+            {
+                return NotFound();
+            }
+            
         }
 
         // PUT api/component/5
         [HttpPut("{id}")]
         [Route(nameof(Update))]
-        public IActionResult Update(int? id, Component component)
+        public IActionResult Update(ComponentParam param)
         {
-            if (!id.HasValue)
+            if (!param.Id.HasValue)
             {
                 return BadRequest();
             }
-            if (component.Name != null && component.Name != string.Empty)
+            if (param.Component.Name != null && param.Component.Name != string.Empty)
             {
-                update.Update(id, component);
+                update.Update(param.Id, param.Component);
                 return BadRequest();
             }
             try
             {
-                return Ok();
+                return NoContent();
             }
             catch (NotFoundComponentException)
             {
@@ -62,21 +70,19 @@ namespace WebApi.Controllers.Components
             }
         }
 
-
-
         // POST api/component
         [HttpPost]
         [Route(nameof(Create))]
         public IActionResult Create(Component component)
         {
-            if (component.Name != null && component.Name != string.Empty)
+            if (component.Name != null && component.Name == string.Empty)
             {
                 return BadRequest();
             }
             try
             {
                 create.Create(component);
-                return Ok();
+                return NoContent();
             }
             catch (ComponentAlreadyExistException)
             {
@@ -96,7 +102,7 @@ namespace WebApi.Controllers.Components
             try
             {
                 delete.Delete(id);
-                return Ok();
+                return NoContent();
             }
             catch (NotFoundComponentException)
             {

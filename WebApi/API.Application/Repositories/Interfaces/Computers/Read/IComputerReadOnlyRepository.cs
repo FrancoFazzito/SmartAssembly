@@ -5,7 +5,8 @@ namespace Application.Repositories.Interfaces
 {
     public interface IComputerReadOnlyRepository
     {
-        IEnumerable<Computer> GetAll();
+        IEnumerable<Computer> All { get; }
+
         IEnumerable<Computer> GetByOrder(int id);
 
         Computer GetById(int? id);

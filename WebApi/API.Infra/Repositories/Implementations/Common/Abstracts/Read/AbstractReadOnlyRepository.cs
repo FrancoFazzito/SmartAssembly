@@ -11,10 +11,7 @@ namespace Infra.Repositories.Implementations.Abstracts
 
         protected readonly IConnection connection;
 
-        public IEnumerable<T> GetAll()
-        {
-            return GetRecords(QuerySelectAll);
-        }
+        public IEnumerable<T> All => GetRecords(QuerySelectAll);
 
         protected AbstractReadOnlyRepository(IConnection connection)
         {

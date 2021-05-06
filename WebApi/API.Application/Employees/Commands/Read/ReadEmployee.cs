@@ -13,6 +13,6 @@ namespace Application.Employees.Commands.Read
             this.read = read;
         }
 
-        public IEnumerable<Employee> All => read.GetAll();
+        public IEnumerable<Employee> All => read.All;
     }
 }

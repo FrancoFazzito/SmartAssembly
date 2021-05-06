@@ -33,7 +33,7 @@ namespace WebApi.Controllers.Clients
         {
             try
             {
-                return Ok(new ApiResponse<IEnumerable<Client>>(read.GetAll()));
+                return Ok(new ApiResponse<IEnumerable<Client>>(read.All));
             }
             catch
             {

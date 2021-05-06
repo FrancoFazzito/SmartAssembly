@@ -37,6 +37,7 @@ namespace WebApi.Controllers.TypeUses
             return Ok(new ApiResponse<IEnumerable<ISpecification>>(read.All));
         }
 
+        // DELETE: api/TypeUse/delete
         [HttpDelete("{name}")]
         [Route(nameof(Delete))]
         public IActionResult Delete(string name)
@@ -56,7 +57,7 @@ namespace WebApi.Controllers.TypeUses
             }
         }
 
-        // POST api/TypeUse
+        // POST api/TypeUse/create
         [HttpPost]
         [Route(nameof(Create))]
         public IActionResult Create(ISpecification value)
