@@ -43,7 +43,7 @@ namespace WebApi.Controllers.Components
             {
                 return NotFound();
             }
-            
+
         }
 
         // PUT api/component/5
@@ -91,8 +91,8 @@ namespace WebApi.Controllers.Components
         }
 
         // DELETE api/component/5
-        [HttpDelete("{id}")]
-        [Route(nameof(Delete))]
+        [HttpDelete]
+        [Route("delete/{id}")]
         public IActionResult Delete(int? id)
         {
             if (!id.HasValue)

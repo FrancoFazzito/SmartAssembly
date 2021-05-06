@@ -1,11 +1,6 @@
-﻿using Application.Clients.Commands.Create;
-using Domain.Clients;
-using FluentAssertions;
-using Infra.Connections;
-using Infra.Repositories.Implementations.Clients;
+﻿using FluentAssertions;
 using Newtonsoft.Json;
 using System;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using System;
+using System.Data.SqlClient;
 using System.Net.Http;
 using WebApi;
 
@@ -26,6 +27,16 @@ namespace TestWebApi.Provider
         {
             Server?.Dispose();
             Client?.Dispose();
+        }
+
+        public SqlConnection Connection
+        {
+            get
+            {
+                var connection = new SqlConnection(@"Data Source=DESKTOP-9R0JJCE\SQLEXPRESS;Initial Catalog=SmartAssembly;Integrated Security=True");
+                connection.Open();
+                return connection;
+            }
         }
     }
 }
