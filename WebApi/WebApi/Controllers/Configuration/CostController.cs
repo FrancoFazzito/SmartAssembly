@@ -24,32 +24,34 @@ namespace WebApi.Controllers.Configuration
             this.read = read;
         }
 
-        // PUT api/Cost/5
-        [HttpPut("{name}")]
-        [Route(nameof(Update))]
-        public IActionResult Update(string name, [FromBody] int? value)
-        {
-            if (!value.HasValue)
-            {
-                return BadRequest();
-            }
-            try
-            {
-                update.Update(name, value);
-                return Ok();
-            }
-            catch (NotFoundCostException)
-            {
-                return NotFound();
-            }
-        }
-
+        // GET api/cost
         [HttpGet]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<IEnumerable<Tuple<string, int>>>))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public IActionResult Get()
         {
             return Ok(new ApiResponse<IEnumerable<Tuple<string, int>>>(read.All));
+        }
+
+
+        // PUT api/Cost/5
+        [HttpPut("{name}")]
+        [Route(nameof(Update))]
+        public IActionResult Update(CostParam costParam)
+        {
+            if (!costParam.Value.HasValue)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                update.Update(costParam.Name, costParam.Value);
+                return Ok();
+            }
+            catch (NotFoundCostException)
+            {
+                return NotFound();
+            }
         }
     }
 }

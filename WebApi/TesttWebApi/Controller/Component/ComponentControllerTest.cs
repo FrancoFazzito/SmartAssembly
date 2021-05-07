@@ -44,7 +44,7 @@ namespace TestWebApi.Controller.Components
 
             //assert
             response.StatusCode.Should().Be(HttpStatusCode.NoContent);
-            var id = GetLastId(provider.Connection);
+            var id = provider.GetLastId("component");
             await provider.Client.DeleteAsync($"api/component/delete/{id}");
         }
 
@@ -80,23 +80,12 @@ namespace TestWebApi.Controller.Components
             await provider.Client.PostAsync("api/component/create", new StringContent(json, Encoding.UTF8, "application/json"));
 
             //act
-            var id = GetLastId(provider.Connection);
+            var id = provider.GetLastId("Component");
             var response = await provider.Client.DeleteAsync($"api/component/delete/{id}");
             response.EnsureSuccessStatusCode();
 
             //assert
             response.StatusCode.Should().Be(HttpStatusCode.NoContent);
-        }
-
-        private int? GetLastId(SqlConnection connection)
-        {
-            var command = new SqlCommand("SELECT top(1) ID FROM Component order by ID desc", connection);
-            var reader = command.ExecuteReader();
-            if (reader.Read())
-            {
-                return reader.GetInt32(0);
-            }
-            return null;
         }
     }
 }

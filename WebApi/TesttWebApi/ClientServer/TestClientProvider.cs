@@ -29,7 +29,7 @@ namespace TestWebApi.Provider
             Client?.Dispose();
         }
 
-        public SqlConnection Connection
+        private SqlConnection Connection
         {
             get
             {
@@ -37,6 +37,17 @@ namespace TestWebApi.Provider
                 connection.Open();
                 return connection;
             }
+        }
+
+        public int? GetLastId(string tableName)
+        {
+            var command = new SqlCommand($"SELECT top(1) ID FROM {tableName} order by ID desc", Connection);
+            var reader = command.ExecuteReader();
+            if (reader.Read())
+            {
+                return reader.GetInt32(0);
+            }
+            return null;
         }
     }
 }
