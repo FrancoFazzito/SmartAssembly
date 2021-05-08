@@ -34,10 +34,10 @@ namespace Infra.Connections
                 command.ExecuteNonQuery();
                 command.Transaction.Commit();
             }
-            catch(Exception ex)
+            catch(SqlException ex)
             {
-                var message = ex.Message;
                 command.Transaction.Rollback();
+                throw new Exception($"{ex.Message} {ex.Number}");
             }
             finally { Close(); }
         }
@@ -97,7 +97,5 @@ namespace Infra.Connections
                 return sqlCommand.ExecuteReader();
             }
         }
-
-        public string Name => "Main";
     }
 }

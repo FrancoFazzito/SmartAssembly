@@ -34,7 +34,15 @@ namespace WebApi.Controllers.Employees
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public IActionResult Get()
         {
-            return Ok(new ApiResponse<IEnumerable<Employee>>(read.All));
+            try
+            {
+                return Ok(new ApiResponse<IEnumerable<Employee>>(read.All));
+            }
+            catch (System.Exception)
+            {
+                return NotFound();
+            }
+            
         }
 
         // POST api/Employee
@@ -57,8 +65,8 @@ namespace WebApi.Controllers.Employees
             }
         }
 
-        // DELETE api/Employee/juan
-        [HttpDelete("{email}")]
+        // DELETE api/Employee
+        [HttpDelete]
         [Route(nameof(Delete))]
         public IActionResult Delete(string email)
         {

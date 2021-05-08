@@ -6,8 +6,6 @@ namespace Infra.Connections
 {
     public interface IConnection
     {
-        string Name { get; }
-
         void Execute(IEnumerable<SqlCommand> commands);
 
         void Execute(SqlCommand command);
