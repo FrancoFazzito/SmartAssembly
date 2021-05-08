@@ -1,4 +1,4 @@
-﻿namespace WebApi.Controllers.Configuration
+﻿namespace WebApi.Controllers.Costs
 {
     public class CostParam
     {

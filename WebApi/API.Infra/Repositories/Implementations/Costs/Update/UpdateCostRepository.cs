@@ -15,7 +15,7 @@ namespace Infra.Repositories.Implementations.Costs.Update
 
         public void EditValue(string name, int? newValue)
         {
-            var command = new SqlCommand("UPDATE Costs SET [Value] = @value WHERE [Name] = @name");
+            var command = new SqlCommand("UPDATE Cost SET Value = @value WHERE Name = @name");
             command.Parameters.AddWithValue("value", newValue);
             command.Parameters.AddWithValue("name", name);
             connection.Execute(command);

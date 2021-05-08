@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Net;
+using WebApi.Controllers.Costs;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -30,12 +31,20 @@ namespace WebApi.Controllers.Configuration
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public IActionResult Get()
         {
-            return Ok(new ApiResponse<IEnumerable<Tuple<string, int>>>(read.All));
+            try
+            {
+                return Ok(new ApiResponse<IEnumerable<Tuple<string, int>>>(read.All));
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+            
         }
 
 
         // PUT api/Cost/5
-        [HttpPut("{name}")]
+        [HttpPut]
         [Route(nameof(Update))]
         public IActionResult Update(CostParam costParam)
         {
@@ -46,7 +55,7 @@ namespace WebApi.Controllers.Configuration
             try
             {
                 update.Update(costParam.Name, costParam.Value);
-                return Ok();
+                return NoContent();
             }
             catch (NotFoundCostException)
             {
