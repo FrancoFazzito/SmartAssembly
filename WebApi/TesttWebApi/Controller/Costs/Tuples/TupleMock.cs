@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace TestWebApi.Controller.Cost
+﻿namespace TestWebApi.Controller.Cost
 {
 
     public class TupleMock

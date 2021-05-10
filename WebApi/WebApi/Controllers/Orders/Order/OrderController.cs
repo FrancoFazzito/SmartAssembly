@@ -23,9 +23,9 @@ namespace WebApi.Controllers.Orders.Delete
             read = new ReadOrder(readOrder);
         }
 
-        //DELETE api/order/5
-        [HttpDelete("{id}")]
-        [Route(nameof(Delete))]
+        //DELETE api/order/Delete/5
+        [HttpDelete]
+        [Route("delete/{id}")]
         public IActionResult Delete(int? id)
         {
             if (!id.HasValue)
@@ -49,7 +49,15 @@ namespace WebApi.Controllers.Orders.Delete
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public IActionResult Get()
         {
-            return Ok(new ApiResponse<IEnumerable<Order>>(read.All));
+            try
+            {
+                return Ok(new ApiResponse<IEnumerable<Order>>(read.All));
+            }
+            catch
+            {
+                return NotFound();
+            }
+
         }
     }
 }

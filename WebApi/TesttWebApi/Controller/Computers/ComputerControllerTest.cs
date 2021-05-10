@@ -1,14 +1,10 @@
 ﻿using FluentAssertions;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 using TestWebApi.Provider;
 using Xunit;
 
-namespace TestWebApi.Controller.Computer
+namespace TestWebApi.Controller.Computers
 {
     public class ComputerControllerTest
     {

@@ -34,7 +34,7 @@ namespace Infra.Connections
                 command.ExecuteNonQuery();
                 command.Transaction.Commit();
             }
-            catch(SqlException ex)
+            catch (SqlException ex)
             {
                 command.Transaction.Rollback();
                 throw new Exception($"{ex.Message} {ex.Number}");

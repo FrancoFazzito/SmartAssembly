@@ -21,7 +21,6 @@ namespace WebApi.Controllers.Orders.Submit
 
         //POST api/order/submit
         [HttpPost]
-        [Route(nameof(Submit))]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<SubmitResult>))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public IActionResult Submit(OrderParam order)
@@ -41,13 +40,13 @@ namespace WebApi.Controllers.Orders.Submit
             }
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route(nameof(Add))]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<SubmitResult>))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public IActionResult Add(AddOrderParam addOrder)
+        public IActionResult Add([FromBody] AddOrderParam addOrder)
         {
-            if (addOrder.computer == null || addOrder.Order == null)
+            if (addOrder.Computer == null || addOrder.Order == null)
             {
                 return BadRequest();
             }
@@ -61,7 +60,7 @@ namespace WebApi.Controllers.Orders.Submit
             }
             try
             {
-                var result = submit.AddComputer(addOrder.Order, addOrder.computer, addOrder.quantity);
+                var result = submit.AddComputer(addOrder.Order, addOrder.Computer, addOrder.quantity);
                 return Ok(new ApiResponse<Order>(result));
             }
             catch (AddStockException ex)

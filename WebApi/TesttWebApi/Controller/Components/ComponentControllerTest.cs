@@ -3,7 +3,6 @@ using Domain.Components.Types;
 using FluentAssertions;
 using Newtonsoft.Json;
 using System;
-using System.Data.SqlClient;
 using System.Net;
 using System.Net.Http;
 using System.Text;

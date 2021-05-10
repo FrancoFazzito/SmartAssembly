@@ -31,8 +31,8 @@ namespace Infra.Repositories.Implementations.Employees
 
         protected override Employee NewRecord(IDataReader reader)
         {
-            return new Employee() 
-            { 
+            return new Employee()
+            {
                 Email = ConvertReader<string>.WithName(reader, "Email")
             };
         }

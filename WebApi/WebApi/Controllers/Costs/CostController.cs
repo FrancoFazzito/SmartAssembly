@@ -39,7 +39,7 @@ namespace WebApi.Controllers.Configuration
             {
                 return NotFound();
             }
-            
+
         }
 
 

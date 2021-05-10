@@ -41,13 +41,14 @@ namespace TestWebApi.Provider
 
         public int? GetLastId(string tableName)
         {
-            var command = new SqlCommand($"SELECT top(1) ID FROM {tableName} order by ID desc", Connection);
+            var command = new SqlCommand($"SELECT top(1) ID FROM [{tableName}] order by ID desc", Connection);
             var reader = command.ExecuteReader();
+            int? id = null;
             if (reader.Read())
             {
-                return reader.GetInt32(0);
+                id = reader.GetInt32(0);
             }
-            return null;
+            return id;
         }
     }
 }
