@@ -49,7 +49,7 @@ namespace TestWebApi.Controller.Clients
         }
 
         [Fact]
-        public async Task Test_Delete_client()
+        public async Task Test_Delete_Client()
         {
             //arrange
             var provider = new TestClientProvider();

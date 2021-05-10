@@ -23,7 +23,7 @@ namespace WebApi.Controllers.Employees
 
         public EmployeeController(Startup.DeleteByNameResolver deleteAccesor, IEmployeeReadOnlyRepository read, ICreate<Employee> create)
         {
-            delete = new DeleteEmployee(deleteAccesor(DeletesEmail.Client), read);
+            delete = new DeleteEmployee(deleteAccesor(DeletesEmail.Employee), read);
             this.create = new CreateEmployee(create, read);
             this.read = new ReadEmployee(read);
         }
@@ -57,7 +57,7 @@ namespace WebApi.Controllers.Employees
             try
             {
                 create.Create(value);
-                return Ok();
+                return NoContent();
             }
             catch (EmployeeAlreadyExistsException)
             {
@@ -68,7 +68,7 @@ namespace WebApi.Controllers.Employees
         // DELETE api/Employee
         [HttpDelete]
         [Route(nameof(Delete))]
-        public IActionResult Delete(string email)
+        public IActionResult Delete([FromBody] string email)
         {
             if (email == null)
             {
@@ -77,7 +77,7 @@ namespace WebApi.Controllers.Employees
             try
             {
                 delete.Delete(email);
-                return Ok();
+                return NoContent();
             }
             catch (NotFoundEmployeeException)
             {
