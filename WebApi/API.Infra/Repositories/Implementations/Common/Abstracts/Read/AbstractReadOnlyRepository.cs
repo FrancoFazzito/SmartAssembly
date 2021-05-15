@@ -51,26 +51,28 @@ namespace Infra.Repositories.Implementations.Abstracts
 
         protected T GetRecord(string query, Dictionary<string, object> parameters)
         {
+            T found = null;
             using (var reader = connection.GetDataReader(query, parameters))
             {
                 if (reader.Read())
                 {
-                    return NewRecord(reader);
+                    found = NewRecord(reader);
                 }
             }
-            return null;
+            return found;
         }
 
         protected T GetRecord(string query)
         {
+            T found = null;
             using (var reader = connection.GetDataReader(query))
             {
                 if (reader.Read())
                 {
-                    return NewRecord(reader);
+                    found = NewRecord(reader);
                 }
             }
-            return null;
+            return found;
         }
 
         public T GetById(int? id)

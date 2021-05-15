@@ -60,9 +60,10 @@ namespace Infra.Connections
                     }
                     transaction.Commit();
                 }
-                catch
+                catch (SqlException ex)
                 {
                     transaction.Rollback();
+                    throw new Exception($"{ex.Message} {ex.Number}");
                 }
                 finally { Close(); }
             }
