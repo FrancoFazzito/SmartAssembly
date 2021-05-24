@@ -38,17 +38,21 @@ namespace Infra.Repositories.Implementations.Orders
 
         protected override Order NewRecord(IDataReader reader)
         {
-            return new Order
+            var order = new Order
             {
                 Id = ConvertReader<int>.WithName(reader, "id"),
                 DateRequested = ConvertReader<DateTime>.WithName(reader, "DateRequested"),
-                Computers = ComputerRepository.GetByOrder(ConvertReader<int>.WithName(reader, "id")).ToList(),
                 DateDelivered = ConvertReader<DateTime>.WithName(reader, "DateDelivered"),
                 Employee = EmployeeRepository.GetByName(ConvertReader<string>.WithName(reader, "Email_Employee")),
                 Client = ClientRepository.GetByEmail(ConvertReader<string>.WithName(reader, "Email_client")),
                 Commentary = ConvertReader<string>.WithName(reader, "Commentary"),
                 State = ConvertReader<OrderState>.WithName(reader, "OrderState")
             };
+            foreach (var computer in ComputerRepository.GetByOrder(ConvertReader<int>.WithName(reader, "id")).ToList())
+            {
+                order.Add(computer);
+            }
+            return order;
         }
     }
 }

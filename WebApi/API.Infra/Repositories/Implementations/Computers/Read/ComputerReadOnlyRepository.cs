@@ -28,15 +28,19 @@ namespace Infra.Repositories.Implementations.Computers
 
         protected override Computer NewRecord(IDataReader reader)
         {
-            return new Computer()
+            var computer = new Computer()
             {
                 Id = ConvertReader<int>.WithName(reader, "ID"),
                 TypeUse = ConvertReader<string>.WithName(reader, "TypeUse"),
-                Components = componentRepository.GetByComputer(ConvertReader<int>.WithName(reader, "ID")),
                 Completed = ConvertReader<bool>.WithName(reader, "Completed"),
                 CostBuild = costRepo.BuildCost,
                 Multiplier = costRepo.PricePerfomanceMultiplier
             };
+            foreach (var component in componentRepository.GetByComputer(ConvertReader<int>.WithName(reader, "ID")))
+            {
+                computer.Add(component);
+            }
+            return computer;
         }
     }
 }

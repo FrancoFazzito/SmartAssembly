@@ -7,7 +7,7 @@ namespace Domain.Computers
 {
     public class Computer
     {
-        private ICollection<Component> components = new List<Component>();
+        private readonly ICollection<Component> components = new List<Component>();
 
         public void Add(Component element, int quantity = 1)
         {
@@ -27,7 +27,7 @@ namespace Domain.Computers
         public bool Completed { get; set; }
         public int CostBuild { get; set; }
         public int Multiplier { get; set; }
-        public IEnumerable<Component> Components { get => components; set => components = value.ToList(); }
+        public IEnumerable<Component> Components { get => components; }
         public decimal Price => components.Sum(c => c.Price) + CostBuild;
         public int TotalConsumption => components.Sum(c => c.Watts);
         public decimal Perfomance => components.Sum(c => c.PerfomanceLevel);

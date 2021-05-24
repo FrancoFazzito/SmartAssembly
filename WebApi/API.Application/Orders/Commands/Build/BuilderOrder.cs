@@ -34,21 +34,19 @@ namespace Application.Orders.Commands.Build
 
         public IEnumerable<Order> GetOrdersByEmployee(string email)
         {
-            var orders = orderRepository.GetByEmployee(email)
-                                        .Where(order => order.State == OrderState.Uncompleted || order.State == OrderState.Error)
-                                        .Select(order => new Order()
-                                        {
-                                            Client = order.Client,
-                                            Commentary = order.Commentary,
-                                            Computers = order.Computers.Where(c => !c.Completed).ToList(),
-                                            DateDelivered = order.DateDelivered,
-                                            DateRequested = order.DateRequested,
-                                            Employee = order.Employee,
-                                            Id = order.Id,
-                                            State = order.State
-                                        });
+            var orders = FilterCompletedComputers(orderRepository.GetByEmployee(email)
+                                                                 .Where(order => order.State == OrderState.Uncompleted || order.State == OrderState.Error));
 
             return orders.Any() ? orders : throw new NotAvailableOrdersException();
+        }
+
+        private IEnumerable<Order> FilterCompletedComputers(IEnumerable<Order> orders)
+        {
+            foreach (var (order, computer) in orders.SelectMany(order => order.Computers.Where(computer => computer.Completed).Select(computer => (order, computer))))
+            {
+                order.Remove(computer);
+            }
+            return orders;
         }
     }
 }

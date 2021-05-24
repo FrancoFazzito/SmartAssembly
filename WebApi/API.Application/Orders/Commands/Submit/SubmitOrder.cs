@@ -5,6 +5,7 @@ using Domain.Computers;
 using Domain.Employees;
 using Domain.Orders;
 using Domain.Orders.States;
+using System.Linq;
 
 namespace Application.Orders.Commands.Create
 {
@@ -47,7 +48,7 @@ namespace Application.Orders.Commands.Create
         {
             if (!computerStock.IsValid(order.Computers))
             {
-                throw new AddStockException(order.Computers.Count);
+                throw new AddStockException(order.Computers.Count());
             }
         }
 

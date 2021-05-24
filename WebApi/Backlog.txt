@@ -1,4 +1,3 @@
-complete crud
 validate rest
 JWT -> add rols
 Swagger
