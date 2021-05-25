@@ -47,7 +47,6 @@ namespace WebApi.Controllers.Orders.Build
 
         // POST api/order/build
         [HttpPost]
-        [Route(nameof(Build))]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<BuilderOrderResult>))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public IActionResult Build([FromBody] int? id)
