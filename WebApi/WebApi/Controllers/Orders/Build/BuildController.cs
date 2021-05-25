@@ -24,7 +24,8 @@ namespace WebApi.Controllers.Orders.Build
         }
 
         // GET: api/order/email
-        [HttpGet("{email}")]
+        [HttpGet]
+        [Route("{email}")]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<IEnumerable<Order>>))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public IActionResult Get(string email)

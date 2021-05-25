@@ -34,9 +34,8 @@ namespace Application.Orders.Commands.Build
 
         public IEnumerable<Order> GetOrdersByEmployee(string email)
         {
-            var orders = FilterCompletedComputers(orderRepository.GetByEmployee(email)
-                                                                 .Where(order => order.State == OrderState.Uncompleted || order.State == OrderState.Error));
-
+            var orders = orderRepository.GetByEmployee(email).Where(order => order.State == OrderState.Uncompleted || order.State == OrderState.Error);
+            orders = FilterCompletedComputers(orders);
             return orders.Any() ? orders : throw new NotAvailableOrdersException();
         }
 

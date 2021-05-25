@@ -50,5 +50,17 @@ namespace TestWebApi.Provider
             }
             return id;
         }
+
+        public string GetLastName(string tableName, string columnName)
+        {
+            var command = new SqlCommand($"SELECT top(1) {columnName} FROM [{tableName}] order by ID desc", Connection);
+            var reader = command.ExecuteReader();
+            string name = null;
+            if (reader.Read())
+            {
+                name = reader.GetString(0);
+            }
+            return name;
+        }
     }
 }

@@ -6,6 +6,7 @@ using Application.Computers.Commands.Build;
 using Application.Costs.Commands.Update;
 using Application.Orders.Commands.Build;
 using Application.Orders.Commands.Create;
+using Application.Orders.Commands.Deliver;
 using Application.Orders.Commands.RegisterError;
 using Application.Reports.Commands.Create;
 using Application.Repositories.Interfaces;
@@ -193,6 +194,7 @@ namespace WebApi
         private void RegisterServicesDeliverOrder(IServiceCollection services)
         {
             services.AddTransient<IDeliverOrderRepository, DeliverOrderRepository>();
+            services.AddTransient<IDeliverOrder, DeliverOrder>();
         }
 
         private void RegisterServicesBuildOrder(IServiceCollection services)

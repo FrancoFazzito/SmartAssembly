@@ -84,6 +84,9 @@ namespace TestWebApi.Controller.Orders.Submit
 
             //assert
             responseSubmit.StatusCode.Should().Be(HttpStatusCode.OK);
+            
+            var id = provider.GetLastId("Order");
+            await provider.Client.DeleteAsync($"api/order/delete/{id}");
         }
     }
 }
