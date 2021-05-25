@@ -37,7 +37,7 @@ namespace TestWebApi.Controller.Orders.Submit
             {
                 Order = order,
                 Computer = computer,
-                quantity = 2
+                Quantity = 2
             });
 
             //act
@@ -70,7 +70,7 @@ namespace TestWebApi.Controller.Orders.Submit
             {
                 Order = order,
                 Computer = computer,
-                quantity = 2
+                Quantity = 2
             });
             var responseAdd = await client.PutAsync("api/order/submit/add", new StringContent(json, Encoding.UTF8, "application/json"));
             var resultAdd = await responseAdd.Content.ReadAsStringAsync();

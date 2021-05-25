@@ -9,6 +9,6 @@ namespace WebApi.Controllers.Orders.Submit
 
         public Computer Computer { get; set; }
 
-        public int? quantity { get; set; }
+        public int? Quantity { get; set; }
     }
 }

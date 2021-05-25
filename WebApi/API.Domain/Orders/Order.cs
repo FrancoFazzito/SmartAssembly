@@ -10,28 +10,31 @@ namespace Domain.Orders
 {
     public class Order
     {
-        private readonly ICollection<Computer> computers = new List<Computer>();
+        public Order()
+        {
+            Computers = new List<Computer>();
+        }
 
         public void Add(Computer computer, int? quantity = 1)
         {
             for (var i = 0; i < quantity; i++)
             {
-                computers.Add(computer);
+                Computers.Add(computer);
             }
         }
 
         public void Remove(Computer computer)
         {
-            computers.Remove(computer);
+            Computers.Remove(computer);
         }
 
         public int Id { get; set; }
         public decimal Price => Computers.Sum(c => c.Price);
         public DateTime DateRequested { get; set; }
-        public DateTime DateToDelivery => DateRequested.AddDays(computers.Count);
+        public DateTime DateToDelivery => DateRequested.AddDays(Computers.Count);
         public DateTime DateDelivered { get; set; }
         public Employee Employee { get; set; }
-        public IEnumerable<Computer> Computers { get => computers; }
+        public ICollection<Computer> Computers { get; set; }
         public Client Client { get; set; }
         public string Commentary { get; set; }
         public OrderState State { get; set; }

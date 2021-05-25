@@ -50,17 +50,17 @@ namespace WebApi.Controllers.Orders.Submit
             {
                 return BadRequest();
             }
-            if (!addOrder.quantity.HasValue)
+            if (!addOrder.Quantity.HasValue)
             {
                 return BadRequest();
             }
-            if (addOrder.quantity <= 0)
+            if (addOrder.Quantity <= 0)
             {
                 return BadRequest();
             }
             try
             {
-                var result = submit.AddComputer(addOrder.Order, addOrder.Computer, addOrder.quantity);
+                var result = submit.AddComputer(addOrder.Order, addOrder.Computer, addOrder.Quantity);
                 return Ok(new ApiResponse<Order>(result));
             }
             catch (AddStockException ex)
